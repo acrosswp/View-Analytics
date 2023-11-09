@@ -33,26 +33,10 @@ var style_output = {
   },
 };
 
-var backend_script = Object.assign({}, script_output,{
-  entry: {
-      'backend-script': [
-        './assets/src/backend/js/index.js'
-      ],
-  },
-});
-
 var frontend_script = Object.assign({}, script_output, {
   entry: {
       'frontend-script': [
         './assets/src/frontend/js/index.js'
-      ],
-  },
-});
-
-var backend_style = Object.assign({}, custom_module, style_output,{
-  entry: {
-      'backend-style': [
-        './assets/src/backend/css/index.js'
       ],
   },
 });
@@ -78,6 +62,6 @@ wpPot( {
 
 // Return Array of Configurations
 module.exports = [
-  backend_script,
+  frontend_style,
   frontend_script
 ];
