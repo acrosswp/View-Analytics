@@ -255,8 +255,6 @@ final class View_Analytics {
 
 		$this->loader->add_action( 'plugin_action_links', $plugin_admin, 'modify_plugin_action_links', 10, 2 );
 		
-		$this->loader->add_action( 'bp_setup_integrations', $plugin_admin, 'register_integration' );
-		
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );

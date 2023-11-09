@@ -56,14 +56,6 @@ class View_Analytics_Admin {
 	}
 
 	/**
-	 * Add integration class class and files
-	 */
-	public function register_integration() {
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/integration/buddyboss-integration.php';
-		buddypress()->integrations['addon'] = new View_Analytics_BuddyBoss_Integration( $this->plugin_name );
-	}
-
-	/**
 	 * Register the stylesheets for the admin area.
 	 *
 	 * @since    1.0.0
