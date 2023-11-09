@@ -192,19 +192,6 @@ final class View_Analytics {
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'vendor/autoload.php' );
 
 		/**
-		 * The class responsible for loading the dependency main class
-		 * core plugin.
-		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/dependency/class-dependency.php';
-
-		/**
-		 * The class responsible for loading the dependency main class
-		 * core plugin.
-		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/dependency/buddyboss.php';
-
-
-		/**
 		 * Check if the class does not exits then only allow the file to add
 		 */
 		if( class_exists( 'AcrossWP_Main_Menu' ) ) {
@@ -227,11 +214,6 @@ final class View_Analytics {
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/class-view-analytics-admin.php';
-
-		/**
-		 * The class responsible for defining all actions that occur in the admin area for update.
-		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/update/class-view-analytics-update.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -278,9 +260,6 @@ final class View_Analytics {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-		
-		$plugin_update = new View_Analytics_Update( $this->get_plugin_name(), $this->get_version() );
-		$this->loader->add_action( 'admin_init', $plugin_update, 'setup_updater' );
 
 	}
 
