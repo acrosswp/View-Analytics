@@ -13,8 +13,8 @@
  * @package           View_Analytics
  *
  * @wordpress-plugin
- * Plugin Name:       View Analytics
- * Plugin URI:        https://acrosswp.com
+ * Plugin Name:       View Analytics for BuddyBoss Platform
+ * Plugin URI:        https://acrosswp.com/downloads/view-analytics/
  * Description:       View Analytics by AcrossWP
  * Version:           1.0.0
  * Author:            AcrossWP
