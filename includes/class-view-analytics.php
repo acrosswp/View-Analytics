@@ -241,12 +241,6 @@ final class View_Analytics {
 		 */
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/view-analytics-public-counts.php';
 
-		/**
-		 * The class responsible for defining all actions that are release to showing the view Count
-		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/view-analytics-public-display.php';
-		
-
 		$this->loader = View_Analytics_Loader::instance();
 
 	}
@@ -316,6 +310,16 @@ final class View_Analytics {
 		$rest_api = new View_Analytics_Rest_Controller( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'rest_api_init', $rest_api, 'register_routes', 1000 );
 
+		$this->loader->add_action( 'bp_before_activity_activity_content', $plugin_public, 'show_view_count', 1000 );
+
+		/**
+		 * Load popup template into the Activity Area
+		 */
+		$this->loader->add_action( 'bp_after_directory_activity_list', $plugin_public, 'who_view_media_modal', 1000 );
+		$this->loader->add_action( 'bp_after_member_activity_content', $plugin_public, 'who_view_media_modal', 1000 );
+		$this->loader->add_action( 'bp_after_group_activity_content', $plugin_public, 'who_view_media_modal', 1000 );
+		$this->loader->add_action( 'bp_after_single_activity_content', $plugin_public, 'who_view_media_modal', 1000 );
+
 		/**
 		 * All class that are release to Pulic Frountend Count
 		 */
@@ -338,21 +342,6 @@ final class View_Analytics {
 		 */
 		$this->loader->add_action( 'wp_ajax_document_get_document_description', $plugin_public_count, 'document_view_count_login_user', -10 );
 		$this->loader->add_action( 'wp_ajax_document_get_activity', $plugin_public_count, 'document_view_count_login_user', -10 );
-		
-		/**
-		 * All class that are release to Pulic Frountend Count Display
-		 */
-		$plugin_public_display = new View_Analytics_Public_Display( $this->get_plugin_name(), $this->get_version() );
-		
-		$this->loader->add_action( 'bp_before_activity_activity_content', $plugin_public_display, 'show_view_count', 1000 );
-
-		/**
-		 * Load popup template into the Activity Area
-		 */
-		$this->loader->add_action( 'bp_after_directory_activity_list', $plugin_public_display, 'who_view_media_modal', 1000 );
-		$this->loader->add_action( 'bp_after_member_activity_content', $plugin_public_display, 'who_view_media_modal', 1000 );
-		$this->loader->add_action( 'bp_after_group_activity_content', $plugin_public_display, 'who_view_media_modal', 1000 );
-		$this->loader->add_action( 'bp_after_single_activity_content', $plugin_public_display, 'who_view_media_modal', 1000 );
 
 	}
 

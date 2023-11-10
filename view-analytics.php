@@ -46,17 +46,7 @@ function view_analytics_activate() {
 	View_Analytics_Activator::activate();
 }
 
-/**
- * The code that runs during plugin deactivation.
- * This action is documented in includes/class-view-analytics-deactivator.php
- */
-function view_analytics_deactivate() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-view-analytics-deactivator.php';
-	View_Analytics_Deactivator::deactivate();
-}
-
 register_activation_hook( __FILE__, 'view_analytics_activate' );
-register_deactivation_hook( __FILE__, 'view_analytics_deactivate' );
 
 /**
  * The core plugin class that is used to define internationalization,

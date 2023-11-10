@@ -43,6 +43,15 @@ class View_Analytics_Public {
 	private $version;
 
 	/**
+	 * The ID of this media setting view.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	private $common;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -53,6 +62,8 @@ class View_Analytics_Public {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+
+		$this->common = View_Analytics_Common::instance();
 
 	}
 
@@ -132,6 +143,66 @@ class View_Analytics_Public {
 				</div>
 			</li>
 		</script>
+		<?php
+	}
+
+	/**
+     * Show the view count into the Frountend
+     * Hook: bp_before_activity_activity_content
+     */
+    public function show_view_count() {
+
+		if ( $this->common->media_view_count_enable() ) {
+
+			$ajax_action = $this->common->is_media_lightbox_ajax();
+
+			if ( empty( $ajax_action ) ) {
+				return;
+			}
+
+			$attachment_id = $this->common->get_lightbox_attachment_id( $ajax_action );
+			$counts = $this->common->media_get_count( $attachment_id );
+
+			if ( empty( $attachment_id ) ) {
+				return;
+			}
+
+			$view = _n( 'View', 'Views', $counts, 'view-analytics' );
+			$counts = apply_filters( 'view_analytics_view_count_content', array( 'count' => $counts, 'text' => $view ), $attachment_id );
+
+			if( $this->common->can_current_user_media_view_list( $attachment_id ) ) {
+				echo "<div id='view_list' class='view-analytics-media-views'><span>" . implode( ' ', $counts ) . '</span> </div>';
+				echo "<input class='current-media-view' type='hidden' value='" . $attachment_id . "'>";
+			} else {
+				echo "<div class='view-analytics-media-views'><span>" . implode( ' ', $counts ) . '</span></div>';
+			}
+		}
+    }
+
+	/**
+	 * Run the Pinn Post comment
+	 */
+	public function who_view_media_modal() {
+		?>
+		<div id="view-analytics-view-confirmation-modal" class="view-analytics-view-confirmation-modal bb-action-popup" style="display: none;">
+			<transition name="modal">
+				<div class="modal-mask bb-white bbm-model-wrap bbm-uploader-model-wrap">
+					<div class="modal-wrapper">
+						<div class="modal-container">
+							<header class="bb-model-header">
+								<h4><?php esc_html_e( 'People Who viewed This', 'view-analytics' ); ?></h4>
+								<a class="bb-close-action-popup bb-model-close-button" id="bp-confirmation-model-close" href="#">
+									<span class="bb-icon-l bb-icon-times"></span>
+								</a>
+							</header>
+							<div class="bb-action-popup-content">
+								<ul class="media-view-list"></ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</transition>
+		</div>
 		<?php
 	}
 }

@@ -104,7 +104,7 @@ class View_Analytics_Rest_Controller extends WP_REST_Controller {
 		if ( empty( $attachment_id ) ) {
 			return new WP_Error(
 				'view_analytics_rest_invalid_id',
-				__( 'Invalid Attachment ID.', 'pin-commnet' ),
+				__( 'Invalid Attachment ID.', 'view-analytics' ),
 				array(
 					'status' => 404,
 				)
