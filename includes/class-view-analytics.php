@@ -192,6 +192,16 @@ final class View_Analytics {
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'vendor/autoload.php' );
 
 		/**
+		 * All the functions are included in this file
+		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/class-view-analytics-common.php' );
+
+		/**
+		 * Contain all the value to edit/delete/remove the table row
+		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/class-view-analytics-common-media-table.php' );
+
+		/**
 		 * Check if the class does not exits then only allow the file to add
 		 */
 		if( class_exists( 'AcrossWP_Main_Menu' ) ) {
@@ -220,6 +230,16 @@ final class View_Analytics {
 		 * side of the site.
 		 */
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/class-view-analytics-public.php';
+
+		/**
+		 * The class responsible for defining all actions that are releate to recoring the view count in table
+		 */
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/view-analytics-public-counts.php';
+
+		/**
+		 * The class responsible for defining all actions that are release to showing the view Count
+		 */
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/view-analytics-public-display.php';
 
 		$this->loader = View_Analytics_Loader::instance();
 
@@ -255,6 +275,8 @@ final class View_Analytics {
 
 		$this->loader->add_action( 'plugin_action_links', $plugin_admin, 'modify_plugin_action_links', 10, 2 );
 
+		$this->loader->add_action( 'bp_admin_setting_media_register_fields', $plugin_admin, 'register_fields', 100 );
+
 	}
 
 	/**
@@ -266,11 +288,44 @@ final class View_Analytics {
 	 */
 	private function define_public_hooks() {
 
+		/**
+		 * All class that are release to Pulic Frountend
+		 */
 		$plugin_public = new View_Analytics_Public( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+
+		/**
+		 * All class that are release to Pulic Frountend Count
+		 */
+		$plugin_public_count = new View_Analytics_Public_Count( $this->get_plugin_name(), $this->get_version() );
+
+		/**
+		 * For Media
+		 */
+		$this->loader->add_action( 'wp_ajax_media_get_media_description', $plugin_public_count, 'media_view_count_login_user', -10 );
+		$this->loader->add_action( 'wp_ajax_media_get_activity', $plugin_public_count, 'media_view_count_login_user', -10 );
+
+		/**
+		 * For Video
+		 */
+		$this->loader->add_action( 'wp_ajax_video_get_video_description', $plugin_public_count, 'video_view_count_login_user', -10 );
+		$this->loader->add_action( 'wp_ajax_video_get_activity', $plugin_public_count, 'video_view_count_login_user', -10 );
+
+		/**
+		 * For Document
+		 */
+		$this->loader->add_action( 'wp_ajax_document_get_document_description', $plugin_public_count, 'document_view_count_login_user', -10 );
+		$this->loader->add_action( 'wp_ajax_document_get_activity', $plugin_public_count, 'document_view_count_login_user', -10 );
+		
+		/**
+		 * All class that are release to Pulic Frountend Count Display
+		 */
+		$plugin_public_display = new View_Analytics_Public_Display( $this->get_plugin_name(), $this->get_version() );
+		
+		$this->loader->add_action( 'bp_before_activity_activity_content', $plugin_public_display, 'show_view_count', 1000 );
 
 	}
 

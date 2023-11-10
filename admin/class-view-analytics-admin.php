@@ -42,6 +42,26 @@ class View_Analytics_Admin {
 	 */
 	private $version;
 
+
+	/**
+	 * The ID of this media setting view.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	private $section_id;
+
+
+	/**
+	 * The ID of this media setting view.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	private $common;
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -51,6 +71,10 @@ class View_Analytics_Admin {
 	 */
 	public function __construct( $plugin_name, $version ) {
 
+		$this->common = View_Analytics_Common::instance();
+
+		$this->section_id = $this->common->media_settings();
+		
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 	}
@@ -79,6 +103,38 @@ class View_Analytics_Admin {
 				'about'         => '<a href="' . esc_url( bp_get_admin_url( '?page=acrosswp' ) ) . '">' . esc_html__( 'About', 'view-analytics' ) . '</a>',
 			)
 		);
+	}
+
+
+	/**
+	 * Register the Setting in BuddyBoss General settings Area
+	 *
+	 * @since    1.0.0
+	 */
+	public function register_fields( $setting ) {
+
+        // Main General Settings Section
+	    $setting->add_section( 
+            $this->section_id,
+            __( 'View Analytics', 'view-analytics' )
+        );
+
+	    $args          = array();
+	    $setting->add_field( $this->common->media_view_count_key(), __( 'View Media Count', 'view-analytics' ), array( $this, 'view_media_view_count' ), 'intval', $args );
+    }
+
+	/**
+	 * Allow pinned activity posts.
+	 *
+	 * @since BuddyBoss 1.0.0
+	 */
+	public function view_media_view_count() {
+		$id = $this->common->media_view_count_key();
+		$value = $this->common->media_view_count_enable();
+		?>
+		<input id="<?php echo $id; ?>" name="<?php echo $id; ?>" type="checkbox" value="1" <?php checked( $value ); ?> />
+		<label for="<?php echo $id; ?>"><?php esc_html_e( 'Enable Media View Count', 'view-analytics' ); ?></label>
+		<?php
 	}
 
 }

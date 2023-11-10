@@ -101,5 +101,4 @@ class View_Analytics_Public {
 		wp_enqueue_script( $this->plugin_name, VIEW_ANALYTICS_PLUGIN_URL . 'assets/dist/js/frontend-script.js', array( 'jquery' ), $this->version, false );
 
 	}
-
 }
