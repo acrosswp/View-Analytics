@@ -34,6 +34,30 @@ class View_Analytics_Common {
 	protected static $_instance = null;
 
 	/**
+	 * The ID of this media setting view.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	public $table;
+
+	/**
+	 * Define the core functionality of the plugin.
+	 *
+	 * Set the plugin name and the plugin version that can be used throughout the plugin.
+	 * Load the dependencies, define the locale, and set the hooks for the admin area and
+	 * the public-facing side of the site.
+	 *
+	 * @since    1.0.0
+	 */
+	public function __construct() {
+
+        $this->table = View_Analytics_Media_Table::instance();
+
+	}
+
+	/**
 	 * Main View_Analytics_Loader Instance.
 	 *
 	 * Ensures only one instance of WooCommerce is loaded or can be loaded.
@@ -70,7 +94,7 @@ class View_Analytics_Common {
      * Return the View Analytics Media Count Ket
      */
     public function media_view_count_enable() {
-        return get_option( $this->media_view_count_key(), false );
+        return get_option( $this->media_view_count_key(), true );
     }
 
 	/**
@@ -203,4 +227,59 @@ class View_Analytics_Common {
 		return filter_input( INPUT_POST,  $key, $filter );
 
     }
+
+	/**
+	 * Get the media view details via $attachment_id
+	 */
+	public function media_get_count( $attachment_id ) {
+		$media_details = $this->table->media_get_details( $attachment_id );
+		if ( empty( $media_details ) ) {
+			return 0;
+		} else {
+			return count( $media_details );
+		}
+	}
+
+	/**
+	 * Check if the current user is allow to view the Media View List
+	 */
+	public function can_current_user_media_view_list( $attachment_id ) {
+		$user_id = get_current_user_id();
+
+		if ( empty( $user_id ) ) {
+			return false;
+		}
+
+		/**
+         * If user is site admin
+         */
+        if( current_user_can('administrator') ) {
+            return true;
+        }
+
+		if( $user_id == get_post_field( 'post_author', $attachment_id ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Show the message about when the user has view the Media
+	 */
+	public function get_media_view_time_message( $action_date, $mysql_time = false ) {
+
+		/**
+		 * If current time is empty
+		 */
+		if ( empty( $mysql_time ) ) {
+			global $wpdb;
+			$mysql_time = $wpdb->get_var( 'select CURRENT_TIMESTAMP()' );
+		}
+
+		$view_time = human_time_diff( strtotime( $action_date ), strtotime( $mysql_time ) );
+
+		return sprintf( __( 'viewed this %s ago.', 'view-analytics' ), $view_time );
+
+	}
 }

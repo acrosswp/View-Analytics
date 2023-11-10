@@ -99,7 +99,7 @@ class View_Analytics_Admin {
 		return array_merge(
 			$links,
 			array(
-				'settings'      => '<a href="' . esc_url( bp_get_admin_url( 'admin.php?page=bp-settings' ) ) . '">' . esc_html__( 'Settings', 'view-analytics' ) . '</a>',
+				'settings'      => '<a href="' . esc_url( bp_get_admin_url( 'admin.php?page=bp-settings&tab=bp-media#view-analytics-media-settings' ) ) . '">' . esc_html__( 'Settings', 'view-analytics' ) . '</a>',
 				'about'         => '<a href="' . esc_url( bp_get_admin_url( '?page=acrosswp' ) ) . '">' . esc_html__( 'About', 'view-analytics' ) . '</a>',
 			)
 		);

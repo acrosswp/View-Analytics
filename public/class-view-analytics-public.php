@@ -101,4 +101,37 @@ class View_Analytics_Public {
 		wp_enqueue_script( $this->plugin_name, VIEW_ANALYTICS_PLUGIN_URL . 'assets/dist/js/frontend-script.js', array( 'jquery' ), $this->version, false );
 
 	}
+
+	/**
+	 * Register the Localize Script for the public-facing side of the site.
+	 *
+	 * @since    1.0.0
+	 */
+	public function wp_localize_script() {
+
+		wp_localize_script( $this->plugin_name, 'view_analytics_object',
+			array( 
+				'attachment_view_endpoint' => rest_url( 'view-analytics/v1/attachment/' ),
+				'nonce' => wp_create_nonce( "wp_rest" ),
+			)
+		);
+	}
+
+	/**
+	 * Run the Pinn Post comment
+	 */
+	public function media_user_view_html() {
+		?>
+		<script type="text/html" id="tmpl-view-analytics-media-view-user">
+			<li class="view-user">
+				<div class="view-user-avatar">
+					<img alt="" src="{{data.user_avatar_url}}" class="avatar avatar-32 photo" height="32" width="32" loading="lazy" decoding="async"> 
+				</div>
+				<div class="view-desc">
+					<a href="{{data.user_profile_url}}">{{data.user_display_name}}</a> {{data.message}}
+				</div>
+			</li>
+		</script>
+		<?php
+	}
 }

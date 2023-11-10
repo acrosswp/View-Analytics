@@ -101,12 +101,12 @@ class View_Analytics_Media_Table {
 	/**
 	 * Get the media view details via $attachment_id
 	 */
-	public function media_get( $attachment_id ) {
+	public function media_get_details( $attachment_id ) {
 		global $wpdb;
 
 		$table_name = $this->media_view_count_table_name();
 
-		return $wpdb->get_row(
+		return $wpdb->get_results(
 			$wpdb->prepare( 
 				"SELECT * FROM $table_name WHERE attachment_id = %d",
 				$attachment_id

@@ -174,20 +174,22 @@ class View_Analytics_Public_Count {
 	 */
 	public function update_media_view_count( $media_id, $attachment_id ) {
 
-		$current_user_id = get_current_user_id();
-		$media_view = View_Analytics_Media_Table::instance()->user_media_get( $current_user_id, $attachment_id );
-
-		/**
-		 * Check if empty
-		 */
-		if ( empty( $media_view ) ) {
-			View_Analytics_Media_Table::instance()->user_media_add( $current_user_id, $media_id, $attachment_id, 1 );
-		} else {
-			$id = $media_view->id;
-			$view_count = $media_view->value;
-			$view_count++;
-
-			View_Analytics_Media_Table::instance()->user_media_update( $id, $view_count );
+		if ( $this->common->media_view_count_enable() ) {
+			$current_user_id = get_current_user_id();
+			$media_view = View_Analytics_Media_Table::instance()->user_media_get( $current_user_id, $attachment_id );
+	
+			/**
+			 * Check if empty
+			 */
+			if ( empty( $media_view ) ) {
+				View_Analytics_Media_Table::instance()->user_media_add( $current_user_id, $media_id, $attachment_id, 1 );
+			} else {
+				$id = $media_view->id;
+				$view_count = $media_view->value;
+				$view_count++;
+	
+				View_Analytics_Media_Table::instance()->user_media_update( $id, $view_count );
+			}
 		}
 	}
 }

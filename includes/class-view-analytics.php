@@ -199,7 +199,7 @@ final class View_Analytics {
 		/**
 		 * Contain all the value to edit/delete/remove the table row
 		 */
-		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/class-view-analytics-common-media-table.php' );
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/class-view-analytics-media-table.php' );
 
 		/**
 		 * Check if the class does not exits then only allow the file to add
@@ -226,6 +226,11 @@ final class View_Analytics {
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/class-view-analytics-admin.php';
 
 		/**
+		 * The class responsible for for rest api to view who has view the media
+		 */
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/class-view-analytics-rest-api.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
@@ -240,6 +245,7 @@ final class View_Analytics {
 		 * The class responsible for defining all actions that are release to showing the view Count
 		 */
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/view-analytics-public-display.php';
+		
 
 		$this->loader = View_Analytics_Loader::instance();
 
@@ -297,6 +303,19 @@ final class View_Analytics {
 		
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'media_user_view_html' );
+
+		/**
+		 * Load the localize Script
+		 */
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'wp_localize_script' );
+
+		/**
+		 * Load the REST API
+		 */
+		$rest_api = new View_Analytics_Rest_Controller( $this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_action( 'rest_api_init', $rest_api, 'register_routes', 1000 );
+
 		/**
 		 * All class that are release to Pulic Frountend Count
 		 */
@@ -326,6 +345,14 @@ final class View_Analytics {
 		$plugin_public_display = new View_Analytics_Public_Display( $this->get_plugin_name(), $this->get_version() );
 		
 		$this->loader->add_action( 'bp_before_activity_activity_content', $plugin_public_display, 'show_view_count', 1000 );
+
+		/**
+		 * Load popup template into the Activity Area
+		 */
+		$this->loader->add_action( 'bp_after_directory_activity_list', $plugin_public_display, 'who_view_media_modal', 1000 );
+		$this->loader->add_action( 'bp_after_member_activity_content', $plugin_public_display, 'who_view_media_modal', 1000 );
+		$this->loader->add_action( 'bp_after_group_activity_content', $plugin_public_display, 'who_view_media_modal', 1000 );
+		$this->loader->add_action( 'bp_after_single_activity_content', $plugin_public_display, 'who_view_media_modal', 1000 );
 
 	}
 
