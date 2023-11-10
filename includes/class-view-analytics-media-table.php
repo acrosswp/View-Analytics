@@ -55,7 +55,7 @@ class View_Analytics_Media_Table {
      */
     public function media_view_count_table_name() {
 		global $wpdb;
-		return $wpdb->prefix.'bp_media_view';
+		return $wpdb->prefix . 'awp_va_media_view';
     }
 
 	/**

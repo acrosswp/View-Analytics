@@ -47,7 +47,7 @@ class View_Analytics_Activator {
 		global $wpdb;
 
 		$charset_collate = $wpdb->get_charset_collate();
-		$table_name		 = $wpdb->prefix.'bp_media_view';
+		$table_name		 = $wpdb->prefix . 'awp_va_media_view';
 
 		$sql = "CREATE TABLE {$table_name} (
 			id bigint(20) NOT NULL AUTO_INCREMENT ,

@@ -20,15 +20,12 @@ jQuery( document ).ready( function($) {
             },
             success: function(response) {
 
-                var html;
+                var html = '';
 
                 if ( $.isArray( response ) ) {
-
                     var media_view_user = wp.template( 'view-analytics-media-view-user' );
-
                     $.each( response, function( key, data ) {
                         html += media_view_user( data )
-                        console.log( html );
                     });
                 }
                 /**
