@@ -191,6 +191,10 @@ final class View_Analytics {
 		 */
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'vendor/autoload.php' );
 
+		if ( class_exists( 'AcrossWP_BuddyBoss_Platform_Dependency' ) ) {
+			new AcrossWP_BuddyBoss_Platform_Dependency( $this->get_plugin_name(), VIEW_ANALYTICS_FILES );
+		}
+
 		/**
 		 * All the functions are included in this file
 		 */
