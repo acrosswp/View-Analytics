@@ -21,4 +21,4 @@ jobs:
       - name: Generate zip
         uses: 10up/action-wordpress-plugin-build-zip@stable
         env:
-          SLUG: view-analytics # optional, remove if GitHub repo name matches SVN slug, including capitalization
+          SLUG: sorting-option-in-network-search-for-buddyboss # optional, remove if GitHub repo name matches SVN slug, including capitalization
