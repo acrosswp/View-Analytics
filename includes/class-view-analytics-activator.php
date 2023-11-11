@@ -47,9 +47,13 @@ class View_Analytics_Activator {
 		global $wpdb;
 
 		$charset_collate = $wpdb->get_charset_collate();
-		$table_name		 = $wpdb->prefix . 'awp_va_media_view';
 
-		$sql = "CREATE TABLE {$table_name} (
+		/**
+		 * Media View
+		 */
+		$media_view_table_name		 = $wpdb->prefix . 'awp_va_media_view';
+
+		$media_view_sql = "CREATE TABLE {$media_view_table_name} (
 			id bigint(20) NOT NULL AUTO_INCREMENT ,
 			user_id bigint(20) NOT NULL DEFAULT 0,
 			media_id bigint(20) NOT NULL DEFAULT 0,
@@ -59,7 +63,24 @@ class View_Analytics_Activator {
 			PRIMARY KEY  (id)
 		) {$charset_collate};";
 
-		maybe_create_table( $table_name, $sql );
+
+		/**
+		 * Profile View
+		 */
+		$profile_view_table_name		 = $wpdb->prefix . 'awp_va_profile_view';
+
+		$profile_view_sql = "CREATE TABLE {$profile_view_table_name} (
+			id bigint(20) NOT NULL AUTO_INCREMENT ,
+			user_id bigint(20) NOT NULL DEFAULT 0,
+			media_id bigint(20) NOT NULL DEFAULT 0,
+			attachment_id bigint(20) NOT NULL DEFAULT 0,
+			value bigint(20) NOT NULL DEFAULT 0,
+			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+			PRIMARY KEY  (id)
+		) {$charset_collate};";
+
+		maybe_create_table( $media_view_table_name, $media_view_sql );
+		maybe_create_table( $profile_view_table_name, $profile_view_sql );
 	}
 
 }
