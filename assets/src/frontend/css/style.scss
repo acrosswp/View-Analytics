@@ -1,0 +1,39 @@
+.media-view-list {
+	list-style:none;
+	margin:0px;
+	padding:0px;
+
+    .view-user{
+        display: flex;
+        align-items: center;
+        margin: 15px 0;
+
+        .view-user-avatar{
+            margin-right:10px;
+        }
+    }
+
+    .view-user:first-child{
+        margin-top:0px;
+    }
+
+    .view-user:last-child{
+        margin-bottom:0px;
+    }
+}
+
+#view_list.view-analytics-media-views {
+    span{
+        background: #f2f2f2;
+        border-radius: 10px;
+        padding: 5px 10px;
+        font-size: 13px;
+        cursor:pointer;
+    }
+}
+
+#view-analytics-view-confirmation-modal{
+    .modal-wrapper{
+        max-width: 450px;
+    }
+}

@@ -81,7 +81,7 @@ class View_Analytics_Profile_Count_View {
 			bp_core_new_nav_item(
 				array(
 					'name'                => __( 'Profile View', 'view-analytics' ),
-					'slug'                => 'profile_view1',
+					'slug'                => 'profile_view',
 					'screen_function'     => array( $this, 'view_manage' )
 				)
 			);
