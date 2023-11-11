@@ -53,7 +53,7 @@ class View_Analytics_Media_Table {
 	/**
      * Return the View Analytics Media Count Ket
      */
-    public function media_view_count_table_name() {
+    public function table_name() {
 		global $wpdb;
 		return $wpdb->prefix . 'awp_va_media_view';
     }
@@ -65,7 +65,7 @@ class View_Analytics_Media_Table {
 		global $wpdb;
 
 		return $wpdb->insert(
-			$this->media_view_count_table_name(),
+			$this->table_name(),
 			array( 
 				'user_id' => $user_id,
 				'media_id' => $media_id,
@@ -87,7 +87,7 @@ class View_Analytics_Media_Table {
 	public function user_media_get( $user_id, $attachment_id ) {
 		global $wpdb;
 
-		$table_name = $this->media_view_count_table_name();
+		$table_name = $this->table_name();
 
 		return $wpdb->get_row(
 			$wpdb->prepare( 
@@ -104,7 +104,7 @@ class View_Analytics_Media_Table {
 	public function media_get_details( $attachment_id ) {
 		global $wpdb;
 
-		$table_name = $this->media_view_count_table_name();
+		$table_name = $this->table_name();
 
 		return $wpdb->get_results(
 			$wpdb->prepare( 
@@ -120,7 +120,7 @@ class View_Analytics_Media_Table {
 	public function user_media_update( $id, $value ) {
 		global $wpdb;
 		$wpdb->update(
-			$this->media_view_count_table_name(),
+			$this->table_name(),
 			array(
 				'value' => $value,
 			),
@@ -137,7 +137,7 @@ class View_Analytics_Media_Table {
 	 */
 	public function user_media_delete( $id ) {
 		global $wpdb;
-		$wpdb->delete( $this->media_view_count_table_name(), array( 'id' => $id ), array( '%d' ) );
+		$wpdb->delete( $this->table_name(), array( 'id' => $id ), array( '%d' ) );
 	}
 
 	/**
