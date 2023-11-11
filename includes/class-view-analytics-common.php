@@ -75,30 +75,57 @@ class View_Analytics_Common {
 	}
 
     /**
-     * Return the View Analytics Media Count Ket
+     * Return the View Analytics Media Count Key
      */
     public function media_settings() {
         return 'view-analytics-media-settings';
     }
 
-
     /**
-     * Return the View Analytics Media Count Ket
+     * Return the View Analytics Media Count Key
      */
     public function media_view_count_key() {
-        return '_View_Analytics_Media_Table_count_enable';
+        return '_view_analytics_media_table_count_enable';
     }
 
-
-    /**
-     * Return the View Analytics Media Count Ket
+	/**
+     * Return the View Analytics Media Count Key
      */
     public function media_view_count_enable() {
         return get_option( $this->media_view_count_key(), true );
     }
 
 	/**
-     * Return the View Analytics Media Count Ket
+     * Return the View Analytics Media Count Key
+     */
+    public function profile_settings() {
+        return 'view-analytics-profile-settings';
+    }
+
+	/**
+     * Return the Profile Analytics Media Count Key
+     */
+    public function profile_view_count_key() {
+        return '_view_analytics_profile_table_count_enable';
+    }
+
+	/**
+     * Return the View Analytics Profile Count Key
+     */
+    public function profile_view_count_enable() {
+        return get_option( $this->profile_view_count_key(), true );
+    }
+
+	/**
+     * Return the View Analytics Media Count Key
+     */
+    public function get_filter_post_value( $key, $filter = FILTER_VALIDATE_INT ) {
+		return filter_input( INPUT_POST,  $key, $filter );
+
+    }
+
+	/**
+     * Return the View Analytics Media Count Key
      */
     public function lightbox_media_ajax_action_key() {
         return array( 
@@ -193,7 +220,7 @@ class View_Analytics_Common {
     }
 
 	/**
-     * Return the View Analytics Media Count Ket
+     * Return the View Analytics Media Count Key
      */
     public function lightbox_all_media_ajax_action() {
 
@@ -208,7 +235,7 @@ class View_Analytics_Common {
     }
 
 	/**
-     * Return the View Analytics Media Count Ket
+     * Return the View Analytics Media Count Key
      */
     public function is_media_lightbox_ajax() {
 
@@ -218,14 +245,6 @@ class View_Analytics_Common {
             return $_REQUEST['action'];
         }
 		return false;
-    }
-
-	/**
-     * Return the View Analytics Media Count Ket
-     */
-    public function get_filter_post_value( $key, $filter = FILTER_VALIDATE_INT ) {
-		return filter_input( INPUT_POST,  $key, $filter );
-
     }
 
 	/**

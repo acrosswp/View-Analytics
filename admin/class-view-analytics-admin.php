@@ -50,7 +50,16 @@ class View_Analytics_Admin {
 	 * @access   private
 	 * @var      string    $version    The current version of this plugin.
 	 */
-	private $section_id;
+	private $media_section_id;
+
+	/**
+	 * The ID of this profile setting view.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	private $profile_section_id;
 
 
 	/**
@@ -73,7 +82,8 @@ class View_Analytics_Admin {
 
 		$this->common = View_Analytics_Common::instance();
 
-		$this->section_id = $this->common->media_settings();
+		$this->media_section_id = $this->common->media_settings();
+		$this->profile_section_id = $this->common->profile_settings();
 		
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
@@ -99,7 +109,8 @@ class View_Analytics_Admin {
 		return array_merge(
 			$links,
 			array(
-				'settings'      => '<a href="' . esc_url( bp_get_admin_url( 'admin.php?page=bp-settings&tab=bp-media#view-analytics-media-settings' ) ) . '">' . esc_html__( 'Settings', 'view-analytics' ) . '</a>',
+				'media_settings'      => '<a href="' . esc_url( bp_get_admin_url( 'admin.php?page=bp-settings&tab=bp-media#view-analytics-media-settings' ) ) . '">' . esc_html__( 'Media Settings', 'view-analytics' ) . '</a>',
+				'profile_settings'      => '<a href="' . esc_url( bp_get_admin_url( 'admin.php?page=bp-settings&tab=bp-xprofile#view-analytics-profile-settings' ) ) . '">' . esc_html__( 'Profile Settings', 'view-analytics' ) . '</a>',
 				'about'         => '<a href="' . esc_url( bp_get_admin_url( '?page=acrosswp' ) ) . '">' . esc_html__( 'About', 'view-analytics' ) . '</a>',
 			)
 		);
@@ -111,11 +122,11 @@ class View_Analytics_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function register_fields( $setting ) {
+	public function media_register_fields( $setting ) {
 
         // Main General Settings Section
 	    $setting->add_section( 
-            $this->section_id,
+            $this->media_section_id,
             __( 'View Analytics', 'view-analytics' )
         );
 
@@ -134,6 +145,37 @@ class View_Analytics_Admin {
 		?>
 		<input id="<?php echo $id; ?>" name="<?php echo $id; ?>" type="checkbox" value="1" <?php checked( $value ); ?> />
 		<label for="<?php echo $id; ?>"><?php esc_html_e( 'Enable Media View Count', 'view-analytics' ); ?></label>
+		<?php
+	}
+
+	/**
+	 * Register the Setting in BuddyBoss General settings Area
+	 *
+	 * @since    1.0.0
+	 */
+	public function profile_register_fields( $setting ) {
+
+        // Main General Settings Section
+	    $setting->add_section( 
+            $this->profile_section_id,
+            __( 'View Analytics', 'view-analytics' )
+        );
+
+	    $args          = array();
+	    $setting->add_field( $this->common->profile_view_count_key(), __( 'View Profile Count', 'view-analytics' ), array( $this, 'view_profile_view_count' ), 'intval', $args );
+    }
+
+	/**
+	 * Allow pinned activity posts.
+	 *
+	 * @since BuddyBoss 1.0.0
+	 */
+	public function view_profile_view_count() {
+		$id = $this->common->profile_view_count_key();
+		$value = $this->common->profile_view_count_enable();
+		?>
+		<input id="<?php echo $id; ?>" name="<?php echo $id; ?>" type="checkbox" value="1" <?php checked( $value ); ?> />
+		<label for="<?php echo $id; ?>"><?php esc_html_e( 'Enable Profile View Count', 'view-analytics' ); ?></label>
 		<?php
 	}
 

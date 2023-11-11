@@ -279,7 +279,15 @@ final class View_Analytics {
 
 		$this->loader->add_action( 'plugin_action_links', $plugin_admin, 'modify_plugin_action_links', 10, 2 );
 
-		$this->loader->add_action( 'bp_admin_setting_media_register_fields', $plugin_admin, 'register_fields', 100 );
+		/**
+		 * For Media
+		 */
+		$this->loader->add_action( 'bp_admin_setting_media_register_fields', $plugin_admin, 'media_register_fields', 100 );
+
+		/**
+		 * For Profile
+		 */
+		$this->loader->add_action( 'bp_admin_setting_xprofile_register_fields', $plugin_admin, 'profile_register_fields', 100 );
 
 	}
 
