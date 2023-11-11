@@ -113,7 +113,7 @@ class View_Analytics_Media_Rest_Controller extends WP_REST_Controller {
 
 
 		$this->common = View_Analytics_Media_Common::instance();
-		if( ! empty( $this->common->can_current_user_media_view_list( $attachment_id ) ) ) {
+		if( ! empty( $this->common->can_current_user_view_list( $attachment_id ) ) ) {
 			return true;
 		}
 
@@ -193,7 +193,7 @@ class View_Analytics_Media_Rest_Controller extends WP_REST_Controller {
 		}
 
 		if ( isset( $schema['properties']['message'] ) ) {
-			$media_data['message'] = $this->common->get_media_view_time_message( $media->action_date, $mysql_time );
+			$media_data['message'] = $this->common->get_view_time_message( $media->action_date, $mysql_time );
 		}
 
 		if ( isset( $schema['properties']['action_date'] ) ) {

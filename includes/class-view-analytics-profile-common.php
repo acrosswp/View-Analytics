@@ -25,6 +25,14 @@ defined( 'ABSPATH' ) || exit;
  */
 class View_Analytics_Profile_Common extends View_Analytics_Common {
 
+    /**
+	 * The single instance of the class.
+	 *
+	 * @var View_Analytics_Loader
+	 * @since 1.0.0
+	 */
+	protected static $_instance = null;
+
 	/**
 	 * Define the core functionality of the plugin.
 	 *
@@ -38,6 +46,24 @@ class View_Analytics_Profile_Common extends View_Analytics_Common {
 
 		parent::__construct();
         $this->table = View_Analytics_Profile_Table::instance();
+	}
+
+
+	/**
+	 * Main View_Analytics_Loader Instance.
+	 *
+	 * Ensures only one instance of WooCommerce is loaded or can be loaded.
+	 *
+	 * @since 1.0.0
+	 * @static
+	 * @see View_Analytics_Loader()
+	 * @return View_Analytics_Loader - Main instance.
+	 */
+	public static function instance() {
+		if ( is_null( self::$_instance ) ) {
+			self::$_instance = new self();
+		}
+		return self::$_instance;
 	}
 
 	/**

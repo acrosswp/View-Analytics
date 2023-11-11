@@ -26,6 +26,14 @@ defined( 'ABSPATH' ) || exit;
 class View_Analytics_Media_Common extends View_Analytics_Common {
 
 	/**
+	 * The single instance of the class.
+	 *
+	 * @var View_Analytics_Loader
+	 * @since 1.0.0
+	 */
+	protected static $_instance = null;
+
+	/**
 	 * Define the core functionality of the plugin.
 	 *
 	 * Set the plugin name and the plugin version that can be used throughout the plugin.
@@ -40,31 +48,49 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 		$this->table = View_Analytics_Media_Table::instance();
 	}
 
+	/**
+	 * Main View_Analytics_Loader Instance.
+	 *
+	 * Ensures only one instance of WooCommerce is loaded or can be loaded.
+	 *
+	 * @since 1.0.0
+	 * @static
+	 * @see View_Analytics_Loader()
+	 * @return View_Analytics_Loader - Main instance.
+	 */
+	public static function instance() {
+		if ( is_null( self::$_instance ) ) {
+			self::$_instance = new self();
+		}
+		return self::$_instance;
+	}
+
+
     /**
      * Return the View Analytics Media Count Key
      */
-    public function media_settings() {
+    public function settings() {
         return 'view-analytics-media-settings';
     }
 
     /**
      * Return the View Analytics Media Count Key
      */
-    public function media_view_count_key() {
+    public function view_count_key() {
         return '_view_analytics_media_table_count_enable';
     }
 
 	/**
      * Return the View Analytics Media Count Key
      */
-    public function media_view_count_enable() {
-        return get_option( $this->media_view_count_key(), true );
+    public function view_count_enable() {
+        return get_option( $this->view_count_key(), true );
     }
 
 	/**
      * Return the View Analytics Media Count Key
      */
-    public function lightbox_media_ajax_action_key() {
+    public function lightbox_ajax_action_key() {
         return array( 
 			'media_get_media_description' => 
 				array( 
@@ -103,7 +129,7 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
      * Return the lightbox attchement id key
      */
     public function get_lightbox_attachment_id_key( $action ) {
-		$action_arr = $this->lightbox_media_ajax_action_key();
+		$action_arr = $this->lightbox_ajax_action_key();
 		$attachment_id_key = false;
 
 		foreach( $action_arr as $key => $value ) {
@@ -120,7 +146,7 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
      * Return the lightbox media id key
      */
     public function get_lightbox_media_id_key( $action ) {
-		$action_arr = $this->lightbox_media_ajax_action_key();
+		$action_arr = $this->lightbox_ajax_action_key();
 		$media_id_key = false;
 
 		foreach( $action_arr as $key => $value ) {
@@ -159,9 +185,9 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 	/**
      * Return the View Analytics Media Count Key
      */
-    public function lightbox_all_media_ajax_action() {
+    public function lightbox_all_ajax_action() {
 
-		$action_arr = $this->lightbox_media_ajax_action_key();
+		$action_arr = $this->lightbox_ajax_action_key();
 		$main_key = array();
 
 		foreach( $action_arr as $key => $value ) {
@@ -174,9 +200,9 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 	/**
      * Return the View Analytics Media Count Key
      */
-    public function is_media_lightbox_ajax() {
+    public function is_lightbox_ajax() {
 
-		$action_arr = $this->lightbox_all_media_ajax_action();
+		$action_arr = $this->lightbox_all_ajax_action();
         
 		if ( isset( $_REQUEST ) && isset( $_REQUEST['action'] ) && in_array( $_REQUEST['action'], $action_arr, true ) ) {
             return $_REQUEST['action'];
@@ -187,7 +213,7 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 	/**
 	 * Get the media view details via $attachment_id
 	 */
-	public function media_get_count( $attachment_id ) {
+	public function get_count( $attachment_id ) {
 		$media_details = $this->table->media_get_details( $attachment_id );
 		if ( empty( $media_details ) ) {
 			return 0;
@@ -199,7 +225,7 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 	/**
 	 * Check if the current user is allow to view the Media View List
 	 */
-	public function can_current_user_media_view_list( $attachment_id ) {
+	public function can_current_user_view_list( $attachment_id ) {
 		$user_id = get_current_user_id();
 
 		if ( empty( $user_id ) ) {
@@ -223,7 +249,7 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 	/**
 	 * Show the message about when the user has view the Media
 	 */
-	public function get_media_view_time_message( $action_date, $mysql_time = false ) {
+	public function get_view_time_message( $action_date, $mysql_time = false ) {
 
 		/**
 		 * If current time is empty

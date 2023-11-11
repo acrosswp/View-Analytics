@@ -375,8 +375,8 @@ final class View_Analytics {
 		/**
 		 * For Media
 		 */
-		$this->loader->add_action( 'wp_ajax_media_get_media_description', $plugin_public_media_count, 'media_view_count_login_user', -10 );
-		$this->loader->add_action( 'wp_ajax_media_get_activity', $plugin_public_media_count, 'media_view_count_login_user', -10 );
+		$this->loader->add_action( 'wp_ajax_media_get_media_description', $plugin_public_media_count, 'photo_view_count_login_user', -10 );
+		$this->loader->add_action( 'wp_ajax_media_get_activity', $plugin_public_media_count, 'photo_view_count_login_user', -10 );
 
 		/**
 		 * For Video

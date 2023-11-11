@@ -75,7 +75,7 @@ class View_Analytics_Public_Media_Count {
     /**
      * Count the number of users has view the media
      */
-    public function media_view_count_login_user() {
+    public function photo_view_count_login_user() {
 		$this->view_count_verification( 'bp_nouveau_media' );
     }
 
@@ -106,7 +106,7 @@ class View_Analytics_Public_Media_Count {
 			 */
 			$check_variable = $this->check_variable();
 			if ( ! empty( $check_variable ) ) {
-				$this->update_media_view_count( $check_variable['media_id'], $check_variable['attachment_id'] );
+				$this->update_view_count( $check_variable['media_id'], $check_variable['attachment_id'] );
 			}
         }
 	}
@@ -172,9 +172,9 @@ class View_Analytics_Public_Media_Count {
 	/**
 	 * Update Media view count
 	 */
-	public function update_media_view_count( $media_id, $attachment_id ) {
+	public function update_view_count( $media_id, $attachment_id ) {
 
-		if ( $this->common->media_view_count_enable() ) {
+		if ( $this->common->view_count_enable() ) {
 			$current_user_id = get_current_user_id();
 			$media_view = View_Analytics_Media_Table::instance()->user_media_get( $current_user_id, $attachment_id );
 	

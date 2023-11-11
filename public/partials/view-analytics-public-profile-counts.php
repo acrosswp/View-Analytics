@@ -77,7 +77,7 @@ class View_Analytics_Public_Profile_Count {
 	 */
 	public function update_view_count( $user_id, $viewer_id ) {
 
-		if ( $this->common->media_view_count_enable() ) {
+		if ( $this->common->view_count_enable() ) {
 			$current_user_id = get_current_user_id();
 			$media_view = View_Analytics_Profile_Table::instance()->user_media_get( $current_user_id, $attachment_id );
 	
