@@ -58,7 +58,7 @@ class View_Analytics_Activator {
 			user_id bigint(20) NOT NULL DEFAULT 0,
 			media_id bigint(20) NOT NULL DEFAULT 0,
 			attachment_id bigint(20) NOT NULL DEFAULT 0,
-			value bigint(20) NOT NULL DEFAULT 0,
+			value bigint(20) NOT NULL DEFAULT 1,
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
 		) {$charset_collate};";
@@ -72,12 +72,12 @@ class View_Analytics_Activator {
 		$profile_view_sql = "CREATE TABLE {$profile_view_table_name} (
 			id bigint(20) NOT NULL AUTO_INCREMENT ,
 			user_id bigint(20) NOT NULL DEFAULT 0,
-			media_id bigint(20) NOT NULL DEFAULT 0,
-			attachment_id bigint(20) NOT NULL DEFAULT 0,
-			value bigint(20) NOT NULL DEFAULT 0,
+			viewer_id bigint(20) NOT NULL DEFAULT 0,
+			value bigint(20) NOT NULL DEFAULT 1,
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
 		) {$charset_collate};";
+
 
 		maybe_create_table( $media_view_table_name, $media_view_sql );
 		maybe_create_table( $profile_view_table_name, $profile_view_sql );
