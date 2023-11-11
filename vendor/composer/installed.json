@@ -1,6 +1,101 @@
 {
     "packages": [
         {
+            "name": "acrosswp/acrosswp-buddyboss-dependency",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/acrosswp/acrosswp-buddyboss-dependency.git",
+                "reference": "41584029327a20bd72d96c39f30cf1352c534fa2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/acrosswp/acrosswp-buddyboss-dependency/zipball/41584029327a20bd72d96c39f30cf1352c534fa2",
+                "reference": "41584029327a20bd72d96c39f30cf1352c534fa2",
+                "shasum": ""
+            },
+            "require": {
+                "acrosswp/acrosswp-dependency": "dev-main"
+            },
+            "time": "2023-11-09T09:11:27+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "acrosswp-buddyboss-dependency.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "acrosswp",
+                    "email": "contant@acrosswp.com"
+                }
+            ],
+            "description": "Composer to autoload the AcrossWP Dependency Class",
+            "homepage": "https://acrosswp.com/",
+            "keywords": [
+                "plugin",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/acrosswp/acrosswp-buddyboss-dependency/issues",
+                "source": "https://github.com/acrosswp/acrosswp-buddyboss-dependency/tree/main"
+            },
+            "install-path": "../acrosswp/acrosswp-buddyboss-dependency"
+        },
+        {
+            "name": "acrosswp/acrosswp-dependency",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/acrosswp/acrosswp-dependency.git",
+                "reference": "ab54a20711f398340cfc5620533d8bd1a36178e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/acrosswp/acrosswp-dependency/zipball/ab54a20711f398340cfc5620533d8bd1a36178e6",
+                "reference": "ab54a20711f398340cfc5620533d8bd1a36178e6",
+                "shasum": ""
+            },
+            "time": "2023-11-09T09:07:02+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "acrosswp-dependency.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "acrosswp",
+                    "email": "contant@acrosswp.com"
+                }
+            ],
+            "description": "Composer to autoload the AcrossWP Dependency Class",
+            "homepage": "https://acrosswp.com/",
+            "keywords": [
+                "plugin",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/acrosswp/acrosswp-dependency/issues",
+                "source": "https://github.com/acrosswp/acrosswp-dependency/tree/main"
+            },
+            "install-path": "../acrosswp/acrosswp-dependency"
+        },
+        {
             "name": "acrosswp/acrosswp-plugin-update-checker-github",
             "version": "dev-main",
             "version_normalized": "dev-main",
@@ -53,25 +148,25 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/YahnisElsts/plugin-update-checker.git",
-                "reference": "00774ef3d9a2a3dfd8ac040b0dcdf5e42126a708"
+                "reference": "0b6bd7cd3286688ab680201aa6a7d8572c51ae1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/YahnisElsts/plugin-update-checker/zipball/00774ef3d9a2a3dfd8ac040b0dcdf5e42126a708",
-                "reference": "00774ef3d9a2a3dfd8ac040b0dcdf5e42126a708",
+                "url": "https://api.github.com/repos/YahnisElsts/plugin-update-checker/zipball/0b6bd7cd3286688ab680201aa6a7d8572c51ae1f",
+                "reference": "0b6bd7cd3286688ab680201aa6a7d8572c51ae1f",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "php": ">=5.6.20"
             },
-            "time": "2023-10-20T13:40:52+00:00",
+            "time": "2023-11-09T08:34:00+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",
             "autoload": {
                 "files": [
-                    "load-v5p2.php"
+                    "load-v5p3.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -96,7 +191,7 @@
             ],
             "support": {
                 "issues": "https://github.com/YahnisElsts/plugin-update-checker/issues",
-                "source": "https://github.com/YahnisElsts/plugin-update-checker/tree/master"
+                "source": "https://github.com/YahnisElsts/plugin-update-checker/tree/v5.3"
             },
             "install-path": "../yahnis-elsts/plugin-update-checker"
         }
