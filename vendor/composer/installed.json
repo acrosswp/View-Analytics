@@ -7,18 +7,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/acrosswp/acrosswp-buddyboss-dependency.git",
-                "reference": "41584029327a20bd72d96c39f30cf1352c534fa2"
+                "reference": "17231cd8f06be3dee067f3611319299b07cb682b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/acrosswp/acrosswp-buddyboss-dependency/zipball/41584029327a20bd72d96c39f30cf1352c534fa2",
-                "reference": "41584029327a20bd72d96c39f30cf1352c534fa2",
+                "url": "https://api.github.com/repos/acrosswp/acrosswp-buddyboss-dependency/zipball/17231cd8f06be3dee067f3611319299b07cb682b",
+                "reference": "17231cd8f06be3dee067f3611319299b07cb682b",
                 "shasum": ""
             },
             "require": {
                 "acrosswp/acrosswp-dependency": "dev-main"
             },
-            "time": "2023-11-09T09:11:27+00:00",
+            "time": "2023-11-11T10:41:10+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",
@@ -56,15 +56,15 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/acrosswp/acrosswp-dependency.git",
-                "reference": "ab54a20711f398340cfc5620533d8bd1a36178e6"
+                "reference": "e2b649ecdbf939b269d2511b4d8dbd067fd73775"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/acrosswp/acrosswp-dependency/zipball/ab54a20711f398340cfc5620533d8bd1a36178e6",
-                "reference": "ab54a20711f398340cfc5620533d8bd1a36178e6",
+                "url": "https://api.github.com/repos/acrosswp/acrosswp-dependency/zipball/e2b649ecdbf939b269d2511b4d8dbd067fd73775",
+                "reference": "e2b649ecdbf939b269d2511b4d8dbd067fd73775",
                 "shasum": ""
             },
-            "time": "2023-11-09T09:07:02+00:00",
+            "time": "2023-11-11T11:10:11+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",
@@ -102,15 +102,15 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/acrosswp/acrosswp-plugin-update-checker-github.git",
-                "reference": "8df5554adf40b5d5f54787b5315fbeee1b715ed7"
+                "reference": "9599e9ed6cbca3684b120f4174fa4780a6d57566"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/acrosswp/acrosswp-plugin-update-checker-github/zipball/8df5554adf40b5d5f54787b5315fbeee1b715ed7",
-                "reference": "8df5554adf40b5d5f54787b5315fbeee1b715ed7",
+                "url": "https://api.github.com/repos/acrosswp/acrosswp-plugin-update-checker-github/zipball/9599e9ed6cbca3684b120f4174fa4780a6d57566",
+                "reference": "9599e9ed6cbca3684b120f4174fa4780a6d57566",
                 "shasum": ""
             },
-            "time": "2023-10-18T16:13:11+00:00",
+            "time": "2023-11-11T23:01:45+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",

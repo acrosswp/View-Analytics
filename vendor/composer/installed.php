@@ -3,7 +3,7 @@
         'name' => 'acrosswp/view-analytics',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '7557ba674d5e8880823f36483e259b31ff7260c0',
+        'reference' => '5a22b637fe105ed4bc4796321b7fe4f4e57b5ac6',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'acrosswp/acrosswp-buddyboss-dependency' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '41584029327a20bd72d96c39f30cf1352c534fa2',
+            'reference' => '17231cd8f06be3dee067f3611319299b07cb682b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../acrosswp/acrosswp-buddyboss-dependency',
             'aliases' => array(
@@ -24,7 +24,7 @@
         'acrosswp/acrosswp-dependency' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'ab54a20711f398340cfc5620533d8bd1a36178e6',
+            'reference' => 'e2b649ecdbf939b269d2511b4d8dbd067fd73775',
             'type' => 'library',
             'install_path' => __DIR__ . '/../acrosswp/acrosswp-dependency',
             'aliases' => array(
@@ -35,7 +35,7 @@
         'acrosswp/acrosswp-plugin-update-checker-github' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '8df5554adf40b5d5f54787b5315fbeee1b715ed7',
+            'reference' => '9599e9ed6cbca3684b120f4174fa4780a6d57566',
             'type' => 'library',
             'install_path' => __DIR__ . '/../acrosswp/acrosswp-plugin-update-checker-github',
             'aliases' => array(
@@ -46,7 +46,7 @@
         'acrosswp/view-analytics' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '7557ba674d5e8880823f36483e259b31ff7260c0',
+            'reference' => '5a22b637fe105ed4bc4796321b7fe4f4e57b5ac6',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
