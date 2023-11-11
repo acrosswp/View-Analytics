@@ -191,6 +191,13 @@ final class View_Analytics {
 		 */
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'vendor/autoload.php' );
 
+		/**
+		 * The file is reponsiable of updating the plugins zip
+		 * of the plugin.
+		 */
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/licenses-update/plugin-update-checker/main.php';
+
+
 		if ( class_exists( 'AcrossWP_BuddyBoss_Platform_Dependency' ) ) {
 			new AcrossWP_BuddyBoss_Platform_Dependency( $this->get_plugin_name(), VIEW_ANALYTICS_FILES );
 		}
@@ -317,6 +324,10 @@ final class View_Analytics {
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
+
+		if( class_exists( 'AcrossWP_Plugin_Update_Checker_Github' ) ) {
+			new AcrossWP_Plugin_Update_Checker_Github();
+		}
 		
 		$plugin_admin = new View_Analytics_Admin( $this->get_plugin_name(), $this->get_version() );
 
