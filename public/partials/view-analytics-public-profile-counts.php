@@ -55,6 +55,15 @@ class View_Analytics_Public_Profile_Count {
 	private $common;
 
 	/**
+	 * The instance of the Profile View Table
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	private $table;
+
+	/**
 	 * Define the core functionality of the plugin.
 	 *
 	 * Set the plugin name and the plugin version that can be used throughout the plugin.
@@ -73,25 +82,43 @@ class View_Analytics_Public_Profile_Count {
 	}
 
 	/**
+	 * This function is run when someone visit the member profile page
+	 */
+	public function member_home_content() {
+
+		$current_user_id = get_current_user_id();
+		$displayed_user_id = bp_displayed_user_id();
+
+		/**
+		 * Check if both are not empty
+		 */
+		if ( ! empty( $current_user_id ) && ! empty( $displayed_user_id ) ) {
+			$this->update_view_count( $displayed_user_id, $current_user_id );
+		}
+	}
+
+	/**
 	 * Update Media view count
 	 */
 	public function update_view_count( $user_id, $viewer_id ) {
 
 		if ( $this->common->view_count_enable() ) {
-			$current_user_id = get_current_user_id();
-			$media_view = View_Analytics_Profile_Table::instance()->user_media_get( $current_user_id, $attachment_id );
+
+			$this->table = View_Analytics_Profile_Table::instance();
+
+			$profile_view = $this->table->user_profile_get( $user_id, $viewer_id );
 	
 			/**
 			 * Check if empty
 			 */
-			if ( empty( $media_view ) ) {
-				View_Analytics_Profile_Table::instance()->user_media_add( $current_user_id, $media_id, $attachment_id, 1 );
+			if ( empty( $profile_view ) ) {
+				View_Analytics_Profile_Table::instance()->user_profile_add( $user_id, $viewer_id, 1 );
 			} else {
-				$id = $media_view->id;
-				$view_count = $media_view->value;
+				$id = $profile_view->id;
+				$view_count = $profile_view->value;
 				$view_count++;
 	
-				View_Analytics_Profile_Table::instance()->user_media_update( $id, $view_count );
+				View_Analytics_Profile_Table::instance()->user_profile_update( $id, $view_count );
 			}
 		}
 	}

@@ -278,6 +278,18 @@ final class View_Analytics {
 		 * All the functions are included in this file
 		 */
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/class-view-analytics-profile-common.php' );
+
+
+		/**
+		 * The class responsible for defining all actions that are releate to recoring the view count in table
+		 */
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/view-analytics-public-profile-counts.php';
+
+
+		/**
+		 * The class responsible for defining all actions that are releate to recoring the view count in table
+		 */
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/view-analytics-public-profile-menu.php';
 	}
 
 	/**
@@ -389,6 +401,20 @@ final class View_Analytics {
 		 */
 		$this->loader->add_action( 'wp_ajax_document_get_document_description', $plugin_public_media_count, 'document_view_count_login_user', -10 );
 		$this->loader->add_action( 'wp_ajax_document_get_activity', $plugin_public_media_count, 'document_view_count_login_user', -10 );
+
+
+		/**
+		 * All class that are release to Pulic Frountend Count
+		 */
+		$plugin_public_profile_count = new View_Analytics_Public_Profile_Count( $this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_action( 'bp_before_member_home_content', $plugin_public_profile_count, 'member_home_content', 1000 );
+
+
+		/**
+		 * All class that are release to Pulic Frountend Count
+		 */
+		$plugin_public_profile_view = new View_Analytics_Profile_Count_View( $this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_action( 'bp_setup_nav', $plugin_public_profile_view, 'navigation', 1000 );
 
 	}
 
