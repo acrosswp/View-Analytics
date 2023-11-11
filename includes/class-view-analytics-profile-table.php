@@ -61,7 +61,7 @@ class View_Analytics_Profile_Table {
 	/**
 	 * Add the current user has view profile count
 	 */
-	public function user_profile_add( $user_id, $viewer_id, $value = 1 ) {
+	public function user_profile_add( $user_id, $viewer_id, $value = 1, $is_new = 1 ) {
 		global $wpdb;
 
 		return $wpdb->insert(
@@ -70,8 +70,10 @@ class View_Analytics_Profile_Table {
 				'user_id' => $user_id,
 				'viewer_id' => $viewer_id,
 				'value' => $value,
+				'is_new' => $is_new,
 			),
 			array(
+				'%d',
 				'%d',
 				'%d',
 				'%d',
