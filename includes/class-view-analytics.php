@@ -201,33 +201,6 @@ final class View_Analytics {
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/class-view-analytics-common.php' );
 
 		/**
-		 * All the functions are included in this file
-		 */
-		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/class-view-analytics-media-common.php' );
-
-		/**
-		 * All the functions are included in this file
-		 */
-		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/class-view-analytics-profile-common.php' );
-
-		/**
-		 * Contain all the value to edit/delete/remove the table row
-		 */
-		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/class-view-analytics-media-table.php' );
-
-		/**
-		 * Contain all the value to edit/delete/remove the table row
-		 */
-		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/class-view-analytics-profile-table.php' );
-
-		/**
-		 * Check if the class does not exits then only allow the file to add
-		 */
-		if( class_exists( 'AcrossWP_Main_Menu' ) ) {
-			AcrossWP_Main_Menu::instance();
-		}
-
-		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
@@ -245,23 +218,66 @@ final class View_Analytics {
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/class-view-analytics-admin.php';
 
 		/**
-		 * The class responsible for for rest api to view who has view the media
-		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/class-view-analytics-media-rest-api.php';
-
-		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/class-view-analytics-public.php';
 
 		/**
+		 * Load all the Media view file
+		 */
+		$this->load_media_view();
+
+		/**
+		 * Load all the Profile view file
+		 */
+		$this->load_profile_view();
+
+		$this->loader = View_Analytics_Loader::instance();
+
+	}
+
+	/**
+	 * Load all the File releaste to Media
+	 */
+	private function load_media_view() {
+
+		/**
+		 * Contain all the value to edit/delete/remove the table row
+		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/class-view-analytics-media-table.php' );
+
+
+		/**
+		 * All the functions are included in this file
+		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/class-view-analytics-media-common.php' );
+
+		/**
 		 * The class responsible for defining all actions that are releate to recoring the view count in table
 		 */
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/view-analytics-public-media-counts.php';
 
-		$this->loader = View_Analytics_Loader::instance();
+		/**
+		 * The class responsible for for rest api to view who has view the media
+		 */
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/class-view-analytics-media-rest-api.php';
+	}
 
+	/**
+	 * Load all the File releaste to Media
+	 */
+	private function load_profile_view() {
+
+		/**
+		 * Contain all the value to edit/delete/remove the table row
+		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/class-view-analytics-profile-table.php' );
+
+		/**
+		 * All the functions are included in this file
+		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/class-view-analytics-profile-common.php' );
 	}
 
 	/**
@@ -332,11 +348,8 @@ final class View_Analytics {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'wp_localize_script' );
 
 		/**
-		 * Load the REST API
+		 * Show Media View Count
 		 */
-		$rest_api = new View_Analytics_Media_Rest_Controller( $this->get_plugin_name(), $this->get_version() );
-		$this->loader->add_action( 'rest_api_init', $rest_api, 'register_routes', 1000 );
-
 		$this->loader->add_action( 'bp_before_activity_activity_content', $plugin_public, 'show_view_count', 1000 );
 
 		/**
@@ -347,28 +360,35 @@ final class View_Analytics {
 		$this->loader->add_action( 'bp_after_group_activity_content', $plugin_public, 'who_view_media_modal', 1000 );
 		$this->loader->add_action( 'bp_after_single_activity_content', $plugin_public, 'who_view_media_modal', 1000 );
 
+
+		/**
+		 * Load the Media REST API
+		 */
+		$rest_api = new View_Analytics_Media_Rest_Controller( $this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_action( 'rest_api_init', $rest_api, 'register_routes', 1000 );
+
 		/**
 		 * All class that are release to Pulic Frountend Count
 		 */
-		$plugin_public_count = new View_Analytics_Public_Media_Count( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public_media_count = new View_Analytics_Public_Media_Count( $this->get_plugin_name(), $this->get_version() );
 
 		/**
 		 * For Media
 		 */
-		$this->loader->add_action( 'wp_ajax_media_get_media_description', $plugin_public_count, 'media_view_count_login_user', -10 );
-		$this->loader->add_action( 'wp_ajax_media_get_activity', $plugin_public_count, 'media_view_count_login_user', -10 );
+		$this->loader->add_action( 'wp_ajax_media_get_media_description', $plugin_public_media_count, 'media_view_count_login_user', -10 );
+		$this->loader->add_action( 'wp_ajax_media_get_activity', $plugin_public_media_count, 'media_view_count_login_user', -10 );
 
 		/**
 		 * For Video
 		 */
-		$this->loader->add_action( 'wp_ajax_video_get_video_description', $plugin_public_count, 'video_view_count_login_user', -10 );
-		$this->loader->add_action( 'wp_ajax_video_get_activity', $plugin_public_count, 'video_view_count_login_user', -10 );
+		$this->loader->add_action( 'wp_ajax_video_get_video_description', $plugin_public_media_count, 'video_view_count_login_user', -10 );
+		$this->loader->add_action( 'wp_ajax_video_get_activity', $plugin_public_media_count, 'video_view_count_login_user', -10 );
 
 		/**
 		 * For Document
 		 */
-		$this->loader->add_action( 'wp_ajax_document_get_document_description', $plugin_public_count, 'document_view_count_login_user', -10 );
-		$this->loader->add_action( 'wp_ajax_document_get_activity', $plugin_public_count, 'document_view_count_login_user', -10 );
+		$this->loader->add_action( 'wp_ajax_document_get_document_description', $plugin_public_media_count, 'document_view_count_login_user', -10 );
+		$this->loader->add_action( 'wp_ajax_document_get_activity', $plugin_public_media_count, 'document_view_count_login_user', -10 );
 
 	}
 
