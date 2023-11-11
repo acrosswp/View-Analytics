@@ -63,13 +63,22 @@ class View_Analytics_Admin {
 
 
 	/**
-	 * The ID of this media setting view.
+	 * The Instance of this media common class.
 	 *
 	 * @since    1.0.0
 	 * @access   private
 	 * @var      string    $version    The current version of this plugin.
 	 */
-	private $common;
+	private $media_common;
+
+	/**
+	 * The Instance of this profile common class.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	private $profile_common;
 
 	/**
 	 * Initialize the class and set its properties.
@@ -80,10 +89,11 @@ class View_Analytics_Admin {
 	 */
 	public function __construct( $plugin_name, $version ) {
 
-		$this->common = View_Analytics_Common::instance();
+		$this->media_common = View_Analytics_Media_Common::instance();
+		$this->profile_common = View_Analytics_Profile_Common::instance();
 
-		$this->media_section_id = $this->common->media_settings();
-		$this->profile_section_id = $this->common->profile_settings();
+		$this->media_section_id = $this->media_common->media_settings();
+		$this->profile_section_id = $this->profile_common->profile_settings();
 		
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
@@ -131,7 +141,7 @@ class View_Analytics_Admin {
         );
 
 	    $args          = array();
-	    $setting->add_field( $this->common->media_view_count_key(), __( 'View Media Count', 'view-analytics' ), array( $this, 'view_media_view_count' ), 'intval', $args );
+	    $setting->add_field( $this->media_common->media_view_count_key(), __( 'View Media Count', 'view-analytics' ), array( $this, 'view_media_view_count' ), 'intval', $args );
     }
 
 	/**
@@ -140,8 +150,8 @@ class View_Analytics_Admin {
 	 * @since BuddyBoss 1.0.0
 	 */
 	public function view_media_view_count() {
-		$id = $this->common->media_view_count_key();
-		$value = $this->common->media_view_count_enable();
+		$id = $this->media_common->media_view_count_key();
+		$value = $this->media_common->media_view_count_enable();
 		?>
 		<input id="<?php echo $id; ?>" name="<?php echo $id; ?>" type="checkbox" value="1" <?php checked( $value ); ?> />
 		<label for="<?php echo $id; ?>"><?php esc_html_e( 'Enable Media View Count', 'view-analytics' ); ?></label>
@@ -162,7 +172,7 @@ class View_Analytics_Admin {
         );
 
 	    $args          = array();
-	    $setting->add_field( $this->common->profile_view_count_key(), __( 'View Profile Count', 'view-analytics' ), array( $this, 'view_profile_view_count' ), 'intval', $args );
+	    $setting->add_field( $this->profile_common->profile_view_count_key(), __( 'View Profile Count', 'view-analytics' ), array( $this, 'view_profile_view_count' ), 'intval', $args );
     }
 
 	/**
@@ -171,8 +181,8 @@ class View_Analytics_Admin {
 	 * @since BuddyBoss 1.0.0
 	 */
 	public function view_profile_view_count() {
-		$id = $this->common->profile_view_count_key();
-		$value = $this->common->profile_view_count_enable();
+		$id = $this->profile_common->profile_view_count_key();
+		$value = $this->profile_common->profile_view_count_enable();
 		?>
 		<input id="<?php echo $id; ?>" name="<?php echo $id; ?>" type="checkbox" value="1" <?php checked( $value ); ?> />
 		<label for="<?php echo $id; ?>"><?php esc_html_e( 'Enable Profile View Count', 'view-analytics' ); ?></label>

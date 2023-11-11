@@ -201,9 +201,24 @@ final class View_Analytics {
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/class-view-analytics-common.php' );
 
 		/**
+		 * All the functions are included in this file
+		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/class-view-analytics-media-common.php' );
+
+		/**
+		 * All the functions are included in this file
+		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/class-view-analytics-profile-common.php' );
+
+		/**
 		 * Contain all the value to edit/delete/remove the table row
 		 */
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/class-view-analytics-media-table.php' );
+
+		/**
+		 * Contain all the value to edit/delete/remove the table row
+		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/class-view-analytics-profile-table.php' );
 
 		/**
 		 * Check if the class does not exits then only allow the file to add
@@ -232,7 +247,7 @@ final class View_Analytics {
 		/**
 		 * The class responsible for for rest api to view who has view the media
 		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/class-view-analytics-rest-api.php';
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/class-view-analytics-media-rest-api.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -243,7 +258,7 @@ final class View_Analytics {
 		/**
 		 * The class responsible for defining all actions that are releate to recoring the view count in table
 		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/view-analytics-public-counts.php';
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/view-analytics-public-media-counts.php';
 
 		$this->loader = View_Analytics_Loader::instance();
 
@@ -319,7 +334,7 @@ final class View_Analytics {
 		/**
 		 * Load the REST API
 		 */
-		$rest_api = new View_Analytics_Rest_Controller( $this->get_plugin_name(), $this->get_version() );
+		$rest_api = new View_Analytics_Media_Rest_Controller( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'rest_api_init', $rest_api, 'register_routes', 1000 );
 
 		$this->loader->add_action( 'bp_before_activity_activity_content', $plugin_public, 'show_view_count', 1000 );
@@ -335,7 +350,7 @@ final class View_Analytics {
 		/**
 		 * All class that are release to Pulic Frountend Count
 		 */
-		$plugin_public_count = new View_Analytics_Public_Count( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public_count = new View_Analytics_Public_Media_Count( $this->get_plugin_name(), $this->get_version() );
 
 		/**
 		 * For Media

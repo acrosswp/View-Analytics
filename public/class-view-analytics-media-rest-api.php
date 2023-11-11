@@ -20,10 +20,10 @@ defined( 'ABSPATH' ) || exit;
  * enqueue the public-facing stylesheet and JavaScript.
  *
  * @package    View_Analytics
- * @subpackage View_Analytics/View_Analytics_Rest_Controller
+ * @subpackage View_Analytics/View_Analytics_Media_Rest_Controller
  * @author     AcrossWP <contact@acrosswp.com>
  */
-class View_Analytics_Rest_Controller extends WP_REST_Controller {
+class View_Analytics_Media_Rest_Controller extends WP_REST_Controller {
 
     /**
 	 * The ID of this plugin.
@@ -112,7 +112,7 @@ class View_Analytics_Rest_Controller extends WP_REST_Controller {
 		}
 
 
-		$this->common = View_Analytics_Common::instance();
+		$this->common = View_Analytics_Media_Common::instance();
 		if( ! empty( $this->common->can_current_user_media_view_list( $attachment_id ) ) ) {
 			return true;
 		}

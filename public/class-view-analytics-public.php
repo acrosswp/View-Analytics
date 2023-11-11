@@ -49,7 +49,7 @@ class View_Analytics_Public {
 	 * @access   private
 	 * @var      string    $version    The current version of this plugin.
 	 */
-	private $common;
+	private $media_common;
 
 	/**
 	 * Initialize the class and set its properties.
@@ -63,7 +63,7 @@ class View_Analytics_Public {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
-		$this->common = View_Analytics_Common::instance();
+		$this->media_common = View_Analytics_Media_Common::instance();
 
 	}
 
@@ -152,16 +152,16 @@ class View_Analytics_Public {
      */
     public function show_view_count() {
 
-		if ( $this->common->media_view_count_enable() ) {
+		if ( $this->media_common->media_view_count_enable() ) {
 
-			$ajax_action = $this->common->is_media_lightbox_ajax();
+			$ajax_action = $this->media_common->is_media_lightbox_ajax();
 
 			if ( empty( $ajax_action ) ) {
 				return;
 			}
 
-			$attachment_id = $this->common->get_lightbox_attachment_id( $ajax_action );
-			$counts = $this->common->media_get_count( $attachment_id );
+			$attachment_id = $this->media_common->get_lightbox_attachment_id( $ajax_action );
+			$counts = $this->media_common->media_get_count( $attachment_id );
 
 			if ( empty( $attachment_id ) ) {
 				return;
@@ -170,7 +170,7 @@ class View_Analytics_Public {
 			$view = _n( 'View', 'Views', $counts, 'view-analytics' );
 			$counts = apply_filters( 'view_analytics_view_count_content', array( 'count' => $counts, 'text' => $view ), $attachment_id );
 
-			if( $this->common->can_current_user_media_view_list( $attachment_id ) ) {
+			if( $this->media_common->can_current_user_media_view_list( $attachment_id ) ) {
 				echo "<div id='view_list' class='view-analytics-media-views'><span>" . implode( ' ', $counts ) . '</span> </div>';
 				echo "<input class='current-media-view' type='hidden' value='" . $attachment_id . "'>";
 			} else {

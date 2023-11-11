@@ -49,46 +49,46 @@ msgstr[1] ""
 msgid "People Who viewed This"
 msgstr ""
 
-#: public/class-view-analytics-rest-api.php:97
+#: public/class-view-analytics-media-rest-api.php:97
 msgid "Sorry, you are not allowed to perform this action."
 msgstr ""
 
-#: public/class-view-analytics-rest-api.php:107
+#: public/class-view-analytics-media-rest-api.php:107
 msgid "Invalid Attachment ID."
 msgstr ""
 
-#: public/class-view-analytics-rest-api.php:227
+#: public/class-view-analytics-media-rest-api.php:227
 msgid "Unique identifier for the object."
 msgstr ""
 
-#: public/class-view-analytics-rest-api.php:231
+#: public/class-view-analytics-media-rest-api.php:231
 msgid "Unique identifier for the attachment."
 msgstr ""
 
-#: public/class-view-analytics-rest-api.php:235
+#: public/class-view-analytics-media-rest-api.php:235
 msgid "Unique identifier for the BB media."
 msgstr ""
 
-#: public/class-view-analytics-rest-api.php:239
+#: public/class-view-analytics-media-rest-api.php:239
 msgid "The id of the user object"
 msgstr ""
 
-#: public/class-view-analytics-rest-api.php:243
+#: public/class-view-analytics-media-rest-api.php:243
 msgid "The Link of the User Profile Picture."
 msgstr ""
 
-#: public/class-view-analytics-rest-api.php:247
+#: public/class-view-analytics-media-rest-api.php:247
 msgid "The Link of the User Profile."
 msgstr ""
 
-#: public/class-view-analytics-rest-api.php:251
+#: public/class-view-analytics-media-rest-api.php:251
 msgid "The display name of the users."
 msgstr ""
 
-#: public/class-view-analytics-rest-api.php:255
+#: public/class-view-analytics-media-rest-api.php:255
 msgid "The message that need to be diplay."
 msgstr ""
 
-#: public/class-view-analytics-rest-api.php:259
+#: public/class-view-analytics-media-rest-api.php:259
 msgid "The date on which the user view the Media"
 msgstr ""
