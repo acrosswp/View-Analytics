@@ -111,7 +111,7 @@ defined( 'ABSPATH' ) || exit;
 						'type'  => 'checkbox',
 						'title' => __( 'View Profile Count', 'view-analytics' ),
 						'label' => __( 'Enable Profile View Count', 'view-analytics' ),
-						'id'    => $this->media_common->view_count_key(),
+						'id'    => $this->profile_common->view_count_key(),
 					 ),
 				),
 			 ) );
