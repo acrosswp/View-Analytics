@@ -44,6 +44,7 @@ class View_Analytics_Activator {
 	 */
 	public static function create_table() {
 
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 		global $wpdb;
 
 		$charset_collate = $wpdb->get_charset_collate();
