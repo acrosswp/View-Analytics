@@ -119,8 +119,8 @@ class View_Analytics_Admin {
 		return array_merge(
 			$links,
 			array(
-				'media_settings'      => '<a href="' . esc_url( bp_get_admin_url( 'admin.php?page=view-analytics' ) ) . '">' . esc_html__( 'Settings', 'view-analytics' ) . '</a>',
-				'about'         => '<a href="' . esc_url( bp_get_admin_url( '?page=acrosswp' ) ) . '">' . esc_html__( 'About', 'view-analytics' ) . '</a>',
+				'media_settings'      => '<a href="' . esc_url( admin_url( 'admin.php?page=view-analytics' ) ) . '">' . esc_html__( 'Settings', 'view-analytics' ) . '</a>',
+				'about'         => '<a href="' . esc_url( admin_url( '?page=acrosswp' ) ) . '">' . esc_html__( 'About', 'view-analytics' ) . '</a>',
 			)
 		);
 	}
