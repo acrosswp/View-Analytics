@@ -5,8 +5,8 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Check if the class does not exits then only allow the file to add
  */
-if( ! class_exists( 'AcrossWP_BuddyBoss_Platform_Dependency' ) ) {
-    class AcrossWP_BuddyBoss_Platform_Dependency extends AcrossWP_Plugins_Dependency {
+if( ! class_exists( 'AcrossWP_BuddyPress_BuddyBoss_Platform_Dependency' ) ) {
+    class AcrossWP_BuddyPress_BuddyBoss_Platform_Dependency extends AcrossWP_Plugins_Dependency {
 
         /**
          * Load this function on plugin load hook
@@ -15,7 +15,7 @@ if( ! class_exists( 'AcrossWP_BuddyBoss_Platform_Dependency' ) ) {
         function constant_not_define_text(){
             printf( 
                 __( 
-                    '<strong>%s</strong></a> requires the BuddyBoss Platform plugin to work. Please <a href="https://buddyboss.com/platform/" target="_blank">install BuddyBoss Platform</a> first.',
+                    '<strong>%s</strong></a> requires the BuddyPress or BuddyBoss Platform plugin to work. Please <a href="https://wordpress.org/plugins/buddypress/" target="_blank">install BuddyPress</a> or <a href="https://buddyboss.com/platform/" target="_blank">install BuddyBoss Platform</a> first.',
                     'acrosswp'
                 ),
                 $this->get_plugin_name()
@@ -75,44 +75,43 @@ if( ! class_exists( 'AcrossWP_BuddyBoss_Platform_Dependency' ) ) {
          * Load this function on plugin load hook
          */
         function constant_name(){
-            return 'BP_PLATFORM_VERSION';
+            return array( 'BP_VERSION', 'BP_PLATFORM_VERSION' );
         }
 
         /**
          * Load this function on plugin load hook
          */
-        function mini_version(){
-            return '2.3.0';
+        function mini_version() {
+            if ( defined( BP_PLATFORM_VERSION ) ) {
+                return '2.3.0';
+            }
+
+            return '11.3.1';
         }
 
         /**
          * Load this function on plugin load hook
          */
         public function component_required() {
-            return array( 'media' );
+            return array();
         }
 
         /**
-         * Check if the Required Component is Active
+         * Load this function on plugin load hook
+         * This was done to support BuddyPress and BuddyBoss Platform
          */
-        public function required_component_is_active() {
-            $is_active = false;
-            $component_required = $this->component_required();
+        public function constant_define(){
 
-            // Active components.
-            $active_components = apply_filters( 'bp_active_components', bp_get_option( 'bp-active-components' ) );
-
-            foreach( $component_required as $component_require ) {
-                if( isset( $active_components[ $component_require ] ) ) {
-                    $is_active = true;
-                } else {
-                    $is_active = false;
-                    break;
+            $return = false;
+            $constants = $this->constant_name();
+            foreach( $constants as $constant ) {
+                $constant = (string) $constant;
+                if ( defined( $constant ) ) {
+                    $return = true;
                 }
             }
 
-            return $is_active;
-
+            return $return;
         }
     }
 }

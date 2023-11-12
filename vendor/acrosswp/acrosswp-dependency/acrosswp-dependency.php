@@ -77,6 +77,22 @@ if( ! class_exists( 'AcrossWP_Plugins_Dependency' ) ) {
          */
         public function required_component_is_active() {
             $is_active = false;
+            $component_required = $this->component_required();
+
+            // Active components.
+            $active_components = apply_filters( 'bp_active_components', bp_get_option( 'bp-active-components' ) );
+
+            foreach( $component_required as $component_require ) {
+                if( isset( $active_components[ $component_require ] ) ) {
+                    $is_active = true;
+                } else {
+                    $is_active = false;
+                    break;
+                }
+            }
+
+            return $is_active;
+
         }
     
         /**
