@@ -119,74 +119,9 @@ class View_Analytics_Admin {
 		return array_merge(
 			$links,
 			array(
-				'media_settings'      => '<a href="' . esc_url( bp_get_admin_url( 'admin.php?page=bp-settings&tab=bp-media#view-analytics-media-settings' ) ) . '">' . esc_html__( 'Media Settings', 'view-analytics' ) . '</a>',
-				'profile_settings'      => '<a href="' . esc_url( bp_get_admin_url( 'admin.php?page=bp-settings&tab=bp-xprofile#view-analytics-profile-settings' ) ) . '">' . esc_html__( 'Profile Settings', 'view-analytics' ) . '</a>',
+				'media_settings'      => '<a href="' . esc_url( bp_get_admin_url( 'admin.php?page=view-analytics' ) ) . '">' . esc_html__( 'Settings', 'view-analytics' ) . '</a>',
 				'about'         => '<a href="' . esc_url( bp_get_admin_url( '?page=acrosswp' ) ) . '">' . esc_html__( 'About', 'view-analytics' ) . '</a>',
 			)
 		);
 	}
-
-
-	/**
-	 * Register the Setting in BuddyBoss General settings Area
-	 *
-	 * @since    1.0.0
-	 */
-	public function media_register_fields( $setting ) {
-
-        // Main General Settings Section
-	    $setting->add_section( 
-            $this->media_section_id,
-            __( 'View Analytics', 'view-analytics' )
-        );
-
-	    $args          = array();
-	    $setting->add_field( $this->media_common->view_count_key(), __( 'View Media Count', 'view-analytics' ), array( $this, 'view_media_view_count' ), 'intval', $args );
-    }
-
-	/**
-	 * Allow pinned activity posts.
-	 *
-	 * @since BuddyBoss 1.0.0
-	 */
-	public function view_media_view_count() {
-		$id = $this->media_common->view_count_key();
-		$value = $this->media_common->view_count_enable();
-		?>
-		<input id="<?php echo $id; ?>" name="<?php echo $id; ?>" type="checkbox" value="1" <?php checked( $value ); ?> />
-		<label for="<?php echo $id; ?>"><?php esc_html_e( 'Enable Media View Count', 'view-analytics' ); ?></label>
-		<?php
-	}
-
-	/**
-	 * Register the Setting in BuddyBoss General settings Area
-	 *
-	 * @since    1.0.0
-	 */
-	public function profile_register_fields( $setting ) {
-
-        // Main General Settings Section
-	    $setting->add_section( 
-            $this->profile_section_id,
-            __( 'View Analytics', 'view-analytics' )
-        );
-
-	    $args          = array();
-	    $setting->add_field( $this->profile_common->view_count_key(), __( 'View Profile Count', 'view-analytics' ), array( $this, 'view_profile_view_count' ), 'intval', $args );
-    }
-
-	/**
-	 * Allow pinned activity posts.
-	 *
-	 * @since BuddyBoss 1.0.0
-	 */
-	public function view_profile_view_count() {
-		$id = $this->profile_common->view_count_key();
-		$value = $this->profile_common->view_count_enable();
-		?>
-		<input id="<?php echo $id; ?>" name="<?php echo $id; ?>" type="checkbox" value="1" <?php checked( $value ); ?> />
-		<label for="<?php echo $id; ?>"><?php esc_html_e( 'Enable Profile View Count', 'view-analytics' ); ?></label>
-		<?php
-	}
-
 }

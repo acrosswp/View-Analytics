@@ -40,7 +40,10 @@ if( ! class_exists( 'AcrossWP_Sub_Menu' ) ) {
 		public function __construct() {
 			$this->main_menu = AcrossWP_Main_Menu::instance();
 
-			add_action( 'admin_menu', array( $this, 'menu' ), 1000 );
+			/**
+			 * Load the sub menu and there fields
+			 */
+			$this->loading();
 		}
 
 
@@ -60,6 +63,6 @@ if( ! class_exists( 'AcrossWP_Sub_Menu' ) ) {
 		 *
 		 * @return void
 		 */
-		abstract function menu();
+		abstract function loading();
 	}	
 }

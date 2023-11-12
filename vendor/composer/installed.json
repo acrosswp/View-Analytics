@@ -194,19 +194,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/acrosswp/acrosswp-plugins-settings-page.git",
-                "reference": "c4ce038278e53819bfd4e4a0894389e2c7a6bd99"
+                "reference": "0bed50f8391be96a98ecadb09aa2c159d0137341"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/acrosswp/acrosswp-plugins-settings-page/zipball/c4ce038278e53819bfd4e4a0894389e2c7a6bd99",
-                "reference": "c4ce038278e53819bfd4e4a0894389e2c7a6bd99",
+                "url": "https://api.github.com/repos/acrosswp/acrosswp-plugins-settings-page/zipball/0bed50f8391be96a98ecadb09aa2c159d0137341",
+                "reference": "0bed50f8391be96a98ecadb09aa2c159d0137341",
                 "shasum": ""
             },
             "require": {
                 "acrosswp/acrosswp-about-us": "dev-main",
                 "wpify/custom-fields": "dev-master"
             },
-            "time": "2023-11-12T15:56:56+00:00",
+            "time": "2023-11-12T16:51:37+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",

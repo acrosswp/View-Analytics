@@ -38,6 +38,24 @@ defined( 'ABSPATH' ) || exit;
 		protected static $_instance = null;
 
 		/**
+		 * The ID of this media setting view.
+		 *
+		 * @since    1.0.0
+		 * @access   private
+		 * @var      string    $version    The current version of this plugin.
+		 */
+		private $media_common;
+
+		/**
+		 * The ID of this profile setting view.
+		 *
+		 * @since    1.0.0
+		 * @access   private
+		 * @var      string    $version    The current version of this plugin.
+		 */
+		private $profile_common;
+
+		/**
 		 * Initialize the class and set its properties.
 		 *
 		 * @since    1.0.0
@@ -70,26 +88,34 @@ defined( 'ABSPATH' ) || exit;
 		 *
 		 * @return void
 		 */
-		public function menu(){
-			add_submenu_page(
-				'acrosswp',
-				__( 'Books Shortcode Reference', 'textdomain' ),
-				__( 'Shortcode Reference', 'textdomain' ),
-				'manage_options',
-				'books-shortcode-ref',
-				array( $this, 'content' )
-			);
-		}
+		public function loading(){
 
-		/**
-		 * Content on the menu page
-		 */
-		public function content() {
-			?>
-			<div class="wrap">
-				<h1><?php echo esc_html( $title ); ?></h1>
-			</div>
-			<?php
+			$this->media_common = View_Analytics_Media_Common::instance();
+			$this->profile_common = View_Analytics_Profile_Common::instance();
+
+			wpify_custom_fields()->create_options_page( array(
+				'type'        => 'normal',
+				'parent_slug' => 'acrosswp',
+				'page_title'  => __( 'View Analytics', 'view-analytics' ),
+				'menu_title'  => __( 'View Analytics', 'view-analytics' ),
+				'capability'  => 'manage_options',
+				'menu_slug'   => 'view-analytics',
+				'items'      => array(
+					array(
+					   'type'  => 'checkbox',
+					   'title' => __( 'View Analytics', 'view-analytics' ),
+					   'label' => __( 'Enable Media View Count', 'view-analytics' ),
+					   'id'    => $this->media_common->view_count_key(),
+					),
+					array(
+						'type'  => 'checkbox',
+						'title' => __( 'View Profile Count', 'view-analytics' ),
+						'label' => __( 'Enable Profile View Count', 'view-analytics' ),
+						'id'    => $this->media_common->view_count_key(),
+					 ),
+				),
+			 ) );
+			 
 		}
 	}
  }
