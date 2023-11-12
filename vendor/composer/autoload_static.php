@@ -7,9 +7,11 @@ namespace Composer\Autoload;
 class ComposerStaticInitc2f6021fd27f99fa8258c76527f1da4c
 {
     public static $files = array (
+        'b63f3776920c9d542d2eda719625843e' => __DIR__ . '/..' . '/acrosswp/acrosswp-about-us/acrosswp-menu.php',
         'ba3e6311190fef6b803d614907261c88' => __DIR__ . '/..' . '/acrosswp/acrosswp-dependency/acrosswp-dependency.php',
         '3df4360102c81a53e670d4e86766fc4d' => __DIR__ . '/..' . '/acrosswp/acrosswp-buddyboss-dependency/acrosswp-buddyboss-dependency.php',
         'b808676c575d8cc3a144a9eb5971e0d9' => __DIR__ . '/..' . '/acrosswp/acrosswp-plugin-update-checker-github/updater.php',
+        'ceeb7ec4e286ed29b06ec5f9ffcc3a87' => __DIR__ . '/..' . '/acrosswp/acrosswp-plugins-settings-page/acrosswp-plugins-settings.php',
         '45a16669595eb3c0a9e2994e57fc3188' => __DIR__ . '/..' . '/yahnis-elsts/plugin-update-checker/load-v5p3.php',
     );
 

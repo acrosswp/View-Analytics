@@ -1,0 +1,26 @@
+{
+    "name": "acrosswp/acrosswp-plugins-settings-page",
+    "type": "library",
+    "license": "GPL-2.0-or-later",
+    "description": "Composer to autoload the AcrossWP Admin Dashboard Plugin Settig Sub-Menu",
+    "homepage": "https://acrosswp.com/",
+    "keywords": [
+        "wordpress",
+        "plugin"
+    ],
+    "autoload": {
+        "files": ["acrosswp-plugins-settings.php"]
+    },
+    "require": {
+        "acrosswp/acrosswp-about-us": "dev-main"
+    },
+    "support": {
+        "issues": "https://github.com/acrosswp/acrosswp-plugins-settings-page/issues"
+    },
+    "authors": [
+        {
+            "name": "acrosswp",
+            "email": "contant@acrosswp.com"
+        }
+    ]
+}

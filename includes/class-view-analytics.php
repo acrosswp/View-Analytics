@@ -328,6 +328,13 @@ final class View_Analytics {
 		if( class_exists( 'AcrossWP_Plugin_Update_Checker_Github' ) ) {
 			new AcrossWP_Plugin_Update_Checker_Github();
 		}
+
+		/**
+		 * Check if the class does not exits then only allow the file to add
+		 */
+		if( class_exists( 'AcrossWP_Main_Menu' ) ) {
+			AcrossWP_Main_Menu::instance();
+		}
 		
 		$plugin_admin = new View_Analytics_Admin( $this->get_plugin_name(), $this->get_version() );
 
