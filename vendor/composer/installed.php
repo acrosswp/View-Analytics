@@ -3,7 +3,7 @@
         'name' => 'acrosswp/view-analytics',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'e342c23f49b30cd64e65b2ff19366a7f53f1140f',
+        'reference' => 'a7d59cfaa42e21530c0fca38137e0a019e032b19',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -57,7 +57,7 @@
         'acrosswp/acrosswp-plugins-settings-page' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'e72602bd92af1aab0b96eefdaeb0ec18f494f0fb',
+            'reference' => 'c4ce038278e53819bfd4e4a0894389e2c7a6bd99',
             'type' => 'library',
             'install_path' => __DIR__ . '/../acrosswp/acrosswp-plugins-settings-page',
             'aliases' => array(
@@ -68,10 +68,21 @@
         'acrosswp/view-analytics' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'e342c23f49b30cd64e65b2ff19366a7f53f1140f',
+            'reference' => 'a7d59cfaa42e21530c0fca38137e0a019e032b19',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'wpify/custom-fields' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => 'e19bfb1af3dea2dbd3e44d1220c7334ae68d7201',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../wpify/custom-fields',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
             'dev_requirement' => false,
         ),
         'yahnis-elsts/plugin-update-checker' => array(

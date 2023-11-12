@@ -1,0 +1,95 @@
+<?php
+// Exit if accessed directly
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * The admin-specific functionality of the plugin.
+ *
+ * @link       https://acrosswp.com
+ * @since      1.0.0
+ *
+ * @package    View_Analytics
+ * @subpackage View_Analytics/admin
+ */
+
+ /**
+  * Check if class exits or not
+  */
+ if ( class_exists( 'AcrossWP_Sub_Menu' ) ) {
+
+	/**
+	 * The admin-specific functionality of the plugin.
+	 *
+	 * Defines the plugin name, version, and two examples hooks for how to
+	 * enqueue the admin-specific stylesheet and JavaScript.
+	 *
+	 * @package    View_Analytics
+	 * @subpackage View_Analytics/admin
+	 * @author     AcrossWP <contact@acrosswp.com>
+	 */
+	class View_Analytics_Admin_Setting_Menu extends AcrossWP_Sub_Menu {
+
+		/**
+		 * The single instance of the class.
+		 *
+		 * @var AcrossWP_Sub_Menu
+		 * @since 0.0.1
+		 */
+		protected static $_instance = null;
+
+		/**
+		 * Initialize the class and set its properties.
+		 *
+		 * @since    1.0.0
+		 * @param      string    $plugin_name       The name of this plugin.
+		 * @param      string    $version    The version of this plugin.
+		 */
+		public function __construct() {
+			parent::__construct();
+		}
+
+		/**
+		 * Main Post_Anonymously_Loader Instance.
+		 *
+		 * Ensures only one instance of WooCommerce is loaded or can be loaded.
+		 *
+		 * @since 0.0.1
+		 * @static
+		 * @see Post_Anonymously_Loader()
+		 * @return Post_Anonymously_Loader - Main instance.
+		 */
+		public static function instance() {
+			if ( is_null( self::$_instance ) ) {
+				self::$_instance = new self();
+			}
+			return self::$_instance;
+		}
+
+		/**
+		 * Adds the plugin license page to the admin menu.
+		 *
+		 * @return void
+		 */
+		public function menu(){
+			add_submenu_page(
+				'acrosswp',
+				__( 'Books Shortcode Reference', 'textdomain' ),
+				__( 'Shortcode Reference', 'textdomain' ),
+				'manage_options',
+				'books-shortcode-ref',
+				array( $this, 'content' )
+			);
+		}
+
+		/**
+		 * Content on the menu page
+		 */
+		public function content() {
+			?>
+			<div class="wrap">
+				<h1><?php echo esc_html( $title ); ?></h1>
+			</div>
+			<?php
+		}
+	}
+ }

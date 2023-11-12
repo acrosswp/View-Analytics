@@ -9,9 +9,9 @@
         "plugin"
     ],
     "require": {
-        "acrosswp/acrosswp-plugins-settings-page": "dev-main",
         "acrosswp/acrosswp-buddyboss-dependency": "dev-main",
         "yahnis-elsts/plugin-update-checker": "dev-master",
+        "acrosswp/acrosswp-plugins-settings-page": "dev-main",
         "acrosswp/acrosswp-plugin-update-checker-github": "dev-main"
     },
     "minimum-stability": "dev",

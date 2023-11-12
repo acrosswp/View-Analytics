@@ -12,7 +12,8 @@
         "files": ["acrosswp-plugins-settings.php"]
     },
     "require": {
-        "acrosswp/acrosswp-about-us": "dev-main"
+        "acrosswp/acrosswp-about-us": "dev-main",
+        "wpify/custom-fields": "dev-master"
     },
     "support": {
         "issues": "https://github.com/acrosswp/acrosswp-plugins-settings-page/issues"

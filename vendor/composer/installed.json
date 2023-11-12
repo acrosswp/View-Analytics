@@ -194,18 +194,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/acrosswp/acrosswp-plugins-settings-page.git",
-                "reference": "e72602bd92af1aab0b96eefdaeb0ec18f494f0fb"
+                "reference": "c4ce038278e53819bfd4e4a0894389e2c7a6bd99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/acrosswp/acrosswp-plugins-settings-page/zipball/e72602bd92af1aab0b96eefdaeb0ec18f494f0fb",
-                "reference": "e72602bd92af1aab0b96eefdaeb0ec18f494f0fb",
+                "url": "https://api.github.com/repos/acrosswp/acrosswp-plugins-settings-page/zipball/c4ce038278e53819bfd4e4a0894389e2c7a6bd99",
+                "reference": "c4ce038278e53819bfd4e4a0894389e2c7a6bd99",
                 "shasum": ""
             },
             "require": {
-                "acrosswp/acrosswp-about-us": "dev-main"
+                "acrosswp/acrosswp-about-us": "dev-main",
+                "wpify/custom-fields": "dev-master"
             },
-            "time": "2023-11-12T13:36:01+00:00",
+            "time": "2023-11-12T15:56:56+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",
@@ -235,6 +236,47 @@
                 "source": "https://github.com/acrosswp/acrosswp-plugins-settings-page/tree/main"
             },
             "install-path": "../acrosswp/acrosswp-plugins-settings-page"
+        },
+        {
+            "name": "wpify/custom-fields",
+            "version": "dev-master",
+            "version_normalized": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@gitlab.com:wpify/custom-fields.git",
+                "reference": "e19bfb1af3dea2dbd3e44d1220c7334ae68d7201"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/wpify%2Fcustom-fields/repository/archive.zip?sha=e19bfb1af3dea2dbd3e44d1220c7334ae68d7201",
+                "reference": "e19bfb1af3dea2dbd3e44d1220c7334ae68d7201",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=7.4||<=8.1"
+            },
+            "require-dev": {
+                "symfony/var-dumper": "^v5.4"
+            },
+            "time": "2023-11-03T19:30:10+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "functions.php"
+                ],
+                "psr-4": {
+                    "Wpify\\CustomFields\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "WPify Custom Fields",
+            "install-path": "../wpify/custom-fields"
         },
         {
             "name": "yahnis-elsts/plugin-update-checker",
