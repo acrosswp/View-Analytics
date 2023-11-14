@@ -130,9 +130,12 @@ class View_Analytics_Public_Media_Count {
 	public function buddypress_media_view( $slug, $name, $args ) {
 		$medium      = bp_attachments_get_queried_object();
 
-
-		var_dump( $medium->id );
-		$this->update_view_count( $medium->id, $medium->id );
+		/**
+		 * Chech if the user is not login
+		 */
+		if ( is_user_logged_in() && ! empty( $medium->id ) ) {
+			$this->update_view_count( $medium->id, $medium->id );
+		}
 	}
 
     /**
