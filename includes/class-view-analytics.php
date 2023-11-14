@@ -434,7 +434,7 @@ final class View_Analytics {
 			/**
 			 * Load popup template into the Activity Area
 			 */
-			$this->loader->add_action( 'wp_head', $plugin_public, 'who_view_media_modal', 1000 );
+			$this->loader->add_action( 'wp_head', $plugin_public, 'buddypress_who_view_media_modal', 1000 );
 
 		}
 
