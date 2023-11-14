@@ -410,7 +410,7 @@ final class View_Analytics {
 		/**
 		 * if BuddyBoss is loading
 		 */
-		if ( $this->common->_is_buddyboss() ) {
+		if ( $this->common->is_buddyboss() ) {
 
 			/**
 			 * Show Media View Count
