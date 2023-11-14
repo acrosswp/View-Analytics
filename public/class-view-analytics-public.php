@@ -219,5 +219,30 @@ class View_Analytics_Public {
 		<?php
 	}
 
-	
+	/**
+	 * Run the Pinn Post comment
+	 */
+	public function buddyboss_who_view_media_modal() {
+		?>
+		<div id="view-analytics-view-confirmation-modal" class="view-analytics-view-confirmation-modal bb-action-popup" style="display: none;">
+			<transition name="modal">
+				<div class="modal-mask bb-white bbm-model-wrap bbm-uploader-model-wrap">
+					<div class="modal-wrapper">
+						<div class="modal-container">
+							<header class="bb-model-header">
+								<h4><?php esc_html_e( 'People Who viewed This', 'view-analytics' ); ?></h4>
+								<a class="bb-close-action-popup bb-model-close-button" id="bp-confirmation-model-close" href="#">
+									<span class="bb-icon-l bb-icon-times"></span>
+								</a>
+							</header>
+							<div class="bb-action-popup-content">
+								<ul class="media-view-list"></ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</transition>
+		</div>
+		<?php
+	}
 }

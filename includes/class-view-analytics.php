@@ -50,6 +50,16 @@ final class View_Analytics {
 	protected $loader;
 
 	/**
+	 * The common that's responsible for common function in Media of BuddyBoss and BuddyPress
+	 * the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      View_Analytics_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 */
+	protected $common;
+
+	/**
 	 * The unique identifier of this plugin.
 	 *
 	 * @since    1.0.0
@@ -247,6 +257,8 @@ final class View_Analytics {
 
 		$this->loader = View_Analytics_Loader::instance();
 
+		$this->common = View_Analytics_Common::instance();
+
 	}
 
 	/**
@@ -370,22 +382,6 @@ final class View_Analytics {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'wp_localize_script' );
 
 		/**
-		 * Show Media View Count
-		 */
-		$this->loader->add_action( 'bp_before_activity_activity_content', $plugin_public, 'buddyboss_show_view_count', 1000 );
-		$this->loader->add_action( 'get_template_part_attachments/single/view', $plugin_public, 'buddypress_show_view_count', 10000, 3 );
-
-		/**
-		 * Load popup template into the Activity Area
-		 */
-		$this->loader->add_action( 'wp_head', $plugin_public, 'who_view_media_modal', 1000 );
-		// $this->loader->add_action( 'bp_after_directory_activity_list', $plugin_public, 'who_view_media_modal', 1000 );
-		// $this->loader->add_action( 'bp_after_member_activity_content', $plugin_public, 'who_view_media_modal', 1000 );
-		// $this->loader->add_action( 'bp_after_group_activity_content', $plugin_public, 'who_view_media_modal', 1000 );
-		// $this->loader->add_action( 'bp_after_single_activity_content', $plugin_public, 'who_view_media_modal', 1000 );
-
-
-		/**
 		 * Load the Media REST API
 		 */
 		$rest_api = new View_Analytics_Media_Rest_Controller( $this->get_plugin_name(), $this->get_version() );
@@ -409,6 +405,38 @@ final class View_Analytics {
 		 */
 		$plugin_public_profile_view = new View_Analytics_Profile_Count_View( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'bp_setup_nav', $plugin_public_profile_view, 'navigation', 1000 );
+
+
+		/**
+		 * if BuddyBoss is loading
+		 */
+		if ( $this->common->_is_buddyboss() ) {
+
+			/**
+			 * Show Media View Count
+			 */
+			$this->loader->add_action( 'bp_before_activity_activity_content', $plugin_public, 'buddyboss_show_view_count', 1000 );
+
+			/**
+			 * Load popup template into the Activity Area
+			 */
+			$this->loader->add_action( 'bp_after_directory_activity_list', $plugin_public, 'buddyboss_who_view_media_modal', 1000 );
+			$this->loader->add_action( 'bp_after_member_activity_content', $plugin_public, 'buddyboss_who_view_media_modal', 1000 );
+			$this->loader->add_action( 'bp_after_group_activity_content', $plugin_public, 'buddyboss_who_view_media_modal', 1000 );
+			$this->loader->add_action( 'bp_after_single_activity_content', $plugin_public, 'buddyboss_who_view_media_modal', 1000 );
+		} else {
+
+			/**
+			 * Show Media View Count
+			 */
+			$this->loader->add_action( 'get_template_part_attachments/single/view', $plugin_public, 'buddypress_show_view_count', 10000, 3 );
+
+			/**
+			 * Load popup template into the Activity Area
+			 */
+			$this->loader->add_action( 'wp_head', $plugin_public, 'who_view_media_modal', 1000 );
+
+		}
 
 	}
 
