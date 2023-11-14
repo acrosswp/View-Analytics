@@ -372,7 +372,8 @@ final class View_Analytics {
 		/**
 		 * Show Media View Count
 		 */
-		$this->loader->add_action( 'bp_before_activity_activity_content', $plugin_public, 'show_view_count', 1000 );
+		$this->loader->add_action( 'bp_before_activity_activity_content', $plugin_public, 'buddyboss_show_view_count', 1000 );
+		$this->loader->add_action( 'get_template_part_attachments/single/view', $plugin_public, 'buddypress_show_view_count', 10000, 3 );
 
 		/**
 		 * Load popup template into the Activity Area

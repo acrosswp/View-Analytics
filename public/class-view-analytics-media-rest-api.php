@@ -73,7 +73,7 @@ class View_Analytics_Media_Rest_Controller extends WP_REST_Controller {
 
 		register_rest_route(
 			$this->namespace,
-			'/' . $this->resource_name . '/(?P<id>[\d]+)',
+			'/' . $this->resource_name . '/(?P<key_id>\w+)',
 			array(
 				// Here we register the readable endpoint for collections.
 				array(
@@ -100,8 +100,8 @@ class View_Analytics_Media_Rest_Controller extends WP_REST_Controller {
 			)
 		);
 
-        $attachment_id = $request->get_param( 'id' );
-		if ( empty( $attachment_id ) ) {
+        $key_id = sanitize_text_field( $request->get_param( 'key_id' ) );
+		if ( empty( $key_id ) ) {
 			return new WP_Error(
 				'view_analytics_rest_invalid_id',
 				__( 'Invalid Attachment ID.', 'view-analytics' ),
@@ -113,7 +113,7 @@ class View_Analytics_Media_Rest_Controller extends WP_REST_Controller {
 
 
 		$this->common = View_Analytics_Media_Common::instance();
-		if( ! empty( $this->common->can_current_user_view_list( $attachment_id ) ) ) {
+		if( ! empty( $this->common->can_current_user_view_list( $key_id ) ) ) {
 			return true;
 		}
 
@@ -133,8 +133,8 @@ class View_Analytics_Media_Rest_Controller extends WP_REST_Controller {
 		$post_data 	= array();
 		$schema 	= $this->get_item_schema();
 
-		$attachment_id   = $request->get_param( 'id' );
-		$media_details = $this->common->table->media_get_details( $attachment_id );
+		$key_id = sanitize_text_field( $request->get_param( 'key_id' ) );
+		$media_details = $this->common->table->media_get_details( $key_id );
 
 		if ( empty( $media_details ) ) {
 			return rest_ensure_response( $post_data );
@@ -180,8 +180,8 @@ class View_Analytics_Media_Rest_Controller extends WP_REST_Controller {
 			$media_data['media_id'] = (int) $media->media_id;
 		}
 
-		if ( isset( $schema['properties']['attachment_id'] ) ) {
-			$media_data['attachment_id'] = (int) $media->attachment_id;
+		if ( isset( $schema['properties']['key_id'] ) ) {
+			$media_data['key_id'] = (int) $media->key_id;
 		}
 
 		if ( isset( $schema['properties']['user_avatar_url'] ) ) {
@@ -247,7 +247,7 @@ class View_Analytics_Media_Rest_Controller extends WP_REST_Controller {
 					'description' => esc_html__( 'Unique identifier for the BB media.', 'view-analytics' ),
 					'type'        => 'integer',
 				),
-				'attachment_id'      => array(
+				'key_id'      => array(
 					'description' => esc_html__( 'Unique identifier for the attachment.', 'view-analytics' ),
 					'type'        => 'integer',
 				),

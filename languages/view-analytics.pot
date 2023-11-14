@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-11 21:58+0000\n"
+"POT-Creation-Date: 2023-11-14 12:51+0000\n"
 "Report-Msgid-Bugs-To: https://github.com/acrosswp/view-analytics/issues\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -15,36 +15,28 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: admin/class-view-analytics-admin.php:122
-msgid "Media Settings"
-msgstr ""
-
-#: admin/class-view-analytics-admin.php:123
-msgid "Profile Settings"
-msgstr ""
-
-#: admin/class-view-analytics-admin.php:124
-msgid "About"
-msgstr ""
-
-#: admin/class-view-analytics-admin.php:140, admin/class-view-analytics-admin.php:171
+#: admin/class-view-analytics-admin-setting-menu.php:99, admin/class-view-analytics-admin-setting-menu.php:100, admin/class-view-analytics-admin-setting-menu.php:106
 msgid "View Analytics"
 msgstr ""
 
-#: admin/class-view-analytics-admin.php:144
-msgid "View Media Count"
-msgstr ""
-
-#: admin/class-view-analytics-admin.php:157
+#: admin/class-view-analytics-admin-setting-menu.php:107
 msgid "Enable Media View Count"
 msgstr ""
 
-#: admin/class-view-analytics-admin.php:175
+#: admin/class-view-analytics-admin-setting-menu.php:112
 msgid "View Profile Count"
 msgstr ""
 
-#: admin/class-view-analytics-admin.php:188
+#: admin/class-view-analytics-admin-setting-menu.php:113
 msgid "Enable Profile View Count"
+msgstr ""
+
+#: admin/class-view-analytics-admin.php:122
+msgid "Settings"
+msgstr ""
+
+#: admin/class-view-analytics-admin.php:123
+msgid "About"
 msgstr ""
 
 #: includes/class-view-analytics-media-common.php:264
@@ -73,49 +65,49 @@ msgstr ""
 msgid "Invalid Attachment ID."
 msgstr ""
 
-#: public/class-view-analytics-media-rest-api.php:227
-msgid "Unique identifier for the object."
-msgstr ""
-
-#: public/class-view-analytics-media-rest-api.php:231
-msgid "Unique identifier for the attachment."
-msgstr ""
-
 #: public/class-view-analytics-media-rest-api.php:235
-msgid "Unique identifier for the BB media."
+msgid "Unique identifier for the object."
 msgstr ""
 
 #: public/class-view-analytics-media-rest-api.php:239
 msgid "The id of the user object"
 msgstr ""
 
-#: public/class-view-analytics-media-rest-api.php:243
-msgid "The Link of the User Profile Picture."
+#: public/class-view-analytics-media-rest-api.php:243, public/class-view-analytics-media-rest-api.php:251
+msgid "Unique identifier for the attachment."
 msgstr ""
 
 #: public/class-view-analytics-media-rest-api.php:247
-msgid "The Link of the User Profile."
-msgstr ""
-
-#: public/class-view-analytics-media-rest-api.php:251
-msgid "The display name of the users."
+msgid "Unique identifier for the BB media."
 msgstr ""
 
 #: public/class-view-analytics-media-rest-api.php:255
-msgid "The message that need to be diplay."
+msgid "The Link of the User Profile Picture."
 msgstr ""
 
 #: public/class-view-analytics-media-rest-api.php:259
+msgid "The Link of the User Profile."
+msgstr ""
+
+#: public/class-view-analytics-media-rest-api.php:263
+msgid "The display name of the users."
+msgstr ""
+
+#: public/class-view-analytics-media-rest-api.php:267
+msgid "The message that need to be diplay."
+msgstr ""
+
+#: public/class-view-analytics-media-rest-api.php:271
 msgid "The date on which the user view the Media"
 msgstr ""
 
-#: public/class-view-analytics-public.php:170
+#: public/class-view-analytics-public.php:167, public/class-view-analytics-public.php:199
 msgid "View"
 msgid_plural "Views"
 msgstr[0] ""
 msgstr[1] ""
 
-#: public/class-view-analytics-public.php:193
+#: public/class-view-analytics-public.php:222
 msgid "People Who viewed This"
 msgstr ""
 

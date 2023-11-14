@@ -150,7 +150,36 @@ class View_Analytics_Public {
      * Show the view count into the Frountend
      * Hook: bp_before_activity_activity_content
      */
-    public function show_view_count() {
+    public function buddypress_show_view_count() {
+
+		if ( $this->media_common->view_count_enable() ) {
+
+			$medium = bp_attachments_get_queried_object();
+
+			if ( empty( $medium ) ) {
+				return;
+			}
+
+			$key_id = $medium->id;
+
+			$counts = $this->media_common->get_count( $key_id );
+
+			$view = _n( 'View', 'Views', $counts, 'view-analytics' );
+			$counts = apply_filters( 'view_analytics_view_count_content', array( 'count' => $counts, 'text' => $view ), $key_id );
+
+			if( $this->media_common->can_current_user_view_list( $key_id ) ) {
+				echo "<div id='view_list' class='view-analytics-media-views'><span current-media-view='". $key_id ."'>" . implode( ' ', $counts ) . '</span> </div>';
+			} else {
+				echo "<div class='view-analytics-media-views'><span>" . implode( ' ', $counts ) . '</span></div>';
+			}
+		}
+    }
+
+	/**
+     * Show the view count into the Frountend
+     * Hook: bp_before_activity_activity_content
+     */
+    public function buddyboss_show_view_count() {
 
 		if ( $this->media_common->view_count_enable() ) {
 

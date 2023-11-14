@@ -8,11 +8,9 @@ jQuery( document ).ready( function($) {
 
 		var message_modal   = $( '#view-analytics-view-confirmation-modal' );
 
-        var parent_li = $(this).closest( "li" )
+        var key_id = target.find( "span" ).attr( 'current-media-view' );
 
-        var attachment_id = parent_li.find( ".current-media-view" ).val();
-
-        var url = view_analytics_object.attachment_view_endpoint + attachment_id + '/';
+        var url = view_analytics_object.attachment_view_endpoint + key_id + '/';
 
         jQuery.ajax({
             type : "GET",
