@@ -50,5 +50,11 @@ e.g.
 
 == Changelog ==
 
+= 1.0.1 =
+* Beta Release
+* Add Support BuddyPress
+* Add Support BP Attachments
+* Table Updated
+
 = 1.0 =
 * Beta Release
