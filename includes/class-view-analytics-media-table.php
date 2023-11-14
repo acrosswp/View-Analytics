@@ -61,13 +61,13 @@ class View_Analytics_Media_Table {
 	/**
 	 * Add the current user has view media count
 	 */
-	public function user_media_add( $user_id, $key_id, $hash_id = 0, $media_id = 0, $attachment_id = 0, $value = 1 ) {
+	public function user_media_add( $viewer_id, $key_id, $hash_id = '0', $media_id = 0, $attachment_id = 0, $value = 1 ) {
 		global $wpdb;
 
 		return $wpdb->insert(
 			$this->table_name(),
 			array(
-				'user_id' => $user_id,
+				'viewer_id' => $viewer_id,
 				'key_id' => $key_id,
 				'hash_id' => $hash_id,
 				'media_id' => $media_id,
@@ -76,8 +76,8 @@ class View_Analytics_Media_Table {
 			),
 			array(
 				'%d',
-				'%d',
-				'%d',
+				'%s',
+				'%s',
 				'%d',
 				'%d',
 				'%d',
@@ -88,15 +88,15 @@ class View_Analytics_Media_Table {
 	/**
 	 * Get the current user has already view the media or not
 	 */
-	public function user_media_get( $user_id, $key_id ) {
+	public function user_media_get( $viewer_id, $key_id ) {
 		global $wpdb;
 
 		$table_name = $this->table_name();
 
 		return $wpdb->get_row(
 			$wpdb->prepare( 
-				"SELECT * FROM $table_name WHERE user_id = %d AND key_id = %d",
-				$user_id,
+				"SELECT * FROM $table_name WHERE viewer_id = %d AND key_id = %s",
+				$viewer_id,
 				$key_id
 			)
 		);
@@ -112,7 +112,7 @@ class View_Analytics_Media_Table {
 
 		return $wpdb->get_results(
 			$wpdb->prepare( 
-				"SELECT * FROM $table_name WHERE key_id = %d",
+				"SELECT * FROM $table_name WHERE key_id = %s",
 				$key_id
 			)
 		);

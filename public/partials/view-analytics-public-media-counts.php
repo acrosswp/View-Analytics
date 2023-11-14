@@ -129,12 +129,10 @@ class View_Analytics_Public_Media_Count {
 	 */
 	public function buddypress_media_view( $slug, $name, $args ) {
 		$medium      = bp_attachments_get_queried_object();
-		// var_dump( $slug );
-		// var_dump( $name );
-		// var_dump( $args );
-		echo '<pre>';
-		var_dump( $medium );
-		echo '</pre>';
+
+
+		var_dump( $medium->id );
+		$this->update_view_count( $medium->id, $medium->id );
 	}
 
     /**
@@ -191,7 +189,7 @@ class View_Analytics_Public_Media_Count {
 		if ( ! empty( $media_id ) && ! empty( $attachment_id ) ) {
 			return array(
 				'key_id' => $attachment_id,
-				'hash_id' => 0,
+				'hash_id' => '0',
 				'media_id' => $media_id,
 				'attachment_id' => $attachment_id,
 			);
@@ -215,7 +213,7 @@ class View_Analytics_Public_Media_Count {
 				if ( ! empty( $attachment_id ) ) {
 					return array(
 						'key_id' => $attachment_id,
-						'hash_id' => 0,
+						'hash_id' => '0',
 						'media_id' => $media_id,
 						'attachment_id' => $attachment_id,
 					);
@@ -242,7 +240,7 @@ class View_Analytics_Public_Media_Count {
 	/**
 	 * Update Media view count
 	 */
-	public function update_view_count( $key_id, $hash_id = 0, $media_id = 0, $attachment_id = 0 ) {
+	public function update_view_count( $key_id, $hash_id = '0', $media_id = 0, $attachment_id = 0 ) {
 
 		if ( $this->common->view_count_enable() ) {
 			$current_user_id = get_current_user_id();

@@ -56,9 +56,9 @@ class View_Analytics_Activator {
 
 		$media_view_sql = "CREATE TABLE {$media_view_table_name} (
 			id bigint(20) NOT NULL AUTO_INCREMENT ,
-			user_id bigint(20) NOT NULL DEFAULT 0,
-			key_id bigint(20) NOT NULL DEFAULT 0,
-			hash_id bigint(20) NOT NULL DEFAULT 0,
+			viewer_id bigint(20) NOT NULL DEFAULT 0,
+			key_id varchar(255) NOT NULL DEFAULT 0,
+			hash_id varchar(255) NOT NULL DEFAULT 0,
 			media_id bigint(20) NOT NULL DEFAULT 0,
 			attachment_id bigint(20) NOT NULL DEFAULT 0,
 			value bigint(20) NOT NULL DEFAULT 1,
