@@ -210,12 +210,12 @@ class View_Analytics_Public {
 	public function buddypress_who_view_media_modal() {
 		add_thickbox();
 		?>
-		<div id="view-analytics-view-confirmation-modal" class="view-analytics-view-confirmation-modal bb-action-popup" style="display: none;">
+		<div id="view-analytics-view-confirmation-modal" class="buddypress-view-confirmation-modal bb-action-popup" style="display: none;">
 			<div class="bb-action-popup-content">
 				<ul class="media-view-list"></ul>
 			</div>
 		</div>
-		<a href="#TB_inline?&width=450&height=550&inlineId=view-analytics-view-confirmation-modal" name="<?php esc_html_e( 'People Who viewed This', 'view-analytics' ); ?>" style="display: none;" class="thickbox hidden hide view-analytics-view-confirmation-modal">Show Popup</a>
+		<a href="#TB_inline?&width=450&height=550&inlineId=view-analytics-view-confirmation-modal" name="<?php esc_html_e( 'People Who viewed This', 'view-analytics' ); ?>" style="display: none;" class="thickbox hidden hide view-confirmation-modal-tigger">Show Popup</a>
 		<?php
 	}
 
@@ -224,7 +224,7 @@ class View_Analytics_Public {
 	 */
 	public function buddyboss_who_view_media_modal() {
 		?>
-		<div id="view-analytics-view-confirmation-modal" class="view-analytics-view-confirmation-modal bb-action-popup" style="display: none;">
+		<div id="view-analytics-view-confirmation-modal" class="buddyboss-view-confirmation-modal bb-action-popup" style="display: none;">
 			<transition name="modal">
 				<div class="modal-mask bb-white bbm-model-wrap bbm-uploader-model-wrap">
 					<div class="modal-wrapper">
