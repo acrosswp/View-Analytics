@@ -109,7 +109,7 @@ class View_Analytics_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, VIEW_ANALYTICS_PLUGIN_URL . 'assets/dist/js/frontend-script.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, VIEW_ANALYTICS_PLUGIN_URL . 'assets/dist/js/frontend-script.js', array( 'jquery', 'wp-util', 'thickbox' ), $this->version, false );
 
 	}
 
@@ -212,6 +212,7 @@ class View_Analytics_Public {
 	 * Run the Pinn Post comment
 	 */
 	public function who_view_media_modal() {
+		add_thickbox();
 		?>
 		<div id="view-analytics-view-confirmation-modal" class="view-analytics-view-confirmation-modal bb-action-popup" style="display: none;">
 			<transition name="modal">
@@ -219,7 +220,7 @@ class View_Analytics_Public {
 					<div class="modal-wrapper">
 						<div class="modal-container">
 							<header class="bb-model-header">
-								<h4><?php esc_html_e( 'People Who viewed This', 'view-analytics' ); ?></h4>
+								<h4></h4>
 								<a class="bb-close-action-popup bb-model-close-button" id="bp-confirmation-model-close" href="#">
 									<span class="bb-icon-l bb-icon-times"></span>
 								</a>
@@ -232,6 +233,7 @@ class View_Analytics_Public {
 				</div>
 			</transition>
 		</div>
+		<a href="#TB_inline?&width=450&height=550&inlineId=view-analytics-view-confirmation-modal" name="<?php esc_html_e( 'People Who viewed This', 'view-analytics' ); ?>" style="display: none;" class="thickbox hidden hide view-analytics-view-confirmation-modal">Show Popup</a>
 		<?php
 	}
 }

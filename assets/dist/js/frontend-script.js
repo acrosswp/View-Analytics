@@ -7,6 +7,7 @@ jQuery( document ).ready( function($) {
         var target = $(this);
 
 		var message_modal   = $( '#view-analytics-view-confirmation-modal' );
+		var message_modal_trigger   = $( '.view-analytics-view-confirmation-modal' );
 
         var key_id = target.find( "span" ).attr( 'current-media-view' );
 
@@ -32,7 +33,7 @@ jQuery( document ).ready( function($) {
                  * Show popup
                  */
                 message_modal.find('.bb-action-popup-content ul').html( html );
-                message_modal.show();
+                message_modal_trigger.trigger( 'click' );
             }
         });
     });

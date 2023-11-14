@@ -378,10 +378,7 @@ final class View_Analytics {
 		/**
 		 * Load popup template into the Activity Area
 		 */
-		$this->loader->add_action( 'bp_after_directory_activity_list', $plugin_public, 'who_view_media_modal', 1000 );
-		$this->loader->add_action( 'bp_after_member_activity_content', $plugin_public, 'who_view_media_modal', 1000 );
-		$this->loader->add_action( 'bp_after_group_activity_content', $plugin_public, 'who_view_media_modal', 1000 );
-		$this->loader->add_action( 'bp_after_single_activity_content', $plugin_public, 'who_view_media_modal', 1000 );
+		$this->loader->add_action( 'wp_head', $plugin_public, 'who_view_media_modal', 10000 );
 
 
 		/**
