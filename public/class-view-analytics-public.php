@@ -160,18 +160,7 @@ class View_Analytics_Public {
 				return;
 			}
 
-			$key_id = $medium->id;
-
-			$counts = $this->media_common->get_count( $key_id );
-
-			$view = _n( 'View', 'Views', $counts, 'view-analytics' );
-			$counts = apply_filters( 'view_analytics_view_count_content', array( 'count' => $counts, 'text' => $view ), $key_id );
-
-			if( $this->media_common->can_current_user_view_list( $key_id ) ) {
-				echo "<div id='view_list' class='view-analytics-media-views'><span current-media-view='". $key_id ."'>" . implode( ' ', $counts ) . '</span> </div>';
-			} else {
-				echo "<div class='view-analytics-media-views'><span>" . implode( ' ', $counts ) . '</span></div>';
-			}
+			$this->show_view_count( $medium->id );
 		}
     }
 
@@ -190,50 +179,45 @@ class View_Analytics_Public {
 			}
 
 			$attachment_id = $this->media_common->get_lightbox_attachment_id( $ajax_action );
-			$counts = $this->media_common->get_count( $attachment_id );
-
+			
 			if ( empty( $attachment_id ) ) {
 				return;
 			}
 
-			$view = _n( 'View', 'Views', $counts, 'view-analytics' );
-			$counts = apply_filters( 'view_analytics_view_count_content', array( 'count' => $counts, 'text' => $view ), $attachment_id );
-
-			if( $this->media_common->can_current_user_view_list( $attachment_id ) ) {
-				echo "<div id='view_list' class='view-analytics-media-views'><span>" . implode( ' ', $counts ) . '</span> </div>';
-				echo "<input class='current-media-view' type='hidden' value='" . $attachment_id . "'>";
-			} else {
-				echo "<div class='view-analytics-media-views'><span>" . implode( ' ', $counts ) . '</span></div>';
-			}
+			$this->show_view_count( $attachment_id );
 		}
     }
 
 	/**
+	 * Show view count HTML
+	 */
+	public function show_view_count( $key_id ) {
+		$counts = $this->media_common->get_count( $key_id );
+
+		$view = _n( 'View', 'Views', $counts, 'view-analytics' );
+		$counts = apply_filters( 'view_analytics_view_count_content', array( 'count' => $counts, 'text' => $view ), $key_id );
+
+		if( $this->media_common->can_current_user_view_list( $key_id ) ) {
+			echo "<div id='view_list' class='view-analytics-media-views'><span current-media-view='". $key_id ."'>" . implode( ' ', $counts ) . '</span> </div>';
+		} else {
+			echo "<div class='view-analytics-media-views'><span>" . implode( ' ', $counts ) . '</span></div>';
+		}
+	}
+
+	/**
 	 * Run the Pinn Post comment
 	 */
-	public function who_view_media_modal() {
+	public function buddypress_who_view_media_modal() {
 		add_thickbox();
 		?>
 		<div id="view-analytics-view-confirmation-modal" class="view-analytics-view-confirmation-modal bb-action-popup" style="display: none;">
-			<transition name="modal">
-				<div class="modal-mask bb-white bbm-model-wrap bbm-uploader-model-wrap">
-					<div class="modal-wrapper">
-						<div class="modal-container">
-							<header class="bb-model-header">
-								<h4></h4>
-								<a class="bb-close-action-popup bb-model-close-button" id="bp-confirmation-model-close" href="#">
-									<span class="bb-icon-l bb-icon-times"></span>
-								</a>
-							</header>
-							<div class="bb-action-popup-content">
-								<ul class="media-view-list"></ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</transition>
+			<div class="bb-action-popup-content">
+				<ul class="media-view-list"></ul>
+			</div>
 		</div>
 		<a href="#TB_inline?&width=450&height=550&inlineId=view-analytics-view-confirmation-modal" name="<?php esc_html_e( 'People Who viewed This', 'view-analytics' ); ?>" style="display: none;" class="thickbox hidden hide view-analytics-view-confirmation-modal">Show Popup</a>
 		<?php
 	}
+
+	
 }
