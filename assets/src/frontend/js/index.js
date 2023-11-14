@@ -31,8 +31,8 @@ jQuery( document ).ready( function($) {
                 /**
                  * For BuddyPress and if not then BuddyBoss
                  */
-                if( $( 'body.view-confirmation-modal-tigger' ).length ) {
-		            var message_modal_trigger   = $( '.view-analytics-view-confirmation-modal' );
+                if( $( 'a.view-confirmation-modal-tigger' ).length ) {
+		            var message_modal_trigger   = $( 'a.view-confirmation-modal-tigger' );
 
                     /**
                      * Show popup
