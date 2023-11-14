@@ -55,6 +55,7 @@ e.g.
 * Add Support BuddyPress
 * Add Support BP Attachments
 * Table Updated
+* Create Custom Setting Page
 
 = 1.0 =
 * Beta Release
