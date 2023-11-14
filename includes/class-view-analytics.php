@@ -394,24 +394,6 @@ final class View_Analytics {
 		 */
 		$plugin_public_media_count = new View_Analytics_Public_Media_Count( $this->get_plugin_name(), $this->get_version() );
 
-		/**
-		 * For Media
-		 */
-		$this->loader->add_action( 'wp_ajax_media_get_media_description', $plugin_public_media_count, 'photo_view_count_login_user', -10 );
-		$this->loader->add_action( 'wp_ajax_media_get_activity', $plugin_public_media_count, 'photo_view_count_login_user', -10 );
-
-		/**
-		 * For Video
-		 */
-		$this->loader->add_action( 'wp_ajax_video_get_video_description', $plugin_public_media_count, 'video_view_count_login_user', -10 );
-		$this->loader->add_action( 'wp_ajax_video_get_activity', $plugin_public_media_count, 'video_view_count_login_user', -10 );
-
-		/**
-		 * For Document
-		 */
-		$this->loader->add_action( 'wp_ajax_document_get_document_description', $plugin_public_media_count, 'document_view_count_login_user', -10 );
-		$this->loader->add_action( 'wp_ajax_document_get_activity', $plugin_public_media_count, 'document_view_count_login_user', -10 );
-
 
 		/**
 		 * All class that are release to Pulic Frountend Count

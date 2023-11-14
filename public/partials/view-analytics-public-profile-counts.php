@@ -93,14 +93,15 @@ class View_Analytics_Public_Profile_Count {
 		 * Check if both are not empty
 		 */
 		if ( ! empty( $current_user_id ) && ! empty( $displayed_user_id ) ) {
-			$this->update_view_count( $displayed_user_id, $current_user_id );
+			$this->buddyboss_update_view_count( $displayed_user_id, $current_user_id );
 		}
 	}
+	
 
 	/**
 	 * Update Media view count
 	 */
-	public function update_view_count( $user_id, $viewer_id ) {
+	public function buddyboss_update_view_count( $user_id, $viewer_id ) {
 
 		if ( $this->common->view_count_enable() ) {
 

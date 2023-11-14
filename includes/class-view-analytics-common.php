@@ -80,6 +80,12 @@ class View_Analytics_Common {
      */
     public function get_filter_post_value( $key, $filter = FILTER_VALIDATE_INT ) {
 		return filter_input( INPUT_POST,  $key, $filter );
+    }
 
+	/**
+     * Return if BuddyBoss is active or not
+     */
+    public function is_buddyboss() {
+		return defined( 'BP_PLATFORM_VERSION' );
     }
 }

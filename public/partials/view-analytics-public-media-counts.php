@@ -55,6 +55,16 @@ class View_Analytics_Public_Media_Count {
 	private $common;
 
 	/**
+	 * The loader that's responsible for maintaining and registering all hooks that power
+	 * the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      View_Analytics_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 */
+	protected $loader;
+
+	/**
 	 * Define the core functionality of the plugin.
 	 *
 	 * Set the plugin name and the plugin version that can be used throughout the plugin.
@@ -68,45 +78,101 @@ class View_Analytics_Public_Media_Count {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+		$this->loader = View_Analytics_Loader::instance();
+
 		$this->common = View_Analytics_Media_Common::instance();
 
+
+		$this->buddyboss();
+
+		$this->buddypress();
+
+	}
+
+
+	/**
+	 * Hook for BuddyBoss releate filter and action
+	 */
+	public function buddyboss() {
+	
+		/**
+		 * For Media
+		 */
+		$this->loader->add_action( 'wp_ajax_media_get_media_description', $this, 'buddyboss_photo_view_count_login_user', -10 );
+		$this->loader->add_action( 'wp_ajax_media_get_activity', $this, 'buddyboss_photo_view_count_login_user', -10 );
+
+		/**
+		 * For Video
+		 */
+		$this->loader->add_action( 'wp_ajax_video_get_video_description', $this, 'buddyboss_video_view_count_login_user', -10 );
+		$this->loader->add_action( 'wp_ajax_video_get_activity', $this, 'buddyboss_video_view_count_login_user', -10 );
+
+		/**
+		 * For Document
+		 */
+		$this->loader->add_action( 'wp_ajax_document_get_document_description', $this, 'buddyboss_document_view_count_login_user', -10 );
+		$this->loader->add_action( 'wp_ajax_document_get_activity', $this, 'buddyboss_document_view_count_login_user', -10 );
+	}
+
+	/**
+	 * Hook for BuddyBoss releate filter and action
+	 */
+	public function buddypress() {
+		/**
+		 * For All Media Type
+		 */
+		$this->loader->add_action( 'get_template_part_attachments/single/view', $this, 'buddypress_media_view', 1000, 3 );
+	}
+
+	/**
+	 * BuddyPress Media View
+	 */
+	public function buddypress_media_view( $slug, $name, $args ) {
+		$medium      = bp_attachments_get_queried_object();
+		// var_dump( $slug );
+		// var_dump( $name );
+		// var_dump( $args );
+		echo '<pre>';
+		var_dump( $medium );
+		echo '</pre>';
 	}
 
     /**
      * Count the number of users has view the media
      */
-    public function photo_view_count_login_user() {
-		$this->view_count_verification( 'bp_nouveau_media' );
+    public function buddyboss_photo_view_count_login_user() {
+		$this->buddyboss_view_count_verification( 'bp_nouveau_media' );
     }
 
 	/**
      * Count the number of users has view the video
      */
-    public function video_view_count_login_user() {
+    public function buddyboss_video_view_count_login_user() {
 		
-		$this->view_count_verification( 'bp_nouveau_video' );
+		$this->buddyboss_view_count_verification( 'bp_nouveau_video' );
     }
 
 
 	/**
      * Count the number of users has view the video
      */
-    public function document_view_count_login_user() {
-		$this->view_count_verification( 'bp_nouveau_media' );
+    public function buddyboss_document_view_count_login_user() {
+		$this->buddyboss_view_count_verification( 'bp_nouveau_media' );
     }
 
 	/**
 	 * Verifying the nonce and then adding the media count
 	 */
-	public function view_count_verification( $key ) {
+	public function buddyboss_view_count_verification( $key ) {
 		// Nonce check!
-	    if ( $this->check_nonce( $key ) ) {
+	    if ( $this->buddyboss_check_nonce( $key ) ) {
+
 			/**
 			 * Check if the attachment_id exits or not
 			 */
-			$check_variable = $this->check_variable();
+			$check_variable = $this->buddyboss_check_variable();
 			if ( ! empty( $check_variable ) ) {
-				$this->update_view_count( $check_variable['media_id'], $check_variable['attachment_id'] );
+				$this->update_view_count( $check_variable['key_id'], $check_variable['key_id'] ,$check_variable['media_id'], $check_variable['attachment_id'] );
 			}
         }
 	}
@@ -114,7 +180,7 @@ class View_Analytics_Public_Media_Count {
 	/**
 	 * Verifying the nonce and then adding the media count
 	 */
-	public function check_variable() {
+	public function buddyboss_check_variable() {
 	
 		$media_id = $this->common->get_filter_post_value( 'id' );
 		$attachment_id = $this->common->get_filter_post_value( 'attachment_id' );
@@ -124,6 +190,8 @@ class View_Analytics_Public_Media_Count {
 		 */
 		if ( ! empty( $media_id ) && ! empty( $attachment_id ) ) {
 			return array(
+				'key_id' => $attachment_id,
+				'hash_id' => 0,
 				'media_id' => $media_id,
 				'attachment_id' => $attachment_id,
 			);
@@ -146,6 +214,8 @@ class View_Analytics_Public_Media_Count {
 				 */
 				if ( ! empty( $attachment_id ) ) {
 					return array(
+						'key_id' => $attachment_id,
+						'hash_id' => 0,
 						'media_id' => $media_id,
 						'attachment_id' => $attachment_id,
 					);
@@ -159,7 +229,7 @@ class View_Analytics_Public_Media_Count {
 	/**
 	 * Verifying the nonce and then adding the media count
 	 */
-	public function check_nonce( $key ) {
+	public function buddyboss_check_nonce( $key ) {
 		// Nonce check!
 	    $nonce = bb_filter_input_string( INPUT_POST, 'nonce' );
 	    if ( wp_verify_nonce( $nonce, $key ) ) {
@@ -172,17 +242,17 @@ class View_Analytics_Public_Media_Count {
 	/**
 	 * Update Media view count
 	 */
-	public function update_view_count( $media_id, $attachment_id ) {
+	public function update_view_count( $key_id, $hash_id = 0, $media_id = 0, $attachment_id = 0 ) {
 
 		if ( $this->common->view_count_enable() ) {
 			$current_user_id = get_current_user_id();
-			$media_view = View_Analytics_Media_Table::instance()->user_media_get( $current_user_id, $attachment_id );
+			$media_view = View_Analytics_Media_Table::instance()->user_media_get( $current_user_id, $key_id );
 	
 			/**
 			 * Check if empty
 			 */
 			if ( empty( $media_view ) ) {
-				View_Analytics_Media_Table::instance()->user_media_add( $current_user_id, $media_id, $attachment_id, 1 );
+				View_Analytics_Media_Table::instance()->user_media_add( $current_user_id, $key_id, $hash_id, $media_id, $attachment_id );
 			} else {
 				$id = $media_view->id;
 				$view_count = $media_view->value;
