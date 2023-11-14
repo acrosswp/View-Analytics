@@ -164,32 +164,40 @@ class View_Analytics_Media_Rest_Controller extends WP_REST_Controller {
 			$media_data['id'] = (int) $media->id;
 		}
 
-		if ( isset( $schema['properties']['attachment_id'] ) ) {
-			$media_data['attachment_id'] = (int) $media->attachment_id;
+		if ( isset( $schema['properties']['viewer_id'] ) ) {
+			$media_data['user_id'] = (int) $media->viewer_id;
+		}
+
+		if ( isset( $schema['properties']['key_id'] ) ) {
+			$media_data['key_id'] = (int) $media->key_id;
+		}
+
+		if ( isset( $schema['properties']['hash_id'] ) ) {
+			$media_data['hash_id'] = (int) $media->hash_id;
 		}
 
 		if ( isset( $schema['properties']['media_id'] ) ) {
 			$media_data['media_id'] = (int) $media->media_id;
 		}
 
-		if ( isset( $schema['properties']['user_id'] ) ) {
-			$media_data['user_id'] = (int) $media->user_id;
+		if ( isset( $schema['properties']['attachment_id'] ) ) {
+			$media_data['attachment_id'] = (int) $media->attachment_id;
 		}
 
 		if ( isset( $schema['properties']['user_avatar_url'] ) ) {
-			$media_data['user_avatar_url'] = get_avatar_url( $media->user_id, 32 );
+			$media_data['user_avatar_url'] = get_avatar_url( $media->viewer_id, 32 );
 		}
 
 		if ( isset( $schema['properties']['user_profile_url'] ) ) {
-			$media_data['user_profile_url'] = bp_core_get_user_domain( $media->user_id );
+			$media_data['user_profile_url'] = bp_core_get_user_domain( $media->viewer_id );
 		}
 
 		if ( isset( $schema['properties']['user_profile_url'] ) ) {
-			$media_data['user_profile_url'] = bp_core_get_user_domain( $media->user_id );
+			$media_data['user_profile_url'] = bp_core_get_user_domain( $media->viewer_id );
 		}
 
 		if ( isset( $schema['properties']['user_display_name'] ) ) {
-			$media_data['user_display_name'] = bp_core_get_user_displayname( $media->user_id );
+			$media_data['user_display_name'] = bp_core_get_user_displayname( $media->viewer_id );
 		}
 
 		if ( isset( $schema['properties']['message'] ) ) {
@@ -227,7 +235,11 @@ class View_Analytics_Media_Rest_Controller extends WP_REST_Controller {
 					'description' => esc_html__( 'Unique identifier for the object.', 'view-analytics' ),
 					'type'        => 'integer',
 				),
-				'attachment_id'      => array(
+				'viewer_id'  => array(
+					'description' => esc_html__( 'The id of the user object', 'view-analytics' ),
+					'type'        => 'integer',
+				),
+				'key_id'      => array(
 					'description' => esc_html__( 'Unique identifier for the attachment.', 'view-analytics' ),
 					'type'        => 'integer',
 				),
@@ -235,8 +247,8 @@ class View_Analytics_Media_Rest_Controller extends WP_REST_Controller {
 					'description' => esc_html__( 'Unique identifier for the BB media.', 'view-analytics' ),
 					'type'        => 'integer',
 				),
-				'user_id'  => array(
-					'description' => esc_html__( 'The id of the user object', 'view-analytics' ),
+				'attachment_id'      => array(
+					'description' => esc_html__( 'Unique identifier for the attachment.', 'view-analytics' ),
 					'type'        => 'integer',
 				),
 				'user_avatar_url' => array(

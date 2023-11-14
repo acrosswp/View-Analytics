@@ -173,7 +173,7 @@ class View_Analytics_Public_Media_Count {
 			 */
 			$check_variable = $this->buddyboss_check_variable();
 			if ( ! empty( $check_variable ) ) {
-				$this->update_view_count( $check_variable['key_id'], $check_variable['key_id'] ,$check_variable['media_id'], $check_variable['attachment_id'] );
+				$this->update_view_count( $check_variable['key_id'], $check_variable['hash_id'] ,$check_variable['media_id'], $check_variable['attachment_id'] );
 			}
         }
 	}
