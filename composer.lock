@@ -55,12 +55,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/acrosswp/acrosswp-buddypress-or-buddyboss-dependency.git",
-                "reference": "51e333048cf08424257bf9fb1311aa0de8074ee8"
+                "reference": "f8a59b7163f3475f9b35563f642aa5616519b1e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/acrosswp/acrosswp-buddypress-or-buddyboss-dependency/zipball/51e333048cf08424257bf9fb1311aa0de8074ee8",
-                "reference": "51e333048cf08424257bf9fb1311aa0de8074ee8",
+                "url": "https://api.github.com/repos/acrosswp/acrosswp-buddypress-or-buddyboss-dependency/zipball/f8a59b7163f3475f9b35563f642aa5616519b1e8",
+                "reference": "f8a59b7163f3475f9b35563f642aa5616519b1e8",
                 "shasum": ""
             },
             "require": {
@@ -93,7 +93,7 @@
                 "issues": "https://github.com/acrosswp/acrosswp-buddypress-or-buddyboss-dependency/issues",
                 "source": "https://github.com/acrosswp/acrosswp-buddypress-or-buddyboss-dependency/tree/main"
             },
-            "time": "2023-11-12T20:10:10+00:00"
+            "time": "2023-11-12T21:14:12+00:00"
         },
         {
             "name": "acrosswp/acrosswp-dependency",
@@ -101,12 +101,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/acrosswp/acrosswp-dependency.git",
-                "reference": "58792030b390dac980856e6f4b677a7117440eee"
+                "reference": "11c2cd9cfa097508d06b3b4718811107917ff2be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/acrosswp/acrosswp-dependency/zipball/58792030b390dac980856e6f4b677a7117440eee",
-                "reference": "58792030b390dac980856e6f4b677a7117440eee",
+                "url": "https://api.github.com/repos/acrosswp/acrosswp-dependency/zipball/11c2cd9cfa097508d06b3b4718811107917ff2be",
+                "reference": "11c2cd9cfa097508d06b3b4718811107917ff2be",
                 "shasum": ""
             },
             "default-branch": true,
@@ -136,7 +136,7 @@
                 "issues": "https://github.com/acrosswp/acrosswp-dependency/issues",
                 "source": "https://github.com/acrosswp/acrosswp-dependency/tree/main"
             },
-            "time": "2023-11-12T19:54:55+00:00"
+            "time": "2023-11-12T21:14:31+00:00"
         },
         {
             "name": "acrosswp/acrosswp-plugin-update-checker-github",
@@ -234,12 +234,12 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.com:wpify/custom-fields.git",
-                "reference": "e19bfb1af3dea2dbd3e44d1220c7334ae68d7201"
+                "reference": "72ed78678be40ce193d517d079035bc61d41e7be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/wpify%2Fcustom-fields/repository/archive.zip?sha=e19bfb1af3dea2dbd3e44d1220c7334ae68d7201",
-                "reference": "e19bfb1af3dea2dbd3e44d1220c7334ae68d7201",
+                "url": "https://gitlab.com/api/v4/projects/wpify%2Fcustom-fields/repository/archive.zip?sha=72ed78678be40ce193d517d079035bc61d41e7be",
+                "reference": "72ed78678be40ce193d517d079035bc61d41e7be",
                 "shasum": ""
             },
             "require": {
@@ -264,7 +264,7 @@
                 "GPL-2.0-or-later"
             ],
             "description": "WPify Custom Fields",
-            "time": "2023-11-03T19:30:10+00:00"
+            "time": "2023-11-13T14:55:35+00:00"
         },
         {
             "name": "yahnis-elsts/plugin-update-checker",
@@ -272,12 +272,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/YahnisElsts/plugin-update-checker.git",
-                "reference": "0b6bd7cd3286688ab680201aa6a7d8572c51ae1f"
+                "reference": "9c1bddcd461538a32ef07b9a4668b40c0b4187ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/YahnisElsts/plugin-update-checker/zipball/0b6bd7cd3286688ab680201aa6a7d8572c51ae1f",
-                "reference": "0b6bd7cd3286688ab680201aa6a7d8572c51ae1f",
+                "url": "https://api.github.com/repos/YahnisElsts/plugin-update-checker/zipball/9c1bddcd461538a32ef07b9a4668b40c0b4187ed",
+                "reference": "9c1bddcd461538a32ef07b9a4668b40c0b4187ed",
                 "shasum": ""
             },
             "require": {
@@ -313,9 +313,9 @@
             ],
             "support": {
                 "issues": "https://github.com/YahnisElsts/plugin-update-checker/issues",
-                "source": "https://github.com/YahnisElsts/plugin-update-checker/tree/v5.3"
+                "source": "https://github.com/YahnisElsts/plugin-update-checker/tree/master"
             },
-            "time": "2023-11-09T08:34:00+00:00"
+            "time": "2023-11-14T09:52:30+00:00"
         }
     ],
     "packages-dev": [],

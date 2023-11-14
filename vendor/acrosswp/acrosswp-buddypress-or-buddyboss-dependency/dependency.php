@@ -71,6 +71,7 @@ if( ! class_exists( 'AcrossWP_BuddyPress_BuddyBoss_Platform_Dependency' ) ) {
             );
         }
 
+
         /**
          * Load this function on plugin load hook
          */
@@ -82,7 +83,8 @@ if( ! class_exists( 'AcrossWP_BuddyPress_BuddyBoss_Platform_Dependency' ) ) {
          * Load this function on plugin load hook
          */
         function mini_version() {
-            if ( defined( BP_PLATFORM_VERSION ) ) {
+
+            if ( defined( 'BP_PLATFORM_VERSION' ) ) {
                 return '2.3.0';
             }
 
@@ -111,6 +113,24 @@ if( ! class_exists( 'AcrossWP_BuddyPress_BuddyBoss_Platform_Dependency' ) ) {
                 }
             }
 
+            return $return;
+        }
+
+        /**
+         * Load this function on plugin load hook
+         */
+        public function constant_mini_version(){
+
+            $return = false;
+    
+            $constant_versions = $this->constant_name();
+            foreach( $constant_versions as $constant_version ) {
+
+                $constant = $this->constant_version( $constant_version );
+                if ( ! empty( $constant ) && version_compare( $constant, $this->mini_version() , '>=' ) ) {
+                    $return = true;
+                }
+            }
             return $return;
         }
     }

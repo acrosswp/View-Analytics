@@ -131,12 +131,23 @@ if( ! class_exists( 'AcrossWP_Plugins_Dependency' ) ) {
             }
             return false;
         }
+
     
         /**
          * Load this function on plugin load hook
          */
-        function constant_version(){
-            return constant( $this->constant_name() );
+        function constant_version( $constant_name = false ){
+
+            if ( empty( $constant_name ) ) {
+                $constant_name = $this->constant_name();
+            }
+
+            if ( defined( $constant_name ) ) {
+                return constant( $constant_name );
+            }
+
+            return false;
+
         }
     
         /**

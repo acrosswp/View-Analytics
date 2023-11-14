@@ -3,7 +3,7 @@
         'name' => 'acrosswp/view-analytics',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'b368fc6d63a895858ea732c8eb316b6084050a4c',
+        'reference' => '174eaab8fba2077453a99ac2c331023d0c0f7ef7',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -24,7 +24,7 @@
         'acrosswp/acrosswp-buddypress-or-buddyboss-dependency' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '51e333048cf08424257bf9fb1311aa0de8074ee8',
+            'reference' => 'f8a59b7163f3475f9b35563f642aa5616519b1e8',
             'type' => 'library',
             'install_path' => __DIR__ . '/../acrosswp/acrosswp-buddypress-or-buddyboss-dependency',
             'aliases' => array(
@@ -35,7 +35,7 @@
         'acrosswp/acrosswp-dependency' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '58792030b390dac980856e6f4b677a7117440eee',
+            'reference' => '11c2cd9cfa097508d06b3b4718811107917ff2be',
             'type' => 'library',
             'install_path' => __DIR__ . '/../acrosswp/acrosswp-dependency',
             'aliases' => array(
@@ -68,7 +68,7 @@
         'acrosswp/view-analytics' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'b368fc6d63a895858ea732c8eb316b6084050a4c',
+            'reference' => '174eaab8fba2077453a99ac2c331023d0c0f7ef7',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -77,7 +77,7 @@
         'wpify/custom-fields' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'e19bfb1af3dea2dbd3e44d1220c7334ae68d7201',
+            'reference' => '72ed78678be40ce193d517d079035bc61d41e7be',
             'type' => 'library',
             'install_path' => __DIR__ . '/../wpify/custom-fields',
             'aliases' => array(
@@ -88,7 +88,7 @@
         'yahnis-elsts/plugin-update-checker' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '0b6bd7cd3286688ab680201aa6a7d8572c51ae1f',
+            'reference' => '9c1bddcd461538a32ef07b9a4668b40c0b4187ed',
             'type' => 'library',
             'install_path' => __DIR__ . '/../yahnis-elsts/plugin-update-checker',
             'aliases' => array(
