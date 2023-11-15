@@ -65,14 +65,6 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 		return self::$_instance;
 	}
 
-
-    /**
-     * Return the View Analytics Media Count Key
-     */
-    public function settings() {
-        return 'view-analytics-media-settings';
-    }
-
     /**
      * Return the View Analytics Media Count Key
      */

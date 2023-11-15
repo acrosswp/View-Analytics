@@ -42,44 +42,6 @@ class View_Analytics_Admin {
 	 */
 	private $version;
 
-
-	/**
-	 * The ID of this media setting view.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
-	 */
-	private $media_section_id;
-
-	/**
-	 * The ID of this profile setting view.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
-	 */
-	private $profile_section_id;
-
-
-	/**
-	 * The Instance of this media common class.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
-	 */
-	private $media_common;
-
-	/**
-	 * The Instance of this profile common class.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
-	 */
-	private $profile_common;
-
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -88,12 +50,6 @@ class View_Analytics_Admin {
 	 * @param      string    $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
-
-		$this->media_common = View_Analytics_Media_Common::instance();
-		$this->profile_common = View_Analytics_Profile_Common::instance();
-
-		$this->media_section_id = $this->media_common->settings();
-		$this->profile_section_id = $this->profile_common->settings();
 		
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;

@@ -67,13 +67,6 @@ class View_Analytics_Profile_Common extends View_Analytics_Common {
 	}
 
 	/**
-     * Return the View Analytics Media Count Key
-     */
-    public function settings() {
-        return 'view-analytics-profile-settings';
-    }
-
-	/**
      * Return the Profile Analytics Media Count Key
      */
     public function view_count_key() {
