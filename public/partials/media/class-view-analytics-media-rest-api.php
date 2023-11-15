@@ -134,7 +134,7 @@ class View_Analytics_Media_Rest_Controller extends WP_REST_Controller {
 		$schema 	= $this->get_item_schema();
 
 		$key_id = sanitize_text_field( $request->get_param( 'key_id' ) );
-		$media_details = $this->common->table->media_get_details( $key_id );
+		$media_details = $this->common->table->get_details( $key_id );
 
 		if ( empty( $media_details ) ) {
 			return rest_ensure_response( $post_data );

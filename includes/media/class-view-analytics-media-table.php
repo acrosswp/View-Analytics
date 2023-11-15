@@ -61,7 +61,7 @@ class View_Analytics_Media_Table {
 	/**
 	 * Add the current user has view media count
 	 */
-	public function user_media_add( $viewer_id, $key_id, $hash_id = '0', $media_id = 0, $attachment_id = 0, $value = 1 ) {
+	public function user_add( $viewer_id, $key_id, $hash_id = '0', $media_id = 0, $attachment_id = 0, $value = 1 ) {
 		global $wpdb;
 
 		return $wpdb->insert(
@@ -88,7 +88,7 @@ class View_Analytics_Media_Table {
 	/**
 	 * Get the current user has already view the media or not
 	 */
-	public function user_media_get( $viewer_id, $key_id ) {
+	public function user_get( $viewer_id, $key_id ) {
 		global $wpdb;
 
 		$table_name = $this->table_name();
@@ -105,7 +105,7 @@ class View_Analytics_Media_Table {
 	/**
 	 * Get the media view details via $attachment_id
 	 */
-	public function media_get_details( $key_id ) {
+	public function get_details( $key_id ) {
 		global $wpdb;
 
 		$table_name = $this->table_name();
@@ -121,7 +121,7 @@ class View_Analytics_Media_Table {
 	/**
 	 * Update the current user has view media count
 	 */
-	public function user_media_update( $id, $value ) {
+	public function user_update( $id, $value ) {
 		global $wpdb;
 		$wpdb->update(
 			$this->table_name(),
@@ -139,7 +139,7 @@ class View_Analytics_Media_Table {
 	/**
 	 * Delete the current user has view media count
 	 */
-	public function user_media_delete( $id ) {
+	public function user_delete( $id ) {
 		global $wpdb;
 		$wpdb->delete( $this->table_name(), array( 'id' => $id ), array( '%d' ) );
 	}

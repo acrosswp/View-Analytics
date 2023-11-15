@@ -64,9 +64,9 @@ final class View_Analytics {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
+	 * @var      string    $name    The string used to uniquely identify this plugin.
 	 */
-	protected $plugin_name;
+	protected $name;
 
 	/**
 	 * The current version of the plugin.
@@ -138,8 +138,8 @@ final class View_Analytics {
 		if( ! function_exists( 'get_plugin_data' ) ){
 			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		}
-		$plugin_data = get_plugin_data( VIEW_ANALYTICS_PLUGIN_FILE );
-		$version = $plugin_data['Version'];
+		$data = get_plugin_data( VIEW_ANALYTICS_PLUGIN_FILE );
+		$version = $data['Version'];
 		$this->define( 'VIEW_ANALYTICS_VERSION', $version );
 
 		$this->define( 'VIEW_ANALYTICS_PLUGIN_URL', $version );
@@ -361,9 +361,9 @@ final class View_Analytics {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new View_Analytics_i18n();
+		$i18n = new View_Analytics_i18n();
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+		$this->loader->add_action( 'plugins_loaded', $i18n, 'load_plugin_textdomain' );
 
 	}
 
@@ -384,9 +384,9 @@ final class View_Analytics {
 			View_Analytics_Admin_Setting_Menu::instance();
 		}
 		
-		$plugin_admin = new View_Analytics_Admin( $this->get_plugin_name(), $this->get_version() );
+		$admin = new View_Analytics_Admin( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'plugin_action_links', $plugin_admin, 'modify_plugin_action_links', 10, 2 );
+		$this->loader->add_action( 'plugin_action_links', $admin, 'modify_plugin_action_links', 10, 2 );
 
 	}
 
@@ -402,18 +402,18 @@ final class View_Analytics {
 		/**
 		 * All class that are release to Pulic Frountend
 		 */
-		$plugin_public = new View_Analytics_Public( $this->get_plugin_name(), $this->get_version() );
+		$public = new View_Analytics_Public( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $public, 'enqueue_styles' );
 		
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $public, 'enqueue_scripts' );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'media_user_view_html' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $public, 'media_user_view_html' );
 
 		/**
 		 * Load the localize Script
 		 */
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'wp_localize_script' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $public, 'wp_localize_script' );
 
 		/**
 		 * Load the Media REST API
@@ -424,27 +424,27 @@ final class View_Analytics {
 		/**
 		 * All class that are release to Public Media Count
 		 */
-		$plugin_public_media_count = new View_Analytics_Public_Media_Count( $this->get_plugin_name(), $this->get_version() );
+		$public_media_count = new View_Analytics_Public_Media_Count( $this->get_plugin_name(), $this->get_version() );
 
 
 		/**
 		 * All class that are release to Public Profile Count
 		 */
-		$plugin_public_profile_count = new View_Analytics_Public_Profile_Count( $this->get_plugin_name(), $this->get_version() );
-		$this->loader->add_action( 'bp_before_member_home_content', $plugin_public_profile_count, 'home_content', 1000 );
+		$public_profile_count = new View_Analytics_Public_Profile_Count( $this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_action( 'bp_before_member_home_content', $public_profile_count, 'home_content', 1000 );
 
 
 		/**
 		 * All class that are release to Public Profile Count View
 		 */
-		$plugin_public_profile_view = new View_Analytics_Profile_Count_View( $this->get_plugin_name(), $this->get_version() );
-		$this->loader->add_action( 'bp_setup_nav', $plugin_public_profile_view, 'navigation', 1000 );
+		$public_profile_view = new View_Analytics_Profile_Count_View( $this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_action( 'bp_setup_nav', $public_profile_view, 'navigation', 1000 );
 
 		/**
 		 * All class that are release to Public Media Count
 		 */
-		$plugin_public_group_count = new View_Analytics_Public_Group_Count( $this->get_plugin_name(), $this->get_version() );
-		$this->loader->add_action( 'bp_before_group_home_content', $plugin_public_group_count, 'navigation', 1000 );
+		$public_group_count = new View_Analytics_Public_Group_Count( $this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_action( 'bp_before_group_home_content', $public_group_count, 'home_content', 1000 );
 
 		/**
 		 * if BuddyBoss is loading
@@ -454,26 +454,26 @@ final class View_Analytics {
 			/**
 			 * Show Media View Count
 			 */
-			$this->loader->add_action( 'bp_before_activity_activity_content', $plugin_public, 'buddyboss_show_view_count', 1000 );
+			$this->loader->add_action( 'bp_before_activity_activity_content', $public, 'buddyboss_show_view_count', 1000 );
 
 			/**
 			 * Load popup template into the Activity Area
 			 */
-			$this->loader->add_action( 'bp_after_directory_activity_list', $plugin_public, 'buddyboss_who_view_media_modal', 1000 );
-			$this->loader->add_action( 'bp_after_member_activity_content', $plugin_public, 'buddyboss_who_view_media_modal', 1000 );
-			$this->loader->add_action( 'bp_after_group_activity_content', $plugin_public, 'buddyboss_who_view_media_modal', 1000 );
-			$this->loader->add_action( 'bp_after_single_activity_content', $plugin_public, 'buddyboss_who_view_media_modal', 1000 );
+			$this->loader->add_action( 'bp_after_directory_activity_list', $public, 'buddyboss_who_view_media_modal', 1000 );
+			$this->loader->add_action( 'bp_after_member_activity_content', $public, 'buddyboss_who_view_media_modal', 1000 );
+			$this->loader->add_action( 'bp_after_group_activity_content', $public, 'buddyboss_who_view_media_modal', 1000 );
+			$this->loader->add_action( 'bp_after_single_activity_content', $public, 'buddyboss_who_view_media_modal', 1000 );
 		} else {
 
 			/**
 			 * Show Media View Count
 			 */
-			$this->loader->add_action( 'get_template_part_attachments/single/view', $plugin_public, 'buddypress_show_view_count', 10000, 3 );
+			$this->loader->add_action( 'get_template_part_attachments/single/view', $public, 'buddypress_show_view_count', 10000, 3 );
 
 			/**
 			 * Load popup template into the Activity Area
 			 */
-			$this->loader->add_action( 'wp_head', $plugin_public, 'buddypress_who_view_media_modal', 1000 );
+			$this->loader->add_action( 'wp_head', $public, 'buddypress_who_view_media_modal', 1000 );
 
 		}
 

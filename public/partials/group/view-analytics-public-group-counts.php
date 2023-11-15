@@ -86,13 +86,13 @@ class View_Analytics_Public_Group_Count {
 	 */
 	public function home_content() {
 
-		$group_id = bp_group_id();
+		$group_id = bp_get_group_id();
 		$current_user_id = get_current_user_id();
 
 		/**
 		 * Check if both are not empty
 		 */
-		if ( ! empty( $current_user_id ) && ! empty( $group_id ) ) {
+		if ( ! empty( $group_id ) && ! empty( $current_user_id ) ) {
 			$this->update_view_count( $group_id, $current_user_id );
 		}
 	}
@@ -107,19 +107,19 @@ class View_Analytics_Public_Group_Count {
 
 			$this->table = View_Analytics_Group_Table::instance();
 
-			$profile_view = $this->table->user_group_get( $group_id, $viewer_id );
-	
+			$view = $this->table->user_get( $group_id, $viewer_id );
+
 			/**
 			 * Check if empty
 			 */
-			if ( empty( $profile_view ) ) {
-				$this->table->user_group_add( $group_id, $viewer_id, 1 );
+			if ( empty( $view ) ) {
+				$this->table->user_add( $group_id, $viewer_id, 1 );
 			} else {
-				$id = $profile_view->id;
-				$view_count = $profile_view->value;
+				$id = $view->id;
+				$view_count = $view->value;
 				$view_count++;
 	
-				$this->table->user_group_update( $id, $view_count );
+				$this->table->user_update( $id, $view_count );
 			}
 		}
 	}

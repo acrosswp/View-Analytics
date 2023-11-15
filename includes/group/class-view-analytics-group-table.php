@@ -61,7 +61,7 @@ class View_Analytics_Group_Table {
 	/**
 	 * Add the current user has view group count
 	 */
-	public function user_group_add( $group_id, $viewer_id, $value = 1 ) {
+	public function user_add( $group_id, $viewer_id, $value = 1 ) {
 		global $wpdb;
 
 		return $wpdb->insert(
@@ -82,7 +82,7 @@ class View_Analytics_Group_Table {
 	/**
 	 * Get the current user has already view the group or not
 	 */
-	public function user_group_get( $group_id, $viewer_id ) {
+	public function user_get( $group_id, $viewer_id ) {
 		global $wpdb;
 
 		$table_name = $this->table_name();
@@ -99,7 +99,7 @@ class View_Analytics_Group_Table {
 	/**
 	 * Update the current user has view group count
 	 */
-	public function user_group_update( $id, $value ) {
+	public function user_update( $id, $value ) {
 		global $wpdb;
 		$wpdb->update(
 			$this->table_name(),
@@ -117,7 +117,7 @@ class View_Analytics_Group_Table {
 	/**
 	 * Delete the current user has view group count
 	 */
-	public function user_group_delete( $group_id ) {
+	public function user_delete( $group_id ) {
 		global $wpdb;
 		$wpdb->delete( $this->table_name(), array( 'group_id' => $group_id ), array( '%d' ) );
 	}
@@ -125,7 +125,7 @@ class View_Analytics_Group_Table {
 	/**
 	 * Get the group view details via $group_id
 	 */
-	public function group_get_details( $group_id ) {
+	public function get_details( $group_id ) {
 		global $wpdb;
 
 		$table_name = $this->table_name();

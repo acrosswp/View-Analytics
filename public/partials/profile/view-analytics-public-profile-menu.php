@@ -95,7 +95,7 @@ class View_Analytics_Profile_Count_View {
 
 	function content() {
 		$user_id = get_current_user_id();
-		$profile_view_details = $this->common->table->profile_get_details( $user_id );
+		$profile_view_details = $this->common->table->get_details( $user_id );
 		if ( empty( $profile_view_details ) ) {
 			echo __( 'No one has view your Profile', 'view-analytics' );
 		} else { ?>

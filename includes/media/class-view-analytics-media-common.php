@@ -206,7 +206,7 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 	 * Get the media view details via $attachment_id
 	 */
 	public function get_count( $key_id ) {
-		$media_details = $this->table->media_get_details( $key_id );
+		$media_details = $this->table->get_details( $key_id );
 		if ( empty( $media_details ) ) {
 			return 0;
 		} else {

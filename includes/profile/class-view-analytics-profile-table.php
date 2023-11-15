@@ -61,7 +61,7 @@ class View_Analytics_Profile_Table {
 	/**
 	 * Add the current user has view profile count
 	 */
-	public function user_profile_add( $user_id, $viewer_id, $value = 1, $is_new = 1 ) {
+	public function user_add( $user_id, $viewer_id, $value = 1, $is_new = 1 ) {
 		global $wpdb;
 
 		return $wpdb->insert(
@@ -84,7 +84,7 @@ class View_Analytics_Profile_Table {
 	/**
 	 * Get the current user has already view the profile or not
 	 */
-	public function user_profile_get( $user_id, $viewer_id ) {
+	public function user_get( $user_id, $viewer_id ) {
 		global $wpdb;
 
 		$table_name = $this->table_name();
@@ -101,7 +101,7 @@ class View_Analytics_Profile_Table {
 	/**
 	 * Update the current user has view profile count
 	 */
-	public function user_profile_update( $id, $value ) {
+	public function user_update( $id, $value ) {
 		global $wpdb;
 		$wpdb->update(
 			$this->table_name(),
@@ -119,7 +119,7 @@ class View_Analytics_Profile_Table {
 	/**
 	 * Delete the current user has view profile count
 	 */
-	public function user_profile_delete( $user_id ) {
+	public function user_delete( $user_id ) {
 		global $wpdb;
 		$wpdb->delete( $this->table_name(), array( 'user_id' => $user_id ), array( '%d' ) );
 		$wpdb->delete( $this->table_name(), array( 'viewer_id' => $user_id ), array( '%d' ) );
@@ -128,7 +128,7 @@ class View_Analytics_Profile_Table {
 	/**
 	 * Get the profile view details via $user_id
 	 */
-	public function profile_get_details( $user_id ) {
+	public function get_details( $user_id ) {
 		global $wpdb;
 
 		$table_name = $this->table_name();

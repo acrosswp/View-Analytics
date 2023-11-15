@@ -247,19 +247,19 @@ class View_Analytics_Public_Media_Count {
 
 		if ( $this->common->view_count_enable() ) {
 			$current_user_id = get_current_user_id();
-			$media_view = View_Analytics_Media_Table::instance()->user_media_get( $current_user_id, $key_id );
+			$media_view = View_Analytics_Media_Table::instance()->user_get( $current_user_id, $key_id );
 	
 			/**
 			 * Check if empty
 			 */
 			if ( empty( $media_view ) ) {
-				View_Analytics_Media_Table::instance()->user_media_add( $current_user_id, $key_id, $hash_id, $media_id, $attachment_id );
+				View_Analytics_Media_Table::instance()->user_add( $current_user_id, $key_id, $hash_id, $media_id, $attachment_id );
 			} else {
 				$id = $media_view->id;
 				$view_count = $media_view->value;
 				$view_count++;
 	
-				View_Analytics_Media_Table::instance()->user_media_update( $id, $view_count );
+				View_Analytics_Media_Table::instance()->user_update( $id, $view_count );
 			}
 		}
 	}

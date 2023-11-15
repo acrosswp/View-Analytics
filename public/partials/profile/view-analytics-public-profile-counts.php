@@ -107,19 +107,19 @@ class View_Analytics_Public_Profile_Count {
 
 			$this->table = View_Analytics_Profile_Table::instance();
 
-			$profile_view = $this->table->user_profile_get( $user_id, $viewer_id );
+			$profile_view = $this->table->user_get( $user_id, $viewer_id );
 	
 			/**
 			 * Check if empty
 			 */
 			if ( empty( $profile_view ) ) {
-				View_Analytics_Profile_Table::instance()->user_profile_add( $user_id, $viewer_id, 1 );
+				View_Analytics_Profile_Table::instance()->user_add( $user_id, $viewer_id, 1 );
 			} else {
 				$id = $profile_view->id;
 				$view_count = $profile_view->value;
 				$view_count++;
 	
-				View_Analytics_Profile_Table::instance()->user_profile_update( $id, $view_count );
+				View_Analytics_Profile_Table::instance()->user_update( $id, $view_count );
 			}
 		}
 	}
