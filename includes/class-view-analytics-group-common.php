@@ -23,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
  * @subpackage View_Analytics/includes
  * @author     AcrossWP <contact@acrosswp.com>
  */
-class View_Analytics_Profile_Common extends View_Analytics_Common {
+class View_Analytics_Group_Common extends View_Analytics_Common {
 
     /**
 	 * The single instance of the class.
@@ -45,7 +45,7 @@ class View_Analytics_Profile_Common extends View_Analytics_Common {
 	public function __construct() {
 
 		parent::__construct();
-        $this->table = View_Analytics_Profile_Table::instance();
+        $this->table = View_Analytics_Group_Table::instance();
 	}
 
 
@@ -70,18 +70,18 @@ class View_Analytics_Profile_Common extends View_Analytics_Common {
      * Return the View Analytics Media Count Key
      */
     public function settings() {
-        return 'view-analytics-profile-settings';
+        return 'view-analytics-group-settings';
     }
 
 	/**
-     * Return the Profile Analytics Media Count Key
+     * Return the Group Analytics Media Count Key
      */
     public function view_count_key() {
-        return '_view_analytics_profile_table_count_enable';
+        return '_view_analytics_group_table_count_enable';
     }
 
 	/**
-     * Return the View Analytics Profile Count Key
+     * Return the View Analytics Group Count Key
      */
     public function view_count_enable() {
         return get_option( $this->view_count_key(), true );
@@ -104,39 +104,6 @@ class View_Analytics_Profile_Common extends View_Analytics_Common {
             return true;
         }
 
-		if( $user_id == bp_displayed_user_id() ) {
-			return true;
-		}
-
 		return false;
-	}
-
-	/**
-	 * Show the message about when the user has view the Media
-	 */
-	public function get_view_body_message( $user_id, $view_count ) {
-		$displayname = bp_core_get_user_displayname( $user_id );
-		$view = _n( 'time', 'times', $view_count, 'view-analytics' );
-		return sprintf( __( '%s saw your profile %s %s.', 'view-analytics' ), $displayname, $view_count, $view );
-
-	}
-
-	/**
-	 * Show the message about when the user has view the Media
-	 */
-	public function get_view_time_message( $action_date, $mysql_time = false ) {
-
-		/**
-		 * If current time is empty
-		 */
-		if ( empty( $mysql_time ) ) {
-			global $wpdb;
-			$mysql_time = $wpdb->get_var( 'select CURRENT_TIMESTAMP()' );
-		}
-
-		$view_time = human_time_diff( strtotime( $action_date ), strtotime( $mysql_time ) );
-
-		return sprintf( __( 'viewed %s ago.', 'view-analytics' ), $view_time );
-
 	}
 }

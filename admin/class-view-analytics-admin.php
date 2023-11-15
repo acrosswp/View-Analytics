@@ -93,7 +93,7 @@ class View_Analytics_Admin {
 		$this->profile_common = View_Analytics_Profile_Common::instance();
 
 		$this->media_section_id = $this->media_common->settings();
-		$this->profile_section_id = $this->profile_common->profile_settings();
+		$this->profile_section_id = $this->profile_common->settings();
 		
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;

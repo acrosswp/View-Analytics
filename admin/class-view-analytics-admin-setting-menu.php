@@ -92,6 +92,7 @@ defined( 'ABSPATH' ) || exit;
 
 			$this->media_common = View_Analytics_Media_Common::instance();
 			$this->profile_common = View_Analytics_Profile_Common::instance();
+			$this->group_common = View_Analytics_Group_Common::instance();
 
 			wpify_custom_fields()->create_options_page( array(
 				'type'        => 'normal',
@@ -112,7 +113,13 @@ defined( 'ABSPATH' ) || exit;
 						'title' => __( 'View Profile Count', 'view-analytics' ),
 						'label' => __( 'Enable Profile View Count', 'view-analytics' ),
 						'id'    => $this->profile_common->view_count_key(),
-					 ),
+					),
+					array(
+						'type'  => 'checkbox',
+						'title' => __( 'View Group Count', 'view-analytics' ),
+						'label' => __( 'Enable Group View Count', 'view-analytics' ),
+						'id'    => $this->group_common->view_count_key(),
+					),
 				),
 			 ) );
 			 
