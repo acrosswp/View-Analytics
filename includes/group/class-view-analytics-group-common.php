@@ -67,13 +67,6 @@ class View_Analytics_Group_Common extends View_Analytics_Common {
 	}
 
 	/**
-     * Return the View Analytics Media Count Key
-     */
-    public function settings() {
-        return 'view-analytics-group-settings';
-    }
-
-	/**
      * Return the Group Analytics Media Count Key
      */
     public function view_count_key() {
