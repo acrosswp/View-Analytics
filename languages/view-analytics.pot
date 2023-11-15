@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-14 16:43+0000\n"
+"POT-Creation-Date: 2023-11-15 14:47+0000\n"
 "Report-Msgid-Bugs-To: https://github.com/acrosswp/view-analytics/issues\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -15,90 +15,54 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: admin/class-view-analytics-admin-setting-menu.php:99, admin/class-view-analytics-admin-setting-menu.php:100, admin/class-view-analytics-admin-setting-menu.php:106
+#: admin/class-view-analytics-admin-setting-menu.php:100, admin/class-view-analytics-admin-setting-menu.php:101, admin/class-view-analytics-admin-setting-menu.php:107
 msgid "View Analytics"
 msgstr ""
 
-#: admin/class-view-analytics-admin-setting-menu.php:107
+#: admin/class-view-analytics-admin-setting-menu.php:108
 msgid "Enable Media View Count"
 msgstr ""
 
-#: admin/class-view-analytics-admin-setting-menu.php:112
+#: admin/class-view-analytics-admin-setting-menu.php:113
 msgid "View Profile Count"
 msgstr ""
 
-#: admin/class-view-analytics-admin-setting-menu.php:113
+#: admin/class-view-analytics-admin-setting-menu.php:114
 msgid "Enable Profile View Count"
 msgstr ""
 
-#: admin/class-view-analytics-admin.php:122
+#: admin/class-view-analytics-admin-setting-menu.php:119
+msgid "View Group Count"
+msgstr ""
+
+#: admin/class-view-analytics-admin-setting-menu.php:120
+msgid "Enable Group View Count"
+msgstr ""
+
+#: admin/class-view-analytics-admin.php:78
 msgid "Settings"
 msgstr ""
 
-#: admin/class-view-analytics-admin.php:123
+#: admin/class-view-analytics-admin.php:79
 msgid "About"
 msgstr ""
 
-#: includes/class-view-analytics-media-common.php:264
-msgid "viewed this %s ago."
-msgstr ""
-
-#: includes/class-view-analytics-profile-common.php:119
+#: includes/group/class-view-analytics-group-common.php:119, includes/profile/class-view-analytics-profile-common.php:112
 msgid "time"
 msgid_plural "times"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-view-analytics-profile-common.php:120
+#: includes/group/class-view-analytics-group-common.php:120, includes/profile/class-view-analytics-profile-common.php:113
 msgid "%s saw your profile %s %s."
 msgstr ""
 
-#: includes/class-view-analytics-profile-common.php:139
-msgid "viewed %s ago."
+#: includes/group/class-view-analytics-group-common.php:139, includes/profile/class-view-analytics-profile-common.php:132
+msgid "first viewed %s ago."
 msgstr ""
 
-#: public/class-view-analytics-media-rest-api.php:97
-msgid "Sorry, you are not allowed to perform this action."
-msgstr ""
-
-#: public/class-view-analytics-media-rest-api.php:107
-msgid "Invalid Attachment ID."
-msgstr ""
-
-#: public/class-view-analytics-media-rest-api.php:235
-msgid "Unique identifier for the object."
-msgstr ""
-
-#: public/class-view-analytics-media-rest-api.php:239
-msgid "The id of the user object"
-msgstr ""
-
-#: public/class-view-analytics-media-rest-api.php:243, public/class-view-analytics-media-rest-api.php:251
-msgid "Unique identifier for the attachment."
-msgstr ""
-
-#: public/class-view-analytics-media-rest-api.php:247
-msgid "Unique identifier for the BB media."
-msgstr ""
-
-#: public/class-view-analytics-media-rest-api.php:255
-msgid "The Link of the User Profile Picture."
-msgstr ""
-
-#: public/class-view-analytics-media-rest-api.php:259
-msgid "The Link of the User Profile."
-msgstr ""
-
-#: public/class-view-analytics-media-rest-api.php:263
-msgid "The display name of the users."
-msgstr ""
-
-#: public/class-view-analytics-media-rest-api.php:267
-msgid "The message that need to be diplay."
-msgstr ""
-
-#: public/class-view-analytics-media-rest-api.php:271
-msgid "The date on which the user view the Media"
+#: includes/media/class-view-analytics-media-common.php:256
+msgid "viewed this %s ago."
 msgstr ""
 
 #: public/class-view-analytics-public.php:197
@@ -111,10 +75,62 @@ msgstr[1] ""
 msgid "People Who viewed This"
 msgstr ""
 
-#: public/partials/view-analytics-public-profile-menu.php:83
+#: public/partials/group/view-analytics-public-group-menu.php:88
+msgid "Group View"
+msgstr ""
+
+#: public/partials/group/view-analytics-public-group-menu.php:109
+msgid "No one has view this Group"
+msgstr ""
+
+#: public/partials/media/class-view-analytics-media-rest-api.php:97
+msgid "Sorry, you are not allowed to perform this action."
+msgstr ""
+
+#: public/partials/media/class-view-analytics-media-rest-api.php:107
+msgid "Invalid Attachment ID."
+msgstr ""
+
+#: public/partials/media/class-view-analytics-media-rest-api.php:235
+msgid "Unique identifier for the object."
+msgstr ""
+
+#: public/partials/media/class-view-analytics-media-rest-api.php:239
+msgid "The id of the user object"
+msgstr ""
+
+#: public/partials/media/class-view-analytics-media-rest-api.php:243, public/partials/media/class-view-analytics-media-rest-api.php:251
+msgid "Unique identifier for the attachment."
+msgstr ""
+
+#: public/partials/media/class-view-analytics-media-rest-api.php:247
+msgid "Unique identifier for the BB media."
+msgstr ""
+
+#: public/partials/media/class-view-analytics-media-rest-api.php:255
+msgid "The Link of the User Profile Picture."
+msgstr ""
+
+#: public/partials/media/class-view-analytics-media-rest-api.php:259
+msgid "The Link of the User Profile."
+msgstr ""
+
+#: public/partials/media/class-view-analytics-media-rest-api.php:263
+msgid "The display name of the users."
+msgstr ""
+
+#: public/partials/media/class-view-analytics-media-rest-api.php:267
+msgid "The message that need to be diplay."
+msgstr ""
+
+#: public/partials/media/class-view-analytics-media-rest-api.php:271
+msgid "The date on which the user view the Media"
+msgstr ""
+
+#: public/partials/profile/view-analytics-public-profile-menu.php:83
 msgid "Profile View"
 msgstr ""
 
-#: public/partials/view-analytics-public-profile-menu.php:100
+#: public/partials/profile/view-analytics-public-profile-menu.php:100
 msgid "No one has view your Profile"
 msgstr ""
