@@ -422,24 +422,29 @@ final class View_Analytics {
 		$this->loader->add_action( 'rest_api_init', $rest_api, 'register_routes', 1000 );
 
 		/**
-		 * All class that are release to Pulic Frountend Count
+		 * All class that are release to Public Media Count
 		 */
 		$plugin_public_media_count = new View_Analytics_Public_Media_Count( $this->get_plugin_name(), $this->get_version() );
 
 
 		/**
-		 * All class that are release to Pulic Frountend Count
+		 * All class that are release to Public Profile Count
 		 */
 		$plugin_public_profile_count = new View_Analytics_Public_Profile_Count( $this->get_plugin_name(), $this->get_version() );
-		$this->loader->add_action( 'bp_before_member_home_content', $plugin_public_profile_count, 'member_home_content', 1000 );
+		$this->loader->add_action( 'bp_before_member_home_content', $plugin_public_profile_count, 'home_content', 1000 );
 
 
 		/**
-		 * All class that are release to Pulic Frountend Count
+		 * All class that are release to Public Profile Count View
 		 */
 		$plugin_public_profile_view = new View_Analytics_Profile_Count_View( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'bp_setup_nav', $plugin_public_profile_view, 'navigation', 1000 );
 
+		/**
+		 * All class that are release to Public Media Count
+		 */
+		$plugin_public_group_count = new View_Analytics_Public_Group_Count( $this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_action( 'bp_before_group_home_content', $plugin_public_group_count, 'navigation', 1000 );
 
 		/**
 		 * if BuddyBoss is loading

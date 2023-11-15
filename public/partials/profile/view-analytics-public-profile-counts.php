@@ -84,7 +84,7 @@ class View_Analytics_Public_Profile_Count {
 	/**
 	 * This function is run when someone visit the member profile page
 	 */
-	public function member_home_content() {
+	public function home_content() {
 
 		$current_user_id = get_current_user_id();
 		$displayed_user_id = bp_displayed_user_id();
@@ -93,7 +93,7 @@ class View_Analytics_Public_Profile_Count {
 		 * Check if both are not empty
 		 */
 		if ( ! empty( $current_user_id ) && ! empty( $displayed_user_id ) ) {
-			$this->buddyboss_update_view_count( $displayed_user_id, $current_user_id );
+			$this->update_view_count( $displayed_user_id, $current_user_id );
 		}
 	}
 	
@@ -101,7 +101,7 @@ class View_Analytics_Public_Profile_Count {
 	/**
 	 * Update Media view count
 	 */
-	public function buddyboss_update_view_count( $user_id, $viewer_id ) {
+	public function update_view_count( $user_id, $viewer_id ) {
 
 		if ( $this->common->view_count_enable() ) {
 
