@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || exit;
  * @subpackage View_Analytics/includes
  * @author     AcrossWP <contact@acrosswp.com>
  */
-class View_Analytics_Profile_Count_View {
+class View_Analytics_Group_Count_View {
 
     /**
 	 * The unique identifier of this plugin.
@@ -46,7 +46,7 @@ class View_Analytics_Profile_Count_View {
 	protected $version;
 
 	/**
-	 * The ID of this profile setting view.
+	 * The ID of this group setting view.
 	 *
 	 * @since    1.0.0
 	 * @access   private
@@ -68,23 +68,31 @@ class View_Analytics_Profile_Count_View {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
-		$this->common = View_Analytics_Profile_Common::instance();
+		$this->common = View_Analytics_Group_Common::instance();
 	}
 
 
 	public function navigation() {
 
+		$current_group = groups_get_current_group();
+
 		/**
 		 * Check if the curret user has access to view the Profile View Tab
 		 */
-		if ( $this->common->can_current_user_view_list() ) {
-			bp_core_new_nav_item(
-				array(
-					'name'                => __( 'Profile View', 'view-analytics' ),
-					'slug'                => 'profile-view',
-					'screen_function'     => array( $this, 'view_manage' )
-				)
-			);
+		if ( ! empty( $current_group ) && $this->common->can_current_user_view_list( $current_group->id ) ) {
+
+			$group_link = bp_get_group_permalink( $current_group );
+
+			// var_dump( $groups_link );
+			bp_core_new_subnav_item( array(
+				'name' => __( 'Group View', 'view-analytics' ),
+				'slug' => 'group-view',
+				'parent_slug' => bp_get_current_group_slug(),
+				'parent_url' => $group_link,
+				'position' => 100,
+				'screen_function' => array( $this, 'view_manage' ),
+				'user_has_access' => bp_is_item_admin() // Only the logged in user can access this on his/her profile
+			) );
 		}
 	}
 
@@ -94,16 +102,17 @@ class View_Analytics_Profile_Count_View {
 	}
 
 	function content() {
-		$user_id = get_current_user_id();
-		$profile_view_details = $this->common->table->get_details( $user_id );
-		if ( empty( $profile_view_details ) ) {
-			echo __( 'No one has view your Profile', 'view-analytics' );
+		$group_id = bp_get_group_id();
+		$view_details = $this->common->table->get_details( $group_id );
+
+		if ( empty( $view_details ) ) {
+			echo __( 'No one has view this Group', 'view-analytics' );
 		} else { ?>
 			<ul class="notification-list bb-nouveau-list bs-item-list list-view">
 				<?php
 				global $wpdb;
 				$mysql_time = $wpdb->get_var( 'select CURRENT_TIMESTAMP()' );
-				foreach( $profile_view_details as $view_detail ) {
+				foreach( $view_details as $view_detail ) {
 					$link = bp_core_get_user_domain( $view_detail->viewer_id );
 					?>
 					<li class="bs-item-wrap">

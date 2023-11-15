@@ -129,7 +129,7 @@ class View_Analytics_Profile_Common extends View_Analytics_Common {
 
 		$view_time = human_time_diff( strtotime( $action_date ), strtotime( $mysql_time ) );
 
-		return sprintf( __( 'viewed %s ago.', 'view-analytics' ), $view_time );
+		return sprintf( __( 'first viewed %s ago.', 'view-analytics' ), $view_time );
 
 	}
 }

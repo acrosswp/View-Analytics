@@ -88,6 +88,8 @@ final class View_Analytics {
 	 */
 	public function __construct() {
 
+		$this->plugin_name = 'view-analytics';
+
 		$this->define_constants();
 
 		if ( defined( 'VIEW_ANALYTICS_VERSION' ) ) {
@@ -95,8 +97,6 @@ final class View_Analytics {
 		} else {
 			$this->version = '1.0.0';
 		}
-
-		$this->plugin_name = 'view-analytics';
 
 		$this->load_dependencies();
 
@@ -347,7 +347,7 @@ final class View_Analytics {
 		/**
 		 * The class responsible for defining all actions that are releate to recoring the view count in table
 		 */
-		// require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/view-analytics-public-group-menu.php';
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/group/view-analytics-public-group-menu.php';
 	}
 
 	/**
@@ -445,6 +445,12 @@ final class View_Analytics {
 		 */
 		$public_group_count = new View_Analytics_Public_Group_Count( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'bp_before_group_home_content', $public_group_count, 'home_content', 1000 );
+
+		/**
+		 * All class that are release to Public Profile Count View
+		 */
+		$public_group_view = new View_Analytics_Group_Count_View( $this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_action( 'bp_setup_nav', $public_group_view, 'navigation', 1000 );
 
 		/**
 		 * if BuddyBoss is loading
