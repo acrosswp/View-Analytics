@@ -83,8 +83,24 @@ class View_Analytics_Activator {
 		) {$charset_collate};";
 
 
+		/**
+		 * Group View
+		 */
+		$group_view_table_name		 = $wpdb->prefix . 'awp_va_group_view';
+
+		$group_view_sql = "CREATE TABLE {$group_view_table_name} (
+			id bigint(20) NOT NULL AUTO_INCREMENT ,
+			group_id bigint(20) NOT NULL,
+			viewer_id bigint(20) NOT NULL,
+			value bigint(20) NOT NULL DEFAULT 1,
+			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+			PRIMARY KEY  (id)
+		) {$charset_collate};";
+
+
 		maybe_create_table( $media_view_table_name, $media_view_sql );
 		maybe_create_table( $profile_view_table_name, $profile_view_sql );
+		maybe_create_table( $group_view_table_name, $group_view_sql );
 	}
 
 }
