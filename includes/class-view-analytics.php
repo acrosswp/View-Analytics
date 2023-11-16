@@ -294,23 +294,23 @@ final class View_Analytics {
 		/**
 		 * Contain all the value to edit/delete/remove the table row
 		 */
-		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/media/class-view-analytics-media-table.php' );
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/media/class-view-analytics-table.php' );
 
 
 		/**
 		 * All the functions are included in this file
 		 */
-		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/media/class-view-analytics-media-common.php' );
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/media/class-view-analytics-common.php' );
 
 		/**
 		 * The class responsible for defining all actions that are releate to recoring the view count in table
 		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/media/view-analytics-public-media-counts.php';
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/media/view-analytics-counts.php';
 
 		/**
 		 * The class responsible for for rest api to view who has view the media
 		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/media/class-view-analytics-media-rest-api.php';
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/media/class-view-analytics-rest-api.php';
 	}
 
 	/**
@@ -321,24 +321,24 @@ final class View_Analytics {
 		/**
 		 * Contain all the value to edit/delete/remove the table row
 		 */
-		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/profile/class-view-analytics-profile-table.php' );
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/profile/class-view-analytics-table.php' );
 
 		/**
 		 * All the functions are included in this file
 		 */
-		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/profile/class-view-analytics-profile-common.php' );
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/profile/class-view-analytics-common.php' );
 
 
 		/**
 		 * The class responsible for defining all actions that are releate to recoring the view count in table
 		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/profile/view-analytics-public-profile-counts.php';
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/profile/view-analytics-counts.php';
 
 
 		/**
 		 * The class responsible for defining all actions that are releate to recoring the view count in table
 		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/profile/view-analytics-public-profile-menu.php';
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/profile/view-analytics-public-menu.php';
 	}
 
 
@@ -350,24 +350,24 @@ final class View_Analytics {
 		/**
 		 * Contain all the value to edit/delete/remove the table row
 		 */
-		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/group/class-view-analytics-group-table.php' );
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/group/class-view-analytics-table.php' );
 
 		/**
 		 * All the functions are included in this file
 		 */
-		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/group/class-view-analytics-group-common.php' );
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/group/class-view-analytics-common.php' );
 
 
 		/**
 		 * The class responsible for defining all actions that are releate to recoring the view count in table
 		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/group/view-analytics-public-group-counts.php';
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/group/view-analytics-counts.php';
 
 
 		/**
 		 * The class responsible for defining all actions that are releate to recoring the view count in table
 		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/group/view-analytics-public-group-menu.php';
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/group/view-analytics-public-menu.php';
 	}
 
 	/**
@@ -378,18 +378,18 @@ final class View_Analytics {
 		/**
 		 * Contain all the value to edit/delete/remove the table row
 		 */
-		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/class-view-analytics-avatar-table.php' );
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/class-view-analytics-table.php' );
 
 		/**
 		 * All the functions are included in this file
 		 */
-		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/class-view-analytics-avatar-common.php' );
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/class-view-analytics-common.php' );
 
 
 		/**
 		 * The class responsible for defining all actions that are releate to recoring the view count in table
 		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/avatar/view-analytics-public-avatar-counts.php';
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/view-analytics-counts.php';
 
 
 		// /**
