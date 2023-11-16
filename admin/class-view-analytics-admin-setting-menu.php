@@ -65,6 +65,15 @@ defined( 'ABSPATH' ) || exit;
 		private $group_common;
 
 		/**
+		 * The ID of this avatar setting view.
+		 *
+		 * @since    1.0.0
+		 * @access   private
+		 * @var      string    $version    The current version of this plugin.
+		 */
+		private $avatar_common;
+
+		/**
 		 * Initialize the class and set its properties.
 		 *
 		 * @since    1.0.0
@@ -74,9 +83,6 @@ defined( 'ABSPATH' ) || exit;
 		public function __construct() {
 			parent::__construct();
 
-			// add_action( 'admin_head', function() {
-			// 	remove_submenu_page( 'acrosswp', 'view-analytics' );
-			// } );
 		}
 
 		/**
@@ -106,6 +112,7 @@ defined( 'ABSPATH' ) || exit;
 			$this->media_common = View_Analytics_Media_Common::instance();
 			$this->profile_common = View_Analytics_Profile_Common::instance();
 			$this->group_common = View_Analytics_Group_Common::instance();
+			$this->avatar_common = View_Analytics_Avatar_Common::instance();
 
 			wpify_custom_fields()->create_options_page( array(
 				'type'        => 'normal',
@@ -132,6 +139,12 @@ defined( 'ABSPATH' ) || exit;
 						'title' => __( 'View Group Count', 'view-analytics' ),
 						'label' => __( 'Enable Group View Count', 'view-analytics' ),
 						'id'    => $this->group_common->view_count_key(),
+					),
+					array(
+						'type'  => 'checkbox',
+						'title' => __( 'View Avatar Count', 'view-analytics' ),
+						'label' => __( 'Enable Avatar View Count', 'view-analytics' ),
+						'id'    => $this->avatar_common->view_count_key(),
 					),
 				),
 			) );

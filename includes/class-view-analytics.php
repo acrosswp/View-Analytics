@@ -213,6 +213,21 @@ final class View_Analytics {
 		}
 
 		/**
+		 * Check if the class does not exits then only allow the file to add
+		 */
+		if( class_exists( 'AcrossWP_Plugin_Update' ) ) {
+
+			/**
+			 * The class responsible for defining all actions that occur in the admin area.
+			 */
+			require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/update/class-view-analytics-update.php';
+
+			$plugin_update = new View_Analytics_Update( $this->get_plugin_name(), $this->get_version() );
+
+			$acrosswp_plugin_update = new AcrossWP_Plugin_Update( $this->get_plugin_name(), $this->get_version() );
+		}
+
+		/**
 		 * All the functions are included in this file
 		 */
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/class-view-analytics-common.php' );
@@ -259,6 +274,11 @@ final class View_Analytics {
 		 * Load all the Group view file
 		 */
 		$this->load_group_view();
+
+		/**
+		 * Load all the Avatar view file
+		 */
+		$this->load_avatar_view();
 
 		$this->loader = View_Analytics_Loader::instance();
 
@@ -348,6 +368,34 @@ final class View_Analytics {
 		 * The class responsible for defining all actions that are releate to recoring the view count in table
 		 */
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/group/view-analytics-public-group-menu.php';
+	}
+
+	/**
+	 * Load all the File releaste to Group
+	 */
+	private function load_avatar_view() {
+
+		/**
+		 * Contain all the value to edit/delete/remove the table row
+		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/class-view-analytics-avatar-table.php' );
+
+		/**
+		 * All the functions are included in this file
+		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/class-view-analytics-avatar-common.php' );
+
+
+		/**
+		 * The class responsible for defining all actions that are releate to recoring the view count in table
+		 */
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/avatar/view-analytics-public-avatar-counts.php';
+
+
+		// /**
+		//  * The class responsible for defining all actions that are releate to recoring the view count in table
+		//  */
+		// require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/group/view-analytics-public-group-menu.php';
 	}
 
 	/**
@@ -441,16 +489,22 @@ final class View_Analytics {
 		$this->loader->add_action( 'bp_setup_nav', $public_profile_view, 'navigation', 1000 );
 
 		/**
-		 * All class that are release to Public Media Count
+		 * All class that are release to Public Group Count
 		 */
 		$public_group_count = new View_Analytics_Public_Group_Count( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'bp_before_group_home_content', $public_group_count, 'home_content', 1000 );
 
 		/**
-		 * All class that are release to Public Profile Count View
+		 * All class that are release to Public Group Count View
 		 */
 		$public_group_view = new View_Analytics_Group_Count_View( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'bp_setup_nav', $public_group_view, 'navigation', 1000 );
+
+		/**
+		 * All class that are release to Public Group Count
+		 */
+		$public_avatar_count = new View_Analytics_Public_Avatar_Count( $this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_action( 'xprofile_avatar_uploaded', $public_avatar_count, 'home_content', 1000, 3 );
 
 		/**
 		 * if BuddyBoss is loading

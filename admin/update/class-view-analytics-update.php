@@ -41,6 +41,15 @@ class View_Analytics_Update {
 	public $version;
 
 	/**
+	 * The View_Analytics_Avatar_Table instance
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      string    $name    The string used to uniquely identify this plugin.
+	 */
+	protected $table;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -90,15 +99,15 @@ class View_Analytics_Update {
 		 */
 		$acrosswp_plugin_update->update_is_running();
 
-		$activity_table_name = $bp->activity->table_name;
+		$users_table_name = $wpdb->users;
 		
-		$per_page = 20;
+		$per_page = 10;
 
-		$key = '_pinned_comment_update_1_0_4';
+		$key = '_view_analytics_update_1_0_4';
 
 		$update_running = get_option( $key, false );
 		if ( empty( $update_running ) ) {
-			$results = $wpdb->get_results( "SELECT id FROM $activity_table_name WHERE `type` = 'activity_comment'", ARRAY_N );
+			$results = $wpdb->get_results( "SELECT ID FROM $users_table_name", ARRAY_N );
 			$count_result = count( $results );
 			
 			$total_page = $count_result <= $per_page ? 1 : ceil( $count_result/$per_page );
@@ -118,19 +127,29 @@ class View_Analytics_Update {
 			$offset = $current_page * $per_page;
 			$current_page++;
 
-			$results = $wpdb->get_results( "SELECT id FROM $activity_table_name WHERE `type` = 'activity_comment' ORDER BY `id` DESC LIMIT $per_page OFFSET $offset", ARRAY_N );
+			$results = $wpdb->get_results( "SELECT ID FROM $users_table_name ORDER BY `ID` DESC LIMIT $per_page OFFSET $offset", ARRAY_N );
 
 			/**
 			 * Check if this is empty or not
 			 */
 			if ( ! empty( $results ) ) {
-				$activity_meta_table_name = $bp->activity->table_name_meta;
+				$this->table = View_Analytics_Avatar_Table::instance();
+				add_filter( 'bp_core_default_avatar_user', '__return_false' );
+
+				$public_avatar_count = new View_Analytics_Public_Avatar_Count( $this->plugin_name, $this->version_compare );
+
 				foreach( $results as $result ) {
 					if( ! empty( $result[0] ) ) {
-						$activity_id = $result[0];
-						$pinned_comment = bp_activity_get_meta( $activity_id, '_pinned_comment', true );
-						if ( empty( $pinned_comment ) ) {
-							bp_activity_update_meta( $activity_id, '_pinned_comment', 0 );
+						if ( ! empty( $result[0] ) ) {
+							$user_id = $result[0];
+							$url = bp_get_displayed_user_avatar( 
+								array(
+									'item_id' => $user_id,
+									'html' => false,
+								)
+							);
+
+							$public_avatar_count->update_view_count( $user_id );
 						}
 					}
 				}
