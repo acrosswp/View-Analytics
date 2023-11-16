@@ -56,6 +56,15 @@ defined( 'ABSPATH' ) || exit;
 		private $profile_common;
 
 		/**
+		 * The ID of this group setting view.
+		 *
+		 * @since    1.0.0
+		 * @access   private
+		 * @var      string    $version    The current version of this plugin.
+		 */
+		private $group_common;
+
+		/**
 		 * Initialize the class and set its properties.
 		 *
 		 * @since    1.0.0
@@ -64,6 +73,10 @@ defined( 'ABSPATH' ) || exit;
 		 */
 		public function __construct() {
 			parent::__construct();
+
+			// add_action( 'admin_head', function() {
+			// 	remove_submenu_page( 'acrosswp', 'view-analytics' );
+			// } );
 		}
 
 		/**
@@ -112,7 +125,7 @@ defined( 'ABSPATH' ) || exit;
 						'type'  => 'checkbox',
 						'title' => __( 'View Profile Count', 'view-analytics' ),
 						'label' => __( 'Enable Profile View Count', 'view-analytics' ),
-						'id'    => $this->profile_common->view_count_key(),
+						'id'    => $this->profile_common->view_count_key(),				
 					),
 					array(
 						'type'  => 'checkbox',
@@ -121,8 +134,7 @@ defined( 'ABSPATH' ) || exit;
 						'id'    => $this->group_common->view_count_key(),
 					),
 				),
-			 ) );
-			 
+			) );
 		}
 	}
  }

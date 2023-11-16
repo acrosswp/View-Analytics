@@ -101,17 +101,23 @@ class View_Analytics_Profile_Table {
 	/**
 	 * Update the current user has view profile count
 	 */
-	public function user_update( $id, $value ) {
+	public function user_update( $id, $value, $mysql_time = false ) {
 		global $wpdb;
+
+		if ( empty( $mysql_time ) ) {
+			$mysql_time = $wpdb->get_var( 'select CURRENT_TIMESTAMP()' );
+		}
+
 		$wpdb->update(
 			$this->table_name(),
 			array(
+				'last_date' => $mysql_time,
 				'value' => $value,
 			),
 			array( 
 				'id' => $id 
 			),
-			array( '%d' ),
+			array( '%s','%d' ),
 			array( '%d' )
 		);
 	}

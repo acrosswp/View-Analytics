@@ -10,10 +10,11 @@ class ComposerStaticInitc2f6021fd27f99fa8258c76527f1da4c
         'b63f3776920c9d542d2eda719625843e' => __DIR__ . '/..' . '/acrosswp/acrosswp-about-us/acrosswp-menu.php',
         'ba3e6311190fef6b803d614907261c88' => __DIR__ . '/..' . '/acrosswp/acrosswp-dependency/acrosswp-dependency.php',
         'f6b87e4acab98b2fead22b4d637bae15' => __DIR__ . '/..' . '/wpify/custom-fields/functions.php',
+        '45a16669595eb3c0a9e2994e57fc3188' => __DIR__ . '/..' . '/yahnis-elsts/plugin-update-checker/load-v5p3.php',
         'dc38373a0e8e9b61437f4120cca10acf' => __DIR__ . '/..' . '/acrosswp/acrosswp-buddypress-or-buddyboss-dependency/dependency.php',
+        '93f9e6313381cd4cd1fbe0d54257582d' => __DIR__ . '/..' . '/acrosswp/acrosswp-plugin-update/acrosswp-plugin-update.php',
         'b808676c575d8cc3a144a9eb5971e0d9' => __DIR__ . '/..' . '/acrosswp/acrosswp-plugin-update-checker-github/updater.php',
         'ceeb7ec4e286ed29b06ec5f9ffcc3a87' => __DIR__ . '/..' . '/acrosswp/acrosswp-plugins-settings-page/acrosswp-plugins-settings.php',
-        '45a16669595eb3c0a9e2994e57fc3188' => __DIR__ . '/..' . '/yahnis-elsts/plugin-update-checker/load-v5p3.php',
     );
 
     public static $prefixLengthsPsr4 = array (

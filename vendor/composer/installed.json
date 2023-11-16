@@ -142,6 +142,55 @@
             "install-path": "../acrosswp/acrosswp-dependency"
         },
         {
+            "name": "acrosswp/acrosswp-plugin-update",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/acrosswp/acrosswp-plugin-update.git",
+                "reference": "b56434d072059bf3ea5949e5148602c1103b4575"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/acrosswp/acrosswp-plugin-update/zipball/b56434d072059bf3ea5949e5148602c1103b4575",
+                "reference": "b56434d072059bf3ea5949e5148602c1103b4575",
+                "shasum": ""
+            },
+            "require": {
+                "yahnis-elsts/plugin-update-checker": "dev-master"
+            },
+            "time": "2023-11-11T11:10:51+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "acrosswp-plugin-update.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "acrosswp",
+                    "email": "contant@acrosswp.com"
+                }
+            ],
+            "description": "Composer to autoload the AcrossWP Plugin Update Class",
+            "homepage": "https://acrosswp.com/",
+            "keywords": [
+                "plugin",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/acrosswp/acrosswp-plugin-update/issues",
+                "source": "https://github.com/acrosswp/acrosswp-plugin-update/tree/main"
+            },
+            "install-path": "../acrosswp/acrosswp-plugin-update"
+        },
+        {
             "name": "acrosswp/acrosswp-plugin-update-checker-github",
             "version": "dev-main",
             "version_normalized": "dev-main",
@@ -285,19 +334,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/YahnisElsts/plugin-update-checker.git",
-                "reference": "9c1bddcd461538a32ef07b9a4668b40c0b4187ed"
+                "reference": "5f251be064949ddce8a040a2bb9e4e1747000d95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/YahnisElsts/plugin-update-checker/zipball/9c1bddcd461538a32ef07b9a4668b40c0b4187ed",
-                "reference": "9c1bddcd461538a32ef07b9a4668b40c0b4187ed",
+                "url": "https://api.github.com/repos/YahnisElsts/plugin-update-checker/zipball/5f251be064949ddce8a040a2bb9e4e1747000d95",
+                "reference": "5f251be064949ddce8a040a2bb9e4e1747000d95",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "php": ">=5.6.20"
             },
-            "time": "2023-11-14T09:52:30+00:00",
+            "time": "2023-11-15T16:49:00+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",

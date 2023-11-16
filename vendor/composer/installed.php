@@ -3,7 +3,7 @@
         'name' => 'acrosswp/view-analytics',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '174eaab8fba2077453a99ac2c331023d0c0f7ef7',
+        'reference' => 'ac6f28203bea07557e024392a635ff8bc372167d',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -43,6 +43,17 @@
             ),
             'dev_requirement' => false,
         ),
+        'acrosswp/acrosswp-plugin-update' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'b56434d072059bf3ea5949e5148602c1103b4575',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../acrosswp/acrosswp-plugin-update',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
+            'dev_requirement' => false,
+        ),
         'acrosswp/acrosswp-plugin-update-checker-github' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
@@ -68,7 +79,7 @@
         'acrosswp/view-analytics' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '174eaab8fba2077453a99ac2c331023d0c0f7ef7',
+            'reference' => 'ac6f28203bea07557e024392a635ff8bc372167d',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -88,7 +99,7 @@
         'yahnis-elsts/plugin-update-checker' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '9c1bddcd461538a32ef07b9a4668b40c0b4187ed',
+            'reference' => '5f251be064949ddce8a040a2bb9e4e1747000d95',
             'type' => 'library',
             'install_path' => __DIR__ . '/../yahnis-elsts/plugin-update-checker',
             'aliases' => array(
