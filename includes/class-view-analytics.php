@@ -204,7 +204,6 @@ final class View_Analytics {
 		 * Add composer file
 		 */
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'vendor/autoload.php' );
-
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'vendor/woocommerce/action-scheduler/action-scheduler.php' );
 
 		/**

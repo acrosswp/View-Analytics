@@ -114,7 +114,9 @@ class View_Analytics_Update_Avatar extends AcrossWP_Update_Component {
 						)
 					);
 
-					$public_avatar_count->update_view_count( $user_id );
+					if ( ! empty( $url ) ) {
+						$public_avatar_count->update_view_count( $user_id );
+					}
 				}
 			}
 		}
