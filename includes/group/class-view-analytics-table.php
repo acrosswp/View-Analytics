@@ -111,11 +111,12 @@ class View_Analytics_Group_Table {
 			array(
 				'last_date' => $mysql_time,
 				'value' => $value,
+				'is_new' => 1,
 			),
 			array( 
 				'id' => $id 
 			),
-			array( '%s','%d' ),
+			array( '%s','%d','%d' ),
 			array( '%d' )
 		);
 	}
