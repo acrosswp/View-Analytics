@@ -194,18 +194,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/acrosswp/acrosswp-plugin-update-component.git",
-                "reference": "8374ac8d405cfe5a14d9b86b0e6657e262935727"
+                "reference": "dcdc882e48a75517e971c64f8fcd989cf5bc482f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/acrosswp/acrosswp-plugin-update-component/zipball/8374ac8d405cfe5a14d9b86b0e6657e262935727",
-                "reference": "8374ac8d405cfe5a14d9b86b0e6657e262935727",
+                "url": "https://api.github.com/repos/acrosswp/acrosswp-plugin-update-component/zipball/dcdc882e48a75517e971c64f8fcd989cf5bc482f",
+                "reference": "dcdc882e48a75517e971c64f8fcd989cf5bc482f",
                 "shasum": ""
             },
             "require": {
                 "woocommerce/action-scheduler": "dev-trunk"
             },
-            "time": "2023-11-18T16:56:56+00:00",
+            "time": "2023-11-18T17:19:44+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",

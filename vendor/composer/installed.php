@@ -3,7 +3,7 @@
         'name' => 'acrosswp/view-analytics',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '0e49d1c2a856dcef90a9cb7576cdedbf24afed96',
+        'reference' => 'c3ecfdf3fb6ffae8959b2c52a6eca0f111713f68',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -57,7 +57,7 @@
         'acrosswp/acrosswp-plugin-update-component' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '8374ac8d405cfe5a14d9b86b0e6657e262935727',
+            'reference' => 'dcdc882e48a75517e971c64f8fcd989cf5bc482f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../acrosswp/acrosswp-plugin-update-component',
             'aliases' => array(
@@ -79,7 +79,7 @@
         'acrosswp/view-analytics' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '0e49d1c2a856dcef90a9cb7576cdedbf24afed96',
+            'reference' => 'c3ecfdf3fb6ffae8959b2c52a6eca0f111713f68',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
