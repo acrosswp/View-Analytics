@@ -3,7 +3,7 @@
         'name' => 'acrosswp/view-analytics',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'ac6f28203bea07557e024392a635ff8bc372167d',
+        'reference' => '3c750562d40c70d05754ba02ad9f72417455ef6b',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -43,23 +43,23 @@
             ),
             'dev_requirement' => false,
         ),
-        'acrosswp/acrosswp-plugin-update' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => 'b56434d072059bf3ea5949e5148602c1103b4575',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../acrosswp/acrosswp-plugin-update',
-            'aliases' => array(
-                0 => '9999999-dev',
-            ),
-            'dev_requirement' => false,
-        ),
         'acrosswp/acrosswp-plugin-update-checker-github' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
             'reference' => '9599e9ed6cbca3684b120f4174fa4780a6d57566',
             'type' => 'library',
             'install_path' => __DIR__ . '/../acrosswp/acrosswp-plugin-update-checker-github',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
+            'dev_requirement' => false,
+        ),
+        'acrosswp/acrosswp-plugin-update-component' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '0ef6fb2c68884e97ab41cd876e02009936ff4c73',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../acrosswp/acrosswp-plugin-update-component',
             'aliases' => array(
                 0 => '9999999-dev',
             ),
@@ -79,10 +79,21 @@
         'acrosswp/view-analytics' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'ac6f28203bea07557e024392a635ff8bc372167d',
+            'reference' => '3c750562d40c70d05754ba02ad9f72417455ef6b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'woocommerce/action-scheduler' => array(
+            'pretty_version' => 'dev-trunk',
+            'version' => 'dev-trunk',
+            'reference' => '10c96381d2ae6162654b370cbb944ec6bb42dbc8',
+            'type' => 'wordpress-plugin',
+            'install_path' => __DIR__ . '/../woocommerce/action-scheduler',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
             'dev_requirement' => false,
         ),
         'wpify/custom-fields' => array(

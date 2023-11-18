@@ -34,6 +34,12 @@ class View_Analytics_Activator {
 	public static function activate() {
 
 		/**
+		 * Add composer file
+		 */
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'vendor/woocommerce/action-scheduler/action-scheduler.php' );
+
+		/**
 		 * Create the Table
 		 */
 		View_Analytics_Activator::create_table();
@@ -44,7 +50,6 @@ class View_Analytics_Activator {
 	 */
 	public static function create_table() {
 
-		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 		global $wpdb;
 
 		$charset_collate = $wpdb->get_charset_collate();
@@ -125,6 +130,11 @@ class View_Analytics_Activator {
 		maybe_create_table( $profile_view_table_name, $profile_view_sql );
 		maybe_create_table( $group_view_table_name, $group_view_sql );
 		maybe_create_table( $avatar_view_table_name, $avatar_view_sql );
+
+
+		if ( false === as_has_scheduled_action( '_view_analytics_update_avatar' ) ) {
+			as_schedule_single_action( strtotime( '+1 minutes' ), '_view_analytics_update_avatar', array(), '', true );
+		}
 	}
 
 }

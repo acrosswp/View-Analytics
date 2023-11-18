@@ -9,9 +9,9 @@ return array(
     'b63f3776920c9d542d2eda719625843e' => $vendorDir . '/acrosswp/acrosswp-about-us/acrosswp-menu.php',
     'ba3e6311190fef6b803d614907261c88' => $vendorDir . '/acrosswp/acrosswp-dependency/acrosswp-dependency.php',
     'f6b87e4acab98b2fead22b4d637bae15' => $vendorDir . '/wpify/custom-fields/functions.php',
-    '45a16669595eb3c0a9e2994e57fc3188' => $vendorDir . '/yahnis-elsts/plugin-update-checker/load-v5p3.php',
     'dc38373a0e8e9b61437f4120cca10acf' => $vendorDir . '/acrosswp/acrosswp-buddypress-or-buddyboss-dependency/dependency.php',
-    '93f9e6313381cd4cd1fbe0d54257582d' => $vendorDir . '/acrosswp/acrosswp-plugin-update/acrosswp-plugin-update.php',
     'b808676c575d8cc3a144a9eb5971e0d9' => $vendorDir . '/acrosswp/acrosswp-plugin-update-checker-github/updater.php',
+    '4ac36bfa8838a6dde941351ad9b5f96a' => $vendorDir . '/acrosswp/acrosswp-plugin-update-component/class-view-analytics.php',
     'ceeb7ec4e286ed29b06ec5f9ffcc3a87' => $vendorDir . '/acrosswp/acrosswp-plugins-settings-page/acrosswp-plugins-settings.php',
+    '45a16669595eb3c0a9e2994e57fc3188' => $vendorDir . '/yahnis-elsts/plugin-update-checker/load-v5p3.php',
 );

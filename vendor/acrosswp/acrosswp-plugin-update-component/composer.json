@@ -1,5 +1,5 @@
 {
-    "name": "acrosswp/acrosswp-plugin-update",
+    "name": "acrosswp/acrosswp-plugin-update-component",
     "type": "library",
     "license": "GPL-2.0-or-later",
     "description": "Composer to autoload the AcrossWP Plugin Update Class",
@@ -9,13 +9,13 @@
         "plugin"
     ],
     "autoload": {
-        "files": ["acrosswp-plugin-update.php"]
+        "files": ["class-view-analytics.php"]
     },
     "support": {
-        "issues": "https://github.com/acrosswp/acrosswp-plugin-update/issues"
+        "issues": "https://github.com/acrosswp/acrosswp-plugin-update-component/issues"
     },
     "require": {
-        "yahnis-elsts/plugin-update-checker": "dev-master"
+        "woocommerce/action-scheduler": "dev-trunk"
     },
     "authors": [
         {

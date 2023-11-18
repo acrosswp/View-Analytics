@@ -172,8 +172,12 @@ final class View_Analytics {
 		 * @since    1.0.0
 		 */
 		if( apply_filters( 'view-analytics-load', true ) ) {
+			
+			$this->define_update_hooks();
+
 			$this->define_admin_hooks();
 			$this->define_public_hooks();
+
 		}
 
 	}
@@ -201,6 +205,8 @@ final class View_Analytics {
 		 */
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'vendor/autoload.php' );
 
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'vendor/woocommerce/action-scheduler/action-scheduler.php' );
+
 		/**
 		 * The file is reponsiable of updating the plugins zip
 		 * of the plugin.
@@ -210,21 +216,6 @@ final class View_Analytics {
 
 		if ( class_exists( 'AcrossWP_BuddyPress_BuddyBoss_Platform_Dependency' ) ) {
 			new AcrossWP_BuddyPress_BuddyBoss_Platform_Dependency( $this->get_plugin_name(), VIEW_ANALYTICS_FILES );
-		}
-
-		/**
-		 * Check if the class does not exits then only allow the file to add
-		 */
-		if( class_exists( 'AcrossWP_Plugin_Update' ) ) {
-
-			/**
-			 * The class responsible for defining all actions that occur in the admin area.
-			 */
-			require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/update/class-view-analytics-update.php';
-
-			$plugin_update = new View_Analytics_Update( $this->get_plugin_name(), $this->get_version() );
-
-			$acrosswp_plugin_update = new AcrossWP_Plugin_Update( $this->get_plugin_name(), $this->get_version() );
 		}
 
 		/**
@@ -412,6 +403,32 @@ final class View_Analytics {
 		$i18n = new View_Analytics_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $i18n, 'load_plugin_textdomain' );
+
+	}
+
+	/**
+	 * Register all of the hooks related to the update-facing functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_update_hooks() {
+
+		$this->loader->add_action( '_view_analytics_update_avatar', $this, 'update_avatar' );
+	}
+
+	/**
+	 * Load the Update avarat updater file
+	 */
+	public function update_avatar() {
+
+		/**
+		 * Updating via shedualte action
+		 */
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/update/class-view-analytics-avatar.php';
+
+		View_Analytics_Update_Avatar::instance( $this->get_plugin_name(), $this->get_version(), '_view_analytics_update_avatar' );
 
 	}
 
