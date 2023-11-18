@@ -416,6 +416,8 @@ final class View_Analytics {
 
 		$this->loader->add_action( '_view_analytics_update_xprofile_avatar', $this, 'update_xprofile_avatar' );
 		$this->loader->add_action( '_view_analytics_update_group_avatar', $this, 'update_group_avatar' );
+		$this->loader->add_action( '_view_analytics_update_xprofile_cover', $this, 'update_xprofile_cover' );
+		$this->loader->add_action( '_view_analytics_update_group_cover', $this, 'update_group_cover' );
 	}
 
 	/**
@@ -443,6 +445,34 @@ final class View_Analytics {
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/update/class-view-analytics-group-avatar.php';
 
 		View_Analytics_Update_Group_Avatar::instance( $this->get_plugin_name(), $this->get_version(), '_view_analytics_update_group_avatar' );
+
+	}
+
+	/**
+	 * Load the Update avarat updater file
+	 */
+	public function update_xprofile_cover() {
+
+		/**
+		 * Updating via shedualte action
+		 */
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/update/class-view-analytics-xprofile-cover.php';
+
+		View_Analytics_Update_Xprofile_Cover::instance( $this->get_plugin_name(), $this->get_version(), '_view_analytics_update_xprofile_cover' );
+
+	}
+
+	/**
+	 * Load the Update avarat updater file
+	 */
+	public function update_group_cover() {
+
+		/**
+		 * Updating via shedualte action
+		 */
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/update/class-view-analytics-group-cover.php';
+
+		View_Analytics_Update_Group_Cover::instance( $this->get_plugin_name(), $this->get_version(), '_view_analytics_update_group_cover' );
 
 	}
 

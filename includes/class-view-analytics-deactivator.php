@@ -36,6 +36,9 @@ class View_Analytics_Deactivator {
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'vendor/woocommerce/action-scheduler/action-scheduler.php' );
 
 		as_unschedule_all_actions( '_view_analytics_update_xprofile_avatar' );
+		as_unschedule_all_actions( '_view_analytics_update_group_avatar' );
+		as_unschedule_all_actions( '_view_analytics_update_xprofile_cover' );
+		as_unschedule_all_actions( '_view_analytics_update_group_cover' );
 	}
 
 }
