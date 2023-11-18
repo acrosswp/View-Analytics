@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
  * @subpackage View_Analytics/Updater
  * @author     AcrossWP <contact@acrosswp.com>
  */
-class View_Analytics_Update_Avatar extends View_Analytics_Update_Component {
+class View_Analytics_Update_Avatar extends AcrossWP_Update_Component {
 
 	/**
 	 * The View_Analytics_Avatar_Table instance
