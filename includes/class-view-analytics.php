@@ -430,7 +430,7 @@ final class View_Analytics {
 		 */
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/update/class-view-analytics-xprofile-avatar.php';
 
-		View_Analytics_Update_Xprofile_Avatar::instance( $this->get_plugin_name(), $this->get_version(), '_view_analytics_update_xprofile_avatar' );
+		new View_Analytics_Update_Xprofile_Avatar( $this->get_plugin_name(), $this->get_version(), '_view_analytics_update_xprofile_avatar' );
 
 	}
 
@@ -444,7 +444,7 @@ final class View_Analytics {
 		 */
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/update/class-view-analytics-group-avatar.php';
 
-		View_Analytics_Update_Group_Avatar::instance( $this->get_plugin_name(), $this->get_version(), '_view_analytics_update_group_avatar' );
+		new View_Analytics_Update_Group_Avatar( $this->get_plugin_name(), $this->get_version(), '_view_analytics_update_group_avatar' );
 
 	}
 
@@ -458,7 +458,7 @@ final class View_Analytics {
 		 */
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/update/class-view-analytics-xprofile-cover.php';
 
-		View_Analytics_Update_Xprofile_Cover::instance( $this->get_plugin_name(), $this->get_version(), '_view_analytics_update_xprofile_cover' );
+		new View_Analytics_Update_Xprofile_Cover( $this->get_plugin_name(), $this->get_version(), '_view_analytics_update_xprofile_cover' );
 
 	}
 
@@ -472,7 +472,7 @@ final class View_Analytics {
 		 */
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/update/class-view-analytics-group-cover.php';
 
-		View_Analytics_Update_Group_Cover::instance( $this->get_plugin_name(), $this->get_version(), '_view_analytics_update_group_cover' );
+		new View_Analytics_Update_Group_Cover( $this->get_plugin_name(), $this->get_version(), '_view_analytics_update_group_cover' );
 
 	}
 

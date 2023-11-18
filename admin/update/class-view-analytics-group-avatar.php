@@ -32,14 +32,6 @@ class View_Analytics_Update_Group_Avatar extends AcrossWP_Update_Component {
 	protected $table;
 
 	/**
-	 * The single instance of the class.
-	 *
-	 * @var View_Analytics_Loader
-	 * @since 1.0.0
-	 */
-	protected static $_instance = null;
-
-	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -49,24 +41,6 @@ class View_Analytics_Update_Group_Avatar extends AcrossWP_Update_Component {
 	public function __construct( $plugin_name, $version, $key ) {
 		parent::__construct( $plugin_name, $version, $key );
 	}
-
-	/**
-	 * Main View_Analytics_Loader Instance.
-	 *
-	 * Ensures only one instance of WooCommerce is loaded or can be loaded.
-	 *
-	 * @since 1.0.0
-	 * @static
-	 * @see View_Analytics_Loader()
-	 * @return View_Analytics_Loader - Main instance.
-	 */
-	public static function instance( $plugin_name, $version, $key ) {
-		if ( is_null( self::$_instance ) ) {
-			self::$_instance = new self( $plugin_name, $version, $key );
-		}
-		return self::$_instance;
-	}
-
 
 	/**
 	 * get the table name

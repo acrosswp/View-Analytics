@@ -187,12 +187,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/acrosswp/acrosswp-plugin-update-component.git",
-                "reference": "0ef6fb2c68884e97ab41cd876e02009936ff4c73"
+                "reference": "8374ac8d405cfe5a14d9b86b0e6657e262935727"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/acrosswp/acrosswp-plugin-update-component/zipball/0ef6fb2c68884e97ab41cd876e02009936ff4c73",
-                "reference": "0ef6fb2c68884e97ab41cd876e02009936ff4c73",
+                "url": "https://api.github.com/repos/acrosswp/acrosswp-plugin-update-component/zipball/8374ac8d405cfe5a14d9b86b0e6657e262935727",
+                "reference": "8374ac8d405cfe5a14d9b86b0e6657e262935727",
                 "shasum": ""
             },
             "require": {
@@ -225,7 +225,7 @@
                 "issues": "https://github.com/acrosswp/acrosswp-plugin-update-component/issues",
                 "source": "https://github.com/acrosswp/acrosswp-plugin-update-component/tree/main"
             },
-            "time": "2023-11-18T10:54:41+00:00"
+            "time": "2023-11-18T16:56:56+00:00"
         },
         {
             "name": "acrosswp/acrosswp-plugins-settings-page",
@@ -412,7 +412,8 @@
         "acrosswp/acrosswp-buddypress-or-buddyboss-dependency": 20,
         "yahnis-elsts/plugin-update-checker": 20,
         "acrosswp/acrosswp-plugins-settings-page": 20,
-        "acrosswp/acrosswp-plugin-update-checker-github": 20
+        "acrosswp/acrosswp-plugin-update-checker-github": 20,
+        "acrosswp/acrosswp-plugin-update-component": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
