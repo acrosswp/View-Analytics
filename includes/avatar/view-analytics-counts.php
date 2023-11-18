@@ -82,7 +82,7 @@ class View_Analytics_Public_Avatar_Count {
 	}
 
 	/**
-	 * This function is run when someone update Group or Profile avatar
+	 * This function is run when someone update Profile avatar
 	 */
 	public function xprofile_home_content( $item_id ) {
 
@@ -93,13 +93,13 @@ class View_Analytics_Public_Avatar_Count {
 		$current_user_id = get_current_user_id();
 
 		if( ! empty( $current_user_id ) ) {
-			$this->update_view_count( $item_id );
+			$this->update_view_count( $item_id, $current_user_id, 'xprofile' ,'user' );
 		}
 
 	}
 
 	/**
-	 * This function is run when someone update Group or Profile avatar
+	 * This function is run when someone update Group avatar
 	 */
 	public function group_home_content( $item_id ) {
 
@@ -110,7 +110,7 @@ class View_Analytics_Public_Avatar_Count {
 		$current_user_id = get_current_user_id();
 
 		if( ! empty( $current_user_id ) ) {
-			$this->update_view_count( $item_id, $current_user_id, 'group' );
+			$this->update_view_count( $item_id, $current_user_id, 'xprofile' ,'group' );
 		}
 
 	}
@@ -119,7 +119,7 @@ class View_Analytics_Public_Avatar_Count {
 	/**
 	 * Update Avatar Update view count
 	 */
-	public function update_view_count( $key_id, $user_id = false, $type = 'user' ) {
+	public function update_view_count( $key_id, $user_id = false, $type = 'xprofile', $action = 'user' ) {
 
 		$user_id = empty( $user_id ) ? $key_id : $user_id;
 
@@ -127,13 +127,13 @@ class View_Analytics_Public_Avatar_Count {
 
 			$this->table = View_Analytics_Avatar_Table::instance();
 
-			$view = $this->table->user_get( $key_id, $type );
+			$view = $this->table->user_get( $key_id, $type, $action );
 
 			/**
 			 * Check if empty
 			 */
 			if ( empty( $view ) ) {
-				$this->table->user_add( $key_id, $user_id, $type );
+				$this->table->user_add( $key_id, $user_id, $type, $action );
 			} else {
 				$id = $view->id;
 				$view_count = $view->value;

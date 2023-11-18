@@ -114,13 +114,14 @@ class View_Analytics_Activator {
 		$avatar_view_table_name		 = $wpdb->prefix . 'awp_va_avatar_view';
 
 		$avatar_view_sql = "CREATE TABLE {$avatar_view_table_name} (
-			id bigint(20) NOT NULL AUTO_INCREMENT ,
-			key_id	varchar(255) NULL,
-			user_id bigint(20) NOT NULL,
-			action	varchar(255) NULL,
-			value bigint(20) NOT NULL DEFAULT 1,
-			is_new tinyint(1) NOT NULL DEFAULT 1,
-			last_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+			id 			bigint(20) NOT NULL AUTO_INCREMENT ,
+			key_id		varchar(255) NULL,
+			user_id 	bigint(20) NOT NULL,
+			type		varchar(255) NULL,
+			action		varchar(255) NULL,
+			value		bigint(20) NOT NULL DEFAULT 1,
+			is_new		tinyint(1) NOT NULL DEFAULT 1,
+			last_date	TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
 		) {$charset_collate};";

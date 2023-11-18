@@ -61,7 +61,7 @@ class View_Analytics_Avatar_Table {
 	/**
 	 * Add the current user has view avatar count
 	 */
-	public function user_add( $key_id, $user_id, $action = 'user', $value = 1 ) {
+	public function user_add( $key_id, $user_id, $type = 'xprofile', $action = 'user', $value = 1 ) {
 		global $wpdb;
 
 		return $wpdb->insert(
@@ -69,12 +69,14 @@ class View_Analytics_Avatar_Table {
 			array( 
 				'key_id' => $key_id,
 				'user_id' => $user_id,
+				'type' => $type,
 				'action' => $action,
 				'value' => $value,
 			),
 			array(
 				'%d',
 				'%d',
+				'%s',
 				'%s',
 				'%d',
 			)
@@ -84,15 +86,16 @@ class View_Analytics_Avatar_Table {
 	/**
 	 * Get the current user has already view the avatar or not
 	 */
-	public function user_get( $key_id, $action = 'user' ) {
+	public function user_get( $key_id, $type = 'xprofile', $action = 'user' ) {
 		global $wpdb;
 
 		$table_name = $this->table_name();
 
 		return $wpdb->get_row(
 			$wpdb->prepare( 
-				"SELECT * FROM $table_name WHERE key_id = %d AND action = %s",
+				"SELECT * FROM $table_name WHERE key_id = %d AND type = %s AND action = %s",
 				$key_id,
+				$type,
 				$action
 			)
 		);
@@ -134,15 +137,16 @@ class View_Analytics_Avatar_Table {
 	/**
 	 * Get the avatar view details via $user_id
 	 */
-	public function get_details( $key_id, $action = 'user' ) {
+	public function get_details( $key_id, $type = 'xprofile', $action = 'user' ) {
 		global $wpdb;
 
 		$table_name = $this->table_name();
 
 		return $wpdb->get_results(
 			$wpdb->prepare( 
-				"SELECT * FROM $table_name WHERE key_id = %d AND action = %s",
+				"SELECT * FROM $table_name WHERE key_id = %d AND type = %s AND action = %s",
 				$key_id,
+				$type,
 				$action
 			)
 		);
