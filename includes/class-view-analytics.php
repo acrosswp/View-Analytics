@@ -535,8 +535,11 @@ final class View_Analytics {
 		 * All class that are release to Public Group Count
 		 */
 		$public_avatar_count = new View_Analytics_Public_Avatar_Count( $this->get_plugin_name(), $this->get_version() );
-		$this->loader->add_action( 'xprofile_avatar_uploaded', $public_avatar_count, 'xprofile_home_content', 1000, 3 );
-		$this->loader->add_action( 'groups_avatar_uploaded', $public_avatar_count, 'group_home_content', 1000, 3 );
+		$this->loader->add_action( 'xprofile_avatar_uploaded', $public_avatar_count, 'xprofile_avatar_uploaded', 1000, 3 );
+		$this->loader->add_action( 'xprofile_cover_image_uploaded', $public_avatar_count, 'xprofile_cover_image_uploaded', 1000, 3 );
+
+		$this->loader->add_action( 'groups_avatar_uploaded', $public_avatar_count, 'groups_avatar_uploaded', 1000, 3 );
+		$this->loader->add_action( 'groups_cover_image_uploaded', $public_avatar_count, 'groups_cover_image_uploaded', 1000, 3 );
 
 		/**
 		 * if BuddyBoss is loading

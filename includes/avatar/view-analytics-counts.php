@@ -84,7 +84,7 @@ class View_Analytics_Public_Avatar_Count {
 	/**
 	 * This function is run when someone update Profile avatar
 	 */
-	public function xprofile_home_content( $item_id ) {
+	public function xprofile_avatar_uploaded( $user_id ) {
 
 		/**
 		 * Add function to update count
@@ -93,7 +93,24 @@ class View_Analytics_Public_Avatar_Count {
 		$current_user_id = get_current_user_id();
 
 		if( ! empty( $current_user_id ) ) {
-			$this->update_view_count( $item_id, $current_user_id, 'xprofile' ,'user' );
+			$this->update_view_count( $user_id, $current_user_id, 'xprofile' ,'avatar' );
+		}
+
+	}
+
+	/**
+	 * This function is run when someone update Profile avatar
+	 */
+	public function xprofile_cover_image_uploaded( $user_id ) {
+
+		/**
+		 * Add function to update count
+		 */
+
+		$current_user_id = get_current_user_id();
+
+		if( ! empty( $current_user_id ) ) {
+			$this->update_view_count( $user_id, $current_user_id, 'xprofile' ,'cover' );
 		}
 
 	}
@@ -101,7 +118,7 @@ class View_Analytics_Public_Avatar_Count {
 	/**
 	 * This function is run when someone update Group avatar
 	 */
-	public function group_home_content( $item_id ) {
+	public function groups_avatar_uploaded( $group_id ) {
 
 		/**
 		 * Add function to update count
@@ -110,7 +127,24 @@ class View_Analytics_Public_Avatar_Count {
 		$current_user_id = get_current_user_id();
 
 		if( ! empty( $current_user_id ) ) {
-			$this->update_view_count( $item_id, $current_user_id, 'xprofile' ,'group' );
+			$this->update_view_count( $group_id, $current_user_id, 'group' ,'avatar' );
+		}
+
+	}
+
+	/**
+	 * This function is run when someone update Group avatar
+	 */
+	public function groups_cover_image_uploaded( $group_id ) {
+
+		/**
+		 * Add function to update count
+		 */
+
+		$current_user_id = get_current_user_id();
+
+		if( ! empty( $current_user_id ) ) {
+			$this->update_view_count( $group_id, $current_user_id, 'group' ,'cover' );
 		}
 
 	}
@@ -119,7 +153,7 @@ class View_Analytics_Public_Avatar_Count {
 	/**
 	 * Update Avatar Update view count
 	 */
-	public function update_view_count( $key_id, $user_id = false, $type = 'xprofile', $action = 'user' ) {
+	public function update_view_count( $key_id, $user_id = false, $type = 'xprofile', $action = 'avatar' ) {
 
 		$user_id = empty( $user_id ) ? $key_id : $user_id;
 

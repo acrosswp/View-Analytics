@@ -61,7 +61,7 @@ class View_Analytics_Avatar_Table {
 	/**
 	 * Add the current user has view avatar count
 	 */
-	public function user_add( $key_id, $user_id, $type = 'xprofile', $action = 'user', $value = 1 ) {
+	public function user_add( $key_id, $user_id, $type = 'xprofile', $action = 'avatar', $value = 1 ) {
 		global $wpdb;
 
 		return $wpdb->insert(
@@ -86,7 +86,7 @@ class View_Analytics_Avatar_Table {
 	/**
 	 * Get the current user has already view the avatar or not
 	 */
-	public function user_get( $key_id, $type = 'xprofile', $action = 'user' ) {
+	public function user_get( $key_id, $type = 'xprofile', $action = 'avatar' ) {
 		global $wpdb;
 
 		$table_name = $this->table_name();
@@ -137,7 +137,7 @@ class View_Analytics_Avatar_Table {
 	/**
 	 * Get the avatar view details via $user_id
 	 */
-	public function get_details( $key_id, $type = 'xprofile', $action = 'user' ) {
+	public function get_details( $key_id, $type = 'xprofile', $action = 'avatar' ) {
 		global $wpdb;
 
 		$table_name = $this->table_name();
