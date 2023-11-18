@@ -3,7 +3,7 @@
         'name' => 'acrosswp/view-analytics',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'c3ecfdf3fb6ffae8959b2c52a6eca0f111713f68',
+        'reference' => '000c90194fe164c98e6a505223fc60eeaafda0e6',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -57,7 +57,7 @@
         'acrosswp/acrosswp-plugin-update-component' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'dcdc882e48a75517e971c64f8fcd989cf5bc482f',
+            'reference' => 'f2eac1a06c6fa619c379f5c58c13261d01477134',
             'type' => 'library',
             'install_path' => __DIR__ . '/../acrosswp/acrosswp-plugin-update-component',
             'aliases' => array(
@@ -79,21 +79,19 @@
         'acrosswp/view-analytics' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'c3ecfdf3fb6ffae8959b2c52a6eca0f111713f68',
+            'reference' => '000c90194fe164c98e6a505223fc60eeaafda0e6',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'woocommerce/action-scheduler' => array(
-            'pretty_version' => 'dev-trunk',
-            'version' => 'dev-trunk',
-            'reference' => '10c96381d2ae6162654b370cbb944ec6bb42dbc8',
+            'pretty_version' => '2.2.5',
+            'version' => '2.2.5.0',
+            'reference' => 'fd7c6b76a7af27d6403ffe39b0963dbd8ce50488',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../woocommerce/action-scheduler',
-            'aliases' => array(
-                0 => '9999999-dev',
-            ),
+            'aliases' => array(),
             'dev_requirement' => false,
         ),
         'wpify/custom-fields' => array(
