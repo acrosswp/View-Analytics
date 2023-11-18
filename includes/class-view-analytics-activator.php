@@ -132,8 +132,12 @@ class View_Analytics_Activator {
 		maybe_create_table( $avatar_view_table_name, $avatar_view_sql );
 
 
-		if ( false === as_has_scheduled_action( '_view_analytics_update_avatar' ) ) {
-			as_schedule_single_action( strtotime( '+1 minutes' ), '_view_analytics_update_avatar', array(), '', true );
+		if ( false === as_has_scheduled_action( '_view_analytics_update_xprofile_avatar' ) ) {
+			as_schedule_single_action( strtotime( '+1 minutes' ), '_view_analytics_update_xprofile_avatar', array(), '', true );
+		}
+
+		if ( false === as_has_scheduled_action( '_view_analytics_update_group_avatar' ) ) {
+			as_schedule_single_action( strtotime( '+1 minutes' ), '_view_analytics_update_group_avatar', array(), '', true );
 		}
 	}
 

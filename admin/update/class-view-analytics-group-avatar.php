@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
  * @subpackage View_Analytics/Updater
  * @author     AcrossWP <contact@acrosswp.com>
  */
-class View_Analytics_Update_Avatar extends AcrossWP_Update_Component {
+class View_Analytics_Update_Group_Avatar extends AcrossWP_Update_Component {
 
 	/**
 	 * The View_Analytics_Avatar_Table instance
@@ -73,7 +73,7 @@ class View_Analytics_Update_Avatar extends AcrossWP_Update_Component {
 	 */
 	public function table_name() {
 		global $wpdb;
-		return $wpdb->users;
+		return $wpdb->prefix . 'bp_groups';
 	}
 
 	/**
@@ -83,8 +83,7 @@ class View_Analytics_Update_Avatar extends AcrossWP_Update_Component {
 
 		global $wpdb;
 		$users_table_name = $this->table_name();
-		$sdfds = $wpdb->get_results( "SELECT ID FROM $users_table_name", ARRAY_N );
-		return $wpdb->get_results( "SELECT ID FROM $users_table_name", ARRAY_N );
+		return $wpdb->get_results( "SELECT id FROM $users_table_name", ARRAY_N );
 	}
 
 		/**
@@ -93,29 +92,33 @@ class View_Analytics_Update_Avatar extends AcrossWP_Update_Component {
 	public function get_result( $per_page, $offset ) {
 		global $wpdb;
 		$users_table_name = $this->table_name();
-		return $wpdb->get_results( "SELECT ID FROM $users_table_name ORDER BY `ID` DESC LIMIT $per_page OFFSET $offset", ARRAY_N );
+		return $wpdb->get_results( "SELECT id FROM $users_table_name ORDER BY `id` DESC LIMIT $per_page OFFSET $offset", ARRAY_N );
 	}
 
 	public function update_result( $results ) {
+
 		$this->table = View_Analytics_Avatar_Table::instance();
 
-		add_filter( 'bp_core_default_avatar_user', '__return_false' );
+		add_filter( 'bp_core_default_avatar_group', '__return_false' );
 
 		$public_avatar_count = new View_Analytics_Public_Avatar_Count( $this->plugin_name, $this->version_compare );
+
+		$user_id = get_current_user_id();
 
 		foreach( $results as $result ) {
 			if( ! empty( $result[0] ) ) {
 				if ( ! empty( $result[0] ) ) {
-					$user_id = $result[0];
+					$group_id = $result[0];
 					$url = bp_get_displayed_user_avatar( 
 						array(
-							'item_id' => $user_id,
-							'html' => false,
+							'item_id'	=> $group_id,
+							'html'		=> false,
+							'object'	=> 'group',
 						)
 					);
 
 					if ( ! empty( $url ) ) {
-						$public_avatar_count->update_view_count( $user_id );
+						$public_avatar_count->update_view_count( $group_id, $user_id, 'group' );
 					}
 				}
 			}

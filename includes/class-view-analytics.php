@@ -414,20 +414,35 @@ final class View_Analytics {
 	 */
 	private function define_update_hooks() {
 
-		$this->loader->add_action( '_view_analytics_update_avatar', $this, 'update_avatar' );
+		$this->loader->add_action( '_view_analytics_update_xprofile_avatar', $this, 'update_xprofile_avatar' );
+		$this->loader->add_action( '_view_analytics_update_group_avatar', $this, 'update_group_avatar' );
 	}
 
 	/**
 	 * Load the Update avarat updater file
 	 */
-	public function update_avatar() {
+	public function update_xprofile_avatar() {
 
 		/**
 		 * Updating via shedualte action
 		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/update/class-view-analytics-avatar.php';
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/update/class-view-analytics-xprofile-avatar.php';
 
-		View_Analytics_Update_Avatar::instance( $this->get_plugin_name(), $this->get_version(), '_view_analytics_update_avatar' );
+		View_Analytics_Update_Xprofile_Avatar::instance( $this->get_plugin_name(), $this->get_version(), '_view_analytics_update_xprofile_avatar' );
+
+	}
+
+	/**
+	 * Load the Update avarat updater file
+	 */
+	public function update_group_avatar() {
+
+		/**
+		 * Updating via shedualte action
+		 */
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/update/class-view-analytics-group-avatar.php';
+
+		View_Analytics_Update_Group_Avatar::instance( $this->get_plugin_name(), $this->get_version(), '_view_analytics_update_group_avatar' );
 
 	}
 
