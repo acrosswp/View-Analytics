@@ -118,7 +118,7 @@ class View_Analytics_Update_Group_Cover extends AcrossWP_Update_Component {
 					);
 
 					if ( ! empty( $url ) ) {
-						$public_avatar_count->update_view_count( $group_id, $user_id, 'group' ,'avatar' );
+						$public_avatar_count->update_view_count( $group_id, $user_id, 'group' ,'cover' );
 					}
 				}
 			}

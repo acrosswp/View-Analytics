@@ -114,7 +114,7 @@ class View_Analytics_Update_Xprofile_Cover extends AcrossWP_Update_Component {
 						)
 					);
 					if ( ! empty( $url ) ) {
-						$public_avatar_count->update_view_count( $user_id, $user_id, 'xprofile' ,'avatar' );
+						$public_avatar_count->update_view_count( $user_id, $user_id, 'xprofile' ,'cover' );
 					}
 				}
 			}
