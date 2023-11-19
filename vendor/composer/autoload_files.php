@@ -11,7 +11,6 @@ return array(
     'f6b87e4acab98b2fead22b4d637bae15' => $vendorDir . '/wpify/custom-fields/functions.php',
     'dc38373a0e8e9b61437f4120cca10acf' => $vendorDir . '/acrosswp/acrosswp-buddypress-or-buddyboss-dependency/dependency.php',
     'b808676c575d8cc3a144a9eb5971e0d9' => $vendorDir . '/acrosswp/acrosswp-plugin-update-checker-github/updater.php',
-    '4ac36bfa8838a6dde941351ad9b5f96a' => $vendorDir . '/acrosswp/acrosswp-plugin-update-component/class-view-analytics.php',
     'ceeb7ec4e286ed29b06ec5f9ffcc3a87' => $vendorDir . '/acrosswp/acrosswp-plugins-settings-page/acrosswp-plugins-settings.php',
     '45a16669595eb3c0a9e2994e57fc3188' => $vendorDir . '/yahnis-elsts/plugin-update-checker/load-v5p3.php',
 );

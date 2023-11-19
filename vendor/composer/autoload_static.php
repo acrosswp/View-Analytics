@@ -12,7 +12,6 @@ class ComposerStaticInitc2f6021fd27f99fa8258c76527f1da4c
         'f6b87e4acab98b2fead22b4d637bae15' => __DIR__ . '/..' . '/wpify/custom-fields/functions.php',
         'dc38373a0e8e9b61437f4120cca10acf' => __DIR__ . '/..' . '/acrosswp/acrosswp-buddypress-or-buddyboss-dependency/dependency.php',
         'b808676c575d8cc3a144a9eb5971e0d9' => __DIR__ . '/..' . '/acrosswp/acrosswp-plugin-update-checker-github/updater.php',
-        '4ac36bfa8838a6dde941351ad9b5f96a' => __DIR__ . '/..' . '/acrosswp/acrosswp-plugin-update-component/class-view-analytics.php',
         'ceeb7ec4e286ed29b06ec5f9ffcc3a87' => __DIR__ . '/..' . '/acrosswp/acrosswp-plugins-settings-page/acrosswp-plugins-settings.php',
         '45a16669595eb3c0a9e2994e57fc3188' => __DIR__ . '/..' . '/yahnis-elsts/plugin-update-checker/load-v5p3.php',
     );

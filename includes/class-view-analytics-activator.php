@@ -37,7 +37,6 @@ class View_Analytics_Activator {
 		 * Add composer file
 		 */
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'vendor/woocommerce/action-scheduler/action-scheduler.php' );
 
 		/**
 		 * Create the Table

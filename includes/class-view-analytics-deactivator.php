@@ -34,7 +34,6 @@ class View_Analytics_Deactivator {
 	public static function deactivate() {
 
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'vendor/woocommerce/action-scheduler/action-scheduler.php' );
 
 
 		/**

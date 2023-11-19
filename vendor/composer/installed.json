@@ -188,55 +188,6 @@
             "install-path": "../acrosswp/acrosswp-plugin-update-checker-github"
         },
         {
-            "name": "acrosswp/acrosswp-plugin-update-component",
-            "version": "dev-main",
-            "version_normalized": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/acrosswp/acrosswp-plugin-update-component.git",
-                "reference": "e3031bc4a3df3ccf0654d1ca1eb4f34cf5c697e4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/acrosswp/acrosswp-plugin-update-component/zipball/e3031bc4a3df3ccf0654d1ca1eb4f34cf5c697e4",
-                "reference": "e3031bc4a3df3ccf0654d1ca1eb4f34cf5c697e4",
-                "shasum": ""
-            },
-            "require": {
-                "woocommerce/action-scheduler": "^3.6"
-            },
-            "time": "2023-11-19T18:32:14+00:00",
-            "default-branch": true,
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "files": [
-                    "class-view-analytics.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "acrosswp",
-                    "email": "contant@acrosswp.com"
-                }
-            ],
-            "description": "Composer to autoload the AcrossWP Plugin Update Class",
-            "homepage": "https://acrosswp.com/",
-            "keywords": [
-                "plugin",
-                "wordpress"
-            ],
-            "support": {
-                "issues": "https://github.com/acrosswp/acrosswp-plugin-update-component/issues",
-                "source": "https://github.com/acrosswp/acrosswp-plugin-update-component/tree/main"
-            },
-            "install-path": "../acrosswp/acrosswp-plugin-update-component"
-        },
-        {
             "name": "acrosswp/acrosswp-plugins-settings-page",
             "version": "dev-main",
             "version_normalized": "dev-main",
@@ -285,49 +236,6 @@
                 "source": "https://github.com/acrosswp/acrosswp-plugins-settings-page/tree/main"
             },
             "install-path": "../acrosswp/acrosswp-plugins-settings-page"
-        },
-        {
-            "name": "woocommerce/action-scheduler",
-            "version": "3.6.4",
-            "version_normalized": "3.6.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/woocommerce/action-scheduler.git",
-                "reference": "e7dafe215be5ef823392204535ee2e241f99a8cb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/e7dafe215be5ef823392204535ee2e241f99a8cb",
-                "reference": "e7dafe215be5ef823392204535ee2e241f99a8cb",
-                "shasum": ""
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7.5",
-                "woocommerce/woocommerce-sniffs": "0.1.0",
-                "wp-cli/wp-cli": "~2.5.0",
-                "yoast/phpunit-polyfills": "^1.0"
-            },
-            "time": "2023-10-11T18:24:47+00:00",
-            "type": "wordpress-plugin",
-            "extra": {
-                "scripts-description": {
-                    "test": "Run unit tests",
-                    "phpcs": "Analyze code against the WordPress coding standards with PHP_CodeSniffer",
-                    "phpcbf": "Fix coding standards warnings/errors automatically with PHP Code Beautifier"
-                }
-            },
-            "installation-source": "dist",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0-or-later"
-            ],
-            "description": "Action Scheduler for WordPress and WooCommerce",
-            "homepage": "https://actionscheduler.org/",
-            "support": {
-                "issues": "https://github.com/woocommerce/action-scheduler/issues",
-                "source": "https://github.com/woocommerce/action-scheduler/tree/3.6.4"
-            },
-            "install-path": "../woocommerce/action-scheduler"
         },
         {
             "name": "wpify/custom-fields",
