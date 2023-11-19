@@ -194,18 +194,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/acrosswp/acrosswp-plugin-update-component.git",
-                "reference": "f2eac1a06c6fa619c379f5c58c13261d01477134"
+                "reference": "9ddfc243a89912992b7d46ca5869bc61273f11e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/acrosswp/acrosswp-plugin-update-component/zipball/f2eac1a06c6fa619c379f5c58c13261d01477134",
-                "reference": "f2eac1a06c6fa619c379f5c58c13261d01477134",
+                "url": "https://api.github.com/repos/acrosswp/acrosswp-plugin-update-component/zipball/9ddfc243a89912992b7d46ca5869bc61273f11e4",
+                "reference": "9ddfc243a89912992b7d46ca5869bc61273f11e4",
                 "shasum": ""
             },
             "require": {
-                "woocommerce/action-scheduler": "2.*"
+                "woocommerce/action-scheduler": "^3.6"
             },
-            "time": "2023-11-18T18:32:46+00:00",
+            "time": "2023-11-19T18:00:22+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",
@@ -288,33 +288,44 @@
         },
         {
             "name": "woocommerce/action-scheduler",
-            "version": "2.2.5",
-            "version_normalized": "2.2.5.0",
+            "version": "3.6.4",
+            "version_normalized": "3.6.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/woocommerce/action-scheduler.git",
-                "reference": "fd7c6b76a7af27d6403ffe39b0963dbd8ce50488"
+                "reference": "e7dafe215be5ef823392204535ee2e241f99a8cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/fd7c6b76a7af27d6403ffe39b0963dbd8ce50488",
-                "reference": "fd7c6b76a7af27d6403ffe39b0963dbd8ce50488",
+                "url": "https://api.github.com/repos/woocommerce/action-scheduler/zipball/e7dafe215be5ef823392204535ee2e241f99a8cb",
+                "reference": "e7dafe215be5ef823392204535ee2e241f99a8cb",
                 "shasum": ""
             },
             "require-dev": {
-                "wp-cli/wp-cli": "1.5.1"
+                "phpunit/phpunit": "^7.5",
+                "woocommerce/woocommerce-sniffs": "0.1.0",
+                "wp-cli/wp-cli": "~2.5.0",
+                "yoast/phpunit-polyfills": "^1.0"
             },
-            "time": "2019-04-24T12:45:40+00:00",
+            "time": "2023-10-11T18:24:47+00:00",
             "type": "wordpress-plugin",
+            "extra": {
+                "scripts-description": {
+                    "test": "Run unit tests",
+                    "phpcs": "Analyze code against the WordPress coding standards with PHP_CodeSniffer",
+                    "phpcbf": "Fix coding standards warnings/errors automatically with PHP Code Beautifier"
+                }
+            },
             "installation-source": "dist",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "GPL-3.0"
+                "GPL-3.0-or-later"
             ],
             "description": "Action Scheduler for WordPress and WooCommerce",
+            "homepage": "https://actionscheduler.org/",
             "support": {
                 "issues": "https://github.com/woocommerce/action-scheduler/issues",
-                "source": "https://github.com/woocommerce/action-scheduler/tree/2.2.5"
+                "source": "https://github.com/woocommerce/action-scheduler/tree/3.6.4"
             },
             "install-path": "../woocommerce/action-scheduler"
         },

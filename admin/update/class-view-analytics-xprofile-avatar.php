@@ -31,6 +31,7 @@ class View_Analytics_Update_Xprofile_Avatar extends AcrossWP_Update_Component {
 	 */
 	protected $table;
 
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -39,7 +40,11 @@ class View_Analytics_Update_Xprofile_Avatar extends AcrossWP_Update_Component {
 	 * @param      string    $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version, $key ) {
-		parent::__construct( $plugin_name, $version, $key );
+		parent::__construct( $plugin_name, $version );
+
+		$this->set_key( $key );
+		
+		$this->update();
 	}
 
 	/**
@@ -88,7 +93,7 @@ class View_Analytics_Update_Xprofile_Avatar extends AcrossWP_Update_Component {
 					);
 
 					if ( ! empty( $url ) ) {
-						$public_avatar_count->update_view_count( $user_id, $user_id, 'xprofile' ,'avatar' );
+						$public_avatar_count->update_view_count( $user_id, $user_id, 'xprofile' ,'avatar', false );
 					}
 				}
 			}

@@ -153,7 +153,7 @@ class View_Analytics_Public_Avatar_Count {
 	/**
 	 * Update Avatar Update view count
 	 */
-	public function update_view_count( $key_id, $user_id = false, $type = 'xprofile', $action = 'avatar' ) {
+	public function update_view_count( $key_id, $user_id = false, $type = 'xprofile', $action = 'avatar', $do_update = true ) {
 
 		$user_id = empty( $user_id ) ? $key_id : $user_id;
 
@@ -169,11 +169,13 @@ class View_Analytics_Public_Avatar_Count {
 			if ( empty( $view ) ) {
 				$this->table->user_add( $key_id, $user_id, $type, $action );
 			} else {
-				$id = $view->id;
-				$view_count = $view->value;
-				$view_count++;
-	
-				$this->table->user_update( $id, $view_count );
+				if ( $do_update ) {
+					$id = $view->id;
+					$view_count = $view->value;
+					$view_count++;
+		
+					$this->table->user_update( $id, $view_count );
+				}
 			}
 		}
 	}

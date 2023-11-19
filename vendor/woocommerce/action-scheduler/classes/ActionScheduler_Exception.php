@@ -5,7 +5,7 @@
  *
  * Facilitates catching Exceptions unique to Action Scheduler.
  *
- * @package Prospress\ActionScheduler
- * @since %VERSION%
+ * @package ActionScheduler
+ * @since 2.1.0
  */
 interface ActionScheduler_Exception {}
