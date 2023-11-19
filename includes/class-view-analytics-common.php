@@ -98,7 +98,6 @@ class View_Analytics_Common {
 		return $this->can_current_user_view_list_group( $group_id );
 	}
 
-
 	/**
 	 * Check if the current user is allow to view the Media View List
 	 */
