@@ -153,9 +153,7 @@ class View_Analytics_Public_Avatar_Count {
 	/**
 	 * Update Avatar Update view count
 	 */
-	public function update_view_count( $key_id, $user_id = false, $type = 'xprofile', $action = 'avatar' ) {
-
-		$user_id = empty( $user_id ) ? $key_id : $user_id;
+	public function update_view_count( $key_id, $user_id, $type = 'xprofile', $action = 'avatar' ) {
 
 		if ( $this->common->view_count_enable() ) {
 
@@ -168,9 +166,7 @@ class View_Analytics_Public_Avatar_Count {
 	/**
 	 * Update Avatar Update view count
 	 */
-	public function doing_update_view_count( $key_id, $user_id = false, $type = 'xprofile', $action = 'avatar' ) {
-
-		$user_id = empty( $user_id ) ? $key_id : $user_id;
+	public function doing_update_view_count( $key_id, $user_id, $type = 'xprofile', $action = 'avatar' ) {
 
 		$this->table = View_Analytics_Avatar_Table::instance();
 		
