@@ -187,12 +187,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/acrosswp/acrosswp-plugin-update-component.git",
-                "reference": "9ddfc243a89912992b7d46ca5869bc61273f11e4"
+                "reference": "e3031bc4a3df3ccf0654d1ca1eb4f34cf5c697e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/acrosswp/acrosswp-plugin-update-component/zipball/9ddfc243a89912992b7d46ca5869bc61273f11e4",
-                "reference": "9ddfc243a89912992b7d46ca5869bc61273f11e4",
+                "url": "https://api.github.com/repos/acrosswp/acrosswp-plugin-update-component/zipball/e3031bc4a3df3ccf0654d1ca1eb4f34cf5c697e4",
+                "reference": "e3031bc4a3df3ccf0654d1ca1eb4f34cf5c697e4",
                 "shasum": ""
             },
             "require": {
@@ -225,7 +225,7 @@
                 "issues": "https://github.com/acrosswp/acrosswp-plugin-update-component/issues",
                 "source": "https://github.com/acrosswp/acrosswp-plugin-update-component/tree/main"
             },
-            "time": "2023-11-19T18:00:22+00:00"
+            "time": "2023-11-19T18:32:14+00:00"
         },
         {
             "name": "acrosswp/acrosswp-plugins-settings-page",
