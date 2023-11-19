@@ -215,30 +215,6 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 	}
 
 	/**
-	 * Check if the current user is allow to view the Media View List
-	 */
-	public function can_current_user_view_list( $attachment_id ) {
-		$user_id = get_current_user_id();
-
-		if ( empty( $user_id ) ) {
-			return false;
-		}
-
-		/**
-         * If user is site admin
-         */
-        if( current_user_can('administrator') ) {
-            return true;
-        }
-
-		if( $user_id == get_post_field( 'post_author', $attachment_id ) ) {
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
 	 * Show the message about when the user has view the Media
 	 */
 	public function get_view_time_message( $action_date, $mysql_time = false ) {

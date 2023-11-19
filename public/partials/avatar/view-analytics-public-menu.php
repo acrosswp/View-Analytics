@@ -209,7 +209,7 @@ class View_Analytics_Avatar_Count_View {
 
 						<div class="notification-content">
 							<span>
-								<a href="<?php echo $link; ?>"><?php echo $this->common->get_view_body_message( $view_detail->user_id, $view_detail->value ); ?></a>
+								<a href="<?php echo $link; ?>"><?php echo $this->common->get_view_body_message( $view_detail->user_id ); ?></a>
 							</span>
 							<span class="posted"><?php echo $this->common->get_view_time_message( $view_detail->action_date, $mysql_time ); ?></span>
 						</div>

@@ -88,4 +88,71 @@ class View_Analytics_Common {
     public function is_buddyboss() {
 		return defined( 'BP_PLATFORM_VERSION' );
     }
+
+
+	/**
+	 * Check if the current user is allow to view the Media View List
+	 */
+	public function can_current_user_view_list( $group_id = false ) {
+
+		return $this->can_current_user_view_list_group( $group_id );
+	}
+
+
+	/**
+	 * Check if the current user is allow to view the Media View List
+	 */
+	public function can_current_user_view_list_group( $group_id = false ) {
+
+		$current_user_id = get_current_user_id();
+
+		if ( empty( $current_user_id ) ) {
+			return false;
+		}
+		
+
+		/**
+         * If user is site admin
+         */
+        if( current_user_can('administrator') ) {
+            return true;
+        }
+
+		if( 
+			! empty( $group_id ) 
+			&& (
+				groups_is_user_admin( $current_user_id, $group_id ) 
+				|| groups_is_user_mod( $current_user_id, $group_id ) 
+			)
+		) {
+			return true;
+		}
+
+		return false;
+	}
+
+	
+	/**
+	 * Check if the current user is allow to view the Media View List
+	 */
+	public function can_current_user_view_list_current_user() {
+		$user_id = get_current_user_id();
+
+		if ( empty( $user_id ) ) {
+			return false;
+		}
+
+		/**
+         * If user is site admin
+         */
+        if( current_user_can('administrator') ) {
+            return true;
+        }
+
+		if( $user_id == bp_displayed_user_id() ) {
+			return true;
+		}
+
+		return false;
+	}
 }
