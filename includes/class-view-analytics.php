@@ -172,8 +172,6 @@ final class View_Analytics {
 		 * @since    1.0.0
 		 */
 		if( apply_filters( 'view-analytics-load', true ) ) {
-			
-			$this->define_update_hooks();
 
 			$this->define_admin_hooks();
 			$this->define_public_hooks();
@@ -402,77 +400,6 @@ final class View_Analytics {
 		$i18n = new View_Analytics_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $i18n, 'load_plugin_textdomain' );
-
-	}
-
-	/**
-	 * Register all of the hooks related to the update-facing functionality
-	 * of the plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 */
-	private function define_update_hooks() {
-
-		$this->loader->add_action( '_view_analytics_update_xprofile_avatar', $this, 'update_xprofile_avatar' );
-		$this->loader->add_action( '_view_analytics_update_group_avatar', $this, 'update_group_avatar' );
-		$this->loader->add_action( '_view_analytics_update_xprofile_cover', $this, 'update_xprofile_cover' );
-		$this->loader->add_action( '_view_analytics_update_group_cover', $this, 'update_group_cover' );
-	}
-
-	/**
-	 * Load the Update avarat updater file
-	 */
-	public function update_xprofile_avatar() {
-
-		/**
-		 * Updating via shedualte action
-		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/update/class-view-analytics-xprofile-avatar.php';
-
-		new View_Analytics_Update_Xprofile_Avatar( $this->get_plugin_name(), $this->get_version(), '_view_analytics_update_xprofile_avatar' );
-
-	}
-
-	/**
-	 * Load the Update avarat updater file
-	 */
-	public function update_group_avatar() {
-
-		/**
-		 * Updating via shedualte action
-		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/update/class-view-analytics-group-avatar.php';
-
-		new View_Analytics_Update_Group_Avatar( $this->get_plugin_name(), $this->get_version(), '_view_analytics_update_group_avatar' );
-
-	}
-
-	/**
-	 * Load the Update avarat updater file
-	 */
-	public function update_xprofile_cover() {
-
-		/**
-		 * Updating via shedualte action
-		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/update/class-view-analytics-xprofile-cover.php';
-
-		new View_Analytics_Update_Xprofile_Cover( $this->get_plugin_name(), $this->get_version(), '_view_analytics_update_xprofile_cover' );
-
-	}
-
-	/**
-	 * Load the Update avarat updater file
-	 */
-	public function update_group_cover() {
-
-		/**
-		 * Updating via shedualte action
-		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/update/class-view-analytics-group-cover.php';
-
-		new View_Analytics_Update_Group_Cover( $this->get_plugin_name(), $this->get_version(), '_view_analytics_update_group_cover' );
 
 	}
 

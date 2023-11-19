@@ -162,18 +162,4 @@ class View_Analytics_Public_Avatar_Count {
 			$this->table->user_add( $key_id, $user_id, $type, $action );
 		}
 	}
-
-	/**
-	 * Update Avatar Update view count
-	 */
-	public function doing_update_view_count( $key_id, $user_id, $type = 'xprofile', $action = 'avatar' ) {
-
-		$this->table = View_Analytics_Avatar_Table::instance();
-		
-		$view = $this->table->user_get( $key_id, $type, $action );
-		
-		if ( empty( $view ) ) {
-			$this->table->user_add( $key_id, $user_id, $type, $action );
-		}
-	}
 }

@@ -43,35 +43,6 @@ class View_Analytics_Activator {
 		 * Create the Table
 		 */
 		View_Analytics_Activator::create_table();
-		View_Analytics_Activator::create_schedule_action();
-	}
-
-	/**
-	 * Create Schedule Action
-	 */
-	public static function create_schedule_action() {
-
-		/**
-		 * For avatar
-		 */
-		if ( false === as_has_scheduled_action( '_view_analytics_update_xprofile_avatar' ) ) {
-			as_schedule_single_action( strtotime( '+1 minutes' ), '_view_analytics_update_xprofile_avatar', array(), 'view_analytics', false );
-		}
-
-		if ( false === as_has_scheduled_action( '_view_analytics_update_group_avatar' ) ) {
-			as_schedule_single_action( strtotime( '+2 minutes' ), '_view_analytics_update_group_avatar', array(), 'view_analytics', false );
-		}
-
-		/**
-		 * For cover image
-		 */
-		if ( false === as_has_scheduled_action( '_view_analytics_update_xprofile_cover' ) ) {
-			as_schedule_single_action( strtotime( '+3 minutes' ), '_view_analytics_update_xprofile_cover', array(), 'view_analytics', false );
-		}
-
-		if ( false === as_has_scheduled_action( '_view_analytics_update_group_cover' ) ) {
-			as_schedule_single_action( strtotime( '+4 minutes' ), '_view_analytics_update_group_cover', array(), 'view_analytics', false );
-		}
 	}
 
 	/**

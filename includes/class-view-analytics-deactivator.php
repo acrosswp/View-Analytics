@@ -41,7 +41,6 @@ class View_Analytics_Deactivator {
 		 * Create the Table
 		 */
 		View_Analytics_Deactivator::delete_table();
-		View_Analytics_Deactivator::delete_schedule_action();
 
 	}
 
@@ -70,24 +69,4 @@ class View_Analytics_Deactivator {
 		$wpdb->query( $group_view_sql );
 		$wpdb->query( $avatar_view_sql );
 	}
-
-
-	/**
-	 * Delete Schedule Action
-	 */
-	public static function delete_schedule_action() {
-
-		as_unschedule_all_actions( '_view_analytics_update_xprofile_avatar', array(), 'view_analytics' );
-		as_unschedule_action( '_view_analytics_update_xprofile_avatar', array(), 'view_analytics' );
-		
-		as_unschedule_all_actions( '_view_analytics_update_group_avatar', array(), 'view_analytics' );
-		as_unschedule_action( '_view_analytics_update_group_avatar', array(), 'view_analytics' );
-		
-		as_unschedule_all_actions( '_view_analytics_update_xprofile_cover', array(), 'view_analytics' );
-		as_unschedule_action( '_view_analytics_update_xprofile_cover', array(), 'view_analytics' );
-
-		as_unschedule_all_actions( '_view_analytics_update_group_cover', array(), 'view_analytics' );
-		as_unschedule_action( '_view_analytics_update_group_cover', array(), 'view_analytics' );
-	}
-
 }
