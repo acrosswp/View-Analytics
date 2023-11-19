@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || exit;
  * @subpackage View_Analytics/includes
  * @author     AcrossWP <contact@acrosswp.com>
  */
-class View_Analytics_Group_Count_View {
+class View_Analytics_Avatar_Count_View {
 
     /**
 	 * The unique identifier of this plugin.
@@ -68,11 +68,11 @@ class View_Analytics_Group_Count_View {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
-		$this->common = View_Analytics_Group_Common::instance();
+		$this->common = View_Analytics_Avatar_Common::instance();
 	}
 
 
-	public function navigation() {
+	public function group_navigation() {
 
 		$current_group = groups_get_current_group();
 
@@ -85,13 +85,13 @@ class View_Analytics_Group_Count_View {
 
 			// var_dump( $groups_link );
 			bp_core_new_subnav_item( array(
-				'name' => __( 'Group View', 'view-analytics' ),
-				'slug' => 'group-view',
+				'name' => __( 'Group Avatar Update', 'view-analytics' ),
+				'slug' => 'group-avatar-update',
 				'parent_slug' => bp_get_current_group_slug(),
 				'parent_url' => $group_link,
 				'position' => 100,
 				'screen_function' => array( $this, 'view_manage' ),
-				'user_has_access' => bp_is_item_admin() // Only the logged in user can access this on his/her profile
+				'user_has_access' => $this->common->can_current_user_view_list() // Only the logged in user can access this on his/her profile
 			) );
 		}
 	}
