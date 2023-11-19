@@ -382,10 +382,10 @@ final class View_Analytics {
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/view-analytics-counts.php';
 
 
-		// /**
-		//  * The class responsible for defining all actions that are releate to recoring the view count in table
-		//  */
-		// require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/group/view-analytics-public-group-menu.php';
+		/**
+		 * The class responsible for defining all actions that are releate to recoring the view count in table
+		 */
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/avatar/view-analytics-public-menu.php';
 	}
 
 	/**
@@ -570,6 +570,12 @@ final class View_Analytics {
 
 		$this->loader->add_action( 'groups_avatar_uploaded', $public_avatar_count, 'groups_avatar_uploaded', 1000 );
 		$this->loader->add_action( 'groups_cover_image_uploaded', $public_avatar_count, 'groups_cover_image_uploaded', 1000 );
+
+		/**
+		 * All class that are release to Public Avatar Count View
+		 */
+		$public_group_view = new View_Analytics_Avatar_Count_View( $this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_action( 'bp_setup_nav', $public_group_view, 'group_navigation', 1000 );
 
 		/**
 		 * if BuddyBoss is loading

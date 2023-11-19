@@ -153,30 +153,31 @@ class View_Analytics_Public_Avatar_Count {
 	/**
 	 * Update Avatar Update view count
 	 */
-	public function update_view_count( $key_id, $user_id = false, $type = 'xprofile', $action = 'avatar', $do_update = true ) {
+	public function update_view_count( $key_id, $user_id = false, $type = 'xprofile', $action = 'avatar' ) {
 
 		$user_id = empty( $user_id ) ? $key_id : $user_id;
 
 		if ( $this->common->view_count_enable() ) {
 
 			$this->table = View_Analytics_Avatar_Table::instance();
-
-			$view = $this->table->user_get( $key_id, $type, $action );
-
-			/**
-			 * Check if empty
-			 */
-			if ( empty( $view ) ) {
-				$this->table->user_add( $key_id, $user_id, $type, $action );
-			} else {
-				if ( $do_update ) {
-					$id = $view->id;
-					$view_count = $view->value;
-					$view_count++;
 		
-					$this->table->user_update( $id, $view_count );
-				}
-			}
+			$this->table->user_add( $key_id, $user_id, $type, $action );
+		}
+	}
+
+	/**
+	 * Update Avatar Update view count
+	 */
+	public function doing_update_view_count( $key_id, $user_id = false, $type = 'xprofile', $action = 'avatar' ) {
+
+		$user_id = empty( $user_id ) ? $key_id : $user_id;
+
+		$this->table = View_Analytics_Avatar_Table::instance();
+		
+		$view = $this->table->user_get( $key_id, $type, $action );
+		
+		if ( empty( $view ) ) {
+			$this->table->user_add( $key_id, $user_id, $type, $action );
 		}
 	}
 }

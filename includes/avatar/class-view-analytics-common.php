@@ -80,13 +80,15 @@ class View_Analytics_Avatar_Common extends View_Analytics_Common {
         return get_option( $this->view_count_key(), true );
     }
 
+
 	/**
 	 * Check if the current user is allow to view the Media View List
 	 */
-	public function can_current_user_view_list() {
-		$user_id = get_current_user_id();
+	public function can_current_user_view_list( $group_id = false ) {
 
-		if ( empty( $user_id ) ) {
+		$current_user_id = get_current_user_id();
+
+		if ( empty( $current_user_id ) ) {
 			return false;
 		}
 
@@ -97,10 +99,45 @@ class View_Analytics_Avatar_Common extends View_Analytics_Common {
             return true;
         }
 
-		if( $user_id == bp_displayed_user_id() ) {
+		if( 
+			! empty( $group_id ) 
+			&& (
+				groups_is_user_admin( $current_user_id, $group_id ) 
+				|| groups_is_user_mod( $current_user_id, $group_id ) 
+			)
+		) {
 			return true;
 		}
 
 		return false;
+	}
+
+	/**
+	 * Show the message about when the user has view the Media
+	 */
+	public function get_view_body_message( $user_id, $view_count ) {
+		$displayname = bp_core_get_user_displayname( $user_id );
+		$view = _n( 'time', 'times', $view_count, 'view-analytics' );
+		return sprintf( __( '%s Update Avatar %s %s.', 'view-analytics' ), $displayname, $view_count, $view );
+
+	}
+
+	/**
+	 * Show the message about when the user has view the Media
+	 */
+	public function get_view_time_message( $action_date, $mysql_time = false ) {
+
+		/**
+		 * If current time is empty
+		 */
+		if ( empty( $mysql_time ) ) {
+			global $wpdb;
+			$mysql_time = $wpdb->get_var( 'select CURRENT_TIMESTAMP()' );
+		}
+
+		$view_time = human_time_diff( strtotime( $action_date ), strtotime( $mysql_time ) );
+
+		return sprintf( __( 'first viewed %s ago.', 'view-analytics' ), $view_time );
+
 	}
 }

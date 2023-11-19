@@ -83,37 +83,46 @@ class View_Analytics_Avatar_Count_View {
 
 			$group_link = bp_get_group_permalink( $current_group );
 
-			// var_dump( $groups_link );
 			bp_core_new_subnav_item( array(
 				'name' => __( 'Group Avatar Update', 'view-analytics' ),
 				'slug' => 'group-avatar-update',
 				'parent_slug' => bp_get_current_group_slug(),
 				'parent_url' => $group_link,
 				'position' => 100,
-				'screen_function' => array( $this, 'view_manage' ),
+				'screen_function' => array( $this, 'group_avatar_view_manage' ),
+				'user_has_access' => $this->common->can_current_user_view_list() // Only the logged in user can access this on his/her profile
+			) );
+
+			bp_core_new_subnav_item( array(
+				'name' => __( 'Group Cover Image Update', 'view-analytics' ),
+				'slug' => 'group-cover-update',
+				'parent_slug' => bp_get_current_group_slug(),
+				'parent_url' => $group_link,
+				'position' => 100,
+				'screen_function' => array( $this, 'group_cover_view_manage' ),
 				'user_has_access' => $this->common->can_current_user_view_list() // Only the logged in user can access this on his/her profile
 			) );
 		}
 	}
 
-	public function view_manage() {
-		add_action( 'bp_template_content', array( $this, 'content' ) );
+	public function group_avatar_view_manage() {
+		add_action( 'bp_template_content', array( $this, 'group_avatar_content' ) );
 		bp_core_load_template( 'template_content' );
 	}
 
-	function content() {
+	function group_avatar_content() {
 		$group_id = bp_get_group_id();
-		$view_details = $this->common->table->get_details( $group_id );
+		$view_details = $this->common->table->get_details( $group_id, 'group', 'avatar' );
 
 		if ( empty( $view_details ) ) {
-			echo __( 'No one has view this Group', 'view-analytics' );
+			echo __( 'No one has update this Group Avatar', 'view-analytics' );
 		} else { ?>
 			<ul class="notification-list bb-nouveau-list bs-item-list list-view">
 				<?php
 				global $wpdb;
 				$mysql_time = $wpdb->get_var( 'select CURRENT_TIMESTAMP()' );
 				foreach( $view_details as $view_detail ) {
-					$link = bp_core_get_user_domain( $view_detail->viewer_id );
+					$link = bp_core_get_user_domain( $view_detail->user_id );
 					?>
 					<li class="bs-item-wrap">
 						<div class="notification-avatar">
@@ -121,7 +130,7 @@ class View_Analytics_Avatar_Count_View {
 								<?php
 								echo bp_core_fetch_avatar(
 									array(
-										'item_id' => $view_detail->viewer_id,
+										'item_id' => $view_detail->user_id,
 										'object'  => 'user',
 									)
 								);
@@ -131,7 +140,54 @@ class View_Analytics_Avatar_Count_View {
 
 						<div class="notification-content">
 							<span>
-								<a href="<?php echo $link; ?>"><?php echo $this->common->get_view_body_message( $view_detail->viewer_id, $view_detail->value ); ?></a>
+								<a href="<?php echo $link; ?>"><?php echo $this->common->get_view_body_message( $view_detail->user_id, $view_detail->value ); ?></a>
+							</span>
+							<span class="posted"><?php echo $this->common->get_view_time_message( $view_detail->action_date, $mysql_time ); ?></span>
+						</div>
+					</li>
+					<?php
+				}
+				?>
+			</ul><?php
+		}
+	}
+
+	public function group_cover_view_manage() {
+		add_action( 'bp_template_content', array( $this, 'group_cover_content' ) );
+		bp_core_load_template( 'template_content' );
+	}
+
+	function group_cover_content() {
+		$group_id = bp_get_group_id();
+		$view_details = $this->common->table->get_details( $group_id, 'group', 'avatar' );
+
+		if ( empty( $view_details ) ) {
+			echo __( 'No one has update this Group Cover Image', 'view-analytics' );
+		} else { ?>
+			<ul class="notification-list bb-nouveau-list bs-item-list list-view">
+				<?php
+				global $wpdb;
+				$mysql_time = $wpdb->get_var( 'select CURRENT_TIMESTAMP()' );
+				foreach( $view_details as $view_detail ) {
+					$link = bp_core_get_user_domain( $view_detail->user_id );
+					?>
+					<li class="bs-item-wrap">
+						<div class="notification-avatar">
+							<a href="<?php echo $link; ?>" class="">
+								<?php
+								echo bp_core_fetch_avatar(
+									array(
+										'item_id' => $view_detail->user_id,
+										'object'  => 'user',
+									)
+								);
+								?>
+							</a>
+						</div>
+
+						<div class="notification-content">
+							<span>
+								<a href="<?php echo $link; ?>"><?php echo $this->common->get_view_body_message( $view_detail->user_id, $view_detail->value ); ?></a>
 							</span>
 							<span class="posted"><?php echo $this->common->get_view_time_message( $view_detail->action_date, $mysql_time ); ?></span>
 						</div>

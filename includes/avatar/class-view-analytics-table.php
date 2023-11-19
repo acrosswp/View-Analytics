@@ -71,14 +71,12 @@ class View_Analytics_Avatar_Table {
 				'user_id' => $user_id,
 				'type' => $type,
 				'action' => $action,
-				'value' => $value,
 			),
 			array(
 				'%d',
 				'%d',
 				'%s',
 				'%s',
-				'%d',
 			)
 		);
 	}
@@ -98,31 +96,6 @@ class View_Analytics_Avatar_Table {
 				$type,
 				$action
 			)
-		);
-	}
-
-	/**
-	 * Update the current user has view avatar count
-	 */
-	public function user_update( $id, $value, $mysql_time = false ) {
-		global $wpdb;
-
-		if ( empty( $mysql_time ) ) {
-			$mysql_time = $wpdb->get_var( 'select CURRENT_TIMESTAMP()' );
-		}
-
-		$wpdb->update(
-			$this->table_name(),
-			array(
-				'last_date' => $mysql_time,
-				'value' => $value,
-				'is_new' => 1,
-			),
-			array( 
-				'id' => $id 
-			),
-			array( '%s','%d', '%d' ),
-			array( '%d' )
 		);
 	}
 

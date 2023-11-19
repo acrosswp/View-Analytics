@@ -119,9 +119,7 @@ class View_Analytics_Activator {
 			user_id 	bigint(20) NOT NULL,
 			type		varchar(255) NULL,
 			action		varchar(255) NULL,
-			value		bigint(20) NOT NULL DEFAULT 1,
 			is_new		tinyint(1) NOT NULL DEFAULT 1,
-			last_date	TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
 		) {$charset_collate};";
