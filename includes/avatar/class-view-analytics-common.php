@@ -118,7 +118,7 @@ class View_Analytics_Avatar_Common extends View_Analytics_Common {
 	public function get_view_body_message( $user_id, $view_count ) {
 		$displayname = bp_core_get_user_displayname( $user_id );
 		$view = _n( 'time', 'times', $view_count, 'view-analytics' );
-		return sprintf( __( '%s Update Avatar %s %s.', 'view-analytics' ), $displayname, $view_count, $view );
+		return sprintf( __( '%s Update.', 'view-analytics' ), $displayname );
 
 	}
 
@@ -137,7 +137,7 @@ class View_Analytics_Avatar_Common extends View_Analytics_Common {
 
 		$view_time = human_time_diff( strtotime( $action_date ), strtotime( $mysql_time ) );
 
-		return sprintf( __( 'first viewed %s ago.', 'view-analytics' ), $view_time );
+		return sprintf( __( 'updated %s ago.', 'view-analytics' ), $view_time );
 
 	}
 }

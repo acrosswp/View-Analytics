@@ -500,8 +500,9 @@ final class View_Analytics {
 		/**
 		 * All class that are release to Public Avatar Count View
 		 */
-		$public_group_view = new View_Analytics_Avatar_Count_View( $this->get_plugin_name(), $this->get_version() );
-		$this->loader->add_action( 'bp_setup_nav', $public_group_view, 'group_navigation', 1000 );
+		$public_avatar_view = new View_Analytics_Avatar_Count_View( $this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_action( 'bp_setup_nav', $public_avatar_view, 'group_navigation', 1000 );
+		$this->loader->add_action( 'bp_setup_nav', $public_avatar_view, 'profile_navigation', 1000 );
 
 		/**
 		 * if BuddyBoss is loading

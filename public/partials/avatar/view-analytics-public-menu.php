@@ -71,7 +71,37 @@ class View_Analytics_Avatar_Count_View {
 		$this->common = View_Analytics_Avatar_Common::instance();
 	}
 
+	/**
+	 * Show menu option on the profile Page
+	 */
+	public function profile_navigation() {
 
+		/**
+		 * Check if the curret user has access to view the Profile View Tab
+		 */
+		if ( $this->common->can_current_user_view_list() ) {
+			bp_core_new_nav_item(
+				array(
+					'name'                => __( 'Profile Avatar Update', 'view-analytics' ),
+					'slug'                => 'profile-avatar-update',
+					'screen_function'     => array( $this, 'xprofile_avatar_view_manage' )
+				)
+			);
+
+			bp_core_new_nav_item(
+				array(
+					'name'                => __( 'Profile Cover Update', 'view-analytics' ),
+					'slug'                => 'profile-cover-update',
+					'screen_function'     => array( $this, 'xprofile_cover_view_manage' )
+				)
+			);
+		}
+	}
+
+
+	/**
+	 * Show menu option on the Group Page
+	 */
 	public function group_navigation() {
 
 		$current_group = groups_get_current_group();
@@ -105,6 +135,28 @@ class View_Analytics_Avatar_Count_View {
 		}
 	}
 
+	public function xprofile_avatar_view_manage() {
+		add_action( 'bp_template_content', array( $this, 'xprofile_avatar_content' ) );
+		bp_core_load_template( 'template_content' );
+	}
+
+	function xprofile_avatar_content() {
+		$user_id = get_current_user_id();
+		$message = __( 'Profile Avatar is not yet updated', 'view-analytics' );
+		$this->content( $user_id, 'xprofile', 'avatar', $message );
+	}
+
+	public function xprofile_cover_view_manage() {
+		add_action( 'bp_template_content', array( $this, 'xprofile_cover_content' ) );
+		bp_core_load_template( 'template_content' );
+	}
+
+	function xprofile_cover_content() {
+		$user_id = get_current_user_id();
+		$message = __( 'Profile Cover Image is not yet updated', 'view-analytics' );
+		$this->content( $user_id, 'xprofile', 'cover', $message );
+	}
+
 	public function group_avatar_view_manage() {
 		add_action( 'bp_template_content', array( $this, 'group_avatar_content' ) );
 		bp_core_load_template( 'template_content' );
@@ -112,44 +164,8 @@ class View_Analytics_Avatar_Count_View {
 
 	function group_avatar_content() {
 		$group_id = bp_get_group_id();
-		$view_details = $this->common->table->get_details( $group_id, 'group', 'avatar' );
-
-		if ( empty( $view_details ) ) {
-			echo __( 'No one has update this Group Avatar', 'view-analytics' );
-		} else { ?>
-			<ul class="notification-list bb-nouveau-list bs-item-list list-view">
-				<?php
-				global $wpdb;
-				$mysql_time = $wpdb->get_var( 'select CURRENT_TIMESTAMP()' );
-				foreach( $view_details as $view_detail ) {
-					$link = bp_core_get_user_domain( $view_detail->user_id );
-					?>
-					<li class="bs-item-wrap">
-						<div class="notification-avatar">
-							<a href="<?php echo $link; ?>" class="">
-								<?php
-								echo bp_core_fetch_avatar(
-									array(
-										'item_id' => $view_detail->user_id,
-										'object'  => 'user',
-									)
-								);
-								?>
-							</a>
-						</div>
-
-						<div class="notification-content">
-							<span>
-								<a href="<?php echo $link; ?>"><?php echo $this->common->get_view_body_message( $view_detail->user_id, $view_detail->value ); ?></a>
-							</span>
-							<span class="posted"><?php echo $this->common->get_view_time_message( $view_detail->action_date, $mysql_time ); ?></span>
-						</div>
-					</li>
-					<?php
-				}
-				?>
-			</ul><?php
-		}
+		$message = __( 'No one has update this Group Avatar', 'view-analytics' );
+		$this->content( $group_id, 'group', 'avatar', $message );
 	}
 
 	public function group_cover_view_manage() {
@@ -159,10 +175,16 @@ class View_Analytics_Avatar_Count_View {
 
 	function group_cover_content() {
 		$group_id = bp_get_group_id();
-		$view_details = $this->common->table->get_details( $group_id, 'group', 'avatar' );
+		$message = __( 'No one has update this Group Cover Image', 'view-analytics' );
+		$this->content( $group_id, 'group', 'cover', $message );
+	}
+
+
+	public function content( $key_id, $type, $action, $message ) {
+		$view_details = $this->common->table->get_details( $key_id, $type, $action );
 
 		if ( empty( $view_details ) ) {
-			echo __( 'No one has update this Group Cover Image', 'view-analytics' );
+			echo $message;
 		} else { ?>
 			<ul class="notification-list bb-nouveau-list bs-item-list list-view">
 				<?php
