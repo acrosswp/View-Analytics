@@ -115,7 +115,7 @@ class View_Analytics_Activator {
 		$avatar_view_sql = "CREATE TABLE {$avatar_view_table_name} (
 			id 			bigint(20) NOT NULL AUTO_INCREMENT ,
 			key_id		varchar(255) NULL,
-			user_id 	bigint(20) NULL,
+			user_id 	bigint(20) NOT NULL,
 			type		varchar(255) NULL,
 			action		varchar(255) NULL,
 			is_new		tinyint(1) NOT NULL DEFAULT 1,
