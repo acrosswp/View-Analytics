@@ -91,7 +91,7 @@ class View_Analytics_Group_Count_View {
 				'parent_url' => $group_link,
 				'position' => 100,
 				'screen_function' => array( $this, 'view_manage' ),
-				'user_has_access' => bp_is_item_admin() // Only the logged in user can access this on his/her profile
+				'user_has_access' => $this->common->can_current_user_view_list() // Only the logged in user can access this on his/her profile
 			) );
 		}
 	}
