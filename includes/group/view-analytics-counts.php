@@ -119,7 +119,7 @@ class View_Analytics_Public_Group_Count {
 				$view_count = $view->value;
 				$view_count++;
 	
-				$this->table->user_update( $id, $view_count );
+				$this->table->user_update( $id, $view_count, $view );
 			}
 		}
 	}

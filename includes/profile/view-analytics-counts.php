@@ -119,7 +119,7 @@ class View_Analytics_Public_Profile_Count {
 				$view_count = $profile_view->value;
 				$view_count++;
 	
-				View_Analytics_Profile_Table::instance()->user_update( $id, $view_count );
+				View_Analytics_Profile_Table::instance()->user_update( $id, $view_count, $profile_view );
 			}
 		}
 	}

@@ -34,6 +34,34 @@ class View_Analytics_Group_Table {
 	protected static $_instance = null;
 
 	/**
+	 * The single instance of the class.
+	 *
+	 * @var View_Analytics_Log_Table
+	 * @since 1.0.0
+	 */
+	public $log_table = null;
+
+	/**
+	 * The single instance of the class.
+	 *
+	 * @since 1.0.0
+	 */
+	public $log_table_key = 'group_view';
+
+	/**
+	 * Define the core functionality of the plugin.
+	 *
+	 * Set the plugin name and the plugin version that can be used throughout the plugin.
+	 * Load the dependencies, define the locale, and set the hooks for the admin area and
+	 * the public-facing side of the site.
+	 *
+	 * @since    1.0.0
+	 */
+	public function __construct() {
+        $this->log_table = View_Analytics_Log_Table::instance();
+	}
+
+	/**
 	 * Main View_Analytics_Group_Table Instance.
 	 *
 	 * Ensures only one instance of WooCommerce is loaded or can be loaded.
@@ -64,7 +92,7 @@ class View_Analytics_Group_Table {
 	public function user_add( $group_id, $viewer_id, $value = 1 ) {
 		global $wpdb;
 
-		return $wpdb->insert(
+		$add = $wpdb->insert(
 			$this->table_name(),
 			array( 
 				'group_id' => $group_id,
@@ -77,6 +105,12 @@ class View_Analytics_Group_Table {
 				'%d',
 			)
 		);
+
+		if ( $add ) {
+			$this->log_table->user_add( $this->log_table_key, $group_id, 0, $viewer_id );
+		}
+
+		return $add;
 	}
 
 	/**
@@ -99,14 +133,14 @@ class View_Analytics_Group_Table {
 	/**
 	 * Update the current user has view group count
 	 */
-	public function user_update( $id, $value, $mysql_time = false ) {
+	public function user_update( $id, $value, $details = false ,$mysql_time = false ) {
 		global $wpdb;
 		
 		if ( empty( $mysql_time ) ) {
 			$mysql_time = $wpdb->get_var( 'select CURRENT_TIMESTAMP()' );
 		}
 
-		$wpdb->update(
+		$update = $wpdb->update(
 			$this->table_name(),
 			array(
 				'last_date' => $mysql_time,
@@ -119,6 +153,12 @@ class View_Analytics_Group_Table {
 			array( '%s','%d','%d' ),
 			array( '%d' )
 		);
+
+		if ( $update && ! empty( $details->group_id ) && ! empty( $details->viewer_id ) ) {
+			$this->log_table->user_add( $this->log_table_key, $details->group_id, 0, $details->viewer_id );
+		}
+
+		return $update;
 	}
 
 	/**

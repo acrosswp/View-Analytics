@@ -261,7 +261,7 @@ class View_Analytics_Public_Media_Count {
 				$view_count = $media_view->value;
 				$view_count++;
 	
-				View_Analytics_Media_Table::instance()->user_update( $id, $view_count );
+				View_Analytics_Media_Table::instance()->user_update( $id, $view_count, $media_view );
 			}
 		}
 	}

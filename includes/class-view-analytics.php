@@ -252,6 +252,11 @@ final class View_Analytics {
 		/**
 		 * Load all the Media view file
 		 */
+		$this->load_log();
+
+		/**
+		 * Load all the Media view file
+		 */
 		$this->load_media_view();
 
 		/**
@@ -273,6 +278,18 @@ final class View_Analytics {
 
 		$this->common = View_Analytics_Common::instance();
 
+	}
+
+
+	/**
+	 * Load all the File releaste to log
+	 */
+	private function load_log() {
+
+		/**
+		 * Contain all the value to edit/delete/remove the table row
+		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/log/class-view-analytics-table.php' );
 	}
 
 	/**

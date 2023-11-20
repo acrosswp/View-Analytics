@@ -34,6 +34,34 @@ class View_Analytics_Media_Table {
 	protected static $_instance = null;
 
 	/**
+	 * The single instance of the class.
+	 *
+	 * @var View_Analytics_Log_Table
+	 * @since 1.0.0
+	 */
+	public $log_table = null;
+
+	/**
+	 * The single instance of the class.
+	 *
+	 * @since 1.0.0
+	 */
+	public $log_table_key = 'media_view';
+
+	/**
+	 * Define the core functionality of the plugin.
+	 *
+	 * Set the plugin name and the plugin version that can be used throughout the plugin.
+	 * Load the dependencies, define the locale, and set the hooks for the admin area and
+	 * the public-facing side of the site.
+	 *
+	 * @since    1.0.0
+	 */
+	public function __construct() {
+        $this->log_table = View_Analytics_Log_Table::instance();
+	}
+
+	/**
 	 * Main View_Analytics_Media_Table Instance.
 	 *
 	 * Ensures only one instance of WooCommerce is loaded or can be loaded.
@@ -64,7 +92,7 @@ class View_Analytics_Media_Table {
 	public function user_add( $viewer_id, $key_id, $hash_id = '0', $media_id = 0, $attachment_id = 0, $media_owner_id = 0, $media_type = 'photo', $value = 1 ) {
 		global $wpdb;
 
-		return $wpdb->insert(
+		$add = $wpdb->insert(
 			$this->table_name(),
 			array(
 				'viewer_id' => $viewer_id,
@@ -87,6 +115,12 @@ class View_Analytics_Media_Table {
 				'%d',
 			)
 		);
+
+		if ( $add ) {
+			$this->log_table->user_add( $this->log_table_key, $key_id, $media_owner_id, $viewer_id, $type );
+		}
+
+		return $add;
 	}
 
 	/**
@@ -125,14 +159,14 @@ class View_Analytics_Media_Table {
 	/**
 	 * Update the current user has view media count
 	 */
-	public function user_update( $id, $value, $mysql_time = false ) {
+	public function user_update( $id, $value, $details = false ,$mysql_time = false ) {
 		global $wpdb;
 
 		if ( empty( $mysql_time ) ) {
 			$mysql_time = $wpdb->get_var( 'select CURRENT_TIMESTAMP()' );
 		}
 
-		$wpdb->update(
+		$update = $wpdb->update(
 			$this->table_name(),
 			array(
 				'last_date' => $mysql_time,
@@ -145,6 +179,18 @@ class View_Analytics_Media_Table {
 			array( '%s','%d','%d' ),
 			array( '%d' )
 		);
+
+		if ( 
+			$update 
+			&& ! empty( $details->key_id ) 
+			&& ! empty( $details->user_id ) 
+			&& ! empty( $details->viewer_id ) 
+			&& ! empty( $details->type ) 
+			) {
+			$this->log_table->user_add( $this->log_table_key, $details->key_id, $details->user_id, $details->viewer_id, $details->type );
+		}
+
+		return $update;
 	}
 
 	/**
