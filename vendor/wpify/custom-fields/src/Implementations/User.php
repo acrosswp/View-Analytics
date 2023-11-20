@@ -51,7 +51,7 @@ final class User extends AbstractImplementation {
 		add_action( 'show_user_profile', array( $this, 'render_edit_form' ) );
 		add_action( 'edit_user_profile', array( $this, 'render_edit_form' ) );
 		add_action( 'personal_options_update', array( $this, 'save' ) );
-		add_action( 'edit_user_update', array( $this, 'save' ) );
+		add_action( 'edit_user_profile_update', array( $this, 'save' ) );
 		add_action( 'init', array( $this, 'register_meta' ), $args['init_priority'] );
 	}
 

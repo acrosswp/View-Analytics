@@ -61,7 +61,7 @@ class View_Analytics_Media_Table {
 	/**
 	 * Add the current user has view media count
 	 */
-	public function user_add( $viewer_id, $key_id, $hash_id = '0', $media_id = 0, $attachment_id = 0, $value = 1 ) {
+	public function user_add( $viewer_id, $key_id, $hash_id = '0', $media_id = 0, $attachment_id = 0, $media_owner_id = 0, $media_type = 'photo', $value = 1 ) {
 		global $wpdb;
 
 		return $wpdb->insert(
@@ -72,6 +72,8 @@ class View_Analytics_Media_Table {
 				'hash_id' => $hash_id,
 				'media_id' => $media_id,
 				'attachment_id' => $attachment_id,
+				'user_id' => $media_owner_id,
+				'type' => $media_type,
 				'value' => $value,
 			),
 			array(
@@ -80,6 +82,8 @@ class View_Analytics_Media_Table {
 				'%s',
 				'%d',
 				'%d',
+				'%d',
+				'%s',
 				'%d',
 			)
 		);
@@ -163,8 +167,26 @@ class View_Analytics_Media_Table {
 
 		return $wpdb->get_row(
 			$wpdb->prepare( 
-				"SELECT * FROM {$bp->media->table_name} WHERE id = %d",
+				"SELECT * FROM {$bp->media->table_name} WHERE attachment_id = %d",
 				$media_id
+			)
+		);
+	}
+
+	/**
+	* Here this will work only for Image and Video 
+	* This function wont work if it's document because docuemnt has a seperate table
+	* 
+	* get the value of the media from the bp_media buddyboss table
+	*/
+	public function get_bb_document_details( $document_id ) {
+		global $wpdb;
+		global $bp;
+
+		return $wpdb->get_row(
+			$wpdb->prepare( 
+				"SELECT * FROM {$bp->document->table_name} WHERE attachment_id = %d",
+				$document_id
 			)
 		);
 	}
@@ -184,6 +206,30 @@ class View_Analytics_Media_Table {
 		 */
 		if ( ! empty( $media_details->attachment_id ) ) {
 			return $media_details->attachment_id;
+		}
+
+		return false;
+	}
+
+	/**
+	* Here this will work only for Image and Video 
+	* This function wont work if it's document because docuemnt has a seperate table
+	* 
+	* get the value of the media from the bp_media buddyboss table
+	*/
+	public function get_bb_media_owner_id( $media_id, $type = 'media' ) {
+
+		if( in_array( $type, array( 'media', 'photo', 'video' ) ) ) {
+			$details = $this->get_bb_media_details( $media_id );
+		} else {
+			$details = $this->get_bb_document_details( $media_id );
+		}
+
+		/**
+		 * if not empty
+		 */
+		if ( ! empty( $details->user_id ) ) {
+			return $details->user_id;
 		}
 
 		return false;

@@ -3,24 +3,13 @@
         'name' => 'acrosswp/view-analytics',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '3764e4c3b906a70410dc8682d5c5a41557ee9312',
+        'reference' => 'af31c533eaa44e4857c53031eff00ec8e5dfc5fe',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
-        'acrosswp/acrosswp-about-us' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => '876cf303d5fbfbff675b383caaecf07f23550228',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../acrosswp/acrosswp-about-us',
-            'aliases' => array(
-                0 => '9999999-dev',
-            ),
-            'dev_requirement' => false,
-        ),
         'acrosswp/acrosswp-buddypress-or-buddyboss-dependency' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
@@ -54,21 +43,10 @@
             ),
             'dev_requirement' => false,
         ),
-        'acrosswp/acrosswp-plugins-settings-page' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => '0bed50f8391be96a98ecadb09aa2c159d0137341',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../acrosswp/acrosswp-plugins-settings-page',
-            'aliases' => array(
-                0 => '9999999-dev',
-            ),
-            'dev_requirement' => false,
-        ),
         'acrosswp/view-analytics' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '3764e4c3b906a70410dc8682d5c5a41557ee9312',
+            'reference' => 'af31c533eaa44e4857c53031eff00ec8e5dfc5fe',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
