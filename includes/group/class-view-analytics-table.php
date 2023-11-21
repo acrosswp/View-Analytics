@@ -61,19 +61,31 @@ class View_Analytics_Group_Table {
 	/**
 	 * Add the current user has view group count
 	 */
-	public function user_add( $group_id, $viewer_id, $is_new = 1 ) {
+	public function user_add( $group_id, $viewer_id, $components, $is_new = 1 ) {
 		global $wpdb;
+
+
 
 		$add = $wpdb->insert(
 			$this->table_name(),
 			array( 
 				'group_id' => $group_id,
 				'viewer_id' => $viewer_id,
+				'url' => $components['url'],
+				'components' => $components['components'],
+				'object' => $components['object'],
+				'primitive' => $components['primitive'],
+				'variable' => $components['variable'],
 				'is_new' => $is_new,
 			),
 			array(
 				'%d',
 				'%d',
+				'%s',
+				'%s',
+				'%s',
+				'%s',
+				'%s',
 				'%d',
 			)
 		);

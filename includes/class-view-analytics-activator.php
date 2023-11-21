@@ -84,6 +84,11 @@ class View_Analytics_Activator {
 			id bigint(20) NOT NULL AUTO_INCREMENT ,
 			user_id bigint(20) NOT NULL,
 			viewer_id bigint(20) NOT NULL,
+			url varchar(255) NOT NULL DEFAULT '',
+			components varchar(255) NOT NULL DEFAULT '',
+			object varchar(255) NOT NULL DEFAULT '',
+			primitive varchar(255) NOT NULL DEFAULT '',
+			variable varchar(255) NOT NULL DEFAULT '',
 			is_new tinyint(1) NOT NULL DEFAULT 1,
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
@@ -99,6 +104,11 @@ class View_Analytics_Activator {
 			id bigint(20) NOT NULL AUTO_INCREMENT ,
 			group_id bigint(20) NOT NULL,
 			viewer_id bigint(20) NOT NULL,
+			url varchar(255) NOT NULL DEFAULT '',
+			components varchar(255) NOT NULL DEFAULT '',
+			object varchar(255) NOT NULL DEFAULT '',
+			primitive varchar(255) NOT NULL DEFAULT '',
+			variable varchar(255) NOT NULL DEFAULT '',
 			is_new tinyint(1) NOT NULL DEFAULT 1,
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)

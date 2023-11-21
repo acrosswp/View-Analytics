@@ -154,4 +154,65 @@ class View_Analytics_Common {
 
 		return false;
 	}
+
+
+	/**
+	 * Get the components of the current Group
+	 */
+	public function get_components( $slug, $default_component = '' ) {
+		
+		global $wp;
+		
+		$current_url = sanitize_text_field( $wp->request );
+		$group_slug = sanitize_text_field( $slug );
+		$group_slug = $group_slug .'/';
+
+		/**
+		 * Strting to array for the current url
+		 */
+		$current_url_array = explode( $group_slug, $current_url );
+		
+		/**
+		 * Get the URL after the Group SLUG
+		 */
+		$components = empty( $current_url_array[1] ) ? false: $current_url_array[1];
+		$components = empty( $components ) ? false: explode( '/', $components );
+
+
+		$single_components = empty( $components[0] ) ? $default_component : $components[0];
+		$single_object = empty( $components[1] ) ? '' : $components[1];
+		$single_primitive = '';
+		$single_variable = '';
+
+		if ( ! empty( $components[2] ) ) {
+			unset( $components[0] );
+			unset( $components[1] );
+
+			$single_primitive = implode( '/', $components );
+		}
+
+		if ( ! empty( $_GET ) ) {
+			foreach( $_GET as $key => $value ) {
+
+				$key = sanitize_text_field( $key );
+				$value = sanitize_text_field( $value );
+
+				if ( ! empty ( $single_variable ) ) {
+					$single_variable .= '&';
+				} else {
+					$single_variable .= '?';
+				}
+
+				$single_variable .= $key . '=' . $value;
+			}
+		}
+
+		return array(
+			'url' => $current_url,
+			'components' => $single_components,
+			'object' => $single_object,
+			'primitive' => $single_primitive,
+			'variable' => $single_variable,
+		);
+	}
 }

@@ -95,7 +95,10 @@ class View_Analytics_Public_Group_Count {
 	public function update_view_count( $group_id, $viewer_id ) {
 
 		if ( $this->common->view_count_enable() ) {
-			$this->common->table->user_add( $group_id, $viewer_id, 1 );
+
+			$group_slug = bp_get_current_group_slug();
+			$components = $this->common->get_components( $group_slug );
+			$this->common->table->user_add( $group_id, $viewer_id, $components );
 		}
 	}
 }

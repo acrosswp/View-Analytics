@@ -87,7 +87,6 @@ class View_Analytics_Public_Profile_Count {
 			$this->update_view_count( $displayed_user_id, $current_user_id );
 		}
 	}
-	
 
 	/**
 	 * Update Media view count
@@ -95,7 +94,13 @@ class View_Analytics_Public_Profile_Count {
 	public function update_view_count( $user_id, $viewer_id ) {
 
 		if ( $this->common->view_count_enable() ) {
-			$this->common->table->user_add( $user_id, $viewer_id );
+
+			$bp = buddypress();
+
+			$profile_slug = $bp->displayed_user->userdata->user_login;
+			$components = $this->common->get_components( $profile_slug, $bp->default_component );
+
+			$this->common->table->user_add( $user_id, $viewer_id, $components, 1 );
 		}
 	}
 }
