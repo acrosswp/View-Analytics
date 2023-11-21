@@ -143,7 +143,7 @@ class View_Analytics_Group_Table {
 					DISTINCT viewer_id,
 					MIN(action_date) as first_action_date,
 					COUNT(*) as view_count
-				FROM wp_awp_va_profile_view
+				FROM {$table_name}
 				WHERE group_id = %d
 				GROUP BY viewer_id
 				ORDER BY first_action_date DESC;",
