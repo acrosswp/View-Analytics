@@ -51,6 +51,9 @@ e.g.
 == Changelog ==
 
 = 1.0.4 =
+* Add Chart for Media View
+* Add Log Table
+* Add Profile View and there Count
 * Add Avatar and Cover Image Update Count
 
 = 1.0.3 =

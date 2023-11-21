@@ -43,6 +43,15 @@ class View_Analytics_Admin {
 	private $version;
 
 	/**
+	 * The ID of this media setting view.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	private $media_common;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -74,8 +83,27 @@ class View_Analytics_Admin {
 		 * class.
 		 */
 
-		 wp_enqueue_script( $this->plugin_name . '-backend', 'https://cdn.jsdelivr.net/npm/chart.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( 'google-chart', 'https://cdn.jsdelivr.net/npm/chart.js', array( 'jquery' ), '', false );
+		wp_enqueue_script( $this->plugin_name . '-backend', VIEW_ANALYTICS_PLUGIN_URL . 'assets/dist/js/backend-script.js', array( 'jquery', 'google-chart' ), $this->version, false );
 
+	}
+
+	/**
+	 * Register the Localize Script for the public-facing side of the site.
+	 *
+	 * @since    1.0.0
+	 */
+	public function wp_localize_script() {
+
+		$this->media_common = View_Analytics_Media_Common::instance();
+		
+
+		wp_localize_script( $this->plugin_name . '-backend', 'view_analytics_media_view',
+			array( 
+				'all_media_type' => $this->media_common->all_media_type_for_chart(),
+				'all_media_view_type' => $this->media_common->get_all_media_view_type_count(),
+			)
+		);
 	}
 
 	/**

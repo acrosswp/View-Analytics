@@ -166,7 +166,7 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 		if ( empty( $attachment_id_key ) && 'video_get_activity' == $action ) {
 			$media_id_key = $this->get_lightbox_media_id_key( $action );
 			$media_id = $this->get_filter_post_value( $media_id_key );
-			$attachment_id =  View_Analytics_Media_Table::instance()->get_bb_media_attachment_id( $media_id );
+			$attachment_id =  $this->table->get_bb_media_attachment_id( $media_id );
 		} else {
 			$attachment_id = $this->get_filter_post_value( $attachment_id_key );
 		}
@@ -206,7 +206,8 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 	 * Get the media view details via $attachment_id
 	 */
 	public function get_count( $key_id ) {
-		$media_details = $this->table->get_details( $key_id );
+
+		$media_details = $this->table->log_table->get_details( $key_id );
 		if ( empty( $media_details ) ) {
 			return 0;
 		} else {
@@ -231,5 +232,96 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 
 		return sprintf( __( 'viewed this %s ago.', 'view-analytics' ), $view_time );
 
+	}
+
+	/**
+	 * Get all the Media view
+	 */
+	public function get_all_media_type() {
+		return $this->table->log_table->get_details( $action );
+	}
+
+	/**
+	 * Get all the Media view
+	 */
+	public function get_all_media_view( $action ) {
+		return $this->table->log_table->get_details( $action );
+	}
+
+	/**
+	 * Get all the Media view
+	 */
+	public function get_all_media_view_type_count() {
+
+		$type_count = array();
+
+		$media_view_logs = $this->get_all_media_view( 'media_view' );
+
+		foreach( $media_view_logs as $media_view_log ) {
+
+			if( empty( $media_view_log->type ) ) {
+				$media_view_log->type = 'not-define';
+			}
+
+			if ( empty( $type_count[ $media_view_log->type ] ) ) {
+				$count = 1;
+			} else {
+				$count = $type_count[ $media_view_log->type ];
+				$count++;
+			}
+			$type_count[ $media_view_log->type ] = $count;
+		}
+
+		$media_types_name = array();
+		$media_count = array();
+		foreach( $type_count as $key => $value ) {
+			$media_types_name[] = ucfirst( $key );
+			$media_count[] = $value;
+		}
+
+		return array(
+			'label' => __( 'All Media View Type', 'view-analytics' ),
+			'media_label' => $media_types_name,
+			'count' => $media_count,
+		);
+		return $type_count;
+	}
+
+	/**
+	 * Return array for chart to show all media type
+	 */
+	public function all_media_type_for_chart() {
+		$media_types_counts = array();
+
+		/**
+		 * For Media table where it contain all photo and video
+		 */
+		$media_types = $this->table->get_bb_media_type_from_bb();
+
+		$media_types[] = 'photo';
+		$media_types[] = 'video';
+		
+		$media_types = array_unique( $media_types );
+		foreach( $media_types as $media_type  ) {
+			$media_types_counts[ $media_type ] = $this->table->get_bb_media_type_count_from_bb( 'media', $media_type );
+		}
+
+		/**
+		 * For Document table where it contain all document
+		 */
+		$media_types_counts['document'] = $this->table->get_bb_media_type_count_from_bb( 'document' );
+
+		$media_types_name = array();
+		$media_count = array();
+		foreach( $media_types_counts as $key => $value ) {
+			$media_types_name[] = ucfirst( $key );
+			$media_count[] = $value;
+		}
+
+		return array(
+			'label' => __( 'All Media Type', 'view-analytics' ),
+			'media_label' => $media_types_name,
+			'count' => $media_count,
+		);
 	}
 }

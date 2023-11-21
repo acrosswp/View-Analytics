@@ -93,4 +93,20 @@ class View_Analytics_Log_Table {
 		$wpdb->delete( $this->table_name(), array( 'viewer_id' => $key_id ), array( '%d' ) );
 		$wpdb->delete( $this->table_name(), array( 'user_id' => $key_id ), array( '%d' ) );
 	}
+
+	/**
+	 * Get the avatar view details via $user_id
+	 */
+	public function get_details( $action ) {
+		global $wpdb;
+
+		$table_name = $this->table_name();
+
+		return $wpdb->get_results(
+			$wpdb->prepare( 
+				"SELECT * FROM $table_name WHERE action = %s",
+				$action
+			)
+		);
+	}
 }

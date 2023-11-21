@@ -37,6 +37,14 @@ var style_output = {
   },
 };
 
+var backend_script = Object.assign({}, script_output,{
+  entry: {
+      'backend-script': [
+        './assets/src/backend/js/index.js'
+      ],
+  },
+});
+
 var frontend_script = Object.assign({}, script_output, {
   entry: {
       'frontend-script': [
@@ -68,5 +76,6 @@ wpPot( {
 // Return Array of Configurations
 module.exports = [
   frontend_style,
+  backend_script,
   frontend_script
 ];

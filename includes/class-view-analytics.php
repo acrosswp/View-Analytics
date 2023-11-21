@@ -439,6 +439,11 @@ final class View_Analytics {
 		$this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_scripts' );
 
 		/**
+		 * Load the localize Script
+		 */
+		$this->loader->add_action( 'admin_enqueue_scripts', $admin, 'wp_localize_script' );
+
+		/**
 		 * Menu
 		 */
 		$admin_main_menu = new View_Analytics_Admin_Main_Menu( $this->get_plugin_name(), $this->get_version() );

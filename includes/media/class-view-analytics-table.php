@@ -207,6 +207,59 @@ class View_Analytics_Media_Table {
 	* 
 	* get the value of the media from the bp_media buddyboss table
 	*/
+	public function get_bb_media_type_count_from_bb( $table = 'media', $type = '' ) {
+		global $wpdb;
+		global $bp;
+
+		
+		$sql = $wpdb->prepare( 
+			"SELECT id FROM {$bp->media->table_name} WHERE type = %s",
+			$type
+		);
+
+		if ( 'document' == $table ) {
+			$sql = $wpdb->prepare( 
+				"SELECT id FROM {$bp->document->table_name}",
+				$type
+			);
+		}
+
+		$result = $wpdb->get_results( $sql, ARRAY_A );
+		return empty( $result ) ? 0 : count( $result );
+	}
+
+	/**
+	* Here this will work only for Image and Video 
+	* This function wont work if it's document because docuemnt has a seperate table
+	* 
+	* get the value of the media from the bp_media buddyboss table
+	*/
+	public function get_bb_media_type_from_bb() {
+		global $wpdb;
+		global $bp;
+
+		$type = array();
+		$sql = "SELECT DISTINCT type FROM {$bp->media->table_name}";
+
+		$media_types = $wpdb->get_results( $sql, ARRAY_A );
+
+		if( ! empty( $media_types ) ) {
+			foreach( $media_types as $media_type ) {
+
+				if( ! in_array( $media_type['type'], $type ) ) {
+					$type[] = $media_type['type'];
+				}
+			}
+		}
+		return $type;
+	}
+
+	/**
+	* Here this will work only for Image and Video 
+	* This function wont work if it's document because docuemnt has a seperate table
+	* 
+	* get the value of the media from the bp_media buddyboss table
+	*/
 	public function get_bb_media_details( $media_id ) {
 		global $wpdb;
 		global $bp;

@@ -41,6 +41,15 @@ class View_Analytics_Admin_Media_Menu {
 	 * @var      string    $version    The current version of this plugin.
 	 */
 	private $version;
+
+	/**
+	 * The ID of this media setting view.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	private $media_common;
 	
 	/**
 	 * Initialize the class and set its properties.
@@ -53,6 +62,8 @@ class View_Analytics_Admin_Media_Menu {
 		
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+
+		$this->media_common = View_Analytics_Media_Common::instance();
 	}
 
 	/**
@@ -75,5 +86,29 @@ class View_Analytics_Admin_Media_Menu {
 	 */
 	function about_view_analytics() {
 		
+		$this->view_all_media_type();
+
+		$this->view_all_media_view();
+	}
+
+	/**
+	 * View All Media that is been view
+	 */
+	function view_all_media_type() {
+		?>
+		<h4>All Media Type</h4>
+		<div class="chart-container" style="width: 400px;"><canvas id="all-media-type"></canvas></div>
+		<?php
+	}
+
+
+	/**
+	 * View All Media that is been view
+	 */
+	function view_all_media_view() {
+		?>
+		<h4>All Media View Type</h4>
+		<div class="chart-container" style="width: 400px;"><canvas id="all-media-view-type"></canvas></div>
+		<?php
 	}
 }
