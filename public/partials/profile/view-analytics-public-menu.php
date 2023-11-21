@@ -122,9 +122,9 @@ class View_Analytics_Profile_Count_View {
 
 						<div class="notification-content">
 							<span>
-								<a href="<?php echo $link; ?>"><?php echo $this->common->get_view_body_message( $view_detail->viewer_id, $view_detail->value ); ?></a>
+								<a href="<?php echo $link; ?>"><?php echo $this->common->get_view_body_message( $view_detail->viewer_id, $view_detail->view_count ); ?></a>
 							</span>
-							<span class="posted"><?php echo $this->common->get_view_time_message( $view_detail->action_date, $mysql_time ); ?></span>
+							<span class="posted"><?php echo $this->common->get_view_time_message( $view_detail->first_action_date, $mysql_time ); ?></span>
 						</div>
 					</li>
 					<?php

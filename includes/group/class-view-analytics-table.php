@@ -34,34 +34,6 @@ class View_Analytics_Group_Table {
 	protected static $_instance = null;
 
 	/**
-	 * The single instance of the class.
-	 *
-	 * @var View_Analytics_Log_Table
-	 * @since 1.0.0
-	 */
-	public $log_table = null;
-
-	/**
-	 * The single instance of the class.
-	 *
-	 * @since 1.0.0
-	 */
-	public $log_table_key = 'group_view';
-
-	/**
-	 * Define the core functionality of the plugin.
-	 *
-	 * Set the plugin name and the plugin version that can be used throughout the plugin.
-	 * Load the dependencies, define the locale, and set the hooks for the admin area and
-	 * the public-facing side of the site.
-	 *
-	 * @since    1.0.0
-	 */
-	public function __construct() {
-        $this->log_table = View_Analytics_Log_Table::instance();
-	}
-
-	/**
 	 * Main View_Analytics_Group_Table Instance.
 	 *
 	 * Ensures only one instance of WooCommerce is loaded or can be loaded.
@@ -89,7 +61,7 @@ class View_Analytics_Group_Table {
 	/**
 	 * Add the current user has view group count
 	 */
-	public function user_add( $group_id, $viewer_id, $value = 1 ) {
+	public function user_add( $group_id, $viewer_id, $is_new = 1 ) {
 		global $wpdb;
 
 		$add = $wpdb->insert(
@@ -97,7 +69,7 @@ class View_Analytics_Group_Table {
 			array( 
 				'group_id' => $group_id,
 				'viewer_id' => $viewer_id,
-				'value' => $value,
+				'is_new' => $is_new,
 			),
 			array(
 				'%d',
@@ -105,10 +77,6 @@ class View_Analytics_Group_Table {
 				'%d',
 			)
 		);
-
-		if ( $add ) {
-			$this->log_table->user_add( $this->log_table_key, $group_id, 0, $viewer_id );
-		}
 
 		return $add;
 	}
@@ -131,32 +99,23 @@ class View_Analytics_Group_Table {
 	}
 
 	/**
-	 * Update the current user has view group count
+	 * Update the current user has view profile count
 	 */
-	public function user_update( $id, $value, $details = false ,$mysql_time = false ) {
+	public function user_update( $id, $is_new ) {
 		global $wpdb;
-		
-		if ( empty( $mysql_time ) ) {
-			$mysql_time = $wpdb->get_var( 'select CURRENT_TIMESTAMP()' );
-		}
 
 		$update = $wpdb->update(
 			$this->table_name(),
 			array(
-				'last_date' => $mysql_time,
 				'value' => $value,
-				'is_new' => 1,
+				'is_new' => $is_new,
 			),
 			array( 
 				'id' => $id 
 			),
-			array( '%s','%d','%d' ),
+			array( '%d','%d' ),
 			array( '%d' )
 		);
-
-		if ( $update && ! empty( $details->group_id ) && ! empty( $details->viewer_id ) ) {
-			$this->log_table->user_add( $this->log_table_key, $details->group_id, 0, $details->viewer_id );
-		}
 
 		return $update;
 	}
@@ -164,9 +123,10 @@ class View_Analytics_Group_Table {
 	/**
 	 * Delete the current user has view group count
 	 */
-	public function user_delete( $group_id ) {
+	public function user_delete( $group_id, $viewer_id ) {
 		global $wpdb;
 		$wpdb->delete( $this->table_name(), array( 'group_id' => $group_id ), array( '%d' ) );
+		$wpdb->delete( $this->table_name(), array( 'viewer_id' => $user_id ), array( '%d' ) );
 	}
 
 	/**
@@ -179,7 +139,14 @@ class View_Analytics_Group_Table {
 
 		return $wpdb->get_results(
 			$wpdb->prepare( 
-				"SELECT * FROM $table_name WHERE group_id = %d",
+				"SELECT 
+					DISTINCT viewer_id,
+					MIN(action_date) as first_action_date,
+					COUNT(*) as view_count
+				FROM wp_awp_va_profile_view
+				WHERE group_id = %d
+				GROUP BY viewer_id
+				ORDER BY first_action_date DESC;",
 				$group_id
 			)
 		);

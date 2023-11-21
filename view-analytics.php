@@ -84,3 +84,12 @@ function view_analytics_run() {
 
 }
 view_analytics_run();
+
+
+
+
+function sdfdsfsdfdsfs() {
+	global $wp;
+	var_dump( $wp->request );
+}
+add_action( 'wp_footer', 'sdfdsfsdfdsfs' );

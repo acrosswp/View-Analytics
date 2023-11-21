@@ -55,15 +55,6 @@ class View_Analytics_Public_Group_Count {
 	private $common;
 
 	/**
-	 * The instance of the Profile View Table
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
-	 */
-	private $table;
-
-	/**
 	 * Define the core functionality of the plugin.
 	 *
 	 * Set the plugin name and the plugin version that can be used throughout the plugin.
@@ -104,23 +95,7 @@ class View_Analytics_Public_Group_Count {
 	public function update_view_count( $group_id, $viewer_id ) {
 
 		if ( $this->common->view_count_enable() ) {
-
-			$this->table = View_Analytics_Group_Table::instance();
-
-			$view = $this->table->user_get( $group_id, $viewer_id );
-
-			/**
-			 * Check if empty
-			 */
-			if ( empty( $view ) ) {
-				$this->table->user_add( $group_id, $viewer_id, 1 );
-			} else {
-				$id = $view->id;
-				$view_count = $view->value;
-				$view_count++;
-	
-				$this->table->user_update( $id, $view_count, $view );
-			}
+			$this->common->table->user_add( $group_id, $viewer_id, 1 );
 		}
 	}
 }

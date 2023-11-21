@@ -84,9 +84,7 @@ class View_Analytics_Activator {
 			id bigint(20) NOT NULL AUTO_INCREMENT ,
 			user_id bigint(20) NOT NULL,
 			viewer_id bigint(20) NOT NULL,
-			value bigint(20) NOT NULL DEFAULT 1,
 			is_new tinyint(1) NOT NULL DEFAULT 1,
-			last_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
 		) {$charset_collate};";
@@ -101,9 +99,7 @@ class View_Analytics_Activator {
 			id bigint(20) NOT NULL AUTO_INCREMENT ,
 			group_id bigint(20) NOT NULL,
 			viewer_id bigint(20) NOT NULL,
-			value bigint(20) NOT NULL DEFAULT 1,
 			is_new tinyint(1) NOT NULL DEFAULT 1,
-			last_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
 		) {$charset_collate};";
