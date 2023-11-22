@@ -34,34 +34,6 @@ class View_Analytics_Media_Table {
 	protected static $_instance = null;
 
 	/**
-	 * The single instance of the class.
-	 *
-	 * @var View_Analytics_Log_Table
-	 * @since 1.0.0
-	 */
-	public $log_table = null;
-
-	/**
-	 * The single instance of the class.
-	 *
-	 * @since 1.0.0
-	 */
-	public $log_table_key = 'media_view';
-
-	/**
-	 * Define the core functionality of the plugin.
-	 *
-	 * Set the plugin name and the plugin version that can be used throughout the plugin.
-	 * Load the dependencies, define the locale, and set the hooks for the admin area and
-	 * the public-facing side of the site.
-	 *
-	 * @since    1.0.0
-	 */
-	public function __construct() {
-        $this->log_table = View_Analytics_Log_Table::instance();
-	}
-
-	/**
 	 * Main View_Analytics_Media_Table Instance.
 	 *
 	 * Ensures only one instance of WooCommerce is loaded or can be loaded.
