@@ -83,7 +83,6 @@ class View_Analytics_Group_Count_View {
 
 			$group_link = bp_get_group_permalink( $current_group );
 
-			// var_dump( $groups_link );
 			bp_core_new_subnav_item( array(
 				'name' => __( 'Group View', 'view-analytics' ),
 				'slug' => 'group-view',

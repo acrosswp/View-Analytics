@@ -161,51 +161,51 @@ class View_Analytics_Media_Rest_Controller extends WP_REST_Controller {
 
 		// We are also renaming the fields to more understandable names.
 		if ( isset( $schema['properties']['id'] ) ) {
-			$media_data['id'] = (int) $media->id;
+			$media_data['id'] = (int) $media['id'];
 		}
 
 		if ( isset( $schema['properties']['viewer_id'] ) ) {
-			$media_data['user_id'] = (int) $media->viewer_id;
+			$media_data['user_id'] = (int) $media['viewer_id'];
 		}
 
 		if ( isset( $schema['properties']['key_id'] ) ) {
-			$media_data['key_id'] = (int) $media->key_id;
+			$media_data['key_id'] = (int) $media['key_id'];
 		}
 
 		if ( isset( $schema['properties']['hash_id'] ) ) {
-			$media_data['hash_id'] = (int) $media->hash_id;
+			$media_data['hash_id'] = (int) $media['hash_id'];
 		}
 
 		if ( isset( $schema['properties']['media_id'] ) ) {
-			$media_data['media_id'] = (int) $media->media_id;
+			$media_data['media_id'] = (int) $media['media_id'];
 		}
 
 		if ( isset( $schema['properties']['key_id'] ) ) {
-			$media_data['key_id'] = (int) $media->key_id;
+			$media_data['key_id'] = (int) $media['key_id'];
 		}
 
 		if ( isset( $schema['properties']['user_avatar_url'] ) ) {
-			$media_data['user_avatar_url'] = get_avatar_url( $media->viewer_id, 32 );
+			$media_data['user_avatar_url'] = get_avatar_url( $media['viewer_id'], 32 );
 		}
 
 		if ( isset( $schema['properties']['user_profile_url'] ) ) {
-			$media_data['user_profile_url'] = bp_core_get_user_domain( $media->viewer_id );
+			$media_data['user_profile_url'] = bp_core_get_user_domain( $media['viewer_id'] );
 		}
 
 		if ( isset( $schema['properties']['user_profile_url'] ) ) {
-			$media_data['user_profile_url'] = bp_core_get_user_domain( $media->viewer_id );
+			$media_data['user_profile_url'] = bp_core_get_user_domain( $media['viewer_id'] );
 		}
 
 		if ( isset( $schema['properties']['user_display_name'] ) ) {
-			$media_data['user_display_name'] = bp_core_get_user_displayname( $media->viewer_id );
+			$media_data['user_display_name'] = bp_core_get_user_displayname( $media['viewer_id'] );
 		}
 
 		if ( isset( $schema['properties']['message'] ) ) {
-			$media_data['message'] = $this->common->get_view_time_message( $media->action_date, $mysql_time );
+			$media_data['message'] = $this->common->get_view_time_message( $media['action_date'], $mysql_time );
 		}
 
 		if ( isset( $schema['properties']['action_date'] ) ) {
-			$media_data['action_date'] = $media->action_date;
+			$media_data['action_date'] = $media['action_date'];
 		}
 
 		return rest_ensure_response( $media_data );

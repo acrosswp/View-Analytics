@@ -99,7 +99,6 @@ class View_Analytics_Public_Group_Count {
 			$group_slug = bp_get_current_group_slug();
 			$components = $this->common->get_components( $group_slug );
 
-
 			$group_view = $this->common->table->user_get( $group_id, $viewer_id );
 
 			if( empty( $group_view ) ) {

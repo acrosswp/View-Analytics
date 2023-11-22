@@ -162,7 +162,8 @@ class View_Analytics_Group_Table {
 			$wpdb->prepare( 
 				"SELECT * FROM {$table_name} WHERE group_id = %d",
 				$group_id
-			)
+			),
+			ARRAY_A
 		);
 	}
 

@@ -192,6 +192,13 @@ class View_Analytics_Public {
 	 * Show view count HTML
 	 */
 	public function show_view_count( $key_id ) {
+
+		/**
+		 * Load popup template into the Activity Area
+		 */
+		$this->buddyboss_who_view_media_modal();
+
+
 		$counts = $this->media_common->get_count( $key_id );
 
 		$view = _n( 'View', 'Views', $counts, 'view-analytics' );

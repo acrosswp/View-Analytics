@@ -162,7 +162,8 @@ class View_Analytics_Profile_Table {
 			$wpdb->prepare( 
 				"SELECT * FROM {$table_name} WHERE user_id = %d",
 				$user_id
-			)
+			),
+			ARRAY_A
 		);
 	}
 

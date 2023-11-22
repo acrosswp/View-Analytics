@@ -424,7 +424,7 @@ final class View_Analytics {
 		/**
 		 * Load the localize Script
 		 */
-		$this->loader->add_action( 'admin_enqueue_scripts', $admin, 'wp_localize_script' );
+		// $this->loader->add_action( 'admin_enqueue_scripts', $admin, 'wp_localize_script' );
 
 		/**
 		 * Menu
@@ -528,13 +528,6 @@ final class View_Analytics {
 			 */
 			$this->loader->add_action( 'bp_before_activity_activity_content', $public, 'buddyboss_show_view_count', 1000 );
 
-			/**
-			 * Load popup template into the Activity Area
-			 */
-			$this->loader->add_action( 'bp_after_directory_activity_list', $public, 'buddyboss_who_view_media_modal', 1000 );
-			$this->loader->add_action( 'bp_after_member_activity_content', $public, 'buddyboss_who_view_media_modal', 1000 );
-			$this->loader->add_action( 'bp_after_group_activity_content', $public, 'buddyboss_who_view_media_modal', 1000 );
-			$this->loader->add_action( 'bp_after_single_activity_content', $public, 'buddyboss_who_view_media_modal', 1000 );
 		} else {
 
 			/**

@@ -122,7 +122,8 @@ class View_Analytics_Avatar_Table {
 				$key_id,
 				$type,
 				$action
-			)
+			),
+			ARRAY_A
 		);
 	}
 }

@@ -97,7 +97,7 @@ class View_Analytics_Media_Table {
 		);
 
 		if ( $add ) {
-			$this->log_table->user_add( $wpdb->insert_id, $media_owner_id, $viewer_id, $key_id, $type );
+			$this->add_log( $wpdb->insert_id, $media_owner_id, $viewer_id, $key_id, $media_type );
 		}
 
 		return $add;
@@ -132,7 +132,8 @@ class View_Analytics_Media_Table {
 			$wpdb->prepare( 
 				"SELECT * FROM $table_name WHERE key_id = %s",
 				$key_id
-			)
+			),
+			ARRAY_A
 		);
 	}
 
@@ -167,7 +168,7 @@ class View_Analytics_Media_Table {
 			&& ! empty( $details->viewer_id ) 
 			&& ! empty( $details->type ) 
 			) {
-			$this->log_table->user_add( $id, $details->user_id, $details->viewer_id, $details->key_id, $type );
+			$this->add_log( $id, $details->user_id, $details->viewer_id, $details->key_id, $details->type );
 		}
 
 		return $update;
@@ -258,7 +259,7 @@ class View_Analytics_Media_Table {
 	public function add_log( $media_view_id, $media_owner_id, $viewer_id, $key_id, $type ) {
 		global $wpdb;
 
-		$add = $wpdb->insert(
+		return $wpdb->insert(
 			$this->table_name_log(),
 			array( 
 				'media_view_id' => $media_view_id,

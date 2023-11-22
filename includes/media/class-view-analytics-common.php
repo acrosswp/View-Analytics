@@ -207,7 +207,8 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 	 */
 	public function get_count( $key_id ) {
 
-		$media_details = $this->table->log_table->get_details( $key_id );
+		$media_details = $this->table->get_details( $key_id );
+
 		if ( empty( $media_details ) ) {
 			return 0;
 		} else {
@@ -238,14 +239,14 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 	 * Get all the Media view
 	 */
 	public function get_all_media_type() {
-		return $this->table->log_table->get_details( $action );
+		return $this->table->get_details( $action );
 	}
 
 	/**
 	 * Get all the Media view
 	 */
 	public function get_all_media_view( $action ) {
-		return $this->table->log_table->get_details( $action );
+		return $this->table->get_details( $action );
 	}
 
 	/**
