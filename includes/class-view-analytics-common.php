@@ -51,11 +51,7 @@ class View_Analytics_Common {
 	 *
 	 * @since    1.0.0
 	 */
-	public function __construct() {
-
-        $this->table = View_Analytics_Media_Table::instance();
-
-	}
+	public function __construct() {}
 
 	/**
 	 * Main View_Analytics_Loader Instance.

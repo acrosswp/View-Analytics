@@ -49,43 +49,64 @@ class View_Analytics_Deactivator {
 	public static function delete_table() {
 		global $wpdb;
 		
+		/**
+		 * Media and Media View Log
+		 */
 		$media_view_table_name_main		 = $wpdb->prefix . 'awp_va_media_view';
 		$media_view_sql_main = "DROP TABLE IF EXISTS $media_view_table_name_main";
 
-		$profile_view_table_name_main		 = $wpdb->prefix . 'awp_va_profile_view';
-		$profile_view_sql_main = "DROP TABLE IF EXISTS $profile_view_table_name_main";
-
-		$group_view_table_name_main		 = $wpdb->prefix . 'awp_va_group_view';
-		$group_view_sql_main = "DROP TABLE IF EXISTS $group_view_table_name_main";
-
-		$avatar_view_table_name_main		 = $wpdb->prefix . 'awp_va_avatar_view';
-		$avatar_view_sql_main = "DROP TABLE IF EXISTS $avatar_view_table_name_main";
-
-		
 		$media_view_table_name		 = $wpdb->prefix . 'awp_va_media_view_log';
 		$media_view_sql = "DROP TABLE IF EXISTS $media_view_table_name";
+
+
+		/**
+		 * profile and Profile view log
+		 */
+		$profile_view_table_name_main		 = $wpdb->prefix . 'awp_va_profile_view';
+		$profile_view_sql_main = "DROP TABLE IF EXISTS $profile_view_table_name_main";
 
 		$profile_view_table_name		 = $wpdb->prefix . 'awp_va_profile_view_log';
 		$profile_view_sql = "DROP TABLE IF EXISTS $profile_view_table_name";
 
+
+		/**
+		 * Group and Group View Log
+		 */
+		$group_view_table_name_main		 = $wpdb->prefix . 'awp_va_group_view';
+		$group_view_sql_main = "DROP TABLE IF EXISTS $group_view_table_name_main";
+
 		$group_view_table_name		 = $wpdb->prefix . 'awp_va_group_view_log';
 		$group_view_sql = "DROP TABLE IF EXISTS $group_view_table_name";
 
+
+		/**
+		 * Avatar and cover image update of Profile and Group
+		 */
 		$avatar_view_table_name		 = $wpdb->prefix . 'awp_va_avatar_view_log';
 		$avatar_view_sql = "DROP TABLE IF EXISTS $avatar_view_table_name";
 
+
+		/**
+		 * We are not using this table any more
+		 */
 		$over_all_log_table_name		 = $wpdb->prefix . 'awp_va_log';
 		$over_all_log_sql = "DROP TABLE IF EXISTS $over_all_log_table_name";
 
+		$avatar_view_table_name_main		 = $wpdb->prefix . 'awp_va_avatar_view';
+		$avatar_view_sql_main = "DROP TABLE IF EXISTS $avatar_view_table_name_main";
+
 		$wpdb->query( $media_view_sql_main );
+		$wpdb->query( $media_view_sql );
+
 		$wpdb->query( $profile_view_sql_main );
+		$wpdb->query( $profile_view_sql );
+		
 		$wpdb->query( $group_view_sql_main );
+		$wpdb->query( $group_view_sql );
+		
+		$wpdb->query( $avatar_view_sql );
+		
 		$wpdb->query( $avatar_view_sql_main );
 		$wpdb->query( $over_all_log_sql );
-
-		$wpdb->query( $media_view_sql );
-		$wpdb->query( $profile_view_sql );
-		$wpdb->query( $group_view_sql );
-		$wpdb->query( $avatar_view_sql );
 	}
 }

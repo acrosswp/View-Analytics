@@ -56,7 +56,7 @@ class View_Analytics_Activator {
 		/**
 		 * Media View
 		 */
-		$media_view_table_name		 = $wpdb->prefix . 'awp_va_media_view_log';
+		$media_view_table_name		 = $wpdb->prefix . 'awp_va_media_view';
 
 		$media_view_sql = "CREATE TABLE {$media_view_table_name} (
 			id bigint(20) NOT NULL AUTO_INCREMENT ,
@@ -70,6 +70,19 @@ class View_Analytics_Activator {
 			type varchar(50) NOT NULL DEFAULT 'photo',
 			is_new tinyint(1) NOT NULL DEFAULT 1,
 			last_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+			PRIMARY KEY  (id)
+		) {$charset_collate};";
+
+		$media_view_table_name_log		 = $wpdb->prefix . 'awp_va_media_view_log';
+
+		$media_view_sql_log = "CREATE TABLE {$media_view_table_name_log} (
+			id bigint(20) NOT NULL AUTO_INCREMENT ,
+			media_view_id bigint(20) NOT NULL DEFAULT 0,
+			user_id bigint(20) NOT NULL DEFAULT 0,
+			viewer_id bigint(20) NOT NULL DEFAULT 0,
+			key_id varchar(255) NOT NULL DEFAULT 0,
+			type varchar(50) NOT NULL DEFAULT 'photo',
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
 		) {$charset_collate};";
@@ -160,6 +173,7 @@ class View_Analytics_Activator {
 		) {$charset_collate};";
 
 		maybe_create_table( $media_view_table_name, $media_view_sql );
+		maybe_create_table( $media_view_table_name_log, $media_view_sql_log );
 
 		maybe_create_table( $profile_view_table_name, $profile_view_sql );
 		maybe_create_table( $profile_view_table_name_log, $profile_view_sql_log );

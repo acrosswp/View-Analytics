@@ -252,11 +252,6 @@ final class View_Analytics {
 		/**
 		 * Load all the Media view file
 		 */
-		$this->load_log();
-
-		/**
-		 * Load all the Media view file
-		 */
 		$this->load_media_view();
 
 		/**
@@ -286,6 +281,12 @@ final class View_Analytics {
 	private function load_media_view() {
 
 		/**
+		 * Contain all the value to edit/delete/remove the table row
+		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/media/class-view-analytics-table.php' );
+
+
+		/**
 		 * All the functions are included in this file
 		 */
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/media/class-view-analytics-common.php' );
@@ -305,6 +306,11 @@ final class View_Analytics {
 	 * Load all the File releaste to Profile
 	 */
 	private function load_profile_view() {
+
+		/**
+		 * Contain all the value to edit/delete/remove the table row
+		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/profile/class-view-analytics-table.php' );
 
 		/**
 		 * All the functions are included in this file
@@ -331,6 +337,11 @@ final class View_Analytics {
 	private function load_group_view() {
 
 		/**
+		 * Contain all the value to edit/delete/remove the table row
+		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/group/class-view-analytics-table.php' );
+
+		/**
 		 * All the functions are included in this file
 		 */
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/group/class-view-analytics-common.php' );
@@ -352,6 +363,11 @@ final class View_Analytics {
 	 * Load all the File releaste to Group
 	 */
 	private function load_avatar_view() {
+
+		/**
+		 * Contain all the value to edit/delete/remove the table row
+		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/class-view-analytics-table.php' );
 
 		/**
 		 * All the functions are included in this file

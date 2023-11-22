@@ -55,6 +55,14 @@ class View_Analytics_Media_Table {
      */
     public function table_name() {
 		global $wpdb;
+		return $wpdb->prefix . 'awp_va_media_view';
+    }
+
+	/**
+     * Return the View Analytics Media Count Ket
+     */
+    public function table_name_log() {
+		global $wpdb;
 		return $wpdb->prefix . 'awp_va_media_view_log';
     }
 
@@ -89,7 +97,7 @@ class View_Analytics_Media_Table {
 		);
 
 		if ( $add ) {
-			$this->log_table->user_add( $this->log_table_key, $key_id, $media_owner_id, $viewer_id, $type );
+			$this->log_table->user_add( $wpdb->insert_id, $media_owner_id, $viewer_id, $key_id, $type );
 		}
 
 		return $add;
@@ -159,7 +167,7 @@ class View_Analytics_Media_Table {
 			&& ! empty( $details->viewer_id ) 
 			&& ! empty( $details->type ) 
 			) {
-			$this->log_table->user_add( $this->log_table_key, $details->key_id, $details->user_id, $details->viewer_id, $details->type );
+			$this->log_table->user_add( $id, $details->user_id, $details->viewer_id, $details->key_id, $type );
 		}
 
 		return $update;
@@ -240,6 +248,31 @@ class View_Analytics_Media_Table {
 			$wpdb->prepare( 
 				"SELECT * FROM {$bp->media->table_name} WHERE attachment_id = %d",
 				$media_id
+			)
+		);
+	}
+
+	/**
+	 * Add value in Log table
+	 */
+	public function add_log( $media_view_id, $media_owner_id, $viewer_id, $key_id, $type ) {
+		global $wpdb;
+
+		$add = $wpdb->insert(
+			$this->table_name_log(),
+			array( 
+				'media_view_id' => $media_view_id,
+				'user_id' => $media_owner_id,
+				'viewer_id' => $viewer_id,
+				'key_id' => $key_id,
+				'type' => $type,
+			),
+			array(
+				'%d',
+				'%d',
+				'%d',
+				'%s',
+				'%s',
 			)
 		);
 	}
