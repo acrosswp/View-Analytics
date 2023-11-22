@@ -185,6 +185,24 @@ class View_Analytics_Media_Table {
 	}
 
 	/**
+	 * Get the Media type count
+	*/
+	public function get_bb_media_type_count( $type ) {
+		global $wpdb;
+
+		$table_name = $this->table_name();
+
+		$sql = $wpdb->prepare( 
+			"SELECT count(1) as count FROM {$table_name} WHERE type = %s",
+			$type
+		);
+
+		$result = $wpdb->get_row( $sql, ARRAY_A );
+
+		return empty( $result['count'] ) ? 0 : absint( $result['count'] );
+	}
+
+	/**
 	* Here this will work only for Image and Video 
 	* This function wont work if it's document because docuemnt has a seperate table
 	* 

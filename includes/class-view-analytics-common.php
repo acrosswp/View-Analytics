@@ -151,6 +151,13 @@ class View_Analytics_Common {
 		return false;
 	}
 
+	/**
+	 * Return all the media type
+	 */
+	public function media_types() {
+		return array( 'photo', 'video', 'document' );
+	}
+
 
 	/**
 	 * Get the components of the current Group

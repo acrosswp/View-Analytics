@@ -277,38 +277,18 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 	 */
 	public function get_all_media_user_view_type_count() {
 
-		$type_count = array();
-
-		$media_views = $this->get_all_media_view();
-
-		foreach( $media_views as $media_view ) {
-
-			if( empty( $media_view->type ) ) {
-				$media_view->type = 'not-define';
-			}
-
-			if ( empty( $type_count[ $media_view->type ] ) ) {
-				$count = 1;
-			} else {
-				$count = $type_count[ $media_view->type ];
-				$count++;
-			}
-			$type_count[ $media_view->type ] = $count;
-		}
-
-		$media_types_name = array();
+		$media_types = $this->media_types();
 		$media_count = array();
-		foreach( $type_count as $key => $value ) {
-			$media_types_name[] = ucfirst( $key );
-			$media_count[] = $value;
+
+		foreach( $media_types as $media_type ) {
+			$media_count[] = $this->table->get_bb_media_type_count( $media_type );
 		}
 
 		return array(
 			'label' => __( 'All Media View Type', 'view-analytics' ),
-			'media_label' => $media_types_name,
+			'media_label' => $media_types,
 			'count' => $media_count,
 		);
-		return $type_count;
 	}
 
 	/**

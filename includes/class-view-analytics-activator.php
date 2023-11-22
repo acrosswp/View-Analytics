@@ -69,7 +69,9 @@ class View_Analytics_Activator {
 			attachment_id bigint(20) NOT NULL DEFAULT 0,
 			value bigint(20) NOT NULL DEFAULT 1,
 			type varchar(50) NOT NULL DEFAULT 'photo',
+			mime_type varchar(50) NOT NULL DEFAULT '',
 			is_new tinyint(1) NOT NULL DEFAULT 1,
+			locale varchar(50) NOT NULL,
 			last_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
@@ -85,6 +87,8 @@ class View_Analytics_Activator {
 			viewer_id bigint(20) NOT NULL DEFAULT 0,
 			key_id varchar(255) NOT NULL DEFAULT 0,
 			type varchar(50) NOT NULL DEFAULT 'photo',
+			mime_type varchar(50) NOT NULL DEFAULT '',
+			locale varchar(50) NOT NULL,
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
 		) {$charset_collate};";
@@ -102,6 +106,7 @@ class View_Analytics_Activator {
 			viewer_id bigint(20) NOT NULL,
 			value bigint(20) NOT NULL DEFAULT 1,
 			is_new tinyint(1) NOT NULL DEFAULT 1,
+			locale varchar(50) NOT NULL,
 			last_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
@@ -119,6 +124,7 @@ class View_Analytics_Activator {
 			object varchar(255) NOT NULL DEFAULT '',
 			primitive varchar(255) NOT NULL DEFAULT '',
 			variable varchar(255) NOT NULL DEFAULT '',
+			locale varchar(50) NOT NULL,
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
 		) {$charset_collate};";
@@ -136,6 +142,7 @@ class View_Analytics_Activator {
 			viewer_id bigint(20) NOT NULL,
 			value bigint(20) NOT NULL DEFAULT 1,
 			is_new tinyint(1) NOT NULL DEFAULT 1,
+			locale varchar(50) NOT NULL,
 			last_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
@@ -157,6 +164,7 @@ class View_Analytics_Activator {
 			object varchar(255) NOT NULL DEFAULT '',
 			primitive varchar(255) NOT NULL DEFAULT '',
 			variable varchar(255) NOT NULL DEFAULT '',
+			locale varchar(50) NOT NULL,
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
 		) {$charset_collate};";
@@ -175,6 +183,7 @@ class View_Analytics_Activator {
 			type		varchar(255) NULL,
 			action		varchar(255) NULL,
 			is_new		tinyint(1) NOT NULL DEFAULT 1,
+			locale varchar(50) NOT NULL,
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
 		) {$charset_collate};";
