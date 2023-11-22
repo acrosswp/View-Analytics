@@ -149,7 +149,6 @@ class View_Analytics_Public_Media_Count {
      * Count the number of users has view the video
      */
     public function buddyboss_video_view_count_login_user() {
-		
 		$this->buddyboss_view_count_verification( 'bp_nouveau_video', 'video' );
     }
 
@@ -184,7 +183,7 @@ class View_Analytics_Public_Media_Count {
 	 * Verifying the nonce and then adding the media count
 	 */
 	public function buddyboss_check_variable() {
-	
+
 		$media_id = $this->common->get_filter_post_value( 'id' );
 		$attachment_id = $this->common->get_filter_post_value( 'attachment_id' );
 
@@ -201,16 +200,16 @@ class View_Analytics_Public_Media_Count {
 		}
 
 		$action = $this->common->get_filter_post_value( 'action', FILTER_SANITIZE_STRING );
+
 		if( 'video_get_activity' == $action ) {
 			$media_id = $this->common->get_filter_post_value( 'video_id' );
-
-			if ( ! empty( $media_id ) ) {
 			
+			if ( ! empty( $media_id ) ) {
 				/**
 				 * Here this will work only for Image and Video 
 				 * This function wont work if it's document because docuemnt has a seperate table
 				 */
-				$attachment_id = View_Analytics_Media_Table::instance()->get_bb_media_attachment_id( $media_id );
+				$attachment_id = $this->common->get_bb_media_attachment_id( $media_id );
 
 				/**
 				 * if not empty

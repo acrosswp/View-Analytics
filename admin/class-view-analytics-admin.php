@@ -101,7 +101,7 @@ class View_Analytics_Admin {
 		wp_localize_script( $this->plugin_name . '-backend', 'view_analytics_media_view',
 			array( 
 				'all_media_type' => $this->media_common->all_media_type_for_chart(),
-				'all_media_view_type' => $this->media_common->get_all_media_view_type_count(),
+				'all_media_view_type' => $this->media_common->get_all_media_user_view_type_count(),
 			)
 		);
 	}

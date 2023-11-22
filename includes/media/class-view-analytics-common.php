@@ -164,15 +164,38 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 		 * With this also check if this is video activity ajax action or else move to else statment
 		 */
 		if ( empty( $attachment_id_key ) && 'video_get_activity' == $action ) {
+			
 			$media_id_key = $this->get_lightbox_media_id_key( $action );
+			
 			$media_id = $this->get_filter_post_value( $media_id_key );
-			$attachment_id =  $this->table->get_bb_media_attachment_id( $media_id );
+
+			$attachment_id =  $this->get_bb_media_attachment_id( $media_id );
 		} else {
 			$attachment_id = $this->get_filter_post_value( $attachment_id_key );
 		}
 
 		return $attachment_id;
     }
+
+	/**
+	* Here this will work only for Image and Video 
+	* This function wont work if it's document because docuemnt has a seperate table
+	* 
+	* get the value of the media from the bp_media buddyboss table
+	*/
+	public function get_bb_media_attachment_id( $media_id ) {
+
+		$media_details = $this->table->get_bb_media_details( $media_id );
+
+		/**
+		 * if not empty
+		 */
+		if ( ! empty( $media_details['attachment_id'] ) ) {
+			return $media_details['attachment_id'];
+		}
+
+		return false;
+	}
 
 	/**
      * Return the View Analytics Media Count Key
@@ -252,25 +275,25 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 	/**
 	 * Get all the Media view
 	 */
-	public function get_all_media_view_type_count() {
+	public function get_all_media_user_view_type_count() {
 
 		$type_count = array();
 
-		$media_view_logs = $this->get_all_media_view( 'media_view' );
+		$media_views = $this->get_all_media_view();
 
-		foreach( $media_view_logs as $media_view_log ) {
+		foreach( $media_views as $media_view ) {
 
-			if( empty( $media_view_log->type ) ) {
-				$media_view_log->type = 'not-define';
+			if( empty( $media_view->type ) ) {
+				$media_view->type = 'not-define';
 			}
 
-			if ( empty( $type_count[ $media_view_log->type ] ) ) {
+			if ( empty( $type_count[ $media_view->type ] ) ) {
 				$count = 1;
 			} else {
-				$count = $type_count[ $media_view_log->type ];
+				$count = $type_count[ $media_view->type ];
 				$count++;
 			}
-			$type_count[ $media_view_log->type ] = $count;
+			$type_count[ $media_view->type ] = $count;
 		}
 
 		$media_types_name = array();

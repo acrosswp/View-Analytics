@@ -247,9 +247,10 @@ class View_Analytics_Media_Table {
 
 		return $wpdb->get_row(
 			$wpdb->prepare( 
-				"SELECT * FROM {$bp->media->table_name} WHERE attachment_id = %d",
+				"SELECT * FROM {$bp->media->table_name} WHERE id = %d",
 				$media_id
-			)
+			),
+			ARRAY_A
 		);
 	}
 
@@ -294,26 +295,6 @@ class View_Analytics_Media_Table {
 				$document_id
 			)
 		);
-	}
-
-	/**
-	* Here this will work only for Image and Video 
-	* This function wont work if it's document because docuemnt has a seperate table
-	* 
-	* get the value of the media from the bp_media buddyboss table
-	*/
-	public function get_bb_media_attachment_id( $media_id ) {
-
-		$media_details = $this->get_bb_media_details( $media_id );
-
-		/**
-		 * if not empty
-		 */
-		if ( ! empty( $media_details->attachment_id ) ) {
-			return $media_details->attachment_id;
-		}
-
-		return false;
 	}
 
 	/**
