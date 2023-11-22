@@ -56,7 +56,7 @@ class View_Analytics_Activator {
 		/**
 		 * Media View
 		 */
-		$media_view_table_name		 = $wpdb->prefix . 'awp_va_media_view';
+		$media_view_table_name		 = $wpdb->prefix . 'awp_va_media_view_log';
 
 		$media_view_sql = "CREATE TABLE {$media_view_table_name} (
 			id bigint(20) NOT NULL AUTO_INCREMENT ,
@@ -78,7 +78,7 @@ class View_Analytics_Activator {
 		/**
 		 * Profile View
 		 */
-		$profile_view_table_name		 = $wpdb->prefix . 'awp_va_profile_view';
+		$profile_view_table_name		 = $wpdb->prefix . 'awp_va_profile_view_log';
 
 		$profile_view_sql = "CREATE TABLE {$profile_view_table_name} (
 			id bigint(20) NOT NULL AUTO_INCREMENT ,
@@ -98,7 +98,7 @@ class View_Analytics_Activator {
 		/**
 		 * Group View
 		 */
-		$group_view_table_name		 = $wpdb->prefix . 'awp_va_group_view';
+		$group_view_table_name		 = $wpdb->prefix . 'awp_va_group_view_log';
 
 		$group_view_sql = "CREATE TABLE {$group_view_table_name} (
 			id bigint(20) NOT NULL AUTO_INCREMENT ,
@@ -118,7 +118,7 @@ class View_Analytics_Activator {
 		/**
 		 * Profile Fields View
 		 */
-		$avatar_view_table_name		 = $wpdb->prefix . 'awp_va_avatar_view';
+		$avatar_view_table_name		 = $wpdb->prefix . 'awp_va_avatar_view_log';
 
 		$avatar_view_sql = "CREATE TABLE {$avatar_view_table_name} (
 			id 			bigint(20) NOT NULL AUTO_INCREMENT ,

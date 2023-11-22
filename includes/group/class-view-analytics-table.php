@@ -55,7 +55,7 @@ class View_Analytics_Group_Table {
      */
     public function table_name() {
 		global $wpdb;
-		return $wpdb->prefix . 'awp_va_group_view';
+		return $wpdb->prefix . 'awp_va_group_view_log';
     }
 
 	/**

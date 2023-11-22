@@ -49,17 +49,17 @@ class View_Analytics_Deactivator {
 	public static function delete_table() {
 		global $wpdb;
 		
-		$media_view_table_name		 = $wpdb->prefix . 'awp_va_media_view';
+		$media_view_table_name		 = $wpdb->prefix . 'awp_va_media_view_log';
 		$media_view_sql = "DROP TABLE IF EXISTS $media_view_table_name";
 
-		$profile_view_table_name		 = $wpdb->prefix . 'awp_va_profile_view';
+		$profile_view_table_name		 = $wpdb->prefix . 'awp_va_profile_view_log';
 		$profile_view_sql = "DROP TABLE IF EXISTS $profile_view_table_name";
 
-		$group_view_table_name		 = $wpdb->prefix . 'awp_va_group_view';
+		$group_view_table_name		 = $wpdb->prefix . 'awp_va_group_view_log';
 		$group_view_sql = "DROP TABLE IF EXISTS $group_view_table_name";
 
 
-		$avatar_view_table_name		 = $wpdb->prefix . 'awp_va_avatar_view';
+		$avatar_view_table_name		 = $wpdb->prefix . 'awp_va_avatar_view_log';
 		$avatar_view_sql = "DROP TABLE IF EXISTS $avatar_view_table_name";
 
 
