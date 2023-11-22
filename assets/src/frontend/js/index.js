@@ -44,4 +44,27 @@ jQuery( document ).ready( function($) {
             }
         });
     });
+
+
+    $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
+        // Modify options, control originalOptions, store jqXHR, etc
+        try {
+            if ( originalOptions.data == null || typeof ( originalOptions.data ) == 'undefined' || typeof ( originalOptions.data.action ) == 'undefined' ) {
+                return true;
+            }
+        } catch ( e ) {
+            return true;
+        }
+
+        if ( 
+            originalOptions.data.action == 'media_get_media_description' 
+            || originalOptions.data.action == 'media_get_activity' 
+            || originalOptions.data.action == 'document_get_document_description' 
+            || originalOptions.data.action == 'document_get_activity' 
+            || originalOptions.data.action == 'video_get_video_description' 
+            || originalOptions.data.action == 'video_get_activity' 
+        ) {
+            options.data += '&va_url=' + window.location.href;
+        }
+    } );
  });

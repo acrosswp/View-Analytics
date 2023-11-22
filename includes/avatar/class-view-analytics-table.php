@@ -67,12 +67,14 @@ class View_Analytics_Avatar_Table {
 		return $wpdb->insert(
 			$this->table_name(),
 			array( 
+				'blog_id' => get_current_blog_id(),
 				'key_id' => $key_id,
 				'user_id' => $user_id,
 				'type' => $type,
 				'action' => $action,
 			),
 			array(
+				'%d',
 				'%d',
 				'%d',
 				'%s',

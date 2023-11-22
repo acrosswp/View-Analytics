@@ -164,6 +164,11 @@ class View_Analytics_Public_Media_Count {
 	 * Verifying the nonce and then adding the media count
 	 */
 	public function buddyboss_view_count_verification( $key, $type ) {
+
+
+		error_log( print_r( $_REQUEST, true ) . "\n", 3, WP_CONTENT_DIR . '/debug_new.log' );
+
+
 		// Nonce check!
 	    if ( $this->buddyboss_check_nonce( $key ) ) {
 

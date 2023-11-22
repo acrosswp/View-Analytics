@@ -75,11 +75,13 @@ class View_Analytics_Profile_Table {
 		$add = $wpdb->insert(
 			$this->table_name(),
 			array( 
+				'blog_id' => get_current_blog_id(),
 				'user_id' => $user_id,
 				'viewer_id' => $viewer_id,
 				'is_new' => $is_new,
 			),
 			array(
+				'%d',
 				'%d',
 				'%d',
 				'%d',
@@ -176,6 +178,7 @@ class View_Analytics_Profile_Table {
 		$add = $wpdb->insert(
 			$this->table_name_log(),
 			array( 
+				'blog_id' => get_current_blog_id(),
 				'key_id' => $key_id,
 				'user_id' => $user_id,
 				'viewer_id' => $viewer_id,
@@ -186,6 +189,7 @@ class View_Analytics_Profile_Table {
 				'variable' => $components['variable'],
 			),
 			array(
+				'%d',
 				'%d',
 				'%d',
 				'%d',

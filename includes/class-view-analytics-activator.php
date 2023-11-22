@@ -59,7 +59,8 @@ class View_Analytics_Activator {
 		$media_view_table_name		 = $wpdb->prefix . 'awp_va_media_view';
 
 		$media_view_sql = "CREATE TABLE {$media_view_table_name} (
-			id bigint(20) NOT NULL AUTO_INCREMENT ,
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			blog_id bigint(20) NULL,
 			user_id bigint(20) NOT NULL DEFAULT 0,
 			viewer_id bigint(20) NOT NULL DEFAULT 0,
 			key_id varchar(255) NOT NULL DEFAULT 0,
@@ -78,6 +79,7 @@ class View_Analytics_Activator {
 
 		$media_view_sql_log = "CREATE TABLE {$media_view_table_name_log} (
 			id bigint(20) NOT NULL AUTO_INCREMENT ,
+			blog_id bigint(20) NULL,
 			media_view_id bigint(20) NOT NULL DEFAULT 0,
 			user_id bigint(20) NOT NULL DEFAULT 0,
 			viewer_id bigint(20) NOT NULL DEFAULT 0,
@@ -94,7 +96,8 @@ class View_Analytics_Activator {
 		$profile_view_table_name		 = $wpdb->prefix . 'awp_va_profile_view';
 
 		$profile_view_sql = "CREATE TABLE {$profile_view_table_name} (
-			id bigint(20) NOT NULL AUTO_INCREMENT ,
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			blog_id bigint(20) NULL,
 			user_id bigint(20) NOT NULL,
 			viewer_id bigint(20) NOT NULL,
 			value bigint(20) NOT NULL DEFAULT 1,
@@ -106,7 +109,8 @@ class View_Analytics_Activator {
 
 		$profile_view_table_name_log		 = $wpdb->prefix . 'awp_va_profile_view_log';
 		$profile_view_sql_log = "CREATE TABLE {$profile_view_table_name_log} (
-			id bigint(20) NOT NULL AUTO_INCREMENT ,
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			blog_id bigint(20) NULL,
 			key_id bigint(20) NOT NULL,
 			user_id bigint(20) NOT NULL,
 			viewer_id bigint(20) NOT NULL,
@@ -126,7 +130,8 @@ class View_Analytics_Activator {
 		$group_view_table_name		 = $wpdb->prefix . 'awp_va_group_view';
 
 		$group_view_sql = "CREATE TABLE {$group_view_table_name} (
-			id bigint(20) NOT NULL AUTO_INCREMENT ,
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			blog_id bigint(20) NULL,
 			group_id bigint(20) NOT NULL,
 			viewer_id bigint(20) NOT NULL,
 			value bigint(20) NOT NULL DEFAULT 1,
@@ -143,6 +148,7 @@ class View_Analytics_Activator {
 
 		$group_view_sql_log = "CREATE TABLE {$group_view_table_name_log} (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
+			blog_id bigint(20) NULL,
 			key_id bigint(20) NOT NULL,
 			group_id bigint(20) NOT NULL,
 			viewer_id bigint(20) NOT NULL,
@@ -162,7 +168,8 @@ class View_Analytics_Activator {
 		$avatar_view_table_name		 = $wpdb->prefix . 'awp_va_avatar_view_log';
 
 		$avatar_view_sql = "CREATE TABLE {$avatar_view_table_name} (
-			id 			bigint(20) NOT NULL AUTO_INCREMENT ,
+			id 			bigint(20) NOT NULL AUTO_INCREMENT,
+			blog_id bigint(20) NULL,
 			key_id		varchar(255) NULL,
 			user_id 	bigint(20) NOT NULL,
 			type		varchar(255) NULL,

@@ -75,6 +75,7 @@ class View_Analytics_Media_Table {
 		$add = $wpdb->insert(
 			$this->table_name(),
 			array(
+				'blog_id' => get_current_blog_id(),
 				'viewer_id' => $viewer_id,
 				'key_id' => $key_id,
 				'hash_id' => $hash_id,
@@ -85,6 +86,7 @@ class View_Analytics_Media_Table {
 				'value' => $value,
 			),
 			array(
+				'%d',
 				'%d',
 				'%s',
 				'%s',
@@ -263,6 +265,7 @@ class View_Analytics_Media_Table {
 		return $wpdb->insert(
 			$this->table_name_log(),
 			array( 
+				'blog_id' => get_current_blog_id(),
 				'media_view_id' => $media_view_id,
 				'user_id' => $media_owner_id,
 				'viewer_id' => $viewer_id,
@@ -270,6 +273,7 @@ class View_Analytics_Media_Table {
 				'type' => $type,
 			),
 			array(
+				'%d',
 				'%d',
 				'%d',
 				'%d',
