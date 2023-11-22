@@ -78,10 +78,23 @@ class View_Analytics_Activator {
 		/**
 		 * Profile View
 		 */
-		$profile_view_table_name		 = $wpdb->prefix . 'awp_va_profile_view_log';
+		$profile_view_table_name		 = $wpdb->prefix . 'awp_va_profile_view';
 
 		$profile_view_sql = "CREATE TABLE {$profile_view_table_name} (
 			id bigint(20) NOT NULL AUTO_INCREMENT ,
+			user_id bigint(20) NOT NULL,
+			viewer_id bigint(20) NOT NULL,
+			value bigint(20) NOT NULL DEFAULT 1,
+			is_new tinyint(1) NOT NULL DEFAULT 1,
+			last_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+			PRIMARY KEY  (id)
+		) {$charset_collate};";
+
+		$profile_view_table_name_log		 = $wpdb->prefix . 'awp_va_profile_view_log';
+		$profile_view_sql_log = "CREATE TABLE {$profile_view_table_name_log} (
+			id bigint(20) NOT NULL AUTO_INCREMENT ,
+			key_id bigint(20) NOT NULL,
 			user_id bigint(20) NOT NULL,
 			viewer_id bigint(20) NOT NULL,
 			url varchar(255) NOT NULL DEFAULT '',
@@ -89,7 +102,6 @@ class View_Analytics_Activator {
 			object varchar(255) NOT NULL DEFAULT '',
 			primitive varchar(255) NOT NULL DEFAULT '',
 			variable varchar(255) NOT NULL DEFAULT '',
-			is_new tinyint(1) NOT NULL DEFAULT 1,
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
 		) {$charset_collate};";
@@ -151,9 +163,14 @@ class View_Analytics_Activator {
 
 
 		maybe_create_table( $media_view_table_name, $media_view_sql );
+
 		maybe_create_table( $profile_view_table_name, $profile_view_sql );
+		maybe_create_table( $profile_view_table_name_log, $profile_view_sql_log );
+		
 		maybe_create_table( $group_view_table_name, $group_view_sql );
+		
 		maybe_create_table( $avatar_view_table_name, $avatar_view_sql );
+		
 		maybe_create_table( $over_all_log_table_name, $log_view_sql );
 	}
 
