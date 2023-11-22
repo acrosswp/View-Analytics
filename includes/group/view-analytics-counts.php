@@ -98,7 +98,19 @@ class View_Analytics_Public_Group_Count {
 
 			$group_slug = bp_get_current_group_slug();
 			$components = $this->common->get_components( $group_slug );
-			$this->common->table->user_add( $group_id, $viewer_id, $components );
+
+
+			$group_view = $this->common->table->user_get( $group_id, $viewer_id );
+
+			if( empty( $group_view ) ) {
+				$this->common->table->user_add( $group_id, $viewer_id, $components, 1 );
+			} else {
+				$id = $group_view->id;
+				$view_count = $group_view->value;
+				$view_count++;
+
+				$this->common->table->user_update( $id, $view_count, $group_id, $viewer_id, $components, 1 );
+			}
 		}
 	}
 }

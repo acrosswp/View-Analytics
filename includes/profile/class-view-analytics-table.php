@@ -187,6 +187,7 @@ class View_Analytics_Profile_Table {
 			array(
 				'%d',
 				'%d',
+				'%d',
 				'%s',
 				'%s',
 				'%s',

@@ -49,17 +49,17 @@ class View_Analytics_Deactivator {
 	public static function delete_table() {
 		global $wpdb;
 		
-		$media_view_table_name_old		 = $wpdb->prefix . 'awp_va_media_view';
-		$media_view_sql_old = "DROP TABLE IF EXISTS $media_view_table_name_old";
+		$media_view_table_name_main		 = $wpdb->prefix . 'awp_va_media_view';
+		$media_view_sql_main = "DROP TABLE IF EXISTS $media_view_table_name_main";
 
-		$profile_view_table_name_old		 = $wpdb->prefix . 'awp_va_profile_view';
-		$profile_view_sql_old = "DROP TABLE IF EXISTS $profile_view_table_name_old";
+		$profile_view_table_name_main		 = $wpdb->prefix . 'awp_va_profile_view';
+		$profile_view_sql_main = "DROP TABLE IF EXISTS $profile_view_table_name_main";
 
-		$group_view_table_name_old		 = $wpdb->prefix . 'awp_va_group_view';
-		$group_view_sql_old = "DROP TABLE IF EXISTS $group_view_table_name_old";
+		$group_view_table_name_main		 = $wpdb->prefix . 'awp_va_group_view';
+		$group_view_sql_main = "DROP TABLE IF EXISTS $group_view_table_name_main";
 
-		$avatar_view_table_name_old		 = $wpdb->prefix . 'awp_va_avatar_view';
-		$avatar_view_sql_old = "DROP TABLE IF EXISTS $avatar_view_table_name_old";
+		$avatar_view_table_name_main		 = $wpdb->prefix . 'awp_va_avatar_view';
+		$avatar_view_sql_main = "DROP TABLE IF EXISTS $avatar_view_table_name_main";
 
 		
 		$media_view_table_name		 = $wpdb->prefix . 'awp_va_media_view_log';
@@ -77,10 +77,10 @@ class View_Analytics_Deactivator {
 		$over_all_log_table_name		 = $wpdb->prefix . 'awp_va_log';
 		$over_all_log_sql = "DROP TABLE IF EXISTS $over_all_log_table_name";
 
-		$wpdb->query( $media_view_sql_old );
-		$wpdb->query( $profile_view_sql_old );
-		$wpdb->query( $group_view_sql_old );
-		$wpdb->query( $avatar_view_sql_old );
+		$wpdb->query( $media_view_sql_main );
+		$wpdb->query( $profile_view_sql_main );
+		$wpdb->query( $group_view_sql_main );
+		$wpdb->query( $avatar_view_sql_main );
 		$wpdb->query( $over_all_log_sql );
 
 		$wpdb->query( $media_view_sql );
