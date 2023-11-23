@@ -72,11 +72,13 @@ class View_Analytics_Avatar_Table {
 				'user_id' => $user_id,
 				'type' => $type,
 				'action' => $action,
+				'locale' => get_user_locale(),
 			),
 			array(
 				'%d',
 				'%d',
 				'%d',
+				'%s',
 				'%s',
 				'%s',
 			)

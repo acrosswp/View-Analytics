@@ -72,6 +72,8 @@ class View_Analytics_Media_Table {
 	public function user_add( $viewer_id, $key_id, $hash_id = '0', $media_id = 0, $attachment_id = 0, $media_owner_id = 0, $media_type = 'photo', $value = 1 ) {
 		global $wpdb;
 
+		$mime_type = get_post_mime_type( $attachment_id );
+
 		$add = $wpdb->insert(
 			$this->table_name(),
 			array(
@@ -84,6 +86,8 @@ class View_Analytics_Media_Table {
 				'user_id' => $media_owner_id,
 				'type' => $media_type,
 				'value' => $value,
+				'mime_type' => $mime_type,
+				'locale' => get_user_locale(),
 			),
 			array(
 				'%d',
@@ -95,11 +99,13 @@ class View_Analytics_Media_Table {
 				'%d',
 				'%s',
 				'%d',
+				'%s',
+				'%s',
 			)
 		);
 
 		if ( $add ) {
-			$this->add_log( $wpdb->insert_id, $media_owner_id, $viewer_id, $key_id, $media_type );
+			$this->add_log( $wpdb->insert_id, $media_owner_id, $viewer_id, $key_id, $media_type, $mime_type );
 		}
 
 		return $add;
@@ -170,7 +176,7 @@ class View_Analytics_Media_Table {
 			&& ! empty( $details->viewer_id ) 
 			&& ! empty( $details->type ) 
 			) {
-			$this->add_log( $id, $details->user_id, $details->viewer_id, $details->key_id, $details->type );
+			$this->add_log( $id, $details->user_id, $details->viewer_id, $details->key_id, $details->type, $details->mime_type );
 		}
 
 		return $update;
@@ -277,7 +283,7 @@ class View_Analytics_Media_Table {
 	/**
 	 * Add value in Log table
 	 */
-	public function add_log( $media_view_id, $media_owner_id, $viewer_id, $key_id, $type ) {
+	public function add_log( $media_view_id, $media_owner_id, $viewer_id, $key_id, $type, $mime_type ) {
 		global $wpdb;
 
 		return $wpdb->insert(
@@ -289,12 +295,16 @@ class View_Analytics_Media_Table {
 				'viewer_id' => $viewer_id,
 				'key_id' => $key_id,
 				'type' => $type,
+				'mime_type' => $mime_type,
+				'locale' => get_user_locale(),
 			),
 			array(
 				'%d',
 				'%d',
 				'%d',
 				'%d',
+				'%s',
+				'%s',
 				'%s',
 				'%s',
 			)

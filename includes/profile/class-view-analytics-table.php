@@ -79,12 +79,14 @@ class View_Analytics_Profile_Table {
 				'user_id' => $user_id,
 				'viewer_id' => $viewer_id,
 				'is_new' => $is_new,
+				'locale' => get_user_locale(),
 			),
 			array(
 				'%d',
 				'%d',
 				'%d',
 				'%d',
+				'%s',
 			)
 		);
 
@@ -187,12 +189,14 @@ class View_Analytics_Profile_Table {
 				'object' => $components['object'],
 				'primitive' => $components['primitive'],
 				'variable' => $components['variable'],
+				'locale' => get_user_locale(),
 			),
 			array(
 				'%d',
 				'%d',
 				'%d',
 				'%d',
+				'%s',
 				'%s',
 				'%s',
 				'%s',
