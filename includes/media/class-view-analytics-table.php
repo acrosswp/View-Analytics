@@ -323,7 +323,7 @@ class View_Analytics_Media_Table {
 
 		return $wpdb->get_row(
 			$wpdb->prepare( 
-				"SELECT * FROM {$bp->document->table_name} WHERE attachment_id = %d",
+				"SELECT * FROM {$bp->document->table_name} WHERE id = %d",
 				$document_id
 			)
 		);

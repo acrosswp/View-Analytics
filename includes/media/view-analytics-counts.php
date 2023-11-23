@@ -178,7 +178,7 @@ class View_Analytics_Public_Media_Count {
 			$check_variable = $this->buddyboss_check_variable();
 			if ( ! empty( $check_variable ) ) {
 
-				$media_owner_id = View_Analytics_Media_Table::instance()->get_bb_media_owner_id( $check_variable['attachment_id'], $type );
+				$media_owner_id = View_Analytics_Media_Table::instance()->get_bb_media_owner_id( $check_variable['media_id'], $type );
 				$this->update_view_count( $check_variable['key_id'], $check_variable['hash_id'] ,$check_variable['media_id'], $check_variable['attachment_id'], $media_owner_id, $type );
 			}
         }
