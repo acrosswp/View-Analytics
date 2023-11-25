@@ -80,7 +80,6 @@ class View_Analytics_Forum_Table {
 				'author_id' => $author_id,
 				'viewer_id' => $viewer_id,
 				'is_new' => $is_new,
-				'device' => $device,
 			),
 			array(
 				'%d',
@@ -88,7 +87,6 @@ class View_Analytics_Forum_Table {
 				'%d',
 				'%d',
 				'%d',
-				'%s',
 			)
 		);
 

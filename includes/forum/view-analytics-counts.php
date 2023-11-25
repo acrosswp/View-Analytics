@@ -77,8 +77,6 @@ class View_Analytics_Public_Forum_Count {
 	 */
 	public function home_content() {
 
-		return;
-
 		$viewer_id = get_current_user_id();
 
 		/**
@@ -95,21 +93,29 @@ class View_Analytics_Public_Forum_Count {
 	public function update_view_count( $viewer_id ) {
 
 		if ( $this->common->view_count_enable() ) {
+
 			$key_id = get_the_ID();
-			$author_id = get_the_author_meta( 'ID' );
 
-			$components = $this->common->get_components( $key_id );
+			if ( 
+				bbp_is_single_forum()
+				|| bbp_is_single_topic()
+				|| $key_id == get_option( '_bbp_root_slug_custom_slug', false )
+			) {
+				$author_id = get_the_author_meta( 'ID' );
 
-			$views = $this->common->table->user_get( $key_id, $viewer_id );
+				$components = $this->common->get_components( $key_id );
 
-			if( empty( $views ) ) {
-				$this->common->table->user_add( $key_id, $author_id, $viewer_id, $components, 1 );
-			} else {
-				$id = $views->id;
-				$view_count = $views->value;
-				$view_count++;
+				$views = $this->common->table->user_get( $key_id, $viewer_id );
 
-				$this->common->table->user_update( $id, $view_count, $key_id, $author_id, $viewer_id, $components, 1 );
+				if( empty( $views ) ) {
+					$this->common->table->user_add( $key_id, $author_id, $viewer_id, $components, 1 );
+				} else {
+					$id = $views->id;
+					$view_count = $views->value;
+					$view_count++;
+
+					$this->common->table->user_update( $id, $view_count, $key_id, $author_id, $viewer_id, $components, 1 );
+				}
 			}
 		}
 	}
