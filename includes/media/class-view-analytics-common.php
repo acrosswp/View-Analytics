@@ -328,4 +328,96 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 			'count' => $media_count,
 		);
 	}
+
+	/**
+	 * Get the components of the current Group and Profile
+	 * For Media view it is getting overwrittin in the Media Common file
+	 */
+	public function get_components( $media_id, $media_type = '' ) {
+		
+		global $wp;
+		
+		$current_url = sanitize_text_field( $_REQUEST['va_url'] );
+		$home_slug = home_url();
+		$home_slug = $home_slug . '/';
+
+		$current_url_main = explode( '?', esc_url_raw( $current_url ) );
+		$current_url = $current_url_main[0];
+
+		/**
+		 * Strting to array for the current url
+		 */
+		$current_url_array = explode( $home_slug, $current_url );
+		$main_url = $current_url_array[1];
+
+		/**
+		 * Get the URL after the Group SLUG
+		 */
+		$components = empty( $current_url_array[1] ) ? false: $current_url_array[1];
+		$components = empty( $components ) ? false: explode( '/', $components );
+
+		$site_components_array = array( 'groups', 'members' );
+
+		$site_components = empty( $components[0] ) ? $default_component : $components[0];
+
+		
+		if( in_array( $site_components, $site_components_array ) ) {
+			$single_components = empty( $components[2] ) ? '' : $components[2];
+			$single_object = empty( $components[3] ) ? '' : $components[3];
+			$single_primitive = '';
+			$single_variable = '';
+
+			if ( ! empty( $components[4] ) ) {
+				unset( $components[0] );
+				unset( $components[1] );
+				unset( $components[2] );
+				unset( $components[3] );
+
+				$single_primitive = rtrim( implode( '/', $components ), '/' );
+			}
+		} else {
+			$single_components = empty( $components[1] ) ? '' : $components[1];
+			$single_object = empty( $components[2] ) ? '' : $components[2];
+			$single_primitive = '';
+			$single_variable = '';
+
+			if ( ! empty( $components[3] ) ) {
+				unset( $components[0] );
+				unset( $components[1] );
+				unset( $components[2] );
+
+				$single_primitive = rtrim( implode( '/', $components ), '/' );
+			}
+
+			$site_components_array = array( 'forums' );
+			if( in_array( $site_components, $site_components_array ) ) {
+
+				if( 'document' == $media_type ) {
+					$single_components = bp_document_get_meta( $media_id, 'forum_id' );
+					$single_object = bp_document_get_meta( $media_id, 'topic_id' );
+					$single_primitive = bp_document_get_meta( $media_id, 'reply_id' );
+				} else {
+
+					$post_id = $this->table->get_bb_post_id( $media_id );
+
+					$single_components = get_post_meta( $post_id, '_bbp_forum_id', true );
+					
+					$single_object = get_post_meta( $post_id, '_bbp_topic_id', true );
+
+					if( $single_object != $post_id ) {
+						$single_primitive = $post_id;
+					}
+				}
+			}
+		}
+
+		return array(
+			'url' => $main_url,
+			'site_components' => $site_components,
+			'components' => $single_components,
+			'object' => $single_object,
+			'primitive' => $single_primitive,
+			'variable' => empty( $current_url_main[1] ) ? '' : $current_url_main[1],
+		);
+	}
 }

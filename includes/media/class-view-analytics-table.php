@@ -69,7 +69,7 @@ class View_Analytics_Media_Table {
 	/**
 	 * Add the current user has view media count
 	 */
-	public function user_add( $viewer_id, $key_id, $hash_id = '0', $media_id = 0, $attachment_id = 0, $media_owner_id = 0, $media_type = 'photo', $value = 1 ) {
+	public function user_add( $viewer_id, $key_id, $hash_id = '0', $media_id = 0, $attachment_id = 0, $media_owner_id = 0, $media_type = 'photo', $components = array(), $value = 1 ) {
 		global $wpdb;
 
 		$mime_type = get_post_mime_type( $attachment_id );
@@ -105,7 +105,7 @@ class View_Analytics_Media_Table {
 		);
 
 		if ( $add ) {
-			$this->add_log( $wpdb->insert_id, $media_owner_id, $viewer_id, $key_id, $media_type, $mime_type );
+			$this->add_log( $wpdb->insert_id, $media_owner_id, $viewer_id, $key_id, $media_type, $mime_type, $components );
 		}
 
 		return $add;
@@ -148,7 +148,7 @@ class View_Analytics_Media_Table {
 	/**
 	 * Update the current user has view media count
 	 */
-	public function user_update( $id, $value, $details = false ,$mysql_time = false ) {
+	public function user_update( $id, $value, $details = false, $components = array(), $mysql_time = false ) {
 		global $wpdb;
 
 		if ( empty( $mysql_time ) ) {
@@ -176,7 +176,7 @@ class View_Analytics_Media_Table {
 			&& ! empty( $details->viewer_id ) 
 			&& ! empty( $details->type ) 
 			) {
-			$this->add_log( $id, $details->user_id, $details->viewer_id, $details->key_id, $details->type, $details->mime_type );
+			$this->add_log( $id, $details->user_id, $details->viewer_id, $details->key_id, $details->type, $details->mime_type, $components );
 		}
 
 		return $update;
@@ -281,37 +281,6 @@ class View_Analytics_Media_Table {
 	}
 
 	/**
-	 * Add value in Log table
-	 */
-	public function add_log( $media_view_id, $media_owner_id, $viewer_id, $key_id, $type, $mime_type ) {
-		global $wpdb;
-
-		return $wpdb->insert(
-			$this->table_name_log(),
-			array( 
-				'blog_id' => get_current_blog_id(),
-				'media_view_id' => $media_view_id,
-				'user_id' => $media_owner_id,
-				'viewer_id' => $viewer_id,
-				'key_id' => $key_id,
-				'type' => $type,
-				'mime_type' => $mime_type,
-				'locale' => get_user_locale(),
-			),
-			array(
-				'%d',
-				'%d',
-				'%d',
-				'%d',
-				'%s',
-				'%s',
-				'%s',
-				'%s',
-			)
-		);
-	}
-
-	/**
 	* Here this will work only for Image and Video 
 	* This function wont work if it's document because docuemnt has a seperate table
 	* 
@@ -325,6 +294,50 @@ class View_Analytics_Media_Table {
 			$wpdb->prepare( 
 				"SELECT * FROM {$bp->document->table_name} WHERE id = %d",
 				$document_id
+			),
+			ARRAY_A
+		);
+	}
+
+	/**
+	 * Add value in Log table
+	 */
+	public function add_log( $media_view_id, $media_owner_id, $viewer_id, $key_id, $type, $mime_type, $components ) {
+		global $wpdb;
+
+		return $wpdb->insert(
+			$this->table_name_log(),
+			array( 
+				'blog_id' => get_current_blog_id(),
+				'media_view_id' => $media_view_id,
+				'user_id' => $media_owner_id,
+				'viewer_id' => $viewer_id,
+				'key_id' => $key_id,
+				'type' => $type,
+				'mime_type' => $mime_type,
+				'url' => $components['url'],
+				'site_components' => $components['site_components'],
+				'components' => $components['components'],
+				'object' => $components['object'],
+				'primitive' => $components['primitive'],
+				'variable' => $components['variable'],
+				'locale' => get_user_locale(),
+			),
+			array(
+				'%d',
+				'%d',
+				'%d',
+				'%d',
+				'%s',
+				'%s',
+				'%s',
+				'%s',
+				'%s',
+				'%s',
+				'%s',
+				'%s',
+				'%s',
+				'%s',
 			)
 		);
 	}
@@ -336,7 +349,7 @@ class View_Analytics_Media_Table {
 	* get the value of the media from the bp_media buddyboss table
 	*/
 	public function get_bb_media_owner_id( $media_id, $type = 'media' ) {
-
+		
 		if( in_array( $type, array( 'media', 'photo', 'video' ) ) ) {
 			$details = $this->get_bb_media_details( $media_id );
 		} else {
@@ -346,10 +359,41 @@ class View_Analytics_Media_Table {
 		/**
 		 * if not empty
 		 */
-		if ( ! empty( $details->user_id ) ) {
-			return $details->user_id;
+		if ( ! empty( $details['user_id'] ) ) {
+			return $details['user_id'];
 		}
 
 		return false;
+	}
+
+
+	/**
+	* Here this will work only for Image and Video 
+	* This function wont work if it's document because docuemnt has a seperate table
+	* 
+	* get the value of the media from the bp_media buddyboss table
+	*/
+	public function get_bb_post_id( $media_id ) {
+		global $wpdb;
+		global $bp;
+
+		$posts = $wpdb->get_row(
+			$wpdb->prepare( 
+				"SELECT t.post_id
+				FROM {$wpdb->postmeta} t
+			   	WHERE 
+					FIND_IN_SET(%s, t.meta_value) > 0 
+					AND t.meta_key = 'bp_media_ids'
+				",
+				$media_id
+			),
+			ARRAY_A
+		);
+
+		if ( empty( $posts['post_id'] ) ) {
+			return false;
+		}
+
+		return $posts['post_id'];
 	}
 }

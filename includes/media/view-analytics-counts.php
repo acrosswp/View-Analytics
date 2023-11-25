@@ -165,10 +165,6 @@ class View_Analytics_Public_Media_Count {
 	 */
 	public function buddyboss_view_count_verification( $key, $type ) {
 
-
-		error_log( print_r( $_REQUEST, true ) . "\n", 3, WP_CONTENT_DIR . '/debug_new.log' );
-
-
 		// Nonce check!
 	    if ( $this->buddyboss_check_nonce( $key ) ) {
 
@@ -178,7 +174,7 @@ class View_Analytics_Public_Media_Count {
 			$check_variable = $this->buddyboss_check_variable();
 			if ( ! empty( $check_variable ) ) {
 
-				$media_owner_id = View_Analytics_Media_Table::instance()->get_bb_media_owner_id( $check_variable['media_id'], $type );
+				$media_owner_id = $this->common->table->get_bb_media_owner_id( $check_variable['media_id'], $type );
 				$this->update_view_count( $check_variable['key_id'], $check_variable['hash_id'] ,$check_variable['media_id'], $check_variable['attachment_id'], $media_owner_id, $type );
 			}
         }
@@ -254,18 +250,20 @@ class View_Analytics_Public_Media_Count {
 		if ( $this->common->view_count_enable() ) {
 			$current_user_id = get_current_user_id();
 			$media_view = $this->common->table->user_get( $current_user_id, $key_id );
+
+			$components = $this->common->get_components( $media_id, $media_type );
 	
 			/**
 			 * Check if empty
 			 */
 			if ( empty( $media_view ) ) {
-				$this->common->table->user_add( $current_user_id, $key_id, $hash_id, $media_id, $attachment_id, $media_owner_id, $media_type );
+				$this->common->table->user_add( $current_user_id, $key_id, $hash_id, $media_id, $attachment_id, $media_owner_id, $media_type, $components );
 			} else {
 				$id = $media_view->id;
 				$view_count = $media_view->value;
 				$view_count++;
 	
-				$this->common->table->user_update( $id, $view_count, $media_view );
+				$this->common->table->user_update( $id, $view_count, $media_view, $components );
 			}
 		}
 	}

@@ -46,9 +46,6 @@ class View_Analytics_Group_Common extends View_Analytics_Common {
 
 		parent::__construct();
         $this->table = View_Analytics_Group_Table::instance();
-
-
-		add_action( 'wp_footer', array( $this, 'get_components' ) );
 	}
 
 

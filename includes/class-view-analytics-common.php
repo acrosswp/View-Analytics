@@ -160,7 +160,8 @@ class View_Analytics_Common {
 
 
 	/**
-	 * Get the components of the current Group
+	 * Get the components of the current Group and Profile
+	 * For Media view it is getting overwrittin in the Media Common file
 	 */
 	public function get_components( $slug, $default_component = '' ) {
 		
