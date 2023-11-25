@@ -77,6 +77,8 @@ class View_Analytics_Public_Forum_Count {
 	 */
 	public function home_content() {
 
+		return;
+
 		$viewer_id = get_current_user_id();
 
 		/**

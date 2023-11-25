@@ -72,8 +72,6 @@ class View_Analytics_Forum_Table {
 	public function user_add( $key_id, $author_id, $viewer_id, $components, $is_new = 1 ) {
 		global $wpdb;
 
-		$device = wp_is_mobile() ? 'mobile' : 'desktop';
-
 		$add = $wpdb->insert(
 			$this->table_name(),
 			array( 
@@ -83,7 +81,6 @@ class View_Analytics_Forum_Table {
 				'viewer_id' => $viewer_id,
 				'is_new' => $is_new,
 				'device' => $device,
-				'locale' => get_user_locale(),
 			),
 			array(
 				'%d',
@@ -91,7 +88,6 @@ class View_Analytics_Forum_Table {
 				'%d',
 				'%d',
 				'%d',
-				'%s',
 				'%s',
 			)
 		);
@@ -130,20 +126,17 @@ class View_Analytics_Forum_Table {
 			$mysql_time = $wpdb->get_var( 'select CURRENT_TIMESTAMP()' );
 		}
 
-		$device = wp_is_mobile() ? 'mobile' : 'desktop';
-
 		$update = $wpdb->update(
 			$this->table_name(),
 			array(
 				'value' => $value,
 				'is_new' => $is_new,
 				'last_date' => $mysql_time,
-				'device' => $device,
 			),
 			array( 
 				'id' => $id 
 			),
-			array( '%d', '%d', '%s', '%s' ),
+			array( '%d', '%d', '%s' ),
 			array( '%d' )
 		);
 
@@ -209,9 +202,9 @@ class View_Analytics_Forum_Table {
 				'%d',
 				'%d',
 				'%s',
-				'%d',
-				'%d',
-				'%d',
+				'%s',
+				'%s',
+				'%s',
 				'%s',
 				'%s',
 				'%s',

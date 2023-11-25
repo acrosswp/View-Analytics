@@ -91,7 +91,7 @@ class View_Analytics_Public_Profile_Count {
 	/**
 	 * Update Media view count
 	 */
-	public function update_view_count( $user_id, $viewer_id ) {
+	public function update_view_count( $author_id, $viewer_id ) {
 
 		if ( $this->common->view_count_enable() ) {
 
@@ -99,16 +99,16 @@ class View_Analytics_Public_Profile_Count {
 			$profile_slug = $bp->displayed_user->userdata->user_login;
 			$components = $this->common->get_components( $profile_slug, $bp->default_component );
 
-			$profile_view = $this->common->table->user_get( $user_id, $viewer_id );
+			$profile_view = $this->common->table->user_get( $author_id, $viewer_id );
 
 			if( empty( $profile_view ) ) {
-				$this->common->table->user_add( $user_id, $viewer_id, $components, 1 );
+				$this->common->table->user_add( $author_id, $viewer_id, $components, 1 );
 			} else {
 				$id = $profile_view->id;
 				$view_count = $profile_view->value;
 				$view_count++;
 
-				$this->common->table->user_update( $id, $view_count, $user_id, $viewer_id, $components, 1 );
+				$this->common->table->user_update( $id, $view_count, $author_id, $viewer_id, $components, 1 );
 			}
 
 		}
