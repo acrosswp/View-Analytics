@@ -69,14 +69,14 @@ class View_Analytics_Profile_Table {
 	/**
 	 * Add the current user has view profile count
 	 */
-	public function user_add( $user_id, $viewer_id, $components, $is_new = 1 ) {
+	public function user_add( $author_id, $viewer_id, $components, $is_new = 1 ) {
 		global $wpdb;
 
 		$add = $wpdb->insert(
 			$this->table_name(),
 			array( 
 				'blog_id' => get_current_blog_id(),
-				'user_id' => $user_id,
+				'author_id' => $author_id,
 				'viewer_id' => $viewer_id,
 				'is_new' => $is_new,
 				'locale' => get_user_locale(),
@@ -91,7 +91,7 @@ class View_Analytics_Profile_Table {
 		);
 
 		if( $add ) {
-			$this->add_log( $wpdb->insert_id, $user_id, $viewer_id, $components );
+			$this->add_log( $wpdb->insert_id, $author_id, $viewer_id, $components );
 		}
 
 		return $add;
@@ -100,15 +100,15 @@ class View_Analytics_Profile_Table {
 	/**
 	 * Get the current user has already view the profile or not
 	 */
-	public function user_get( $user_id, $viewer_id ) {
+	public function user_get( $author_id, $viewer_id ) {
 		global $wpdb;
 
 		$table_name = $this->table_name();
 
 		return $wpdb->get_row(
 			$wpdb->prepare( 
-				"SELECT * FROM $table_name WHERE user_id = %d AND viewer_id = %d",
-				$user_id,
+				"SELECT * FROM $table_name WHERE author_id = %d AND viewer_id = %d",
+				$author_id,
 				$viewer_id
 			)
 		);
@@ -117,7 +117,7 @@ class View_Analytics_Profile_Table {
 	/**
 	 * Update the current user has view profile count
 	 */
-	public function user_update( $id, $value ,$user_id, $viewer_id, $components, $is_new = 1, $mysql_time = false ) {
+	public function user_update( $id, $value ,$author_id, $viewer_id, $components, $is_new = 1, $mysql_time = false ) {
 		global $wpdb;
 
 		if ( empty( $mysql_time ) ) {
@@ -139,7 +139,7 @@ class View_Analytics_Profile_Table {
 		);
 
 		if( $update ) {
-			$this->add_log( $id, $user_id, $viewer_id, $components );
+			$this->add_log( $id, $author_id, $viewer_id, $components );
 		}
 
 		return $update;
@@ -148,24 +148,24 @@ class View_Analytics_Profile_Table {
 	/**
 	 * Delete the current user has view profile count
 	 */
-	public function user_delete( $user_id ) {
+	public function user_delete( $author_id ) {
 		global $wpdb;
-		$wpdb->delete( $this->table_name(), array( 'user_id' => $user_id ), array( '%d' ) );
-		$wpdb->delete( $this->table_name(), array( 'viewer_id' => $user_id ), array( '%d' ) );
+		$wpdb->delete( $this->table_name(), array( 'author_id' => $author_id ), array( '%d' ) );
+		$wpdb->delete( $this->table_name(), array( 'viewer_id' => $author_id ), array( '%d' ) );
 	}
 
 	/**
-	 * Get the profile view details via $user_id
+	 * Get the profile view details via $author_id
 	 */
-	public function get_details( $user_id ) {
+	public function get_details( $author_id ) {
 		global $wpdb;
 
 		$table_name = $this->table_name();
 
 		return $wpdb->get_results(
 			$wpdb->prepare( 
-				"SELECT * FROM {$table_name} WHERE user_id = %d",
-				$user_id
+				"SELECT * FROM {$table_name} WHERE author_id = %d",
+				$author_id
 			),
 			ARRAY_A
 		);
@@ -174,7 +174,7 @@ class View_Analytics_Profile_Table {
 	/**
 	 * Add value in Log table
 	 */
-	public function add_log( $match_id, $user_id, $viewer_id, $components ) {
+	public function add_log( $match_id, $author_id, $viewer_id, $components ) {
 		global $wpdb;
 
 		$add = $wpdb->insert(
@@ -182,7 +182,7 @@ class View_Analytics_Profile_Table {
 			array( 
 				'blog_id' => get_current_blog_id(),
 				'match_id' => $match_id,
-				'user_id' => $user_id,
+				'author_id' => $author_id,
 				'viewer_id' => $viewer_id,
 				'url' => $components['url'],
 				'components' => $components['components'],

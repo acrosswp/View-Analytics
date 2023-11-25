@@ -83,7 +83,7 @@ class View_Analytics_Media_Table {
 				'hash_id' => $hash_id,
 				'media_id' => $media_id,
 				'attachment_id' => $attachment_id,
-				'user_id' => $media_owner_id,
+				'author_id' => $media_owner_id,
 				'type' => $media_type,
 				'value' => $value,
 				'mime_type' => $mime_type,
@@ -172,11 +172,11 @@ class View_Analytics_Media_Table {
 		if ( 
 			$update 
 			&& ! empty( $details->key_id ) 
-			&& ! empty( $details->user_id ) 
+			&& ! empty( $details->author_id ) 
 			&& ! empty( $details->viewer_id ) 
 			&& ! empty( $details->type ) 
 			) {
-			$this->add_log( $id, $details->user_id, $details->viewer_id, $details->key_id, $details->type, $details->mime_type, $components );
+			$this->add_log( $id, $details->author_id, $details->viewer_id, $details->key_id, $details->type, $details->mime_type, $components );
 		}
 
 		return $update;
@@ -310,7 +310,7 @@ class View_Analytics_Media_Table {
 			array( 
 				'blog_id' => get_current_blog_id(),
 				'match_id' => $match_id,
-				'user_id' => $media_owner_id,
+				'author_id' => $media_owner_id,
 				'viewer_id' => $viewer_id,
 				'key_id' => $key_id,
 				'type' => $type,
@@ -359,8 +359,8 @@ class View_Analytics_Media_Table {
 		/**
 		 * if not empty
 		 */
-		if ( ! empty( $details['user_id'] ) ) {
-			return $details['user_id'];
+		if ( ! empty( $details['author_id'] ) ) {
+			return $details['author_id'];
 		}
 
 		return false;
