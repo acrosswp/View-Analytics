@@ -175,6 +175,13 @@ class View_Analytics_Public_Media_Count {
 			if ( ! empty( $check_variable ) ) {
 
 				$media_owner_id = $this->common->table->get_bb_media_owner_id( $check_variable['media_id'], $type );
+
+
+				error_log( print_r( $type, true ) . "\n", 3, WP_CONTENT_DIR . '/debug_new.log' );
+				error_log( print_r( $check_variable['media_id'], true ) . "\n", 3, WP_CONTENT_DIR . '/debug_new.log' );
+				error_log( print_r( $media_owner_id, true ) . "\n", 3, WP_CONTENT_DIR . '/debug_new.log' );
+
+
 				$this->update_view_count( $check_variable['key_id'], $check_variable['hash_id'] ,$check_variable['media_id'], $check_variable['attachment_id'], $media_owner_id, $type );
 			}
         }

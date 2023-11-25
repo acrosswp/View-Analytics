@@ -354,17 +354,18 @@ class View_Analytics_Media_Table {
 	*/
 	public function get_bb_media_owner_id( $media_id, $type = 'media' ) {
 		
-		if( in_array( $type, array( 'media', 'photo', 'video' ) ) ) {
-			$details = $this->get_bb_media_details( $media_id );
-		} else {
+		if( 'document' == $type ) {
+
 			$details = $this->get_bb_document_details( $media_id );
+		} else {
+			$details = $this->get_bb_media_details( $media_id );
 		}
 
 		/**
 		 * if not empty
 		 */
-		if ( ! empty( $details['author_id'] ) ) {
-			return $details['author_id'];
+		if ( ! empty( $details['user_id'] ) ) {
+			return $details['user_id'];
 		}
 
 		return false;
