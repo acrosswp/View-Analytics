@@ -115,4 +115,32 @@ class View_Analytics_Forum_Common extends View_Analytics_Common {
 		return sprintf( __( 'first viewed %s ago.', 'view-analytics' ), $view_time );
 
 	}
+
+		/**
+	 * Get the components of the current Group and Profile
+	 * For Media view it is getting overwrittin in the Media Common file
+	 */
+	public function get_components( $post_id, $current_url = '' ) {
+
+		global $wp;
+		$current_url = sanitize_text_field( $wp->request );
+
+		$single_components = get_post_meta( $post_id, '_bbp_forum_id', true );
+		$single_object = get_post_meta( $post_id, '_bbp_topic_id', true );
+		$single_primitive = '';
+		$single_variable = explode( '?', esc_url_raw( $current_url ) );;
+
+		if( $single_object != $post_id ) {
+			$single_primitive = $post_id;
+		}
+	
+
+		return array(
+			'url' => $current_url,
+			'components' => $single_components,
+			'object' => $single_object,
+			'primitive' => $single_primitive,
+			'variable' => empty( $single_variable[1] ) ? '' : $single_variable[1],
+		);
+	}
 }

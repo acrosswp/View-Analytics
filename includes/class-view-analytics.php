@@ -492,6 +492,42 @@ final class View_Analytics {
 		$this->loader->add_action( 'wp_enqueue_scripts', $public, 'wp_localize_script' );
 
 		/**
+		 * All class that are release to Public Avatar Count View
+		 */
+		$public_avatar_view = new View_Analytics_Avatar_Count_View( $this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_action( 'bp_setup_nav', $public_avatar_view, 'group_navigation', 1000 );
+		$this->loader->add_action( 'bp_setup_nav', $public_avatar_view, 'profile_navigation', 1000 );
+
+		/**
+		 * All class that are release to Public Avatar Count
+		 */
+		$public_avatar_count = new View_Analytics_Public_Avatar_Count( $this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_action( 'xprofile_avatar_uploaded', $public_avatar_count, 'xprofile_avatar_uploaded', 1000 );
+		$this->loader->add_action( 'xprofile_cover_image_uploaded', $public_avatar_count, 'xprofile_cover_image_uploaded', 1000 );
+
+		$this->loader->add_action( 'groups_avatar_uploaded', $public_avatar_count, 'groups_avatar_uploaded', 1000 );
+		$this->loader->add_action( 'groups_cover_image_uploaded', $public_avatar_count, 'groups_cover_image_uploaded', 1000 );
+
+
+		/**
+		 * All class that are release to Public Group Count
+		 */
+		$public_forum_count = new View_Analytics_Public_Forum_Count( $this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_action( 'bbp_head', $public_forum_count, 'home_content', 1000 );
+
+		/**
+		 * All class that are release to Public Group Count
+		 */
+		$public_group_count = new View_Analytics_Public_Group_Count( $this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_action( 'bp_before_group_home_content', $public_group_count, 'home_content', 1000 );
+
+		/**
+		 * All class that are release to Public Group Count View
+		 */
+		$public_group_view = new View_Analytics_Group_Count_View( $this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_action( 'bp_setup_nav', $public_group_view, 'navigation', 1000 );
+
+		/**
 		 * Load the Media REST API
 		 */
 		$rest_api = new View_Analytics_Media_Rest_Controller( $this->get_plugin_name(), $this->get_version() );
@@ -515,35 +551,6 @@ final class View_Analytics {
 		 */
 		$public_profile_view = new View_Analytics_Profile_Count_View( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'bp_setup_nav', $public_profile_view, 'navigation', 1000 );
-
-		/**
-		 * All class that are release to Public Group Count
-		 */
-		$public_group_count = new View_Analytics_Public_Group_Count( $this->get_plugin_name(), $this->get_version() );
-		$this->loader->add_action( 'bp_before_group_home_content', $public_group_count, 'home_content', 1000 );
-
-		/**
-		 * All class that are release to Public Group Count View
-		 */
-		$public_group_view = new View_Analytics_Group_Count_View( $this->get_plugin_name(), $this->get_version() );
-		$this->loader->add_action( 'bp_setup_nav', $public_group_view, 'navigation', 1000 );
-
-		/**
-		 * All class that are release to Public Group Count
-		 */
-		$public_avatar_count = new View_Analytics_Public_Avatar_Count( $this->get_plugin_name(), $this->get_version() );
-		$this->loader->add_action( 'xprofile_avatar_uploaded', $public_avatar_count, 'xprofile_avatar_uploaded', 1000 );
-		$this->loader->add_action( 'xprofile_cover_image_uploaded', $public_avatar_count, 'xprofile_cover_image_uploaded', 1000 );
-
-		$this->loader->add_action( 'groups_avatar_uploaded', $public_avatar_count, 'groups_avatar_uploaded', 1000 );
-		$this->loader->add_action( 'groups_cover_image_uploaded', $public_avatar_count, 'groups_cover_image_uploaded', 1000 );
-
-		/**
-		 * All class that are release to Public Avatar Count View
-		 */
-		$public_avatar_view = new View_Analytics_Avatar_Count_View( $this->get_plugin_name(), $this->get_version() );
-		$this->loader->add_action( 'bp_setup_nav', $public_avatar_view, 'group_navigation', 1000 );
-		$this->loader->add_action( 'bp_setup_nav', $public_avatar_view, 'profile_navigation', 1000 );
 
 		/**
 		 * if BuddyBoss is loading

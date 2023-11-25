@@ -102,6 +102,7 @@ class View_Analytics_Admin_Setting_Menu {
 		$this->profile_common = View_Analytics_Profile_Common::instance();
 		$this->group_common = View_Analytics_Group_Common::instance();
 		$this->avatar_common = View_Analytics_Avatar_Common::instance();
+		$this->forum_common = View_Analytics_Forum_Common::instance();
 
 		wpify_custom_fields()->create_options_page( array(
 			'type'        => 'normal',
@@ -134,6 +135,12 @@ class View_Analytics_Admin_Setting_Menu {
 					'title' => __( 'View Avatar Count', 'view-analytics' ),
 					'label' => __( 'Enable Avatar View Count', 'view-analytics' ),
 					'id'    => $this->avatar_common->view_count_key(),
+				),
+				array(
+					'type'  => 'checkbox',
+					'title' => __( 'View Forum/Topic/Reply Count', 'view-analytics' ),
+					'label' => __( 'Enable Forum/Topic/Reply View Count', 'view-analytics' ),
+					'id'    => $this->forum_common->view_count_key(),
 				),
 			),
 		) );

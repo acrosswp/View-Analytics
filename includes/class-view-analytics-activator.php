@@ -68,6 +68,7 @@ class View_Analytics_Activator {
 			action		varchar(255) NULL,
 			is_new		tinyint(1) NOT NULL DEFAULT 1,
 			locale varchar(50) NOT NULL,
+			device varchar(50) NOT NULL,
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
 		) {$charset_collate};";
@@ -81,9 +82,8 @@ class View_Analytics_Activator {
 		$forum_view_sql = "CREATE TABLE {$forum_view_table_name} (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			blog_id bigint(20) NULL,
-			type bigint(20) NOT NULL,
 			key_id bigint(20) NOT NULL,
-			user_id bigint(20) NOT NULL,
+			author_id bigint(20) NOT NULL,
 			viewer_id bigint(20) NOT NULL,
 			value bigint(20) NOT NULL DEFAULT 1,
 			is_new tinyint(1) NOT NULL DEFAULT 1,
@@ -98,7 +98,8 @@ class View_Analytics_Activator {
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			match_id bigint(20) NOT NULL,
 			blog_id bigint(20) NULL,
-			user_id bigint(20) NOT NULL,
+			key_id bigint(20) NOT NULL,
+			author_id bigint(20) NOT NULL,
 			viewer_id bigint(20) NOT NULL,
 			url varchar(255) NOT NULL DEFAULT '',
 			components varchar(255) NOT NULL DEFAULT '',
@@ -106,6 +107,7 @@ class View_Analytics_Activator {
 			primitive varchar(255) NOT NULL DEFAULT '',
 			variable varchar(255) NOT NULL DEFAULT '',
 			locale varchar(50) NOT NULL,
+			device varchar(50) NOT NULL,
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
 		) {$charset_collate};";
@@ -145,6 +147,7 @@ class View_Analytics_Activator {
 			object varchar(255) NOT NULL DEFAULT '',
 			primitive varchar(255) NOT NULL DEFAULT '',
 			variable varchar(255) NOT NULL DEFAULT '',
+			device varchar(50) NOT NULL,
 			locale varchar(50) NOT NULL,
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
@@ -192,6 +195,7 @@ class View_Analytics_Activator {
 			object varchar(255) NOT NULL DEFAULT '',
 			primitive varchar(255) NOT NULL DEFAULT '',
 			variable varchar(255) NOT NULL DEFAULT '',
+			device varchar(50) NOT NULL,
 			locale varchar(50) NOT NULL,
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
@@ -228,6 +232,7 @@ class View_Analytics_Activator {
 			object varchar(255) NOT NULL DEFAULT '',
 			primitive varchar(255) NOT NULL DEFAULT '',
 			variable varchar(255) NOT NULL DEFAULT '',
+			device varchar(50) NOT NULL,
 			locale varchar(50) NOT NULL,
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)

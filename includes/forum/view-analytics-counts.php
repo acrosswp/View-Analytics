@@ -77,40 +77,38 @@ class View_Analytics_Public_Forum_Count {
 	 */
 	public function home_content() {
 
-		$current_user_id = get_current_user_id();
-		$displayed_user_id = bp_displayed_user_id();
+		$viewer_id = get_current_user_id();
 
 		/**
 		 * Check if both are not empty
 		 */
-		if ( ! empty( $current_user_id ) && ! empty( $displayed_user_id ) ) {
-			$this->update_view_count( $displayed_user_id, $current_user_id );
+		if ( ! empty( $viewer_id ) ) {
+			$this->update_view_count( $viewer_id );
 		}
 	}
 
 	/**
 	 * Update Media view count
 	 */
-	public function update_view_count( $user_id, $viewer_id ) {
+	public function update_view_count( $viewer_id ) {
 
 		if ( $this->common->view_count_enable() ) {
+			$key_id = get_the_ID();
+			$author_id = get_the_author_meta( 'ID' );
 
-			$bp = buddypress();
-			$profile_slug = $bp->displayed_user->userdata->user_login;
-			$components = $this->common->get_components( $profile_slug, $bp->default_component );
+			$components = $this->common->get_components( $key_id );
 
-			$profile_view = $this->common->table->user_get( $user_id, $viewer_id );
+			$views = $this->common->table->user_get( $key_id, $viewer_id );
 
-			if( empty( $profile_view ) ) {
-				$this->common->table->user_add( $user_id, $viewer_id, $components, 1 );
+			if( empty( $views ) ) {
+				$this->common->table->user_add( $key_id, $author_id, $viewer_id, $components, 1 );
 			} else {
-				$id = $profile_view->id;
-				$view_count = $profile_view->value;
+				$id = $views->id;
+				$view_count = $views->value;
 				$view_count++;
 
-				$this->common->table->user_update( $id, $view_count, $user_id, $viewer_id, $components, 1 );
+				$this->common->table->user_update( $id, $view_count, $key_id, $author_id, $viewer_id, $components, 1 );
 			}
-
 		}
 	}
 }
