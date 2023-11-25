@@ -64,6 +64,8 @@ class View_Analytics_Avatar_Table {
 	public function user_add( $key_id, $user_id, $type = 'xprofile', $action = 'avatar', $value = 1 ) {
 		global $wpdb;
 
+		$device = wp_is_mobile() ? 'mobile' : 'desktop';
+
 		return $wpdb->insert(
 			$this->table_name(),
 			array( 
@@ -72,12 +74,14 @@ class View_Analytics_Avatar_Table {
 				'user_id' => $user_id,
 				'type' => $type,
 				'action' => $action,
+				'device' => $device,
 				'locale' => get_user_locale(),
 			),
 			array(
 				'%d',
 				'%d',
 				'%d',
+				'%s',
 				'%s',
 				'%s',
 				'%s',

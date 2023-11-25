@@ -72,6 +72,8 @@ class View_Analytics_Profile_Table {
 	public function user_add( $author_id, $viewer_id, $components, $is_new = 1 ) {
 		global $wpdb;
 
+		$device = wp_is_mobile() ? 'mobile' : 'desktop';
+
 		$add = $wpdb->insert(
 			$this->table_name(),
 			array( 
@@ -79,6 +81,7 @@ class View_Analytics_Profile_Table {
 				'author_id' => $author_id,
 				'viewer_id' => $viewer_id,
 				'is_new' => $is_new,
+				'device' => $device,
 				'locale' => get_user_locale(),
 			),
 			array(
@@ -86,6 +89,7 @@ class View_Analytics_Profile_Table {
 				'%d',
 				'%d',
 				'%d',
+				'%s',
 				'%s',
 			)
 		);
@@ -124,17 +128,20 @@ class View_Analytics_Profile_Table {
 			$mysql_time = $wpdb->get_var( 'select CURRENT_TIMESTAMP()' );
 		}
 
+		$device = wp_is_mobile() ? 'mobile' : 'desktop';
+
 		$update = $wpdb->update(
 			$this->table_name(),
 			array(
 				'value' => $value,
 				'is_new' => $is_new,
 				'last_date' => $mysql_time,
+				'device' => $device,
 			),
 			array( 
 				'id' => $id 
 			),
-			array( '%d','%d', '%s' ),
+			array( '%d', '%d', '%s', '%s' ),
 			array( '%d' )
 		);
 
@@ -177,6 +184,8 @@ class View_Analytics_Profile_Table {
 	public function add_log( $match_id, $author_id, $viewer_id, $components ) {
 		global $wpdb;
 
+		$device = wp_is_mobile() ? 'mobile' : 'desktop';
+
 		$add = $wpdb->insert(
 			$this->table_name_log(),
 			array( 
@@ -189,6 +198,7 @@ class View_Analytics_Profile_Table {
 				'object' => $components['object'],
 				'primitive' => $components['primitive'],
 				'variable' => $components['variable'],
+				'device' => $device,
 				'locale' => get_user_locale(),
 			),
 			array(
@@ -196,6 +206,7 @@ class View_Analytics_Profile_Table {
 				'%d',
 				'%d',
 				'%d',
+				'%s',
 				'%s',
 				'%s',
 				'%s',

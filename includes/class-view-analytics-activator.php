@@ -68,7 +68,7 @@ class View_Analytics_Activator {
 			action		varchar(255) NULL,
 			is_new		tinyint(1) NOT NULL DEFAULT 1,
 			locale varchar(50) NOT NULL,
-			device varchar(50) NOT NULL,
+			device varchar(50) NOT NULL DEFAULT 'desktop',
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
 		) {$charset_collate};";

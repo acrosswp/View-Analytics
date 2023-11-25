@@ -74,6 +74,8 @@ class View_Analytics_Media_Table {
 
 		$mime_type = get_post_mime_type( $attachment_id );
 
+		$device = wp_is_mobile() ? 'mobile' : 'desktop';
+
 		$add = $wpdb->insert(
 			$this->table_name(),
 			array(
@@ -87,6 +89,7 @@ class View_Analytics_Media_Table {
 				'type' => $media_type,
 				'value' => $value,
 				'mime_type' => $mime_type,
+				'device' => $device,
 				'locale' => get_user_locale(),
 			),
 			array(
@@ -99,6 +102,7 @@ class View_Analytics_Media_Table {
 				'%d',
 				'%s',
 				'%d',
+				'%s',
 				'%s',
 				'%s',
 			)
@@ -155,17 +159,20 @@ class View_Analytics_Media_Table {
 			$mysql_time = $wpdb->get_var( 'select CURRENT_TIMESTAMP()' );
 		}
 
+		$device = wp_is_mobile() ? 'mobile' : 'desktop';
+
 		$update = $wpdb->update(
 			$this->table_name(),
 			array(
 				'last_date' => $mysql_time,
 				'value' => $value,
 				'is_new' => 1,
+				'device' => $device,
 			),
 			array( 
 				'id' => $id 
 			),
-			array( '%s','%d','%d' ),
+			array( '%s', '%d', '%d', '%s' ),
 			array( '%d' )
 		);
 
@@ -305,6 +312,8 @@ class View_Analytics_Media_Table {
 	public function add_log( $match_id, $media_owner_id, $viewer_id, $key_id, $type, $mime_type, $components ) {
 		global $wpdb;
 
+		$device = wp_is_mobile() ? 'mobile' : 'desktop';
+
 		return $wpdb->insert(
 			$this->table_name_log(),
 			array( 
@@ -321,6 +330,7 @@ class View_Analytics_Media_Table {
 				'object' => $components['object'],
 				'primitive' => $components['primitive'],
 				'variable' => $components['variable'],
+				'device' => $device,
 				'locale' => get_user_locale(),
 			),
 			array(
@@ -328,6 +338,7 @@ class View_Analytics_Media_Table {
 				'%d',
 				'%d',
 				'%d',
+				'%s',
 				'%s',
 				'%s',
 				'%s',
