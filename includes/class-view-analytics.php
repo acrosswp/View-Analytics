@@ -249,6 +249,22 @@ final class View_Analytics {
 		 */
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/class-view-analytics-public.php';
 
+
+		/**
+		 * Load all the Avatar view file
+		 */
+		$this->load_avatar_view();
+
+		/**
+		 * Load all the Profile view file
+		 */
+		$this->load_forum_view();
+
+		/**
+		 * Load all the Group view file
+		 */
+		$this->load_group_view();
+
 		/**
 		 * Load all the Media view file
 		 */
@@ -259,20 +275,88 @@ final class View_Analytics {
 		 */
 		$this->load_profile_view();
 
-		/**
-		 * Load all the Group view file
-		 */
-		$this->load_group_view();
-
-		/**
-		 * Load all the Avatar view file
-		 */
-		$this->load_avatar_view();
-
 		$this->loader = View_Analytics_Loader::instance();
 
 		$this->common = View_Analytics_Common::instance();
 
+	}
+
+	/**
+	 * Load all the File releaste to Group
+	 */
+	private function load_avatar_view() {
+
+		/**
+		 * Contain all the value to edit/delete/remove the table row
+		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/class-view-analytics-table.php' );
+
+		/**
+		 * All the functions are included in this file
+		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/class-view-analytics-common.php' );
+
+
+		/**
+		 * The class responsible for defining all actions that are releate to recoring the view count in table
+		 */
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/view-analytics-counts.php';
+
+
+		/**
+		 * The class responsible for defining all actions that are releate to recoring the view count in table
+		 */
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/avatar/view-analytics-public-menu.php';
+	}
+
+	/**
+	 * Load all the File releaste to Group
+	 */
+	private function load_forum_view() {
+
+		/**
+		 * Contain all the value to edit/delete/remove the table row
+		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/forum/class-view-analytics-table.php' );
+
+		/**
+		 * All the functions are included in this file
+		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/forum/class-view-analytics-common.php' );
+
+
+		/**
+		 * The class responsible for defining all actions that are releate to recoring the view count in table
+		 */
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/forum/view-analytics-counts.php';
+	}
+
+		/**
+	 * Load all the File releaste to Group
+	 */
+	private function load_group_view() {
+
+		/**
+		 * Contain all the value to edit/delete/remove the table row
+		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/group/class-view-analytics-table.php' );
+
+		/**
+		 * All the functions are included in this file
+		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/group/class-view-analytics-common.php' );
+
+
+		/**
+		 * The class responsible for defining all actions that are releate to recoring the view count in table
+		 */
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/group/view-analytics-counts.php';
+
+
+		/**
+		 * The class responsible for defining all actions that are releate to recoring the view count in table
+		 */
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/group/view-analytics-public-menu.php';
 	}
 
 	/**
@@ -328,63 +412,6 @@ final class View_Analytics {
 		 * The class responsible for defining all actions that are releate to recoring the view count in table
 		 */
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/profile/view-analytics-public-menu.php';
-	}
-
-
-	/**
-	 * Load all the File releaste to Group
-	 */
-	private function load_group_view() {
-
-		/**
-		 * Contain all the value to edit/delete/remove the table row
-		 */
-		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/group/class-view-analytics-table.php' );
-
-		/**
-		 * All the functions are included in this file
-		 */
-		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/group/class-view-analytics-common.php' );
-
-
-		/**
-		 * The class responsible for defining all actions that are releate to recoring the view count in table
-		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/group/view-analytics-counts.php';
-
-
-		/**
-		 * The class responsible for defining all actions that are releate to recoring the view count in table
-		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/group/view-analytics-public-menu.php';
-	}
-
-	/**
-	 * Load all the File releaste to Group
-	 */
-	private function load_avatar_view() {
-
-		/**
-		 * Contain all the value to edit/delete/remove the table row
-		 */
-		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/class-view-analytics-table.php' );
-
-		/**
-		 * All the functions are included in this file
-		 */
-		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/class-view-analytics-common.php' );
-
-
-		/**
-		 * The class responsible for defining all actions that are releate to recoring the view count in table
-		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/view-analytics-counts.php';
-
-
-		/**
-		 * The class responsible for defining all actions that are releate to recoring the view count in table
-		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/avatar/view-analytics-public-menu.php';
 	}
 
 	/**

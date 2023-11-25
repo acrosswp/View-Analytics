@@ -174,14 +174,14 @@ class View_Analytics_Profile_Table {
 	/**
 	 * Add value in Log table
 	 */
-	public function add_log( $key_id, $user_id, $viewer_id, $components ) {
+	public function add_log( $match_id, $user_id, $viewer_id, $components ) {
 		global $wpdb;
 
 		$add = $wpdb->insert(
 			$this->table_name_log(),
 			array( 
 				'blog_id' => get_current_blog_id(),
-				'key_id' => $key_id,
+				'match_id' => $match_id,
 				'user_id' => $user_id,
 				'viewer_id' => $viewer_id,
 				'url' => $components['url'],

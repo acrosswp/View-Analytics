@@ -23,25 +23,25 @@ defined( 'ABSPATH' ) || exit;
  * @subpackage View_Analytics/includes
  * @author     AcrossWP <contact@acrosswp.com>
  */
-class View_Analytics_Group_Table {
+class View_Analytics_Forum_Table {
 
 	/**
 	 * The single instance of the class.
 	 *
-	 * @var View_Analytics_Group_Table
+	 * @var View_Analytics_Forum_Table
 	 * @since 1.0.0
 	 */
 	protected static $_instance = null;
 
 	/**
-	 * Main View_Analytics_Group_Table Instance.
+	 * Main View_Analytics_Forum_Table Instance.
 	 *
 	 * Ensures only one instance of WooCommerce is loaded or can be loaded.
 	 *
 	 * @since 1.0.0
 	 * @static
-	 * @see View_Analytics_Group_Table()
-	 * @return View_Analytics_Group_Table - Main instance.
+	 * @see View_Analytics_Forum_Table()
+	 * @return View_Analytics_Forum_Table - Main instance.
 	 */
 	public static function instance() {
 		if ( is_null( self::$_instance ) ) {
@@ -55,7 +55,7 @@ class View_Analytics_Group_Table {
      */
     public function table_name() {
 		global $wpdb;
-		return $wpdb->prefix . 'awp_va_group_view';
+		return $wpdb->prefix . 'awp_va_forum_view';
     }
 
 	/**
@@ -63,20 +63,20 @@ class View_Analytics_Group_Table {
      */
     public function table_name_log() {
 		global $wpdb;
-		return $wpdb->prefix . 'awp_va_group_view_log';
+		return $wpdb->prefix . 'awp_va_forum_view_log';
     }
 
 	/**
-	 * Add the current user has view group count
+	 * Add the current user has view forum count
 	 */
-	public function user_add( $group_id, $viewer_id, $components, $is_new = 1 ) {
+	public function user_add( $user_id, $viewer_id, $components, $is_new = 1 ) {
 		global $wpdb;
 
 		$add = $wpdb->insert(
 			$this->table_name(),
 			array( 
 				'blog_id' => get_current_blog_id(),
-				'group_id' => $group_id,
+				'user_id' => $user_id,
 				'viewer_id' => $viewer_id,
 				'is_new' => $is_new,
 				'locale' => get_user_locale(),
@@ -91,33 +91,33 @@ class View_Analytics_Group_Table {
 		);
 
 		if( $add ) {
-			$this->add_log( $wpdb->insert_id, $group_id, $viewer_id, $components );
+			$this->add_log( $wpdb->insert_id, $user_id, $viewer_id, $components );
 		}
 
 		return $add;
 	}
 
 	/**
-	 * Get the current user has already view the group or not
+	 * Get the current user has already view the forum or not
 	 */
-	public function user_get( $group_id, $viewer_id ) {
+	public function user_get( $user_id, $viewer_id ) {
 		global $wpdb;
 
 		$table_name = $this->table_name();
 
 		return $wpdb->get_row(
 			$wpdb->prepare( 
-				"SELECT * FROM $table_name WHERE group_id = %d AND viewer_id = %d",
-				$group_id,
+				"SELECT * FROM $table_name WHERE user_id = %d AND viewer_id = %d",
+				$user_id,
 				$viewer_id
 			)
 		);
 	}
 
 	/**
-	 * Update the current user has view profile count
+	 * Update the current user has view forum count
 	 */
-	public function user_update( $id, $value ,$group_id, $viewer_id, $components, $is_new = 1, $mysql_time = false ) {
+	public function user_update( $id, $value ,$user_id, $viewer_id, $components, $is_new = 1, $mysql_time = false ) {
 		global $wpdb;
 
 		if ( empty( $mysql_time ) ) {
@@ -134,38 +134,38 @@ class View_Analytics_Group_Table {
 			array( 
 				'id' => $id 
 			),
-			array( '%d', '%d', '%s' ),
+			array( '%d','%d', '%s' ),
 			array( '%d' )
 		);
 
 		if( $update ) {
-			$this->add_log( $id, $group_id, $viewer_id, $components );
+			$this->add_log( $id, $user_id, $viewer_id, $components );
 		}
 
 		return $update;
 	}
 
 	/**
-	 * Delete the current user has view group count
+	 * Delete the current user has view forum count
 	 */
-	public function user_delete( $group_id, $viewer_id ) {
+	public function user_delete( $user_id ) {
 		global $wpdb;
-		$wpdb->delete( $this->table_name(), array( 'group_id' => $group_id ), array( '%d' ) );
+		$wpdb->delete( $this->table_name(), array( 'user_id' => $user_id ), array( '%d' ) );
 		$wpdb->delete( $this->table_name(), array( 'viewer_id' => $user_id ), array( '%d' ) );
 	}
 
 	/**
-	 * Get the group view details via $group_id
+	 * Get the forum view details via $user_id
 	 */
-	public function get_details( $group_id ) {
+	public function get_details( $user_id ) {
 		global $wpdb;
 
 		$table_name = $this->table_name();
 
 		return $wpdb->get_results(
 			$wpdb->prepare( 
-				"SELECT * FROM {$table_name} WHERE group_id = %d",
-				$group_id
+				"SELECT * FROM {$table_name} WHERE user_id = %d",
+				$user_id
 			),
 			ARRAY_A
 		);
@@ -174,15 +174,15 @@ class View_Analytics_Group_Table {
 	/**
 	 * Add value in Log table
 	 */
-	public function add_log( $match_id, $group_id, $viewer_id, $components ) {
+	public function add_log( $key_id, $user_id, $viewer_id, $components ) {
 		global $wpdb;
 
 		$add = $wpdb->insert(
 			$this->table_name_log(),
 			array( 
 				'blog_id' => get_current_blog_id(),
-				'match_id' => $match_id,
-				'group_id' => $group_id,
+				'key_id' => $key_id,
+				'user_id' => $user_id,
 				'viewer_id' => $viewer_id,
 				'url' => $components['url'],
 				'components' => $components['components'],

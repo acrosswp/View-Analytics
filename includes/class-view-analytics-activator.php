@@ -53,47 +53,20 @@ class View_Analytics_Activator {
 
 		$charset_collate = $wpdb->get_charset_collate();
 
+
 		/**
-		 * Media View
+		 * Profile Update View
 		 */
-		$media_view_table_name		 = $wpdb->prefix . 'awp_va_media_view';
+		$avatar_view_table_name		 = $wpdb->prefix . 'awp_va_avatar_view_log';
 
-		$media_view_sql = "CREATE TABLE {$media_view_table_name} (
-			id bigint(20) NOT NULL AUTO_INCREMENT,
+		$avatar_view_sql = "CREATE TABLE {$avatar_view_table_name} (
+			id 			bigint(20) NOT NULL AUTO_INCREMENT,
 			blog_id bigint(20) NULL,
-			user_id bigint(20) NOT NULL DEFAULT 0,
-			viewer_id bigint(20) NOT NULL DEFAULT 0,
-			key_id varchar(255) NOT NULL DEFAULT 0,
-			hash_id varchar(255) NOT NULL DEFAULT 0,
-			media_id bigint(20) NOT NULL DEFAULT 0,
-			attachment_id bigint(20) NOT NULL DEFAULT 0,
-			value bigint(20) NOT NULL DEFAULT 1,
-			type varchar(50) NOT NULL DEFAULT 'photo',
-			mime_type varchar(50) NOT NULL DEFAULT '',
-			is_new tinyint(1) NOT NULL DEFAULT 1,
-			locale varchar(50) NOT NULL,
-			last_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-			PRIMARY KEY  (id)
-		) {$charset_collate};";
-
-		$media_view_table_name_log		 = $wpdb->prefix . 'awp_va_media_view_log';
-
-		$media_view_sql_log = "CREATE TABLE {$media_view_table_name_log} (
-			id bigint(20) NOT NULL AUTO_INCREMENT ,
-			blog_id bigint(20) NULL,
-			media_view_id bigint(20) NOT NULL DEFAULT 0,
-			user_id bigint(20) NOT NULL DEFAULT 0,
-			viewer_id bigint(20) NOT NULL DEFAULT 0,
-			key_id varchar(255) NOT NULL DEFAULT 0,
-			type varchar(50) NOT NULL DEFAULT 'photo',
-			mime_type varchar(50) NOT NULL DEFAULT '',
-			url varchar(255) NOT NULL DEFAULT '',
-			site_components varchar(255) NOT NULL DEFAULT '',
-			components varchar(255) NOT NULL DEFAULT '',
-			object varchar(255) NOT NULL DEFAULT '',
-			primitive varchar(255) NOT NULL DEFAULT '',
-			variable varchar(255) NOT NULL DEFAULT '',
+			key_id		varchar(255) NULL,
+			user_id 	bigint(20) NOT NULL,
+			type		varchar(255) NULL,
+			action		varchar(255) NULL,
+			is_new		tinyint(1) NOT NULL DEFAULT 1,
 			locale varchar(50) NOT NULL,
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
@@ -101,13 +74,15 @@ class View_Analytics_Activator {
 
 
 		/**
-		 * Profile View
+		 * Forum View
 		 */
-		$profile_view_table_name		 = $wpdb->prefix . 'awp_va_profile_view';
+		$forum_view_table_name		 = $wpdb->prefix . 'awp_va_forum_view';
 
-		$profile_view_sql = "CREATE TABLE {$profile_view_table_name} (
+		$forum_view_sql = "CREATE TABLE {$forum_view_table_name} (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			blog_id bigint(20) NULL,
+			type bigint(20) NOT NULL,
+			key_id bigint(20) NOT NULL,
 			user_id bigint(20) NOT NULL,
 			viewer_id bigint(20) NOT NULL,
 			value bigint(20) NOT NULL DEFAULT 1,
@@ -118,11 +93,11 @@ class View_Analytics_Activator {
 			PRIMARY KEY  (id)
 		) {$charset_collate};";
 
-		$profile_view_table_name_log		 = $wpdb->prefix . 'awp_va_profile_view_log';
-		$profile_view_sql_log = "CREATE TABLE {$profile_view_table_name_log} (
+		$forum_view_table_name_log		 = $wpdb->prefix . 'awp_va_forum_view_log';
+		$forum_view_sql_log = "CREATE TABLE {$forum_view_table_name_log} (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
+			match_id bigint(20) NOT NULL,
 			blog_id bigint(20) NULL,
-			key_id bigint(20) NOT NULL,
 			user_id bigint(20) NOT NULL,
 			viewer_id bigint(20) NOT NULL,
 			url varchar(255) NOT NULL DEFAULT '',
@@ -161,8 +136,8 @@ class View_Analytics_Activator {
 
 		$group_view_sql_log = "CREATE TABLE {$group_view_table_name_log} (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
+			match_id bigint(20) NOT NULL,
 			blog_id bigint(20) NULL,
-			key_id bigint(20) NOT NULL,
 			group_id bigint(20) NOT NULL,
 			viewer_id bigint(20) NOT NULL,
 			url varchar(255) NOT NULL DEFAULT '',
@@ -177,33 +152,101 @@ class View_Analytics_Activator {
 
 
 		/**
-		 * Profile Fields View
+		 * Media View
 		 */
-		$avatar_view_table_name		 = $wpdb->prefix . 'awp_va_avatar_view_log';
+		$media_view_table_name		 = $wpdb->prefix . 'awp_va_media_view';
 
-		$avatar_view_sql = "CREATE TABLE {$avatar_view_table_name} (
-			id 			bigint(20) NOT NULL AUTO_INCREMENT,
+		$media_view_sql = "CREATE TABLE {$media_view_table_name} (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
 			blog_id bigint(20) NULL,
-			key_id		varchar(255) NULL,
-			user_id 	bigint(20) NOT NULL,
-			type		varchar(255) NULL,
-			action		varchar(255) NULL,
-			is_new		tinyint(1) NOT NULL DEFAULT 1,
+			user_id bigint(20) NOT NULL DEFAULT 0,
+			viewer_id bigint(20) NOT NULL DEFAULT 0,
+			key_id varchar(255) NOT NULL DEFAULT 0,
+			hash_id varchar(255) NOT NULL DEFAULT 0,
+			media_id bigint(20) NOT NULL DEFAULT 0,
+			attachment_id bigint(20) NOT NULL DEFAULT 0,
+			value bigint(20) NOT NULL DEFAULT 1,
+			type varchar(50) NOT NULL DEFAULT 'photo',
+			mime_type varchar(50) NOT NULL DEFAULT '',
+			is_new tinyint(1) NOT NULL DEFAULT 1,
+			locale varchar(50) NOT NULL,
+			last_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+			PRIMARY KEY  (id)
+		) {$charset_collate};";
+
+		$media_view_table_name_log		 = $wpdb->prefix . 'awp_va_media_view_log';
+
+		$media_view_sql_log = "CREATE TABLE {$media_view_table_name_log} (
+			id bigint(20) NOT NULL AUTO_INCREMENT ,
+			match_id bigint(20) NOT NULL DEFAULT 0,
+			blog_id bigint(20) NULL,
+			user_id bigint(20) NOT NULL DEFAULT 0,
+			viewer_id bigint(20) NOT NULL DEFAULT 0,
+			key_id varchar(255) NOT NULL DEFAULT 0,
+			type varchar(50) NOT NULL DEFAULT 'photo',
+			mime_type varchar(50) NOT NULL DEFAULT '',
+			url varchar(255) NOT NULL DEFAULT '',
+			site_components varchar(255) NOT NULL DEFAULT '',
+			components varchar(255) NOT NULL DEFAULT '',
+			object varchar(255) NOT NULL DEFAULT '',
+			primitive varchar(255) NOT NULL DEFAULT '',
+			variable varchar(255) NOT NULL DEFAULT '',
 			locale varchar(50) NOT NULL,
 			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
 		) {$charset_collate};";
 
+
+		/**
+		 * Profile View
+		 */
+		$profile_view_table_name		 = $wpdb->prefix . 'awp_va_profile_view';
+
+		$profile_view_sql = "CREATE TABLE {$profile_view_table_name} (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			blog_id bigint(20) NULL,
+			user_id bigint(20) NOT NULL,
+			viewer_id bigint(20) NOT NULL,
+			value bigint(20) NOT NULL DEFAULT 1,
+			is_new tinyint(1) NOT NULL DEFAULT 1,
+			locale varchar(50) NOT NULL,
+			last_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+			PRIMARY KEY  (id)
+		) {$charset_collate};";
+
+		$profile_view_table_name_log		 = $wpdb->prefix . 'awp_va_profile_view_log';
+		$profile_view_sql_log = "CREATE TABLE {$profile_view_table_name_log} (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			match_id bigint(20) NOT NULL,
+			blog_id bigint(20) NULL,
+			user_id bigint(20) NOT NULL,
+			viewer_id bigint(20) NOT NULL,
+			url varchar(255) NOT NULL DEFAULT '',
+			components varchar(255) NOT NULL DEFAULT '',
+			object varchar(255) NOT NULL DEFAULT '',
+			primitive varchar(255) NOT NULL DEFAULT '',
+			variable varchar(255) NOT NULL DEFAULT '',
+			locale varchar(50) NOT NULL,
+			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+			PRIMARY KEY  (id)
+		) {$charset_collate};";
+
+
+		maybe_create_table( $avatar_view_table_name, $avatar_view_sql );
+
+		maybe_create_table( $forum_view_table_name, $forum_view_sql );
+		maybe_create_table( $forum_view_table_name_log, $forum_view_sql_log );	
+
+		maybe_create_table( $group_view_table_name, $group_view_sql );
+		maybe_create_table( $group_view_table_name_log, $group_view_sql_log );
+
 		maybe_create_table( $media_view_table_name, $media_view_sql );
 		maybe_create_table( $media_view_table_name_log, $media_view_sql_log );
 
 		maybe_create_table( $profile_view_table_name, $profile_view_sql );
-		maybe_create_table( $profile_view_table_name_log, $profile_view_sql_log );
-		
-		maybe_create_table( $group_view_table_name, $group_view_sql );
-		maybe_create_table( $group_view_table_name_log, $group_view_sql_log );
-		
-		maybe_create_table( $avatar_view_table_name, $avatar_view_sql );
+		maybe_create_table( $profile_view_table_name_log, $profile_view_sql_log );		
 	
 	}
 

@@ -302,14 +302,14 @@ class View_Analytics_Media_Table {
 	/**
 	 * Add value in Log table
 	 */
-	public function add_log( $media_view_id, $media_owner_id, $viewer_id, $key_id, $type, $mime_type, $components ) {
+	public function add_log( $match_id, $media_owner_id, $viewer_id, $key_id, $type, $mime_type, $components ) {
 		global $wpdb;
 
 		return $wpdb->insert(
 			$this->table_name_log(),
 			array( 
 				'blog_id' => get_current_blog_id(),
-				'media_view_id' => $media_view_id,
+				'match_id' => $match_id,
 				'user_id' => $media_owner_id,
 				'viewer_id' => $viewer_id,
 				'key_id' => $key_id,
