@@ -120,20 +120,30 @@ class View_Analytics_Forum_Common extends View_Analytics_Common {
 	 * Get the components of the current Group and Profile
 	 * For Media view it is getting overwrittin in the Media Common file
 	 */
-	public function get_components( $post_id, $current_url = '' ) {
+	public function get_components( $post_id, $bbp_root_slug = '' ) {
 
 		global $wp;
 		$current_url = sanitize_text_field( $wp->request );
 
-		$single_components = get_post_meta( $post_id, '_bbp_forum_id', true );
-		$single_object = get_post_meta( $post_id, '_bbp_topic_id', true );
-		$single_primitive = '';
-		$single_variable = explode( '?', esc_url_raw( $current_url ) );;
+		$single_components = '';
+		$single_object = '';
+		$single_variable = explode( '?', esc_url_raw( $current_url ) );
 
-		if( $single_object != $post_id ) {
-			$single_primitive = $post_id;
+		$primitive = explode( 'page', esc_url_raw( $current_url ) );
+		$single_primitive = empty( $primitive[1] ) ? '' : 'page' . $primitive[1];
+
+		if( $bbp_root_slug != $post_id ) {
+			$forum_id = get_post_meta( $post_id, '_bbp_forum_id', true );
+			if( ! empty( $forum_id ) ) {
+				$single_components = $forum_id;
+
+				$single_object = get_post_meta( $post_id, '_bbp_topic_id', true );
+			} else {
+				$single_components = $post_id;
+			}
+		} else {
+			$single_components = $post_id;
 		}
-	
 
 		return array(
 			'url' => $current_url,

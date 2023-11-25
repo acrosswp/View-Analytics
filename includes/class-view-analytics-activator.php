@@ -82,7 +82,7 @@ class View_Analytics_Activator {
 		$forum_view_sql = "CREATE TABLE {$forum_view_table_name} (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			blog_id bigint(20) NULL,
-			key_id bigint(20) NOT NULL,
+			post_id bigint(20) NOT NULL,
 			author_id bigint(20) NOT NULL,
 			viewer_id bigint(20) NOT NULL,
 			value bigint(20) NOT NULL DEFAULT 1,
@@ -98,7 +98,7 @@ class View_Analytics_Activator {
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			match_id bigint(20) NOT NULL,
 			blog_id bigint(20) NULL,
-			key_id bigint(20) NOT NULL,
+			post_id bigint(20) NOT NULL,
 			author_id bigint(20) NOT NULL,
 			viewer_id bigint(20) NOT NULL,
 			url varchar(255) NOT NULL DEFAULT '',

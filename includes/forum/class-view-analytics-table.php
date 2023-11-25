@@ -69,14 +69,14 @@ class View_Analytics_Forum_Table {
 	/**
 	 * Add the current user has view forum count
 	 */
-	public function user_add( $key_id, $author_id, $viewer_id, $components, $is_new = 1 ) {
+	public function user_add( $post_id, $author_id, $viewer_id, $components, $is_new = 1 ) {
 		global $wpdb;
 
 		$add = $wpdb->insert(
 			$this->table_name(),
 			array( 
 				'blog_id' => get_current_blog_id(),
-				'key_id' => $key_id,
+				'post_id' => $post_id,
 				'author_id' => $author_id,
 				'viewer_id' => $viewer_id,
 				'is_new' => $is_new,
@@ -91,7 +91,7 @@ class View_Analytics_Forum_Table {
 		);
 
 		if( $add ) {
-			$this->add_log( $wpdb->insert_id, $author_id, $viewer_id, $components );
+			$this->add_log( $wpdb->insert_id, $post_id, $author_id, $viewer_id, $components );
 		}
 
 		return $add;
@@ -100,15 +100,15 @@ class View_Analytics_Forum_Table {
 	/**
 	 * Get the current user has already view the forum or not
 	 */
-	public function user_get( $key_id, $viewer_id ) {
+	public function user_get( $post_id, $viewer_id ) {
 		global $wpdb;
 
 		$table_name = $this->table_name();
 
 		return $wpdb->get_row(
 			$wpdb->prepare( 
-				"SELECT * FROM $table_name WHERE key_id = %d AND viewer_id = %d",
-				$key_id,
+				"SELECT * FROM $table_name WHERE post_id = %d AND viewer_id = %d",
+				$post_id,
 				$viewer_id
 			)
 		);
@@ -117,8 +117,9 @@ class View_Analytics_Forum_Table {
 	/**
 	 * Update the current user has view forum count
 	 */
-	public function user_update( $id, $value, $author_id, $viewer_id, $components, $is_new = 1, $mysql_time = false ) {
+	public function user_update( $id, $value, $post_id, $author_id, $viewer_id, $components, $is_new = 1, $mysql_time = false ) {
 		global $wpdb;
+
 
 		if ( empty( $mysql_time ) ) {
 			$mysql_time = $wpdb->get_var( 'select CURRENT_TIMESTAMP()' );
@@ -127,19 +128,23 @@ class View_Analytics_Forum_Table {
 		$update = $wpdb->update(
 			$this->table_name(),
 			array(
-				'value' => $value,
-				'is_new' => $is_new,
+				'value' => absint( $value ),
+				'is_new' => absint( $is_new ),
 				'last_date' => $mysql_time,
 			),
 			array( 
-				'id' => $id 
+				'id' => absint( $id ) 
 			),
-			array( '%d', '%d', '%s' ),
+			array( 
+				'%d',
+				'%d',
+				'%s',
+			),
 			array( '%d' )
 		);
 
 		if( $update ) {
-			$this->add_log( $id, $author_id, $viewer_id, $components );
+			$this->add_log( $id, $post_id, $author_id, $viewer_id, $components );
 		}
 
 		return $update;
@@ -157,15 +162,15 @@ class View_Analytics_Forum_Table {
 	/**
 	 * Get the forum view details via $user_id
 	 */
-	public function get_details( $key_id ) {
+	public function get_details( $post_id ) {
 		global $wpdb;
 
 		$table_name = $this->table_name();
 
 		return $wpdb->get_results(
 			$wpdb->prepare( 
-				"SELECT * FROM {$table_name} WHERE key_id = %d",
-				$key_id
+				"SELECT * FROM {$table_name} WHERE post_id = %d",
+				$post_id
 			),
 			ARRAY_A
 		);
@@ -174,7 +179,7 @@ class View_Analytics_Forum_Table {
 	/**
 	 * Add value in Log table
 	 */
-	public function add_log( $key_id, $author_id, $viewer_id, $components ) {
+	public function add_log( $match_id, $post_id, $author_id, $viewer_id, $components ) {
 		global $wpdb;
 
 		$device = wp_is_mobile() ? 'mobile' : 'desktop';
@@ -183,7 +188,8 @@ class View_Analytics_Forum_Table {
 			$this->table_name_log(),
 			array( 
 				'blog_id' => get_current_blog_id(),
-				'key_id' => $key_id,
+				'match_id' => $match_id,
+				'post_id' => $post_id,
 				'author_id' => $author_id,
 				'viewer_id' => $viewer_id,
 				'url' => $components['url'],
@@ -195,6 +201,7 @@ class View_Analytics_Forum_Table {
 				'locale' => get_user_locale(),
 			),
 			array(
+				'%d',
 				'%d',
 				'%d',
 				'%d',

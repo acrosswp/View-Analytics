@@ -94,27 +94,28 @@ class View_Analytics_Public_Forum_Count {
 
 		if ( $this->common->view_count_enable() ) {
 
-			$key_id = get_the_ID();
+			$post_id = get_the_ID();
+			$bbp_root_slug = get_option( '_bbp_root_slug_custom_slug', false );
 
 			if ( 
 				bbp_is_single_forum()
 				|| bbp_is_single_topic()
-				|| $key_id == get_option( '_bbp_root_slug_custom_slug', false )
+				|| $post_id == $bbp_root_slug
 			) {
 				$author_id = get_the_author_meta( 'ID' );
 
-				$components = $this->common->get_components( $key_id );
+				$components = $this->common->get_components( $post_id, $bbp_root_slug );
 
-				$views = $this->common->table->user_get( $key_id, $viewer_id );
+				$views = $this->common->table->user_get( $post_id, $viewer_id );
 
 				if( empty( $views ) ) {
-					$this->common->table->user_add( $key_id, $author_id, $viewer_id, $components, 1 );
+					$this->common->table->user_add( $post_id, $author_id, $viewer_id, $components, 1 );
 				} else {
 					$id = $views->id;
 					$view_count = $views->value;
 					$view_count++;
 
-					$this->common->table->user_update( $id, $view_count, $key_id, $author_id, $viewer_id, $components, 1 );
+					$this->common->table->user_update( $id, $view_count, $post_id, $author_id, $viewer_id, $components, 1 );
 				}
 			}
 		}
