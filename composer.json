@@ -12,8 +12,7 @@
         "acrosswp/acrosswp-buddypress-or-buddyboss-dependency": "dev-main",
         "yahnis-elsts/plugin-update-checker": "dev-master",
         "acrosswp/acrosswp-plugin-update-checker-github": "dev-main",
-        "wpify/custom-fields": "dev-master",
-        "woocommerce/action-scheduler": "^3.6"
+        "wpify/custom-fields": "dev-master"
     },
     "minimum-stability": "dev",
     "support": {
