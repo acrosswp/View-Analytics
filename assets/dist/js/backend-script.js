@@ -44,27 +44,27 @@ jQuery(function($) {
 
 
 
-      /**
+    /**
      * For all Media View Type
      */
-      const all_media_view_type = document.getElementById('all-media-view-type');
+    const all_media_view_type = document.getElementById('all-media-view-type');
 
-      new Chart(all_media_view_type, {
-          type: 'bar',
-          data: {
-              labels: view_analytics_media_view.all_media_view_type.media_label,
-              datasets: [{
-                  label: view_analytics_media_view.all_media_view_type.label,
-                  data: view_analytics_media_view.all_media_view_type.count,
-                  backgroundColor: [
-                      'rgb(255, 99, 132)',
-                      'rgb(54, 162, 235)',
-                      'rgb(255, 205, 86)'
-                  ],
-              }],
-              hoverOffset: 4
-          }
-      });
+    new Chart(all_media_view_type, {
+        data: {
+            labels: view_analytics_media_view.all_media_type.media_label,
+            datasets: [{
+                    type: 'bar',
+                    label: view_analytics_media_view.all_media_type.label,
+                    data: view_analytics_media_view.all_media_type.count,
+                },
+                {
+                    type: 'bar',
+                    label: view_analytics_media_view.all_media_view_type.label,
+                    data: view_analytics_media_view.all_media_view_type.count,
+            }],
+            hoverOffset: 4
+        }
+    });
 });
 /******/ })()
 ;

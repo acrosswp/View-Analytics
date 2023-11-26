@@ -71,7 +71,7 @@ class View_Analytics_Admin_Media_Menu {
 	 */
 	public function menu() {
 
-		add_submenu_page(
+		$hook = add_submenu_page(
 			'view-analytics',
 			__( 'Media Analytics', 'view-analytics' ),
 			__( 'Media Analytics', 'view-analytics' ),
@@ -79,35 +79,47 @@ class View_Analytics_Admin_Media_Menu {
 			'view-analytics-media',
 			array( $this, 'about_view_analytics' )
 		);
+
 	}
 
 	/**
 	 * Show the content on the main menu
 	 */
 	function about_view_analytics() {
-		
-		$this->view_all_media_type();
 
-		$this->view_all_media_view();
-	}
+		// $this->view_all_media_view();
+		global $wpdb;
 
-	/**
-	 * View All Media that is been view
-	 */
-	function view_all_media_type() {
+		$table = new Custom_Table_Example_List_Table();
+		$table->prepare_items();
+
+		$message = '';
+		if ('delete' === $table->current_action()) {
+			$message = '<div class="updated below-h2" id="message"><p>' . sprintf(__('Items deleted: %d', 'cltd_example'), count($_REQUEST['id'])) . '</p></div>';
+		}
 		?>
-		<h4>All Media Type</h4>
-		<div class="chart-container" style="width: 400px;"><canvas id="all-media-type"></canvas></div>
+		<div class="wrap">
+			<div class="icon32 icon32-posts-post" id="icon-edit"><br></div>
+				<h2>
+					<?php _e('Persons', 'cltd_example')?>
+					<a class="add-new-h2" href="<?php echo get_admin_url(get_current_blog_id(), 'admin.php?page=persons_form');?>"><?php _e('Add new', 'cltd_example')?></a>
+				</h2>
+			<?php echo $message; ?>
+
+			<form id="persons-table" method="GET">
+				<input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>"/>
+				<?php $table->display() ?>
+			</form>
+		</div>
 		<?php
 	}
-
 
 	/**
 	 * View All Media that is been view
 	 */
 	function view_all_media_view() {
 		?>
-		<h4>All Media View Type</h4>
+		<h4>All Media and View Stack</h4>
 		<div class="chart-container" style="width: 400px;"><canvas id="all-media-view-type"></canvas></div>
 		<?php
 	}

@@ -330,6 +330,44 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 	}
 
 	/**
+	 * Return array for chart to show all media type
+	 */
+	public function media_type_for_chart( $media_type ) {
+		$media_types_counts = array();
+
+		/**
+		 * For Media table where it contain all photo and video
+		 */
+		$media_types = $this->table->get_bb_media_type_from_bb();
+
+		$media_types[] = 'photo';
+		$media_types[] = 'video';
+		
+		$media_types = array_unique( $media_types );
+		foreach( $media_types as $media_type  ) {
+			$media_types_counts[ $media_type ] = $this->table->get_bb_media_type_count_from_bb( 'media', $media_type );
+		}
+
+		/**
+		 * For Document table where it contain all document
+		 */
+		$media_types_counts['document'] = $this->table->get_bb_media_type_count_from_bb( 'document' );
+
+		$media_types_name = array();
+		$media_count = array();
+		foreach( $media_types_counts as $key => $value ) {
+			$media_types_name[] = ucfirst( $key );
+			$media_count[] = $value;
+		}
+
+		return array(
+			'label' => __( 'All Media Type', 'view-analytics' ),
+			'media_label' => $media_types_name,
+			'count' => $media_count,
+		);
+	}
+
+	/**
 	 * Get the components of the current Group and Profile
 	 * For Media view it is getting overwrittin in the Media Common file
 	 */
