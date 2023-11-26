@@ -178,11 +178,13 @@ class View_Analytics_Profile_Table {
 		global $wpdb;
 
 		$device = wp_is_mobile() ? 'mobile' : 'desktop';
+		$session = View_Analytics_Common::instance()->wp_get_current_session();
 
 		$add = $wpdb->insert(
 			$this->table_name_log(),
 			array( 
 				'blog_id' => get_current_blog_id(),
+				'session' => $session,
 				'match_id' => $match_id,
 				'author_id' => $author_id,
 				'viewer_id' => $viewer_id,
@@ -196,6 +198,7 @@ class View_Analytics_Profile_Table {
 			),
 			array(
 				'%d',
+				'%s',
 				'%d',
 				'%d',
 				'%d',

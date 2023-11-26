@@ -65,11 +65,13 @@ class View_Analytics_Avatar_Table {
 		global $wpdb;
 
 		$device = wp_is_mobile() ? 'mobile' : 'desktop';
+		$session = View_Analytics_Common::instance()->wp_get_current_session();
 
 		return $wpdb->insert(
 			$this->table_name(),
 			array( 
 				'blog_id' => get_current_blog_id(),
+				'session' => $session,
 				'key_id' => $key_id,
 				'user_id' => $user_id,
 				'type' => $type,
@@ -79,6 +81,7 @@ class View_Analytics_Avatar_Table {
 			),
 			array(
 				'%d',
+				'%s',
 				'%d',
 				'%d',
 				'%s',

@@ -70,6 +70,23 @@ class View_Analytics_Common {
 		return self::$_instance;
 	}
 
+	/**
+	 * Removes the current session token from the database.
+	 *
+	 * @since 4.0.0
+	 */
+	function wp_get_current_session() {
+
+		$session = false;
+		$token = wp_get_session_token();
+		if ( $token ) {
+			$manager = WP_Session_Tokens::get_instance( get_current_user_id() );
+			$session = $manager->get( $token );
+			$session = $session['login'];
+		}
+		
+		return $session;
+	}
     
 	/**
      * Return the View Analytics Media Count Key

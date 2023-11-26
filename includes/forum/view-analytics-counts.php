@@ -74,6 +74,8 @@ class View_Analytics_Public_Forum_Count {
 
 	/**
 	 * This function is run when someone visit the member profile page
+	 * 
+	 * Need Improvment
 	 */
 	public function home_content() {
 
@@ -96,10 +98,9 @@ class View_Analytics_Public_Forum_Count {
 
 			$post_id = get_the_ID();
 			$bbp_root_slug = get_option( '_bbp_root_slug_custom_slug', false );
-
 			if ( 
-				bbp_is_single_forum()
-				|| bbp_is_single_topic()
+				is_singular( bbp_get_forum_post_type() )
+				|| is_singular( bbp_get_topic_post_type() )
 				|| $post_id == $bbp_root_slug
 			) {
 				$author_id = get_the_author_meta( 'ID' );
