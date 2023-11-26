@@ -5,7 +5,7 @@ Tags: comments, spam
 Requires at least: 4.9.1
 Tested up to: 6.2.2
 Requires PHP: 5.6.20
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,6 +49,13 @@ e.g.
 1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
 
 == Changelog ==
+
+= 1.0.5 =
+* Add session Tracking
+* Add language Tracking
+* Add Device Tracking
+* Add View Count forum and topic
+* Add url to Media staying that where the media is been viewed
 
 = 1.0.4 =
 * Add Chart for Media View
