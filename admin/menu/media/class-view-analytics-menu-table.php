@@ -95,7 +95,7 @@ class View_Analytics_List_Media_Table extends WP_List_Table {
      * @param $item - row (key, value array)
      * @return HTML
      */
-    function column_id( $item ) {
+    function column_key_id( $item ) {
         $actions = array(
             'view_log' => sprintf('<a href="?page=view-analytics-media&id=%s">%s</a>', $item['id'], __( 'View Log', 'view-analytics' ) ),
             'delete' => sprintf('<a href="?page=%s&action=delete&id=%s">%s</a>', $_REQUEST['page'], $item['id'], __( 'Delete', 'view-analytics' ) ),
@@ -127,7 +127,45 @@ class View_Analytics_List_Media_Table extends WP_List_Table {
      * @return HTML
      */
     function column_type( $item ) {
-        return ucfirst( $item['type'] );
+        ob_start();
+        $post_link = get_edit_post_link( $item['attachment_id'] );
+        $image_link = wp_get_attachment_url( $item['attachment_id'] );
+        ?>
+        <strong>
+            <a href="<?php echo $post_link; ?>">
+                <img alt="" src="<?php echo $image_link; ?>" class="avatar avatar-32 photo" height="32" width="32" loading="lazy" decoding="async"> 
+            </a>
+            <?php echo ucfirst( $item['type'] ). ' - ' . $item['mime_type']; ?>
+        </strong>
+        <?php
+        $output = ob_get_contents();
+        ob_end_clean();
+
+        return $output;
+    }
+
+    /**
+     * [REQUIRED] this is how checkbox column renders
+     *
+     * @param $item - row (key, value array)
+     * @return HTML
+     */
+    function column_author_id( $item ) {
+        ob_start();
+        $post_link = bp_core_get_user_domain( $item['author_id'] );
+        $image_link = bp_get_displayed_user_avatar(  array( 'item_id' => $item['author_id'], 'html' => false ) );
+        ?>
+        <strong>
+            <a href="<?php echo $post_link; ?>">
+                <img alt="" src="<?php echo $image_link; ?>" class="avatar avatar-32 photo" height="32" width="32" loading="lazy" decoding="async"> 
+            </a>
+            <?php echo bp_core_get_user_displayname( $item['author_id'] ); ?>
+        </strong>
+        <?php
+        $output = ob_get_contents();
+        ob_end_clean();
+
+        return $output;
     }
 
     /**
@@ -142,8 +180,8 @@ class View_Analytics_List_Media_Table extends WP_List_Table {
             'cb' => '<input type="checkbox" />', //Render a checkbox instead of text
             'id' => __( 'ID', 'view-analytics'),
             'key_id' => __( 'Media ID', 'view-analytics'),
-            'type' => __( 'Media Type', 'view-analytics'),
-            'mime_type' => __( 'Mime Type', 'view-analytics'),
+            'type' => __( 'Media Details', 'view-analytics'),
+            'author_id' => __( 'Author Details', 'view-analytics'),
             'user_count' => __( 'User Count', 'view-analytics'),
             'ref_count' => __( 'View', 'view-analytics'),
             'session_count' => __( 'Session View', 'view-analytics'),
@@ -215,7 +253,7 @@ class View_Analytics_List_Media_Table extends WP_List_Table {
         global $wpdb;
 
         $columns = $this->get_columns();
-        $hidden = array();
+        $hidden = array( 'id' );
         $sortable = $this->get_sortable_columns();
 
         // here we configure table headers, defined in our methods
