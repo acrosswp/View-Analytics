@@ -241,7 +241,7 @@ final class View_Analytics {
 		 */
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/menu/class-view-analytics-main-menu.php';
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/menu/class-view-analytics-settings-menu.php';
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/menu/class-view-analytics-media-menu.php';
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/menu/media/class-view-analytics-menu.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing

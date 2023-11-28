@@ -176,12 +176,6 @@ class View_Analytics_Public_Media_Count {
 
 				$media_owner_id = $this->common->table->get_bb_media_owner_id( $check_variable['media_id'], $type );
 
-
-				error_log( print_r( $type, true ) . "\n", 3, WP_CONTENT_DIR . '/debug_new.log' );
-				error_log( print_r( $check_variable['media_id'], true ) . "\n", 3, WP_CONTENT_DIR . '/debug_new.log' );
-				error_log( print_r( $media_owner_id, true ) . "\n", 3, WP_CONTENT_DIR . '/debug_new.log' );
-
-
 				$this->update_view_count( $check_variable['key_id'], $check_variable['hash_id'] ,$check_variable['media_id'], $check_variable['attachment_id'], $media_owner_id, $type );
 			}
         }
@@ -256,21 +250,49 @@ class View_Analytics_Public_Media_Count {
 
 		if ( $this->common->view_count_enable() ) {
 			$current_user_id = get_current_user_id();
-			$media_view = $this->common->table->user_get( $current_user_id, $key_id );
 
+			$media_view = $this->common->table->get_details( $key_id );
+			
 			$components = $this->common->get_components( $media_id, $media_type );
 	
 			/**
 			 * Check if empty
 			 */
 			if ( empty( $media_view ) ) {
-				$this->common->table->user_add( $current_user_id, $key_id, $hash_id, $media_id, $attachment_id, $media_owner_id, $media_type, $components );
+				$this->common->table->user_add( 
+					$current_user_id,
+					$key_id,
+					$hash_id,
+					$media_id,
+					$attachment_id,
+					$media_owner_id,
+					$media_type,
+					$components
+				);
 			} else {
-				$id = $media_view->id;
-				$view_count = $media_view->value;
-				$view_count++;
-	
-				$this->common->table->user_update( $id, $view_count, $media_view, $components );
+				$id = $media_view['id'];
+
+				$ref_count = empty( $media_view['ref_count'] ) ? 1 : absint( $media_view['ref_count'] ) + 1;
+
+				$user_list = empty( $media_view['user_list'] ) ? array() : maybe_unserialize( $media_view['user_list'] );
+				$user_list[] = $current_user_id;
+				$user_list = array_unique( $user_list );
+
+				$user_count = count( $user_list );
+
+				$session_count = $this->common->table->user_get( $current_user_id, $key_id, true );
+				$session_count = empty( $session_count ) ? absint( $media_view['session_count'] ) + 1 : absint( $media_view['session_count'] );
+
+				$this->common->table->user_update( 
+					$id,
+					$user_list,
+					$user_count,
+					$ref_count,
+					$session_count,
+					$current_user_id,
+					$media_view,
+					$components
+				);
 			}
 		}
 	}

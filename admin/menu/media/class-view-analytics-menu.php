@@ -86,11 +86,14 @@ class View_Analytics_Admin_Media_Menu {
 	 * Show the content on the main menu
 	 */
 	function about_view_analytics() {
-
-		// $this->view_all_media_view();
 		global $wpdb;
 
-		$table = new Custom_Table_Example_List_Table();
+		/**
+		 * Media view table
+		 */
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/menu/media/class-view-analytics-menu-custom-table.php';
+
+		$table = new View_Analytics_List_Media_Table();
 		$table->prepare_items();
 
 		$message = '';

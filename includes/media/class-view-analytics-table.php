@@ -69,7 +69,7 @@ class View_Analytics_Media_Table {
 	/**
 	 * Add the current user has view media count
 	 */
-	public function user_add( $viewer_id, $key_id, $hash_id = '0', $media_id = 0, $attachment_id = 0, $media_owner_id = 0, $media_type = 'photo', $components = array(), $value = 1 ) {
+	public function user_add( $viewer_id, $key_id, $hash_id = '0', $media_id = 0, $attachment_id = 0, $media_owner_id = 0, $media_type = 'photo', $components = array(), $ref_count = 1 ) {
 		global $wpdb;
 
 		$mime_type = get_post_mime_type( $attachment_id );
@@ -77,35 +77,31 @@ class View_Analytics_Media_Table {
 		$add = $wpdb->insert(
 			$this->table_name(),
 			array(
-				'blog_id' => get_current_blog_id(),
-				'viewer_id' => $viewer_id,
 				'key_id' => $key_id,
 				'hash_id' => $hash_id,
 				'media_id' => $media_id,
 				'attachment_id' => $attachment_id,
+				'user_list' => serialize( array( $viewer_id ) ),
 				'author_id' => $media_owner_id,
 				'type' => $media_type,
-				'value' => $value,
+				'ref_count' => $ref_count,
 				'mime_type' => $mime_type,
-				'locale' => get_user_locale(),
 			),
 			array(
-				'%d',
-				'%d',
 				'%s',
 				'%s',
-				'%d',
 				'%d',
 				'%d',
 				'%s',
 				'%d',
 				'%s',
+				'%d',
 				'%s',
 			)
 		);
 
 		if ( $add ) {
-			$this->add_log( $wpdb->insert_id, $media_owner_id, $viewer_id, $key_id, $media_type, $mime_type, $components );
+			$this->add_log( $wpdb->insert_id, $viewer_id, $key_id, $components );
 		}
 
 		return $add;
@@ -114,18 +110,29 @@ class View_Analytics_Media_Table {
 	/**
 	 * Get the current user has already view the media or not
 	 */
-	public function user_get( $viewer_id, $key_id ) {
+	public function user_get( $viewer_id, $key_id, $session = false ) {
 		global $wpdb;
 
-		$table_name = $this->table_name();
+		$table_name = $this->table_name_log();
 
-		return $wpdb->get_row(
-			$wpdb->prepare( 
+		if ( $session ) {
+
+			$session = View_Analytics_Common::instance()->wp_get_current_session();
+
+			$sql = $wpdb->prepare( 
+				"SELECT * FROM $table_name WHERE viewer_id = %d AND key_id = %s AND session = %s",
+				$viewer_id,
+				$key_id,
+				$session,
+			);
+		} else {
+			$sql = $wpdb->prepare( 
 				"SELECT * FROM $table_name WHERE viewer_id = %d AND key_id = %s",
 				$viewer_id,
 				$key_id
-			)
-		);
+			);
+		}
+		return $wpdb->get_results( $sql, ARRAY_A );
 	}
 
 	/**
@@ -136,7 +143,7 @@ class View_Analytics_Media_Table {
 
 		$table_name = $this->table_name();
 
-		return $wpdb->get_results(
+		return $wpdb->get_row(
 			$wpdb->prepare( 
 				"SELECT * FROM $table_name WHERE key_id = %s",
 				$key_id
@@ -146,9 +153,45 @@ class View_Analytics_Media_Table {
 	}
 
 	/**
+	 * Get the media view details via $attachment_id
+	 */
+	public function get_all_details( $orderby = 'value', $order = 'DESC', $offset = 0, $per_page = 20 ) {
+		global $wpdb;
+
+		$table_name = $this->table_name();
+
+		return $wpdb->get_results(
+			$wpdb->prepare( 
+				"SELECT DISTINCT key_id FROM $table_name ORDER BY $orderby $order LIMIT %d OFFSET %d",
+				$per_page,
+				$offset
+			),
+			ARRAY_A
+		);
+	}
+
+	/**
+	 * Get the media view details via $attachment_id
+	 */
+	public function get_all_details_count() {
+		global $wpdb;
+
+		$table_name = $this->table_name();
+
+		$results = $wpdb->get_results(
+			$wpdb->prepare( 
+				"SELECT id FROM $table_name"
+			),
+			ARRAY_A
+		);
+
+		return empty( $results ) ? 0 : count( $results );
+	}
+
+	/**
 	 * Update the current user has view media count
 	 */
-	public function user_update( $id, $value, $details = false, $components = array(), $mysql_time = false ) {
+	public function user_update( $id, $user_list, $user_count, $ref_count, $session_count, $viewer_id, $details = false, $components = array(), $mysql_time = false ) {
 		global $wpdb;
 
 		if ( empty( $mysql_time ) ) {
@@ -158,25 +201,26 @@ class View_Analytics_Media_Table {
 		$update = $wpdb->update(
 			$this->table_name(),
 			array(
-				'last_date' => $mysql_time,
-				'value' => $value,
+				'user_list' => serialize( $user_list ),
+				'user_count' => $user_count,
+				'ref_count' => $ref_count,
+				'session_count' => $session_count,
 				'is_new' => 1,
+				'last_date' => $mysql_time,
 			),
 			array( 
 				'id' => $id 
 			),
-			array( '%s', '%d', '%d' ),
+			array( '%s', '%d', '%d', '%d', '%d', '%s' ),
 			array( '%d' )
 		);
 
 		if ( 
 			$update 
-			&& ! empty( $details->key_id ) 
-			&& ! empty( $details->author_id ) 
-			&& ! empty( $details->viewer_id ) 
-			&& ! empty( $details->type ) 
+			&& ! empty( $details['key_id'] ) 
+			&& ! empty( $details['author_id'] ) 
 			) {
-			$this->add_log( $id, $details->author_id, $details->viewer_id, $details->key_id, $details->type, $details->mime_type, $components );
+			$this->add_log( $id, $viewer_id, $details['key_id'], $components );
 		}
 
 		return $update;
@@ -302,7 +346,7 @@ class View_Analytics_Media_Table {
 	/**
 	 * Add value in Log table
 	 */
-	public function add_log( $match_id, $media_owner_id, $viewer_id, $key_id, $type, $mime_type, $components ) {
+	public function add_log( $match_id, $viewer_id, $key_id, $components ) {
 		global $wpdb;
 
 		$device = wp_is_mobile() ? 'mobile' : 'desktop';
@@ -314,11 +358,8 @@ class View_Analytics_Media_Table {
 				'blog_id' => get_current_blog_id(),
 				'session' => $session,
 				'match_id' => $match_id,
-				'author_id' => $media_owner_id,
 				'viewer_id' => $viewer_id,
 				'key_id' => $key_id,
-				'type' => $type,
-				'mime_type' => $mime_type,
 				'url' => $components['url'],
 				'site_components' => $components['site_components'],
 				'components' => $components['components'],
@@ -333,9 +374,6 @@ class View_Analytics_Media_Table {
 				'%s',
 				'%d',
 				'%d',
-				'%d',
-				'%s',
-				'%s',
 				'%s',
 				'%s',
 				'%s',
