@@ -116,9 +116,7 @@ class View_Analytics_Media_Table {
 		$table_name = $this->table_name_log();
 
 		if ( $session ) {
-
 			$session = View_Analytics_Common::instance()->wp_get_current_session();
-
 			$sql = $wpdb->prepare( 
 				"SELECT * FROM $table_name WHERE viewer_id = %d AND key_id = %s AND session = %s",
 				$viewer_id,
@@ -155,35 +153,51 @@ class View_Analytics_Media_Table {
 	/**
 	 * Get the media view details via $attachment_id
 	 */
-	public function get_all_details( $orderby = 'value', $order = 'DESC', $offset = 0, $per_page = 20 ) {
+	public function get_all_details( $orderby = 'ref_count', $order = 'DESC', $per_page = 20, $offset = 0, $media_type = false ) {
 		global $wpdb;
 
 		$table_name = $this->table_name();
+		$orderby = sanitize_text_field( $orderby );
+		$order = sanitize_text_field( $order );
 
-		return $wpdb->get_results(
-			$wpdb->prepare( 
-				"SELECT DISTINCT key_id FROM $table_name ORDER BY $orderby $order LIMIT %d OFFSET %d",
+		if ( empty( $media_type ) || 'all' == $media_type ) {
+			$sql = $wpdb->prepare( 
+				"SELECT * FROM $table_name ORDER BY {$orderby} {$order} LIMIT %d OFFSET %d",
 				$per_page,
 				$offset
-			),
-			ARRAY_A
-		);
+			);
+		} else {
+			$sql = $wpdb->prepare( 
+				"SELECT * FROM $table_name WHERE type = %s ORDER BY {$orderby} {$order} LIMIT %d OFFSET %d",
+				$media_type,
+				$per_page,
+				$offset
+			);
+		}
+
+		return $wpdb->get_results( $sql, ARRAY_A );
 	}
 
 	/**
 	 * Get the media view details via $attachment_id
 	 */
-	public function get_all_details_count() {
+	public function get_all_details_count( $media_type = false ) {
 		global $wpdb;
 
 		$table_name = $this->table_name();
 
-		$results = $wpdb->get_results(
-			$wpdb->prepare( 
+		if ( empty( $media_type ) || 'all' == $media_type ) {
+			$sql = $wpdb->prepare( 
 				"SELECT id FROM $table_name"
-			),
-			ARRAY_A
-		);
+			);
+		} else {
+			$sql = $wpdb->prepare( 
+				"SELECT id FROM $table_name WHERE type = %s",
+				$media_type
+			);
+		}
+
+		$results = $wpdb->get_results( $sql, ARRAY_A );
 
 		return empty( $results ) ? 0 : count( $results );
 	}
@@ -232,6 +246,20 @@ class View_Analytics_Media_Table {
 	public function user_delete( $id ) {
 		global $wpdb;
 		$wpdb->delete( $this->table_name(), array( 'id' => $id ), array( '%d' ) );
+	}
+
+	/**
+	 * Delete the current user has view media count
+	 */
+	public function delete( $ids ) {
+		global $wpdb;
+
+		$table_name = $this->table_name();
+		$table_name_log = $this->table_name_log();
+
+		$wpdb->query( "DELETE FROM $table_name WHERE id IN( {$ids} )" );
+
+		$wpdb->query( "DELETE FROM $table_name_log WHERE id IN( {$ids} )" );
 	}
 
 	/**

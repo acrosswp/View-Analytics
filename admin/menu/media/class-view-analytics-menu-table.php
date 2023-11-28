@@ -54,13 +54,27 @@ class View_Analytics_List_Media_Table extends WP_List_Table {
         global $status, $page;
 
         parent::__construct(array(
-            'singular' => 'media',
-            'plural' => 'media',
+            'singular'  => 'media',
+            'plural'    => 'medias',
+            'ajax'      => false      
         ));
 
 		$this->common = View_Analytics_Media_Common::instance();
 
 		$this->per_page = 20;
+    }
+
+    protected function get_views() {
+
+        $url = admin_url( 'admin.php?page=view-analytics-media' );
+
+        $status_links['all'] = sprintf( __( "<a href='%s'>All</a>", 'view-analytics' ), $url );
+        
+        foreach( $this->common->media_types() as $media_type ) {
+            $status_links[ $media_type ] = sprintf( __( "<a href='%s&media_type=%s'>%s</a>", 'view-analytics' ), $url, $media_type, ucfirst( $media_type ) );
+        }
+
+        return $status_links;
     }
 
     /**
@@ -75,28 +89,16 @@ class View_Analytics_List_Media_Table extends WP_List_Table {
     }
 
     /**
-     * [OPTIONAL] this is example, how to render specific column
-     *
-     * method name must be like this: "column_[column_name]"
-     *
-     * @param $item - row (key, value array)
-     * @return HTML
-     */
-    function column_age( $item ) {
-        return '<em>' . $item['value'] . '</em>';
-    }
-
-    /**
      * [OPTIONAL] this is example, how to render column with actions,
      * when you hover row "Edit | Delete" links showed
      *
      * @param $item - row (key, value array)
      * @return HTML
      */
-    function column_name( $item ) {
+    function column_id( $item ) {
         $actions = array(
-            'edit' => sprintf('<a href="?page=view-analytics-media&id=%s">%s</a>', $item['id'], __('Edit', 'cltd_example')),
-            'delete' => sprintf('<a href="?page=%s&action=delete&id=%s">%s</a>', $_REQUEST['page'], $item['id'], __('Delete', 'cltd_example')),
+            'view_log' => sprintf('<a href="?page=view-analytics-media&id=%s">%s</a>', $item['id'], __( 'View Log', 'view-analytics' ) ),
+            'delete' => sprintf('<a href="?page=%s&action=delete&id=%s">%s</a>', $_REQUEST['page'], $item['id'], __( 'Delete', 'view-analytics' ) ),
         );
 
         return sprintf('%s %s',
@@ -128,9 +130,11 @@ class View_Analytics_List_Media_Table extends WP_List_Table {
     function get_columns() {
         $columns = array(
             'cb' => '<input type="checkbox" />', //Render a checkbox instead of text
-            'id' => __('ID', 'cltd_example'),
-            'email' => __('E-Mail', 'cltd_example'),
-            'age' => __('Age', 'cltd_example'),
+            'id' => __( 'ID', 'view-analytics'),
+            'key_id' => __( 'Media ID', 'view-analytics'),
+            'user_count' => __( 'User Count', 'view-analytics'),
+            'ref_count' => __( 'View', 'view-analytics'),
+            'session_count' => __( 'Session View', 'view-analytics'),
         );
         return $columns;
     }
@@ -144,9 +148,9 @@ class View_Analytics_List_Media_Table extends WP_List_Table {
      */
     function get_sortable_columns() {
         $sortable_columns = array(
-            'name' => array('name', true),
-            'email' => array('email', false),
-            'age' => array('age', false),
+            'user_count' => array( 'user_count', false),
+            'ref_count' => array( 'ref_count', false),
+            'session_count' => array( 'session_count', false),
         );
         return $sortable_columns;
     }
@@ -158,7 +162,7 @@ class View_Analytics_List_Media_Table extends WP_List_Table {
      */
     function get_bulk_actions() {
         $actions = array(
-            'delete' => 'Delete'
+            'delete' => __( 'Delete', 'view-analytics')
         );
         return $actions;
     }
@@ -175,12 +179,16 @@ class View_Analytics_List_Media_Table extends WP_List_Table {
         $table_name = $this->common->table->table_name();
         $table_name_log = $this->common->table->table_name_log();
 
-        if ('delete' === $this->current_action()) {
-            $ids = isset($_REQUEST['id']) ? $_REQUEST['id'] : array();
-            if (is_array($ids)) $ids = implode(',', $ids);
+        if ( 'delete' === $this->current_action() ) {
+            
+            $ids = isset( $_REQUEST['id']) ? $_REQUEST['id'] : array();
 
-            if (!empty($ids)) {
-                $wpdb->query("DELETE FROM $table_name WHERE id IN($ids)");
+            if ( is_array( $ids ) ) {
+                $ids = implode(',', $ids);
+            }
+
+            if ( ! empty( $ids ) ) {
+                $this->common->table->delete( $ids );
             }
         }
     }
@@ -199,22 +207,27 @@ class View_Analytics_List_Media_Table extends WP_List_Table {
         $sortable = $this->get_sortable_columns();
 
         // here we configure table headers, defined in our methods
-        $this->_column_headers = array($columns, $hidden, $sortable);
+        $this->_column_headers = array( $columns, $hidden, $sortable );
 
         // [OPTIONAL] process bulk action if any
         $this->process_bulk_action();
 
+        $media_type = isset( $_GET['media_type'] ) ? $_GET['media_type'] : false;
+
         // will be used in pagination settings
-        $total_items = $this->common->table->get_all_details_count();
+        $total_items = $this->common->table->get_all_details_count( $media_type );
 
         // prepare query params, as usual current page, order by and order direction
-        $paged = isset($_REQUEST['paged']) ? max(0, intval($_REQUEST['paged'] - 1) * $this->per_page ) : 0;
-        $orderby = (isset($_REQUEST['orderby']) && in_array($_REQUEST['orderby'], array_keys($this->get_sortable_columns()))) ? $_REQUEST['orderby'] : 'name';
-        $order = (isset($_REQUEST['order']) && in_array($_REQUEST['order'], array('asc', 'desc'))) ? $_REQUEST['order'] : 'asc';
+        
+        $paged = isset( $_GET['paged'] ) ? max( 0, intval( $_GET['paged'] - 1 ) * $this->per_page ) : 0;
+        
+        $orderby = ( isset( $_GET['orderby'] ) && in_array( $_GET['orderby'], array_keys( $this->get_sortable_columns() ) ) ) ? $_GET['orderby'] : 'ref_count';
+        
+        $order = ( isset($_GET['order'] ) && in_array( $_GET['order'], array( 'asc', 'desc') ) ) ? $_GET['order'] : 'desc';
 
         // [REQUIRED] define $items array
         // notice that last argument is ARRAY_A, so we will retrieve array
-        $this->items = $this->common->table->get_all_details();
+        $this->items = $this->common->table->get_all_details( $orderby, $order, $this->per_page, $paged, $media_type );
 
         // [REQUIRED] configure pagination
         $this->set_pagination_args(array(

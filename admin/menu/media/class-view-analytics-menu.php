@@ -86,31 +86,31 @@ class View_Analytics_Admin_Media_Menu {
 	 * Show the content on the main menu
 	 */
 	function about_view_analytics() {
+
 		global $wpdb;
 
 		/**
 		 * Media view table
 		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/menu/media/class-view-analytics-menu-custom-table.php';
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/menu/media/class-view-analytics-menu-table.php';
 
 		$table = new View_Analytics_List_Media_Table();
 		$table->prepare_items();
 
 		$message = '';
-		if ('delete' === $table->current_action()) {
-			$message = '<div class="updated below-h2" id="message"><p>' . sprintf(__('Items deleted: %d', 'cltd_example'), count($_REQUEST['id'])) . '</p></div>';
+		if ( 'delete' === $table->current_action() ) {
+			$count = is_array( $_REQUEST['id'] ) ? count( $_REQUEST['id'] ) : 1;
+			$message = '<div class="updated below-h2" id="message"><p>' . sprintf( __( 'Items deleted: %d', 'view-analytics' ), $count ) .'</p></div>';
 		}
 		?>
 		<div class="wrap">
 			<div class="icon32 icon32-posts-post" id="icon-edit"><br></div>
-				<h2>
-					<?php _e('Persons', 'cltd_example')?>
-					<a class="add-new-h2" href="<?php echo get_admin_url(get_current_blog_id(), 'admin.php?page=persons_form');?>"><?php _e('Add new', 'cltd_example')?></a>
-				</h2>
 			<?php echo $message; ?>
-
+			<?php $table->views(); ?>
 			<form id="persons-table" method="GET">
 				<input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>"/>
+				<input type="hidden" name="paged" value="<?php echo $_REQUEST['paged'] ?>"/>
+				<input type="hidden" name="media_type" value="<?php echo $_REQUEST['media_type'] ?>"/>
 				<?php $table->display() ?>
 			</form>
 		</div>
