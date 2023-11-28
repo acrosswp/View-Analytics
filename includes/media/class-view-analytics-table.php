@@ -205,12 +205,8 @@ class View_Analytics_Media_Table {
 	/**
 	 * Update the current user has view media count
 	 */
-	public function user_update( $id, $user_list, $user_count, $ref_count, $session_count, $viewer_id, $details = false, $components = array(), $mysql_time = false ) {
+	public function user_update( $id, $user_list, $user_count, $ref_count, $session_count, $viewer_id, $details = false, $components = array() ) {
 		global $wpdb;
-
-		if ( empty( $mysql_time ) ) {
-			$mysql_time = $wpdb->get_var( 'select CURRENT_TIMESTAMP()' );
-		}
 
 		$update = $wpdb->update(
 			$this->table_name(),
@@ -220,12 +216,11 @@ class View_Analytics_Media_Table {
 				'ref_count' => $ref_count,
 				'session_count' => $session_count,
 				'is_new' => 1,
-				'last_date' => $mysql_time,
 			),
 			array( 
 				'id' => $id 
 			),
-			array( '%s', '%d', '%d', '%d', '%d', '%s' ),
+			array( '%s', '%d', '%d', '%d', '%d' ),
 			array( '%d' )
 		);
 

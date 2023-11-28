@@ -121,6 +121,16 @@ class View_Analytics_List_Media_Table extends WP_List_Table {
     }
 
     /**
+     * [REQUIRED] this is how checkbox column renders
+     *
+     * @param $item - row (key, value array)
+     * @return HTML
+     */
+    function column_type( $item ) {
+        return ucfirst( $item['type'] );
+    }
+
+    /**
      * [REQUIRED] This method return columns to display in table
      * you can skip columns that you do not want to show
      * like content, or description
@@ -132,6 +142,8 @@ class View_Analytics_List_Media_Table extends WP_List_Table {
             'cb' => '<input type="checkbox" />', //Render a checkbox instead of text
             'id' => __( 'ID', 'view-analytics'),
             'key_id' => __( 'Media ID', 'view-analytics'),
+            'type' => __( 'Media Type', 'view-analytics'),
+            'mime_type' => __( 'Mime Type', 'view-analytics'),
             'user_count' => __( 'User Count', 'view-analytics'),
             'ref_count' => __( 'View', 'view-analytics'),
             'session_count' => __( 'Session View', 'view-analytics'),

@@ -176,8 +176,6 @@ class View_Analytics_Activator {
 			type varchar(50) NOT NULL DEFAULT 'photo',
 			mime_type varchar(50) NOT NULL DEFAULT '',
 			is_new tinyint(1) NOT NULL DEFAULT 1,
-			last_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
 		) {$charset_collate};";
 
