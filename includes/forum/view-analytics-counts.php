@@ -92,7 +92,7 @@ class View_Analytics_Public_Forum_Count {
 	/**
 	 * Update Media view count
 	 */
-	public function update_view_count( $viewer_id ) {
+	public function update_view_count( $current_user_id ) {
 
 		if ( $this->common->view_count_enable() ) {
 
@@ -107,16 +107,54 @@ class View_Analytics_Public_Forum_Count {
 
 				$components = $this->common->get_components( $post_id, $bbp_root_slug );
 
-				$views = $this->common->table->user_get( $post_id, $viewer_id );
+				$views = $this->common->table->get_details( $post_id );
 
 				if( empty( $views ) ) {
-					$this->common->table->user_add( $post_id, $author_id, $viewer_id, $components, 1 );
+					$this->common->table->user_add( 
+						$post_id,
+						$author_id,
+						$current_user_id,
+						$components,
+						1
+					);
 				} else {
-					$id = $views->id;
-					$view_count = $views->value;
-					$view_count++;
 
-					$this->common->table->user_update( $id, $view_count, $post_id, $author_id, $viewer_id, $components, 1 );
+					$id = $views['id'];
+
+					/**
+					 * Ref count
+					 */
+					$ref_count = empty( $views['ref_count'] ) ? 1 : absint( $views['ref_count'] ) + 1;
+
+					/**
+					 * Users list
+					 */
+					$users_list = empty( $views['users_list'] ) ? array() : maybe_unserialize( $views['users_list'] );
+					if ( ! in_array( $current_user_id, $users_list ) ) {
+						array_unshift( $users_list, $current_user_id );
+					}
+
+					/**
+					 * Users view count
+					 */
+					$user_count = count( $users_list );
+
+					/**
+					 * update session count
+					 */
+					$session_count = $this->common->table->user_get( $current_user_id, $post_id, true );
+					$session_count = empty( $session_count ) ? absint( $views['session_count'] ) + 1 : absint( $views['session_count'] );
+
+					$this->common->table->user_update( 
+						$id,
+						$users_list,
+						$user_count,
+						$ref_count,
+						$session_count,
+						$current_user_id,
+						$views,
+						$components
+					);
 				}
 			}
 		}

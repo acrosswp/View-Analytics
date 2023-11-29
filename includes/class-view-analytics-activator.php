@@ -85,12 +85,12 @@ class View_Analytics_Activator {
 			blog_id bigint(20) NULL,
 			post_id bigint(20) NOT NULL,
 			author_id bigint(20) NOT NULL,
-			viewer_id bigint(20) NOT NULL,
-			value bigint(20) NOT NULL DEFAULT 1,
+			users_list longtext NULL,
+			user_count bigint(20) NOT NULL DEFAULT 1,
+			ref_count bigint(20) NOT NULL DEFAULT 1,
+			session_count bigint(20) NOT NULL DEFAULT 1,
 			is_new tinyint(1) NOT NULL DEFAULT 1,
 			locale varchar(50) NOT NULL,
-			last_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id)
 		) {$charset_collate};";
 
@@ -101,7 +101,6 @@ class View_Analytics_Activator {
 			blog_id bigint(20) NULL,
 			session varchar(255) NOT NULL DEFAULT '',
 			post_id bigint(20) NOT NULL,
-			author_id bigint(20) NOT NULL,
 			viewer_id bigint(20) NOT NULL,
 			url varchar(255) NOT NULL DEFAULT '',
 			components varchar(255) NULL DEFAULT '',

@@ -253,14 +253,14 @@ class View_Analytics_Public_Media_Count {
 		if ( $this->common->view_count_enable() ) {
 			$current_user_id = get_current_user_id();
 
-			$media_view = $this->common->table->get_details( $key_id );
+			$views = $this->common->table->get_details( $key_id );
 			
 			$components = $this->common->get_components( $media_id, $media_type );
 	
 			/**
 			 * Check if empty
 			 */
-			if ( empty( $media_view ) ) {
+			if ( empty( $views ) ) {
 				$this->common->table->user_add( 
 					$current_user_id,
 					$key_id,
@@ -272,17 +272,17 @@ class View_Analytics_Public_Media_Count {
 					$components
 				);
 			} else {
-				$id = $media_view['id'];
+				$id = $views['id'];
 
 				/**
 				 * Ref count
 				 */
-				$ref_count = empty( $media_view['ref_count'] ) ? 1 : absint( $media_view['ref_count'] ) + 1;
+				$ref_count = empty( $views['ref_count'] ) ? 1 : absint( $views['ref_count'] ) + 1;
 
 				/**
 				 * Users list
 				 */
-				$users_list = empty( $media_view['users_list'] ) ? array() : maybe_unserialize( $media_view['users_list'] );
+				$users_list = empty( $views['users_list'] ) ? array() : maybe_unserialize( $views['users_list'] );
 				if ( ! in_array( $current_user_id, $users_list ) ) {
 					array_unshift( $users_list, $current_user_id );
 				}
@@ -296,7 +296,7 @@ class View_Analytics_Public_Media_Count {
 				 * update session count
 				 */
 				$session_count = $this->common->table->user_get( $current_user_id, $key_id, true );
-				$session_count = empty( $session_count ) ? absint( $media_view['session_count'] ) + 1 : absint( $media_view['session_count'] );
+				$session_count = empty( $session_count ) ? absint( $views['session_count'] ) + 1 : absint( $views['session_count'] );
 
 				$this->common->table->user_update( 
 					$id,
@@ -305,7 +305,7 @@ class View_Analytics_Public_Media_Count {
 					$ref_count,
 					$session_count,
 					$current_user_id,
-					$media_view,
+					$views,
 					$components
 				);
 			}

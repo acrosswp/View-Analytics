@@ -78,73 +78,78 @@ class View_Analytics_Forum_Table {
 				'blog_id' => get_current_blog_id(),
 				'post_id' => $post_id,
 				'author_id' => $author_id,
-				'viewer_id' => $viewer_id,
+				'users_list' => serialize( array( $viewer_id ) ),
 				'is_new' => $is_new,
 			),
 			array(
 				'%d',
 				'%d',
 				'%d',
-				'%d',
+				'%s',
 				'%d',
 			)
 		);
 
 		if( $add ) {
-			$this->add_log( $wpdb->insert_id, $post_id, $author_id, $viewer_id, $components );
+			$this->add_log( $wpdb->insert_id, $post_id, $viewer_id, $components );
 		}
 
 		return $add;
 	}
 
 	/**
-	 * Get the current user has already view the forum or not
+	 * Get the current user has already view the media or not
 	 */
-	public function user_get( $post_id, $viewer_id ) {
+	public function user_get( $viewer_id, $post_id, $session = false ) {
 		global $wpdb;
 
-		$table_name = $this->table_name();
+		$table_name = $this->table_name_log();
 
-		return $wpdb->get_row(
-			$wpdb->prepare( 
-				"SELECT * FROM $table_name WHERE post_id = %d AND viewer_id = %d",
+		if ( $session ) {
+			$session = View_Analytics_Common::instance()->wp_get_current_session();
+			$sql = $wpdb->prepare( 
+				"SELECT * FROM $table_name WHERE viewer_id = %d AND post_id = %s AND session = %s",
+				$viewer_id,
 				$post_id,
-				$viewer_id
-			)
-		);
+				$session,
+			);
+		} else {
+			$sql = $wpdb->prepare( 
+				"SELECT * FROM $table_name WHERE viewer_id = %d AND post_id = %s",
+				$viewer_id,
+				$post_id
+			);
+		}
+		return $wpdb->get_results( $sql, ARRAY_A );
 	}
 
 	/**
 	 * Update the current user has view forum count
 	 */
-	public function user_update( $id, $value, $post_id, $author_id, $viewer_id, $components, $is_new = 1, $mysql_time = false ) {
+	public function user_update( $id, $users_list, $user_count, $ref_count, $session_count, $viewer_id, $details = false, $components = array() ) {
 		global $wpdb;
-
-
-		if ( empty( $mysql_time ) ) {
-			$mysql_time = $wpdb->get_var( 'select CURRENT_TIMESTAMP()' );
-		}
 
 		$update = $wpdb->update(
 			$this->table_name(),
 			array(
-				'value' => absint( $value ),
-				'is_new' => absint( $is_new ),
-				'last_date' => $mysql_time,
+				'users_list' => serialize( $users_list ),
+				'user_count' => $user_count,
+				'ref_count' => $ref_count,
+				'session_count' => $session_count,
+				'is_new' => 1,
 			),
 			array( 
-				'id' => absint( $id ) 
+				'id' => $id 
 			),
-			array( 
-				'%d',
-				'%d',
-				'%s',
-			),
+			array( '%s', '%d', '%d', '%d', '%d' ),
 			array( '%d' )
 		);
 
-		if( $update ) {
-			$this->add_log( $id, $post_id, $author_id, $viewer_id, $components );
+		if ( 
+			$update 
+			&& ! empty( $details['author_id'] ) 
+			) {
+			$this->add_log( $wpdb->insert_id, $details['post_id'], $viewer_id, $components );
 		}
 
 		return $update;
@@ -167,7 +172,7 @@ class View_Analytics_Forum_Table {
 
 		$table_name = $this->table_name();
 
-		return $wpdb->get_results(
+		return $wpdb->get_row(
 			$wpdb->prepare( 
 				"SELECT * FROM {$table_name} WHERE post_id = %d",
 				$post_id
@@ -179,7 +184,7 @@ class View_Analytics_Forum_Table {
 	/**
 	 * Add value in Log table
 	 */
-	public function add_log( $match_id, $post_id, $author_id, $viewer_id, $components ) {
+	public function add_log( $match_id, $post_id, $viewer_id, $components ) {
 		global $wpdb;
 
 		$device = wp_is_mobile() ? 'mobile' : 'desktop';
@@ -192,7 +197,6 @@ class View_Analytics_Forum_Table {
 				'session' => $session,
 				'match_id' => $match_id,
 				'post_id' => $post_id,
-				'author_id' => $author_id,
 				'viewer_id' => $viewer_id,
 				'url' => $components['url'],
 				'components' => $components['components'],
@@ -205,7 +209,6 @@ class View_Analytics_Forum_Table {
 			array(
 				'%d',
 				'%s',
-				'%d',
 				'%d',
 				'%d',
 				'%d',
