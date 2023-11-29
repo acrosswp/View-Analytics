@@ -134,14 +134,28 @@ class View_Analytics_Media_Rest_Controller extends WP_REST_Controller {
 		$schema 	= $this->get_item_schema();
 
 		$key_id = sanitize_text_field( $request->get_param( 'key_id' ) );
-		$media_details = $this->common->table->get_details( $key_id );
+		$media_detail = $this->common->table->get_details( $key_id );
 
-		if ( empty( $media_details ) ) {
+		if ( empty( $media_detail ) ) {
 			return rest_ensure_response( $post_data );
 		}
 
-		foreach ( $media_details as $media ) {
-			$response = $this->prepare_item_for_response( $media, $request, $mysql_time );
+		$user_lists = unserialize( $media_detail['user_list'] );
+
+		foreach ( $user_lists as $user_id ) {
+
+			/**
+			 * Get the visitor id
+			 */
+			$media_detail['viewer_id'] = $user_id;
+
+			/**
+			 * Action date
+			 */
+			$action_date = $this->common->table->get_user_first_view( $user_id, $key_id );
+			$media_detail['action_date'] = $action_date['action_date'];
+
+			$response = $this->prepare_item_for_response( $media_detail, $request, $mysql_time );
 			$post_data[]   = $this->prepare_response_for_collection( $response );
 		}
 

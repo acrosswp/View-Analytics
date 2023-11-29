@@ -232,10 +232,10 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 
 		$media_details = $this->table->get_details( $key_id );
 
-		if ( empty( $media_details ) ) {
+		if ( empty( $media_details['user_count'] ) ) {
 			return 0;
 		} else {
-			return count( $media_details );
+			return $media_details['user_count'];
 		}
 	}
 
@@ -396,7 +396,7 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 
 		$site_components_array = array( 'groups', 'members' );
 
-		$site_components = empty( $components[0] ) ? $default_component : $components[0];
+		$site_components = empty( $components[0] ) ? 'home' : $components[0];
 
 		
 		if( in_array( $site_components, $site_components_array ) ) {

@@ -134,6 +134,23 @@ class View_Analytics_Media_Table {
 	}
 
 	/**
+	 * Get the current user has already view the media or not
+	 */
+	public function get_user_first_view( $viewer_id, $key_id ) {
+		global $wpdb;
+
+		$table_name = $this->table_name_log();
+
+		$sql = $wpdb->prepare( 
+			"SELECT MIN( action_date ) as action_date FROM $table_name WHERE viewer_id = %d AND key_id = %s",
+			$viewer_id,
+			$key_id
+		);
+
+		return $wpdb->get_row( $sql, ARRAY_A );
+	}
+
+	/**
 	 * Get the media view details via $attachment_id
 	 */
 	public function get_details( $key_id ) {
