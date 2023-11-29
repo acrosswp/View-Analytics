@@ -149,7 +149,7 @@ class View_Analytics_Forum_Table {
 			$update 
 			&& ! empty( $details['author_id'] ) 
 			) {
-			$this->add_log( $wpdb->insert_id, $details['post_id'], $viewer_id, $components );
+			$this->add_log( $id, $details['post_id'], $viewer_id, $components );
 		}
 
 		return $update;
