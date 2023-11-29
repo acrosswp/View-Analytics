@@ -81,7 +81,7 @@ class View_Analytics_Media_Table {
 				'hash_id' => $hash_id,
 				'media_id' => $media_id,
 				'attachment_id' => $attachment_id,
-				'user_list' => serialize( array( $viewer_id ) ),
+				'users_list' => serialize( array( $viewer_id ) ),
 				'author_id' => $media_owner_id,
 				'type' => $media_type,
 				'ref_count' => $ref_count,
@@ -222,13 +222,13 @@ class View_Analytics_Media_Table {
 	/**
 	 * Update the current user has view media count
 	 */
-	public function user_update( $id, $user_list, $user_count, $ref_count, $session_count, $viewer_id, $details = false, $components = array() ) {
+	public function user_update( $id, $users_list, $user_count, $ref_count, $session_count, $viewer_id, $details = false, $components = array() ) {
 		global $wpdb;
 
 		$update = $wpdb->update(
 			$this->table_name(),
 			array(
-				'user_list' => serialize( $user_list ),
+				'users_list' => serialize( $users_list ),
 				'user_count' => $user_count,
 				'ref_count' => $ref_count,
 				'session_count' => $session_count,

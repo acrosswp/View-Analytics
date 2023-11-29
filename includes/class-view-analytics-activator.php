@@ -169,7 +169,7 @@ class View_Analytics_Activator {
 			hash_id varchar(255) NOT NULL DEFAULT 0,
 			media_id bigint(20) NOT NULL DEFAULT 0,
 			attachment_id bigint(20) NOT NULL DEFAULT 0,
-			user_list longtext NULL,
+			users_list longtext NULL,
 			user_count bigint(20) NOT NULL DEFAULT 1,
 			ref_count bigint(20) NOT NULL DEFAULT 1,
 			session_count bigint(20) NOT NULL DEFAULT 1,

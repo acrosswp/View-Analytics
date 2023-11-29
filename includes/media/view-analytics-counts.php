@@ -118,6 +118,7 @@ class View_Analytics_Public_Media_Count {
 	 * Hook for BuddyBoss releate filter and action
 	 */
 	public function buddypress() {
+
 		/**
 		 * For All Media Type
 		 */
@@ -128,6 +129,7 @@ class View_Analytics_Public_Media_Count {
 	 * BuddyPress Media View
 	 */
 	public function buddypress_media_view( $slug, $name, $args ) {
+
 		$medium      = bp_attachments_get_queried_object();
 
 		/**
@@ -272,20 +274,33 @@ class View_Analytics_Public_Media_Count {
 			} else {
 				$id = $media_view['id'];
 
+				/**
+				 * Ref count
+				 */
 				$ref_count = empty( $media_view['ref_count'] ) ? 1 : absint( $media_view['ref_count'] ) + 1;
 
-				$user_list = empty( $media_view['user_list'] ) ? array() : maybe_unserialize( $media_view['user_list'] );
-				$user_list[] = $current_user_id;
-				$user_list = array_unique( $user_list );
+				/**
+				 * Users list
+				 */
+				$users_list = empty( $media_view['users_list'] ) ? array() : maybe_unserialize( $media_view['users_list'] );
+				if ( ! in_array( $current_user_id, $users_list ) ) {
+					array_unshift( $users_list, $current_user_id );
+				}
 
-				$user_count = count( $user_list );
+				/**
+				 * Users view count
+				 */
+				$user_count = count( $users_list );
 
+				/**
+				 * update session count
+				 */
 				$session_count = $this->common->table->user_get( $current_user_id, $key_id, true );
 				$session_count = empty( $session_count ) ? absint( $media_view['session_count'] ) + 1 : absint( $media_view['session_count'] );
 
 				$this->common->table->user_update( 
 					$id,
-					$user_list,
+					$users_list,
 					$user_count,
 					$ref_count,
 					$session_count,
