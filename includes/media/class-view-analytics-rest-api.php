@@ -145,14 +145,14 @@ class View_Analytics_Media_Rest_Controller extends WP_REST_Controller {
 		foreach ( $user_lists as $user_id ) {
 
 			/**
-			 * Get the visitor id
+			 * Get the visitor
 			 */
 			$media_detail['viewer_id'] = $user_id;
 
 			/**
 			 * Action date
 			 */
-			$action_date = $this->common->table->get_user_first_view( $user_id, $key_id );
+			$action_date = $this->common->table->get_user_log_view( $user_id, $key_id );
 			$media_detail['action_date'] = $action_date['action_date'];
 
 			$response = $this->prepare_item_for_response( $media_detail, $request, $mysql_time );

@@ -136,7 +136,7 @@ class View_Analytics_Media_Table {
 	/**
 	 * Get the current user has already view the media or not
 	 */
-	public function get_user_first_view( $viewer_id, $key_id ) {
+	public function get_user_log_view( $viewer_id, $key_id ) {
 		global $wpdb;
 
 		$table_name = $this->table_name_log();

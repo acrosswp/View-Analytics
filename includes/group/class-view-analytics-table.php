@@ -182,6 +182,23 @@ class View_Analytics_Group_Table {
 	}
 
 	/**
+	 * Get the current user has already view the media or not
+	 */
+	public function get_user_log_view( $viewer_id, $group_id ) {
+		global $wpdb;
+
+		$table_name = $this->table_name_log();
+
+		$sql = $wpdb->prepare( 
+			"SELECT count(id) as user_view_count, MIN( action_date ) as action_date FROM $table_name WHERE viewer_id = %d AND group_id = %s",
+			$viewer_id,
+			$group_id
+		);
+
+		return $wpdb->get_row( $sql, ARRAY_A );
+	}
+
+	/**
 	 * Add value in Log table
 	 */
 	public function add_log( $match_id, $group_id, $viewer_id, $components ) {

@@ -111,8 +111,12 @@ class View_Analytics_Group_Count_View {
 				<?php
 				global $wpdb;
 				$mysql_time = $wpdb->get_var( 'select CURRENT_TIMESTAMP()' );
-				foreach( $view_details as $view_detail ) {
-					$link = bp_core_get_user_domain( $view_detail->viewer_id );
+				$user_lists = unserialize( $view_details['users_list'] );
+
+				foreach( $user_lists as $viewer_id ) {
+					$log_view = $this->common->table->get_user_log_view( $viewer_id, $group_id );
+
+					$link = bp_core_get_user_domain( $viewer_id );
 					?>
 					<li class="bs-item-wrap">
 						<div class="notification-avatar">
@@ -120,7 +124,7 @@ class View_Analytics_Group_Count_View {
 								<?php
 								echo bp_core_fetch_avatar(
 									array(
-										'item_id' => $view_detail->viewer_id,
+										'item_id' => $viewer_id,
 										'object'  => 'user',
 									)
 								);
@@ -130,9 +134,9 @@ class View_Analytics_Group_Count_View {
 
 						<div class="notification-content">
 							<span>
-								<a href="<?php echo $link; ?>"><?php echo $this->common->get_view_body_message( $view_detail->viewer_id, $view_detail->value ); ?></a>
+								<a href="<?php echo $link; ?>"><?php echo $this->common->get_view_body_message( $viewer_id, $log_view['user_view_count'] ); ?></a>
 							</span>
-							<span class="posted"><?php echo $this->common->get_view_time_message( $view_detail->action_date, $mysql_time ); ?></span>
+							<span class="posted"><?php echo $this->common->get_view_time_message( $log_view['action_date'], $mysql_time ); ?></span>
 						</div>
 					</li>
 					<?php
