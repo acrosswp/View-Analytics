@@ -77,14 +77,14 @@ class View_Analytics_Profile_Table {
 			array( 
 				'blog_id' => get_current_blog_id(),
 				'author_id' => $author_id,
-				'viewer_id' => $viewer_id,
+				'users_list' => serialize( array( $viewer_id ) ),
 				'is_new' => $is_new,
 				'locale' => get_user_locale(),
 			),
 			array(
 				'%d',
 				'%d',
-				'%d',
+				'%s',
 				'%d',
 				'%s',
 			)
@@ -98,26 +98,35 @@ class View_Analytics_Profile_Table {
 	}
 
 	/**
-	 * Get the current user has already view the profile or not
+	 * Get the current user has already view the media or not
 	 */
-	public function user_get( $author_id, $viewer_id ) {
+	public function user_get( $viewer_id, $author_id, $session = false ) {
 		global $wpdb;
 
-		$table_name = $this->table_name();
+		$table_name = $this->table_name_log();
 
-		return $wpdb->get_row(
-			$wpdb->prepare( 
-				"SELECT * FROM $table_name WHERE author_id = %d AND viewer_id = %d",
+		if ( $session ) {
+			$session = View_Analytics_Common::instance()->wp_get_current_session();
+			$sql = $wpdb->prepare( 
+				"SELECT * FROM $table_name WHERE viewer_id = %d AND author_id = %s AND session = %s",
+				$viewer_id,
 				$author_id,
-				$viewer_id
-			)
-		);
+				$session,
+			);
+		} else {
+			$sql = $wpdb->prepare( 
+				"SELECT * FROM $table_name WHERE viewer_id = %d AND author_id = %s",
+				$viewer_id,
+				$author_id
+			);
+		}
+		return $wpdb->get_results( $sql, ARRAY_A );
 	}
 
 	/**
 	 * Update the current user has view profile count
 	 */
-	public function user_update( $id, $value ,$author_id, $viewer_id, $components, $is_new = 1, $mysql_time = false ) {
+	public function user_update( $id, $users_list, $user_count, $ref_count, $session_count, $viewer_id, $details = false, $components = array() ) {
 		global $wpdb;
 
 		if ( empty( $mysql_time ) ) {
@@ -127,19 +136,21 @@ class View_Analytics_Profile_Table {
 		$update = $wpdb->update(
 			$this->table_name(),
 			array(
-				'value' => $value,
-				'is_new' => $is_new,
-				'last_date' => $mysql_time,
+				'users_list' => serialize( $users_list ),
+				'user_count' => $user_count,
+				'ref_count' => $ref_count,
+				'session_count' => $session_count,
+				'is_new' => 1,
 			),
 			array( 
 				'id' => $id 
 			),
-			array( '%d', '%d', '%s' ),
+			array( '%s', '%d', '%d', '%d', '%d' ),
 			array( '%d' )
 		);
 
 		if( $update ) {
-			$this->add_log( $id, $author_id, $viewer_id, $components );
+			$this->add_log( $id, $details['author_id'], $viewer_id, $components );
 		}
 
 		return $update;
@@ -162,7 +173,7 @@ class View_Analytics_Profile_Table {
 
 		$table_name = $this->table_name();
 
-		return $wpdb->get_results(
+		return $wpdb->get_row(
 			$wpdb->prepare( 
 				"SELECT * FROM {$table_name} WHERE author_id = %d",
 				$author_id

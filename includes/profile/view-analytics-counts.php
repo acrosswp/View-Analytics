@@ -91,7 +91,7 @@ class View_Analytics_Public_Profile_Count {
 	/**
 	 * Update Media view count
 	 */
-	public function update_view_count( $author_id, $viewer_id ) {
+	public function update_view_count( $author_id, $current_user_id ) {
 
 		if ( $this->common->view_count_enable() ) {
 
@@ -99,18 +99,49 @@ class View_Analytics_Public_Profile_Count {
 			$profile_slug = $bp->displayed_user->userdata->user_login;
 			$components = $this->common->get_components( $profile_slug, $bp->default_component );
 
-			$profile_view = $this->common->table->user_get( $author_id, $viewer_id );
+			$views = $this->common->table->get_details( $author_id );
 
-			if( empty( $profile_view ) ) {
-				$this->common->table->user_add( $author_id, $viewer_id, $components, 1 );
+			if( empty( $views ) ) {
+				$this->common->table->user_add( $author_id, $current_user_id, $components, 1 );
 			} else {
-				$id = $profile_view->id;
-				$view_count = $profile_view->value;
-				$view_count++;
+				
+				$id = $views['id'];
 
-				$this->common->table->user_update( $id, $view_count, $author_id, $viewer_id, $components, 1 );
+				/**
+				 * Ref count
+				 */
+				$ref_count = empty( $views['ref_count'] ) ? 1 : absint( $views['ref_count'] ) + 1;
+
+				/**
+				 * Users list
+				 */
+				$users_list = empty( $views['users_list'] ) ? array() : maybe_unserialize( $views['users_list'] );
+				if ( ! in_array( $current_user_id, $users_list ) ) {
+					array_unshift( $users_list, $current_user_id );
+				}
+
+				/**
+				 * Users view count
+				 */
+				$user_count = count( $users_list );
+
+				/**
+				 * update session count
+				 */
+				$session_count = $this->common->table->user_get( $current_user_id, $author_id, true );
+				$session_count = empty( $session_count ) ? absint( $views['session_count'] ) + 1 : absint( $views['session_count'] );
+
+				$this->common->table->user_update( 
+					$id,
+					$users_list,
+					$user_count,
+					$ref_count,
+					$session_count,
+					$current_user_id,
+					$views,
+					$components
+				);
 			}
-
 		}
 	}
 }
