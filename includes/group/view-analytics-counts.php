@@ -92,23 +92,55 @@ class View_Analytics_Public_Group_Count {
 	/**
 	 * Update Media view count
 	 */
-	public function update_view_count( $group_id, $viewer_id ) {
+	public function update_view_count( $group_id, $current_user_id ) {
 
 		if ( $this->common->view_count_enable() ) {
 
 			$group_slug = bp_get_current_group_slug();
 			$components = $this->common->get_components( $group_slug );
 
-			$group_view = $this->common->table->user_get( $group_id, $viewer_id );
+			$views = $this->common->table->get_details( $group_id );
+			$author_id = bp_get_group_creator_id();
 
-			if( empty( $group_view ) ) {
-				$this->common->table->user_add( $group_id, $viewer_id, $components, 1 );
+			if( empty( $views ) ) {
+				$this->common->table->user_add( $group_id, $author_id, $current_user_id, $components, 1 );
 			} else {
-				$id = $group_view->id;
-				$view_count = $group_view->value;
-				$view_count++;
+				$id = $views['id'];
 
-				$this->common->table->user_update( $id, $view_count, $group_id, $viewer_id, $components, 1 );
+				/**
+				 * Ref count
+				 */
+				$ref_count = empty( $views['ref_count'] ) ? 1 : absint( $views['ref_count'] ) + 1;
+
+				/**
+				 * Users list
+				 */
+				$users_list = empty( $views['users_list'] ) ? array() : maybe_unserialize( $views['users_list'] );
+				if ( ! in_array( $current_user_id, $users_list ) ) {
+					array_unshift( $users_list, $current_user_id );
+				}
+
+				/**
+				 * Users view count
+				 */
+				$user_count = count( $users_list );
+
+				/**
+				 * update session count
+				 */
+				$session_count = $this->common->table->user_get( $current_user_id, $group_id, true );
+				$session_count = empty( $session_count ) ? absint( $views['session_count'] ) + 1 : absint( $views['session_count'] );
+
+				$this->common->table->user_update( 
+					$id,
+					$users_list,
+					$user_count,
+					$ref_count,
+					$session_count,
+					$current_user_id,
+					$views,
+					$components
+				);
 			}
 		}
 	}
