@@ -143,9 +143,9 @@ class View_Analytics_Media_Rest_Controller extends WP_REST_Controller {
 			return rest_ensure_response( $post_data );
 		}
 
-		$user_lists = unserialize( $media_detail['user_list'] );
+		$users_list = unserialize( $media_detail['users_list'] );
 
-		foreach ( $user_lists as $user_id ) {
+		foreach ( $users_list as $user_id ) {
 
 			/**
 			 * Get the visitor
