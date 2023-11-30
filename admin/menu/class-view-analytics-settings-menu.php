@@ -92,6 +92,96 @@ class View_Analytics_Admin_Setting_Menu {
 	}
 
 	/**
+	 * Add the setting for media
+	 */
+	public function media_settings() {
+		return apply_filters(
+			'view-analytics-admin-media-setting',
+			array(
+				array(
+					'type'  => 'toggle',
+					'title' => __( 'View Media Analytics', 'view-analytics' ),
+					'label' => __( 'Enable Media View Count', 'view-analytics' ),
+					'id'    => 'main',
+					'default' => true,
+				),
+			)
+		);
+	}
+
+	/**
+	 * Add the setting for media
+	 */
+	public function profile_settings() {
+		return apply_filters(
+			'view-analytics-admin-profile-setting',
+			array(
+				array(
+					'type'  => 'toggle',
+					'title' => __( 'View Profile Count', 'view-analytics' ),
+					'label' => __( 'Enable Profile View Count', 'view-analytics' ),
+					'id'    => 'main',
+					'default' => true,
+				),
+			)
+		);
+	}
+
+	/**
+	 * Add the setting for media
+	 */
+	public function group_settings() {
+		return apply_filters(
+			'view-analytics-admin-group-setting',
+			array(
+				array(
+					'type'  => 'toggle',
+					'title' => __( 'View Group Count', 'view-analytics' ),
+					'label' => __( 'Enable Group View Count', 'view-analytics' ),
+					'id'    => 'main',
+					'default' => true,
+				),
+			)
+		);
+	}
+
+	/**
+	 * Add the setting for media
+	 */
+	public function avatar_settings() {
+		return apply_filters(
+			'view-analytics-admin-avatar-setting',
+			array(
+				array(
+					'type'  => 'toggle',
+					'title' => __( 'View Avatar Count', 'view-analytics' ),
+					'label' => __( 'Enable Avatar View Count', 'view-analytics' ),
+					'id'    => 'main',
+					'default' => true,
+				),
+			)
+		);
+	}
+
+	/**
+	 * Add the setting for media
+	 */
+	public function forum_settings() {
+		return apply_filters(
+			'view-analytics-admin-forum-setting',
+			array(
+				array(
+					'type'  => 'toggle',
+					'title' => __( 'View Forum/Topic/Reply Count', 'view-analytics' ),
+					'label' => __( 'Enable Forum/Topic/Reply View Count', 'view-analytics' ),
+					'id'    => 'main',
+					'default' => true,
+				),
+			)
+		);
+	}
+
+	/**
 	 * Adds the plugin license page to the admin menu.
 	 *
 	 * @return void
@@ -111,37 +201,37 @@ class View_Analytics_Admin_Setting_Menu {
 			'menu_title'  => __( 'Settings', 'view-analytics' ),
 			'capability'  => 'manage_options',
 			'menu_slug'   => 'view-analytics-settings',
-			'items'      => array(	   
+			'items'      => array(
 				array(
-					'type'  => 'toggle',
-					'title' => __( 'View Media Analytics', 'view-analytics' ),
-					'label' => __( 'Enable Media View Count', 'view-analytics' ),
-					'id'    => $this->media_common->view_count_key(),
+					'id'              => $this->media_common->view_count_key(),
+					'type'            => 'group',
+					'title'           => __( 'View Media Analytics', 'view-analytics' ),
+					'items'           => $this->media_settings(),
 				),
 				array(
-					'type'  => 'toggle',
-					'title' => __( 'View Profile Count', 'view-analytics' ),
-					'label' => __( 'Enable Profile View Count', 'view-analytics' ),
-					'id'    => $this->profile_common->view_count_key(),
+					'id'              => $this->profile_common->view_count_key(),
+					'type'            => 'group',
+					'title'           => __( 'View Profile Count', 'view-analytics' ),
+					'items'           => $this->profile_settings(),
 				),
 				array(
-					'type'  => 'toggle',
-					'title' => __( 'View Group Count', 'view-analytics' ),
-					'label' => __( 'Enable Group View Count', 'view-analytics' ),
-					'id'    => $this->group_common->view_count_key(),
+					'id'              => $this->group_common->view_count_key(),
+					'type'            => 'group',
+					'title'           => __( 'View Group Count', 'view-analytics' ),
+					'items'           => $this->group_settings(),
 				),
 				array(
-					'type'  => 'toggle',
-					'title' => __( 'View Avatar Count', 'view-analytics' ),
-					'label' => __( 'Enable Avatar View Count', 'view-analytics' ),
-					'id'    => $this->avatar_common->view_count_key(),
+					'id'              => $this->avatar_common->view_count_key(),
+					'type'            => 'group',
+					'title'           => __( 'View Avatar Count', 'view-analytics' ),
+					'items'           => $this->avatar_settings(),
 				),
 				array(
-					'type'  => 'toggle',
-					'title' => __( 'View Forum/Topic/Reply Count', 'view-analytics' ),
-					'label' => __( 'Enable Forum/Topic/Reply View Count', 'view-analytics' ),
-					'id'    => $this->forum_common->view_count_key(),
-				),		  
+					'id'              => $this->forum_common->view_count_key(),
+					'type'            => 'group',
+					'title'           => __( 'View Forum/Topic/Reply Count', 'view-analytics' ),
+					'items'           => $this->forum_settings(),
+				)
 			),	
 		) );
 	}
