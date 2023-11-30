@@ -253,6 +253,23 @@ class View_Analytics_Activator {
 		maybe_create_table( $profile_view_table_name, $profile_view_sql );
 		maybe_create_table( $profile_view_table_name_log, $profile_view_sql_log );		
 	
+
+		/**
+		 * Add the option to enable the all the setting if the plugin is activiating for the first time
+		 */
+		$default_active_keys = array(
+			'_view_analytics_media_table_count_enable',
+			'_view_analytics_profile_table_count_enable',
+			'_view_analytics_group_table_count_enable',
+			'_view_analytics_avatar_table_count_enable',
+			'_view_analytics_forum_table_count_enable',
+		);
+
+		foreach( $default_active_keys as $key ) {
+			if ( option_exists( $key ) ) {
+				update_option( $key, true );
+			}
+		}
 	}
 
 }

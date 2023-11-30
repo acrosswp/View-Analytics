@@ -190,12 +190,12 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.com:wpify/custom-fields.git",
-                "reference": "cd55e4f45aead746e6cfab63000ed1b5d4328409"
+                "reference": "138666c03fb47f02a09c6fe16f73d763e536590c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/wpify%2Fcustom-fields/repository/archive.zip?sha=cd55e4f45aead746e6cfab63000ed1b5d4328409",
-                "reference": "cd55e4f45aead746e6cfab63000ed1b5d4328409",
+                "url": "https://gitlab.com/api/v4/projects/wpify%2Fcustom-fields/repository/archive.zip?sha=138666c03fb47f02a09c6fe16f73d763e536590c",
+                "reference": "138666c03fb47f02a09c6fe16f73d763e536590c",
                 "shasum": ""
             },
             "require": {
@@ -220,7 +220,7 @@
                 "GPL-2.0-or-later"
             ],
             "description": "WPify Custom Fields",
-            "time": "2023-11-29T14:20:47+00:00"
+            "time": "2023-11-30T14:56:39+00:00"
         },
         {
             "name": "yahnis-elsts/plugin-update-checker",

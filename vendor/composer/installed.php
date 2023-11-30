@@ -3,7 +3,7 @@
         'name' => 'acrosswp/view-analytics',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '66a8d6b737a1f8805d6fdf7fc852908549acb18e',
+        'reference' => '396eb6bcb6beabd0f74c76d16bcb8fa6aff89ef9',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -57,7 +57,7 @@
         'acrosswp/view-analytics' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '66a8d6b737a1f8805d6fdf7fc852908549acb18e',
+            'reference' => '396eb6bcb6beabd0f74c76d16bcb8fa6aff89ef9',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -66,7 +66,7 @@
         'wpify/custom-fields' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'cd55e4f45aead746e6cfab63000ed1b5d4328409',
+            'reference' => '138666c03fb47f02a09c6fe16f73d763e536590c',
             'type' => 'library',
             'install_path' => __DIR__ . '/../wpify/custom-fields',
             'aliases' => array(
