@@ -75,8 +75,47 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 	/**
      * Return the View Analytics Media Count Key
      */
+    public function get_view_setting() {
+        return get_option( $this->view_count_key(), false );
+    }
+
+	/**
+     * Return the View Analytics Media Count Key
+     */
+    public function get_view_setting_active( $key ) {
+        $settings = $this->get_view_setting();
+		return empty( $settings[ $key ] ) ? false : $settings[ $key ];
+    }
+
+	/**
+     * Return the View Analytics Media Count Key
+     */
     public function view_count_enable() {
-        return get_option( $this->view_count_key(), true );
+        return $this->get_view_setting_active( 'main' );
+    }
+
+	/**
+     * Return the View Analytics Media show the user view count
+     */
+    public function view_count_show_view_count() {
+
+		if( ! $this->view_count_enable() ) {
+			return false;
+		}
+
+		return $this->get_view_setting_active( 'show_view_count' );
+    }
+
+	/**
+     * Return the View Analytics Media show the user view list
+     */
+    public function view_count_show_user_list() {
+
+		if( ! $this->view_count_enable() ) {
+			return false;
+		}
+
+		return $this->get_view_setting_active( 'show_view_user_list' );
     }
 
 	/**

@@ -105,6 +105,18 @@ class View_Analytics_Admin_Setting_Menu {
 					'id'    => 'main',
 					'default' => true,
 				),
+				array(
+					'type'  => 'toggle',
+					'description' => __( 'Show Media View Count in Public', 'view-analytics' ),
+					'id'    => 'show_view_count',
+					'default' => true,
+				),
+				array(
+					'type'  => 'toggle',
+					'description' => __( 'Show Media View User Lists when someone click on the views button', 'view-analytics' ),
+					'id'    => 'show_view_user_list',
+					'default' => true,
+				),
 			)
 		);
 	}

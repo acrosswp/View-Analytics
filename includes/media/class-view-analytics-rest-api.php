@@ -113,7 +113,10 @@ class View_Analytics_Media_Rest_Controller extends WP_REST_Controller {
 
 
 		$this->common = View_Analytics_Media_Common::instance();
-		if( ! empty( $this->common->can_current_user_view_list( $key_id ) ) ) {
+		if( 
+			! empty( $this->common->view_count_show_user_list() )
+			&& ! empty( $this->common->can_current_user_view_list( $key_id ) )
+		) {
 			return true;
 		}
 

@@ -170,7 +170,7 @@ class View_Analytics_Public {
      */
     public function buddyboss_show_view_count() {
 
-		if ( $this->media_common->view_count_enable() ) {
+		if ( $this->media_common->view_count_show_view_count() ) {
 
 			$ajax_action = $this->media_common->is_lightbox_ajax();
 
@@ -203,10 +203,14 @@ class View_Analytics_Public {
 		$view = _n( 'View', 'Views', $counts, 'view-analytics' );
 		$counts = apply_filters( 'view_analytics_view_count_content', array( 'count' => $counts, 'text' => $view ), $key_id );
 
-		if( $this->media_common->can_current_user_view_list( $key_id ) ) {
-			echo "<div id='view_list' class='view-analytics-media-views'><span current-media-view='". $key_id ."'>" . implode( ' ', $counts ) . '</span> </div>';
-		} else {
+		if( 
+			! $this->media_common->view_count_show_user_list()
+			|| 
+			! $this->media_common->can_current_user_view_list( $key_id ) 
+		) {
 			echo "<div class='view-analytics-media-views'><span>" . implode( ' ', $counts ) . '</span></div>';
+		} else {
+			echo "<div id='view_list' class='view-analytics-media-views'><span current-media-view='". $key_id ."'>" . implode( ' ', $counts ) . '</span> </div>';
 		}
 	}
 
