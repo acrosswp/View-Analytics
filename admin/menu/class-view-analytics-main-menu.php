@@ -41,6 +41,15 @@ class View_Analytics_Admin_Main_Menu {
 	 * @var      string    $version    The current version of this plugin.
 	 */
 	private $version;
+
+	/**
+	 * Stroe all the sub menu of view analytics
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    sub menu of view analytics
+	 */
+	private $tabs;
 	
 	/**
 	 * Initialize the class and set its properties.
@@ -53,6 +62,8 @@ class View_Analytics_Admin_Main_Menu {
 		
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+
+		add_action( 'admin_notices', array( $this, 'tabs' ) );
 	}
 
 	/**
@@ -60,13 +71,78 @@ class View_Analytics_Admin_Main_Menu {
 	 */
 	public function menu() {
 
-		add_menu_page(
-			__( 'View Analytics', 'view-analytics' ),
+		add_submenu_page(
+			ACROSSWP_MAIN_MENU,
+			__( 'Abouts', 'view-analytics' ),
 			__( 'View Analytics', 'view-analytics' ),
 			'manage_options',
 			'view-analytics',
 			array( $this, 'about_view_analytics' )
 		);
+	}
+
+	/**
+	 * Add Navigation tab on top of the page View Analytics
+	 *
+	 * @since BuddyBoss 1.0.0
+	 */
+	function tabs() {
+		global $pagenow, $current_screen;
+
+		if ( 
+			'view-analytics' == $current_screen->parent_base
+			|| 'acrosswp_page_view-analytics' == $current_screen->base
+		) {
+			?>
+			<div class="wrap">
+				<h2 class="nav-tab-wrapper"><?php $this->view_analytics_tabs(); ?></h2>
+			</div>
+			<?php
+		}
+	}
+
+	/**
+	 * Set the tab for the plugins
+	 */
+	function set_tabs() {
+
+		global $submenu;
+
+		foreach( $submenu['acrosswp'] as $child_menu ) {
+			if( ! empty( $child_menu[2] ) && 'view-analytics' == $child_menu[2] ) {
+				$this->tabs[] = $child_menu;
+			}
+		}
+
+		foreach( $submenu['view-analytics'] as $child_menu ) {
+			$this->tabs[] = $child_menu;
+		}
+	}
+
+	/**
+	 * Output the tabs in the admin area.
+	 *
+	 * @since BuddyBoss 1.0.0
+	 *
+	 * @param string $active_tab Name of the tab that is active. Optional.
+	 */
+	function view_analytics_tabs() {
+
+		$this->set_tabs();
+		$active_tab = $_GET['page'];
+
+		$tabs_html    = '';
+		$idle_class   = 'nav-tab';
+		$active_class = 'nav-tab nav-tab-active';
+
+		// Loop through tabs and build navigation.
+		foreach ( array_values( $this->tabs ) as $tab_data ) {
+			$is_current = (bool) ( $tab_data[2] == $active_tab );
+			$tab_class  = $is_current ? $tab_data[2] . ' ' . $active_class : $tab_data[2] . ' ' . $idle_class;
+			$tabs_html .= '<a href="' . esc_url( admin_url( 'admin.php?page='.$tab_data[2]  ) ) . '" class="' . esc_attr( $tab_class ) . '">' . esc_html( $tab_data[3] ) . '</a>';
+		}
+
+		echo $tabs_html;
 	}
 
 	/**

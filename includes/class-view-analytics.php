@@ -241,7 +241,6 @@ final class View_Analytics {
 		 */
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/menu/class-view-analytics-main-menu.php';
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/menu/class-view-analytics-settings-menu.php';
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/menu/media/class-view-analytics-menu.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -444,6 +443,13 @@ final class View_Analytics {
 			new AcrossWP_Plugin_Update_Checker_Github();
 		}
 
+		/**
+		 * Check if the class does not exits then only allow the file to add
+		 */
+		if( class_exists( 'AcrossWP_Main_Menu' ) ) {
+			AcrossWP_Main_Menu::instance();
+		}
+
 		$admin = new View_Analytics_Admin( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'plugin_action_links', $admin, 'modify_plugin_action_links', 10, 2 );
 		$this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_scripts' );
@@ -462,8 +468,6 @@ final class View_Analytics {
 		$admin_setting_menu = new View_Analytics_Admin_Setting_Menu( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'init', $admin_setting_menu, 'setting_menu', 100 );
 
-		$admin_media_menu = new View_Analytics_Admin_Media_Menu( $this->get_plugin_name(), $this->get_version() );
-		$this->loader->add_action( 'admin_menu', $admin_media_menu, 'menu', 10000 );
 	}
 
 	/**

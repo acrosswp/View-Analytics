@@ -3,13 +3,24 @@
         'name' => 'acrosswp/view-analytics',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '40d79d55d8d7f2dc57ca32585c529abafd8f9adf',
+        'reference' => '66a8d6b737a1f8805d6fdf7fc852908549acb18e',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
+        'acrosswp/acrosswp-about-us' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '876cf303d5fbfbff675b383caaecf07f23550228',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../acrosswp/acrosswp-about-us',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
+            'dev_requirement' => false,
+        ),
         'acrosswp/acrosswp-buddypress-or-buddyboss-dependency' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
@@ -46,7 +57,7 @@
         'acrosswp/view-analytics' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '40d79d55d8d7f2dc57ca32585c529abafd8f9adf',
+            'reference' => '66a8d6b737a1f8805d6fdf7fc852908549acb18e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
