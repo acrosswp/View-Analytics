@@ -102,15 +102,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/acrosswp/acrosswp-plugin-update-checker-github.git",
-                "reference": "9599e9ed6cbca3684b120f4174fa4780a6d57566"
+                "reference": "43933bdd6a4e46ce41d3b9427db4586f2d4ab39f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/acrosswp/acrosswp-plugin-update-checker-github/zipball/9599e9ed6cbca3684b120f4174fa4780a6d57566",
-                "reference": "9599e9ed6cbca3684b120f4174fa4780a6d57566",
+                "url": "https://api.github.com/repos/acrosswp/acrosswp-plugin-update-checker-github/zipball/43933bdd6a4e46ce41d3b9427db4586f2d4ab39f",
+                "reference": "43933bdd6a4e46ce41d3b9427db4586f2d4ab39f",
                 "shasum": ""
             },
-            "time": "2023-11-11T23:01:45+00:00",
+            "require": {
+                "yahnis-elsts/plugin-update-checker": "dev-master"
+            },
+            "time": "2023-11-30T07:35:22+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",
@@ -148,12 +151,12 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.com:wpify/custom-fields.git",
-                "reference": "72ed78678be40ce193d517d079035bc61d41e7be"
+                "reference": "cd55e4f45aead746e6cfab63000ed1b5d4328409"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/wpify%2Fcustom-fields/repository/archive.zip?sha=72ed78678be40ce193d517d079035bc61d41e7be",
-                "reference": "72ed78678be40ce193d517d079035bc61d41e7be",
+                "url": "https://gitlab.com/api/v4/projects/wpify%2Fcustom-fields/repository/archive.zip?sha=cd55e4f45aead746e6cfab63000ed1b5d4328409",
+                "reference": "cd55e4f45aead746e6cfab63000ed1b5d4328409",
                 "shasum": ""
             },
             "require": {
@@ -163,7 +166,7 @@
             "require-dev": {
                 "symfony/var-dumper": "^v5.4"
             },
-            "time": "2023-11-13T14:55:35+00:00",
+            "time": "2023-11-29T14:20:47+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",

@@ -11,6 +11,9 @@
     "autoload": {
         "files": ["updater.php"]
     },
+    "require": {
+        "yahnis-elsts/plugin-update-checker": "dev-master"
+    },
     "support": {
         "issues": "https://github.com/acrosswp/acrosswp-plugin-update-checker-github/issues"
     },

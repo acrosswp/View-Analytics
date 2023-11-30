@@ -3,7 +3,7 @@
         'name' => 'acrosswp/view-analytics',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'af31c533eaa44e4857c53031eff00ec8e5dfc5fe',
+        'reference' => '40d79d55d8d7f2dc57ca32585c529abafd8f9adf',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -35,7 +35,7 @@
         'acrosswp/acrosswp-plugin-update-checker-github' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '9599e9ed6cbca3684b120f4174fa4780a6d57566',
+            'reference' => '43933bdd6a4e46ce41d3b9427db4586f2d4ab39f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../acrosswp/acrosswp-plugin-update-checker-github',
             'aliases' => array(
@@ -46,7 +46,7 @@
         'acrosswp/view-analytics' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'af31c533eaa44e4857c53031eff00ec8e5dfc5fe',
+            'reference' => '40d79d55d8d7f2dc57ca32585c529abafd8f9adf',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -55,7 +55,7 @@
         'wpify/custom-fields' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '72ed78678be40ce193d517d079035bc61d41e7be',
+            'reference' => 'cd55e4f45aead746e6cfab63000ed1b5d4328409',
             'type' => 'library',
             'install_path' => __DIR__ . '/../wpify/custom-fields',
             'aliases' => array(
