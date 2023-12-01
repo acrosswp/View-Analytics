@@ -71,6 +71,40 @@ class View_Analytics_Common {
 	}
 
 	/**
+     * Return the View Analytics Media Count Key
+     */
+    public function get_view_setting() {
+        return get_option( $this->view_count_key(), false );
+    }
+
+	/**
+     * Return the View Analytics Avatar Count Key
+     */
+    public function get_view_setting_active( $key ) {
+        $settings = $this->get_view_setting();
+		return empty( $settings[ $key ] ) ? false : $settings[ $key ];
+    }
+
+	/**
+     * Return the View Analytics Avatar Count Key
+     */
+    public function view_count_enable() {
+        return $this->get_view_setting_active( 'main' );
+    }
+
+	/**
+     * Return the View Analytics Avatar show the user view count
+     */
+    public function view_count_show_view_count() {
+
+		if( ! $this->view_count_enable() ) {
+			return false;
+		}
+
+		return $this->get_view_setting_active( 'show_view_count' );
+    }
+
+	/**
 	 * Removes the current session token from the database.
 	 *
 	 * @since 4.0.0

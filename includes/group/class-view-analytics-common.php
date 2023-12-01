@@ -74,13 +74,6 @@ class View_Analytics_Group_Common extends View_Analytics_Common {
     }
 
 	/**
-     * Return the View Analytics Group Count Key
-     */
-    public function view_count_enable() {
-        return get_option( $this->view_count_key(), true );
-    }
-
-	/**
 	 * Show the message about when the user has view the Media
 	 */
 	public function get_view_body_message( $user_id, $view_count ) {

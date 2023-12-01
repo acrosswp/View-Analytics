@@ -100,8 +100,8 @@ class View_Analytics_Admin_Setting_Menu {
 			array(
 				array(
 					'type'  => 'toggle',
-					'title' => __( 'View Media Analytics', 'view-analytics' ),
-					'label' => __( 'Enable Media View Count', 'view-analytics' ),
+					'title' => __( 'Media Analytics', 'view-analytics' ),
+					'label' => __( 'Enable Media Analytics', 'view-analytics' ),
 					'id'    => 'main',
 					'default' => true,
 				),
@@ -130,9 +130,15 @@ class View_Analytics_Admin_Setting_Menu {
 			array(
 				array(
 					'type'  => 'toggle',
-					'title' => __( 'View Profile Count', 'view-analytics' ),
-					'label' => __( 'Enable Profile View Count', 'view-analytics' ),
+					'title' => __( 'Profile Analytics', 'view-analytics' ),
+					'label' => __( 'Enable Profile Analytics', 'view-analytics' ),
 					'id'    => 'main',
+					'default' => true,
+				),
+				array(
+					'type'  => 'toggle',
+					'description' => __( 'Show list of user who has view the Member Profile', 'view-analytics' ),
+					'id'    => 'show_view_count',
 					'default' => true,
 				),
 			)
@@ -148,9 +154,15 @@ class View_Analytics_Admin_Setting_Menu {
 			array(
 				array(
 					'type'  => 'toggle',
-					'title' => __( 'View Group Count', 'view-analytics' ),
-					'label' => __( 'Enable Group View Count', 'view-analytics' ),
+					'title' => __( 'Group Analytics', 'view-analytics' ),
+					'label' => __( 'Enable Group Analytics', 'view-analytics' ),
 					'id'    => 'main',
+					'default' => true,
+				),
+				array(
+					'type'  => 'toggle',
+					'description' => __( 'Show list of user who has view the Groups', 'view-analytics' ),
+					'id'    => 'show_view_count',
 					'default' => true,
 				),
 			)
@@ -166,9 +178,15 @@ class View_Analytics_Admin_Setting_Menu {
 			array(
 				array(
 					'type'  => 'toggle',
-					'title' => __( 'View Avatar Count', 'view-analytics' ),
-					'label' => __( 'Enable Avatar View Count', 'view-analytics' ),
+					'title' => __( 'Avatar Analytics', 'view-analytics' ),
+					'label' => __( 'Enable Avatar Analytics', 'view-analytics' ),
 					'id'    => 'main',
+					'default' => true,
+				),
+				array(
+					'type'  => 'toggle',
+					'description' => __( 'Show Avatar update Count in Public', 'view-analytics' ),
+					'id'    => 'show_view_count',
 					'default' => true,
 				),
 			)
@@ -184,9 +202,15 @@ class View_Analytics_Admin_Setting_Menu {
 			array(
 				array(
 					'type'  => 'toggle',
-					'title' => __( 'View Forum/Topic/Reply Count', 'view-analytics' ),
+					'title' => __( 'Forum Analytics', 'view-analytics' ),
 					'label' => __( 'Enable Forum/Topic/Reply View Count', 'view-analytics' ),
 					'id'    => 'main',
+					'default' => true,
+				),
+				array(
+					'type'  => 'toggle',
+					'description' => __( 'Show Forum view Count in Public', 'view-analytics' ),
+					'id'    => 'show_view_count',
 					'default' => true,
 				),
 			)

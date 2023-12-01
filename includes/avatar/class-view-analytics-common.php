@@ -67,21 +67,14 @@ class View_Analytics_Avatar_Common extends View_Analytics_Common {
 	}
 
 	/**
-     * Return the Avatar Analytics Media Count Key
+     * Return the Avatar Analytics Avatar Count Key
      */
     public function view_count_key() {
         return '_view_analytics_avatar_table_count_enable';
     }
 
 	/**
-     * Return the View Analytics Avatar Count Key
-     */
-    public function view_count_enable() {
-        return get_option( $this->view_count_key(), true );
-    }
-
-	/**
-	 * Show the message about when the user has view the Media
+	 * Show the message about when the user has view the Avatar
 	 */
 	public function get_view_body_message( $user_id ) {
 		$displayname = bp_core_get_user_displayname( $user_id );
@@ -90,7 +83,7 @@ class View_Analytics_Avatar_Common extends View_Analytics_Common {
 	}
 
 	/**
-	 * Show the message about when the user has view the Media
+	 * Show the message about when the user has view the Avatar
 	 */
 	public function get_view_time_message( $action_date, $mysql_time = false ) {
 

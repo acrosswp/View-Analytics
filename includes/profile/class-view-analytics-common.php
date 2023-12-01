@@ -67,28 +67,21 @@ class View_Analytics_Profile_Common extends View_Analytics_Common {
 	}
 
 	/**
-     * Return the Profile Analytics Media Count Key
+     * Return the Profile Analytics Profile Count Key
      */
     public function view_count_key() {
         return '_view_analytics_profile_table_count_enable';
     }
 
 	/**
-     * Return the View Analytics Profile Count Key
-     */
-    public function view_count_enable() {
-        return get_option( $this->view_count_key(), true );
-    }
-
-	/**
-	 * Check if the current user is allow to view the Media View List
+	 * Check if the current user is allow to view the Profile View List
 	 */
 	public function can_current_user_view_list( $group_id = false ) {
 		return $this->can_current_user_view_list_current_user();
 	}
 
 	/**
-	 * Show the message about when the user has view the Media
+	 * Show the message about when the user has view the Profile
 	 */
 	public function get_view_body_message( $user_id, $view_count ) {
 		$displayname = bp_core_get_user_displayname( $user_id );
@@ -98,7 +91,7 @@ class View_Analytics_Profile_Common extends View_Analytics_Common {
 	}
 
 	/**
-	 * Show the message about when the user has view the Media
+	 * Show the message about when the user has view the Profile
 	 */
 	public function get_view_time_message( $action_date, $mysql_time = false ) {
 

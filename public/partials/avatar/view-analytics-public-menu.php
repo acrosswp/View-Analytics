@@ -79,7 +79,11 @@ class View_Analytics_Avatar_Count_View {
 		/**
 		 * Check if the curret user has access to view the Profile View Tab
 		 */
-		if ( $this->common->can_current_user_view_list_current_user() ) {
+		if ( 
+			$this->common->view_count_show_view_count()
+			&& 
+			$this->common->can_current_user_view_list_current_user() 
+		) {
 			bp_core_new_nav_item(
 				array(
 					'name'                => __( 'Profile Avatar Update', 'view-analytics' ),
@@ -109,7 +113,13 @@ class View_Analytics_Avatar_Count_View {
 		/**
 		 * Check if the curret user has access to view the Profile View Tab
 		 */
-		if ( ! empty( $current_group ) && $this->common->can_current_user_view_list( $current_group->id ) ) {
+		if ( 
+			! empty( $current_group ) 
+			&& 
+			$this->common->view_count_show_view_count()
+			&& 
+			$this->common->can_current_user_view_list( $current_group->id ) 
+		) {
 
 			$group_link = bp_get_group_permalink( $current_group );
 

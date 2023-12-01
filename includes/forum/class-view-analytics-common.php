@@ -74,13 +74,6 @@ class View_Analytics_Forum_Common extends View_Analytics_Common {
     }
 
 	/**
-     * Return the View Analytics Forum Count Key
-     */
-    public function view_count_enable() {
-        return get_option( $this->view_count_key(), true );
-    }
-
-	/**
 	 * Check if the current user is allow to view the Media View List
 	 */
 	public function can_current_user_view_list( $group_id = false ) {

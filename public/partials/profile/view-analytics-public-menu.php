@@ -77,7 +77,11 @@ class View_Analytics_Profile_Count_View {
 		/**
 		 * Check if the curret user has access to view the Profile View Tab
 		 */
-		if ( $this->common->can_current_user_view_list() ) {
+		if ( 
+			$this->common->view_count_show_view_count()
+			&& 
+			$this->common->can_current_user_view_list()
+		) {
 			bp_core_new_nav_item(
 				array(
 					'name'                => __( 'Profile View', 'view-analytics' ),
