@@ -18,7 +18,7 @@
   margin-bottom: 0px;
 }
 
-#view_list .view-analytics-media-views span {
+#view_list.view-analytics-media-views span {
   cursor: pointer;
 }
 

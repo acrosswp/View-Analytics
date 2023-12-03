@@ -22,11 +22,9 @@
     }
 }
 
-#view_list {
-    .view-analytics-media-views {
-        span {
-            cursor:pointer;
-        }
+#view_list.view-analytics-media-views {
+    span {
+        cursor:pointer;
     }
 }
 

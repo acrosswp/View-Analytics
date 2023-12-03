@@ -75,13 +75,27 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 	/**
      * Return the View Analytics Media show the user view list
      */
-    public function view_count_show_user_list() {
+    public function view_count_show_user_list( $author_id ) {
+
+		$view = false;
 
 		if( ! $this->view_count_enable() ) {
-			return false;
+			return $view;
 		}
 
-		return $this->get_view_setting_active( 'show_view_user_list' );
+		if ( $this->get_view_setting_active( 'show_view_user_list' ) ) {
+
+			/**
+			 * if the user is the admin then return true
+			 */
+			if( $this->is_admin() ) {
+				return true;
+			}
+
+			$view = apply_filters( $this->create_filter_key( 'show_view_user_list' ), $this->is_author( $author_id ) );
+		}
+
+		return $view;
     }
 
 	/**
@@ -229,20 +243,6 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
         }
 		return false;
     }
-
-	/**
-	 * Get the media view details via $attachment_id
-	 */
-	public function get_count( $key_id ) {
-
-		$media_details = $this->table->get_details( $key_id );
-
-		if ( empty( $media_details['user_count'] ) ) {
-			return 0;
-		} else {
-			return $media_details['user_count'];
-		}
-	}
 
 	/**
 	 * Show the message about when the user has view the Media

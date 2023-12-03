@@ -112,11 +112,18 @@ class View_Analytics_Media_Rest_Controller extends WP_REST_Controller {
 		}
 
 
-		$this->common = View_Analytics_Media_Common::instance();
-		if( 
-			! empty( $this->common->view_count_show_user_list() )
-			&& ! empty( $this->common->can_current_user_view_list( $key_id ) )
-		) {
+		$this->common	= View_Analytics_Media_Common::instance();
+
+		/**
+		 * get the media details
+		 */
+		$details		= $this->common->table->get_details( $key_id );
+
+		/**
+		 * Get the Author ID
+		 */
+		$author_id	= empty( $details['author_id'] ) ? 0 : absint( $details['author_id'] );
+		if( $this->common->view_count_show_user_list( $author_id ) ) {
 			return true;
 		}
 

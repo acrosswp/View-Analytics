@@ -383,6 +383,11 @@ final class View_Analytics {
 		 * The class responsible for for rest api to view who has view the media
 		 */
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/media/class-view-analytics-rest-api.php';
+
+		/**
+		 * The class responsible for for rest api to view who has view the media
+		 */
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/media/view-analytics-public-menu.php';
 	}
 
 	/**
@@ -488,8 +493,6 @@ final class View_Analytics {
 		
 		$this->loader->add_action( 'wp_enqueue_scripts', $public, 'enqueue_scripts' );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $public, 'media_user_view_html' );
-
 		/**
 		 * Load the localize Script
 		 */
@@ -542,6 +545,11 @@ final class View_Analytics {
 		 */
 		$public_media_count = new View_Analytics_Public_Media_Count( $this->get_plugin_name(), $this->get_version() );
 
+		/**
+		 * All class that are release to Public Media View
+		 */
+		$public_media_view = new View_Analytics_Media_Count_View( $this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_action( 'wp_enqueue_scripts', $public_media_view, 'media_user_view_html' );
 
 		/**
 		 * All class that are release to Public Profile Count
@@ -564,19 +572,19 @@ final class View_Analytics {
 			/**
 			 * Show Media View Count
 			 */
-			$this->loader->add_action( 'bp_before_activity_activity_content', $public, 'buddyboss_show_view_count', 1000 );
+			$this->loader->add_action( 'bp_before_activity_activity_content', $public_media_view, 'buddyboss_show_view_count', 1000 );
 
 		} else {
 
 			/**
 			 * Show Media View Count
 			 */
-			$this->loader->add_action( 'get_template_part_attachments/single/view', $public, 'buddypress_show_view_count', 10000, 3 );
+			$this->loader->add_action( 'get_template_part_attachments/single/view', $public_media_view, 'buddypress_show_view_count', 10000, 3 );
 
 			/**
 			 * Load popup template into the Activity Area
 			 */
-			$this->loader->add_action( 'wp_head', $public, 'buddypress_who_view_media_modal', 1000 );
+			$this->loader->add_action( 'wp_head', $public_media_view, 'buddypress_who_view_media_modal', 1000 );
 
 		}
 

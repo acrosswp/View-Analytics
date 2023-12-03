@@ -71,6 +71,13 @@ class View_Analytics_Common {
 	}
 
 	/**
+	 * Create fiilter name by given key
+	 */
+	public function create_filter_key( $key = '' ) {
+		return $this->view_count_key() . '_' . $key;
+	}
+
+	/**
      * Return the View Analytics Media Count Key
      */
     public function get_view_setting() {
@@ -97,11 +104,17 @@ class View_Analytics_Common {
      */
     public function view_count_show_view_count() {
 
-		if( ! $this->view_count_enable() ) {
-			return false;
+		$view = false;
+
+		if ( ! $this->view_count_enable() ) {
+			return $view;
 		}
 
-		return $this->get_view_setting_active( 'show_view_count' );
+		if ( $this->get_view_setting_active( 'show_view_count' ) ) {
+			$view = apply_filters( $this->create_filter_key( 'show_view_count' ), true );
+		}
+
+		return $view;
     }
 
 	/**
@@ -142,13 +155,13 @@ class View_Analytics_Common {
 	 */
 	public function can_current_user_view_list( $group_id = false ) {
 
-		return $this->can_current_user_view_list_group( $group_id );
+		return $this->is_admin( $group_id );
 	}
 
 	/**
-	 * Check if the current user is allow to view the Media View List
+	 * Check if the current user is admin or if you want to check of the user is Group admin
 	 */
-	public function can_current_user_view_list_group( $group_id = false ) {
+	public function is_admin( $group_id = false ) {
 
 		$current_user_id = get_current_user_id();
 
@@ -176,30 +189,19 @@ class View_Analytics_Common {
 
 		return false;
 	}
-
 	
 	/**
 	 * Check if the current user is allow to view the Media View List
 	 */
-	public function can_current_user_view_list_current_user() {
-		$user_id = get_current_user_id();
+	public function is_author( $author_id ) {
+		return ( get_current_user_id() == $author_id ) ? true : false;
+	}
 
-		if ( empty( $user_id ) ) {
-			return false;
-		}
-
-		/**
-         * If user is site admin
-         */
-        if( current_user_can('administrator') ) {
-            return true;
-        }
-
-		if( $user_id == bp_displayed_user_id() ) {
-			return true;
-		}
-
-		return false;
+	/**
+	 * Check if the current user is allow to view the Media View List
+	 */
+	public function can_current_user_view_list_current_user( $author_id = 0 ) {
+		return ( get_current_user_id() == $author_id ) ? true : false;
 	}
 
 	/**
