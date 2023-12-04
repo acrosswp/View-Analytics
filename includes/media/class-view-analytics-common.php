@@ -77,25 +77,22 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
      */
     public function view_count_show_user_list( $author_id ) {
 
-		$view = false;
-
 		if( ! $this->view_count_enable() ) {
-			return $view;
+			return false;
 		}
 
-		if ( $this->get_view_setting_active( 'show_view_user_list' ) ) {
-
-			/**
-			 * if the user is the admin then return true
-			 */
-			if( $this->is_admin() ) {
-				return true;
-			}
-
-			$view = apply_filters( $this->create_filter_key( 'show_view_user_list' ), $this->is_author( $author_id ) );
+		if ( ! $this->get_view_setting_active( 'show_view_user_list' ) ) {
+			return false;
 		}
 
-		return $view;
+		/**
+		 * if the user is the admin then return true
+		 */
+		if( $this->is_admin() ) {
+			return true;
+		}
+
+		return apply_filters( $this->create_filter_key( 'show_view_user_list' ), $this->is_author( $author_id ) );
     }
 
 	/**
