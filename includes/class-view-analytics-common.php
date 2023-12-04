@@ -103,7 +103,7 @@ class View_Analytics_Common {
 	/**
      * Return the View Analytics show count
      */
-    public function view_count_show_view_count( $author_id = 0 ) {
+    public function view_count_show_view_count( $author_id = 0, $group_id = false ) {
 
 		
 		if ( empty( $author_id ) ) {
@@ -125,7 +125,29 @@ class View_Analytics_Common {
 			return true;
 		}
 
-		return apply_filters( $this->create_filter_key( 'show_view_count' ), $this->is_author( $author_id ) );
+		/**
+		 * If group id is there check for the Group Admin and Moderations
+		 */
+		if( 
+			! empty( $group_id ) 
+			&& (
+				groups_is_user_admin( $author_id, $group_id ) 
+				|| groups_is_user_mod( $author_id, $group_id ) 
+			)
+		) {
+			return true;
+		}
+
+		/**
+		 * If group id is there check for the Group Admin and Moderations
+		 */
+		if ( ! empty( $group_id )  ) {
+			$value = groups_is_user_member( $author_id, $group_id );
+		} else {
+			$value = $this->is_author( $author_id );
+		}
+
+		return apply_filters( $this->create_filter_key( 'show_view_count' ), $value );
     }
 
 	/**

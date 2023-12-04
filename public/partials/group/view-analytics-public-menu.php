@@ -75,11 +75,12 @@ class View_Analytics_Group_Count_View {
 	public function navigation() {
 
 		$current_group = groups_get_current_group();
+		$current_user_id = get_current_user_id();
 
 		/**
 		 * Check if the curret user has access to view the Profile View Tab
 		 */
-		if (  ! empty( $current_group ) && $this->common->view_count_show_view_count() ) {
+		if (  ! empty( $current_group->id ) ) {
 
 			$group_link = bp_get_group_permalink( $current_group );
 
@@ -90,7 +91,7 @@ class View_Analytics_Group_Count_View {
 				'parent_url' => $group_link,
 				'position' => 100,
 				'screen_function' => array( $this, 'view_manage' ),
-				'user_has_access' => $this->common->can_current_user_view_list() // Only the logged in user can access this on his/her profile
+				'user_has_access' => $this->common->view_count_show_view_count( $current_user_id, $current_group->id )
 			) );
 		}
 	}

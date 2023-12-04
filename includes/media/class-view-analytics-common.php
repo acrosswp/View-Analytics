@@ -76,7 +76,7 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
      * Return the View Analytics show count
 	 * Overwrite this for Media View Count 
      */
-    public function view_count_show_view_count( $author_id = false ) {
+    public function view_count_show_view_count( $author_id = false, $group_id = false ) {
 
 		$view = false;
 
