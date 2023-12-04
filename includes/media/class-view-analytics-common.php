@@ -73,6 +73,25 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
     }
 
 	/**
+     * Return the View Analytics show count
+	 * Overwrite this for Media View Count 
+     */
+    public function view_count_show_view_count( $author_id = false ) {
+
+		$view = false;
+
+		if ( ! $this->view_count_enable() ) {
+			return $view;
+		}
+
+		if ( $this->get_view_setting_active( 'show_view_count' ) ) {
+			$view = apply_filters( $this->create_filter_key( 'show_view_count' ), true );
+		}
+
+		return $view;
+    }
+
+	/**
      * Return the View Analytics Media show the user view list
      */
     public function view_count_show_user_list( $author_id ) {

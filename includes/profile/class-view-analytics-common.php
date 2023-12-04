@@ -72,6 +72,7 @@ class View_Analytics_Profile_Common extends View_Analytics_Common {
     public function view_count_key() {
         return '_view_analytics_profile_table_count_enable';
     }
+	
 
 	/**
 	 * Check if the current user is allow to view the Profile View List

@@ -99,22 +99,33 @@ class View_Analytics_Common {
         return $this->get_view_setting_active( 'main' );
     }
 
+
 	/**
-     * Return the View Analytics Avatar show the user view count
+     * Return the View Analytics show count
      */
-    public function view_count_show_view_count() {
+    public function view_count_show_view_count( $author_id = 0 ) {
 
-		$view = false;
-
-		if ( ! $this->view_count_enable() ) {
-			return $view;
+		
+		if ( empty( $author_id ) ) {
+			return false;
+		}
+		
+		if( ! $this->view_count_enable() ) {
+			return false;
+		}
+		
+		if ( ! $this->get_view_setting_active( 'show_view_count' ) ) {
+			return false;
+		}
+		
+		/**
+		 * if the user is the admin then return true
+		 */
+		if( $this->is_admin() ) {
+			return true;
 		}
 
-		if ( $this->get_view_setting_active( 'show_view_count' ) ) {
-			$view = apply_filters( $this->create_filter_key( 'show_view_count' ), true );
-		}
-
-		return $view;
+		return apply_filters( $this->create_filter_key( 'show_view_count' ), $this->is_author( $author_id ) );
     }
 
 	/**

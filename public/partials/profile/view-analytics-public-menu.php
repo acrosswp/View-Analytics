@@ -77,11 +77,8 @@ class View_Analytics_Profile_Count_View {
 		/**
 		 * Check if the curret user has access to view the Profile View Tab
 		 */
-		if ( 
-			$this->common->view_count_show_view_count()
-			&& 
-			$this->common->can_current_user_view_list()
-		) {
+		$displayed_user_id = bp_displayed_user_id();
+		if ( ! empty( $displayed_user_id ) && $this->common->view_count_show_view_count( $displayed_user_id ) ) {
 			bp_core_new_nav_item(
 				array(
 					'name'                => __( 'Profile View', 'view-analytics' ),
@@ -98,7 +95,7 @@ class View_Analytics_Profile_Count_View {
 	}
 
 	function content() {
-		$author_id = get_current_user_id();
+		$author_id = bp_displayed_user_id();
 		$view_details = $this->common->table->get_details( $author_id );
 		if ( empty( $view_details ) ) {
 			echo __( 'No one has view your Profile', 'view-analytics' );
