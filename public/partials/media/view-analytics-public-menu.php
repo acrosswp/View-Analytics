@@ -95,16 +95,13 @@ class View_Analytics_Media_Count_View {
      */
     public function buddypress_show_view_count() {
 
-		if ( $this->common->view_count_enable() ) {
+		$medium = bp_attachments_get_queried_object();
 
-			$medium = bp_attachments_get_queried_object();
-
-			if ( empty( $medium ) ) {
-				return;
-			}
-
-			$this->show_view_count( $medium->id );
+		if ( empty( $medium ) ) {
+			return;
 		}
+
+		$this->show_view_count( $medium->id );
     }
 
 	/**
@@ -113,22 +110,19 @@ class View_Analytics_Media_Count_View {
      */
     public function buddyboss_show_view_count() {
 
-		if ( $this->common->view_count_show_view_count() ) {
+		$ajax_action = $this->common->is_lightbox_ajax();
 
-			$ajax_action = $this->common->is_lightbox_ajax();
-
-			if ( empty( $ajax_action ) ) {
-				return;
-			}
-
-			$attachment_id = $this->common->get_lightbox_attachment_id( $ajax_action );
-			
-			if ( empty( $attachment_id ) ) {
-				return;
-			}
-
-			$this->show_view_count( $attachment_id );
+		if ( empty( $ajax_action ) ) {
+			return;
 		}
+
+		$attachment_id = $this->common->get_lightbox_attachment_id( $ajax_action );
+		
+		if ( empty( $attachment_id ) ) {
+			return;
+		}
+
+		$this->show_view_count( $attachment_id );
     }
 
 	/**
@@ -140,18 +134,21 @@ class View_Analytics_Media_Count_View {
 		$counts		= empty( $details['user_count'] ) ? 0 : absint( $details['user_count'] );
 		$author_id	= empty( $details['author_id'] ) ? 0 : absint( $details['author_id'] );
 
-		$view = _n( 'View', 'Views', $counts, 'view-analytics' );
-		$counts = apply_filters( 'view_analytics_view_count_content', array( 'count' => $counts, 'text' => $view ), $key_id );
+		if ( $this->common->access( false, false, '', true ) ) {
 
-		if ( $this->common->view_count_show_user_list( $author_id ) ) {
-			/**
-			 * Load popup template into the Activity Area
-			 */
-			$this->buddyboss_who_view_media_modal();
-
-			echo "<div id='view_list' class='view-analytics-media-views'><span current-media-view='". $key_id ."'>" . implode( ' ', $counts ) . '</span> </div>';
-		} else {
-			echo "<div class='view-analytics-media-views'><span>" . implode( ' ', $counts ) . '</span></div>';
+			$view = _n( 'View', 'Views', $counts, 'view-analytics' );
+			$counts = apply_filters( 'view_analytics_view_count_content', array( 'count' => $counts, 'text' => $view ), $key_id );
+	
+			if ( $this->common->access( $author_id, false, 'show_view_user_list' ) ) {
+				/**
+				 * Load popup template into the Activity Area
+				 */
+				$this->buddyboss_who_view_media_modal();
+	
+				echo "<div id='view_list' class='view-analytics-media-views'><span current-media-view='". $key_id ."'>" . implode( ' ', $counts ) . '</span> </div>';
+			} else {
+				echo "<div class='view-analytics-media-views'><span>" . implode( ' ', $counts ) . '</span></div>';
+			}
 		}
 	}
 

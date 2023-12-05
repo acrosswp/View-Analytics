@@ -91,7 +91,7 @@ class View_Analytics_Group_Count_View {
 				'parent_url' => $group_link,
 				'position' => 100,
 				'screen_function' => array( $this, 'view_manage' ),
-				'user_has_access' => $this->common->view_count_show_view_count( $current_user_id, $current_group->id )
+				'user_has_access' => $this->common->access( $current_user_id, $current_group->id )
 			) );
 		}
 	}

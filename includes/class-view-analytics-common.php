@@ -102,52 +102,41 @@ class View_Analytics_Common {
 
 	/**
      * Return the View Analytics show count
+	 * 
+	 * $author_id = 0. Here this is added for the Media to view by the Non login user as well
      */
-    public function view_count_show_view_count( $author_id = 0, $group_id = false ) {
+    public function access( $author_id = 0, $group_id = false, $key = false, $value = false ) {
 
-		
-		if ( empty( $author_id ) ) {
-			return false;
-		}
+
+		$key = empty( $key ) ? 'show_view_count' : $key;
 		
 		if( ! $this->view_count_enable() ) {
 			return false;
 		}
-		
-		if ( ! $this->get_view_setting_active( 'show_view_count' ) ) {
-			return false;
-		}
-		
+
 		/**
 		 * if the user is the admin then return true
 		 */
-		if( $this->is_admin() ) {
+		if ( $this->is_admin( $author_id, $group_id ) ) {
 			return true;
 		}
-
-		/**
-		 * If group id is there check for the Group Admin and Moderations
-		 */
-		if( 
-			! empty( $group_id ) 
-			&& (
-				groups_is_user_admin( $author_id, $group_id ) 
-				|| groups_is_user_mod( $author_id, $group_id ) 
-			)
-		) {
-			return true;
+		
+		if ( ! $this->get_view_setting_active( $key ) ) {
+			return false;
 		}
 
-		/**
-		 * If group id is there check for the Group Admin and Moderations
-		 */
-		if ( ! empty( $group_id )  ) {
-			$value = groups_is_user_member( $author_id, $group_id );
-		} else {
-			$value = $this->is_author( $author_id );
+		if ( ! empty( $author_id ) ) {
+			/**
+			 * If group id is there check for the Group Admin and Moderations
+			 */
+			if ( ! empty( $group_id )  ) {
+				$value = groups_is_user_member( $author_id, $group_id );
+			} else {
+				$value = $this->is_author( $author_id );
+			}
 		}
 
-		return apply_filters( $this->create_filter_key( 'show_view_count' ), $value );
+		return apply_filters( $this->create_filter_key( $key ), $value );
     }
 
 	/**
@@ -182,26 +171,10 @@ class View_Analytics_Common {
 		return defined( 'BP_PLATFORM_VERSION' );
     }
 
-
-	/**
-	 * Check if the current user is allow to view the Media View List
-	 */
-	public function can_current_user_view_list( $group_id = false ) {
-
-		return $this->is_admin( $group_id );
-	}
-
 	/**
 	 * Check if the current user is admin or if you want to check of the user is Group admin
 	 */
-	public function is_admin( $group_id = false ) {
-
-		$current_user_id = get_current_user_id();
-
-		if ( empty( $current_user_id ) ) {
-			return false;
-		}
-		
+	public function is_admin( $author_id = false, $group_id = false ) {
 
 		/**
          * If user is site admin
@@ -212,9 +185,9 @@ class View_Analytics_Common {
 
 		if( 
 			! empty( $group_id ) 
+			&& ! empty( $author_id )
 			&& (
-				groups_is_user_admin( $current_user_id, $group_id ) 
-				|| groups_is_user_mod( $current_user_id, $group_id ) 
+				groups_is_user_admin( $author_id, $group_id )  || groups_is_user_mod( $author_id, $group_id ) 
 			)
 		) {
 			return true;
@@ -227,13 +200,6 @@ class View_Analytics_Common {
 	 * Check if the current user is allow to view the Media View List
 	 */
 	public function is_author( $author_id ) {
-		return ( get_current_user_id() == $author_id ) ? true : false;
-	}
-
-	/**
-	 * Check if the current user is allow to view the Media View List
-	 */
-	public function can_current_user_view_list_current_user( $author_id = 0 ) {
 		return ( get_current_user_id() == $author_id ) ? true : false;
 	}
 

@@ -75,26 +75,37 @@ class View_Analytics_Avatar_Count_View {
 	 * Show menu option on the profile Page
 	 */
 	public function profile_navigation() {
+		
+		$displayed_user_id = bp_displayed_user_id();
 
 		/**
 		 * Check if the curret user has access to view the Profile View Tab
 		 */
-		if ( $this->common->view_count_show_view_count() ) {
-			bp_core_new_nav_item(
-				array(
-					'name'                => __( 'Profile Avatar Update', 'view-analytics' ),
-					'slug'                => 'profile-avatar-update',
-					'screen_function'     => array( $this, 'xprofile_avatar_view_manage' )
-				)
-			);
+		if ( $displayed_user_id ) {
 
-			bp_core_new_nav_item(
-				array(
-					'name'                => __( 'Profile Cover Update', 'view-analytics' ),
-					'slug'                => 'profile-cover-update',
-					'screen_function'     => array( $this, 'xprofile_cover_view_manage' )
-				)
-			);
+			if ( $this->common->access( $displayed_user_id, false, 'show_view_count_profile_avatar' ) ) {
+
+				bp_core_new_nav_item(
+					array(
+						'name'                => __( 'Profile Avatar Update', 'view-analytics' ),
+						'slug'                => 'profile-avatar-update',
+						'screen_function'     => array( $this, 'xprofile_avatar_view_manage' ),
+						'show_for_displayed_user' => false
+					)
+				);
+			}
+
+			if ( $this->common->access( $displayed_user_id, false, 'show_view_count_profile_cover' ) ) {
+				bp_core_new_nav_item(
+					array(
+						'name'                => __( 'Profile Cover Update', 'view-analytics' ),
+						'slug'                => 'profile-cover-update',
+						'screen_function'     => array( $this, 'xprofile_cover_view_manage' ),
+						'show_for_displayed_user' => false
+					)
+				);
+			}
+
 		}
 	}
 
@@ -105,11 +116,13 @@ class View_Analytics_Avatar_Count_View {
 	public function group_navigation() {
 
 		$current_group = groups_get_current_group();
-
+		
 		/**
 		 * Check if the curret user has access to view the Profile View Tab
 		 */
-		if (  ! empty( $current_group )  &&  $this->common->view_count_show_view_count() ) {
+		if ( ! empty( $current_group->id ) ) {
+
+			$current_user_id = get_current_user_id();
 
 			$group_link = bp_get_group_permalink( $current_group );
 
@@ -120,7 +133,7 @@ class View_Analytics_Avatar_Count_View {
 				'parent_url' => $group_link,
 				'position' => 100,
 				'screen_function' => array( $this, 'group_avatar_view_manage' ),
-				'user_has_access' => $this->common->can_current_user_view_list() // Only the logged in user can access this on his/her profile
+				'user_has_access' => $this->common->access( $current_user_id, $current_group->id, 'show_view_count_group_avatar' )
 			) );
 
 			bp_core_new_subnav_item( array(
@@ -130,7 +143,7 @@ class View_Analytics_Avatar_Count_View {
 				'parent_url' => $group_link,
 				'position' => 100,
 				'screen_function' => array( $this, 'group_cover_view_manage' ),
-				'user_has_access' => $this->common->can_current_user_view_list() // Only the logged in user can access this on his/her profile
+				'user_has_access' => $this->common->access( $current_user_id, $current_group->id, 'show_view_count_group_cover' )
 			) );
 		}
 	}

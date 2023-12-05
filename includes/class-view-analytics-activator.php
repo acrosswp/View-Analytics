@@ -265,8 +265,8 @@ class View_Analytics_Activator {
 			'_view_analytics_forum_table_count_enable',
 		);
 
-		foreach( $default_active_keys as $key ) {
-			if ( option_exists( $key ) ) {
+		foreach( $default_active_keys as $key ) {	
+			if ( empty( get_option( $key, false ) ) ) {
 				update_option( $key, true );
 			}
 		}

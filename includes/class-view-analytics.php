@@ -117,6 +117,7 @@ final class View_Analytics {
 	 * @return View_Analytics - Main instance.
 	 */
 	public static function instance() {
+
 		if ( is_null( self::$_instance ) ) {
 			self::$_instance = new self();
 		}
@@ -468,7 +469,7 @@ final class View_Analytics {
 		 * Menu
 		 */
 		$admin_main_menu = new View_Analytics_Admin_Main_Menu( $this->get_plugin_name(), $this->get_version() );
-		$this->loader->add_action( 'admin_menu', $admin_main_menu, 'menu', 100 );
+		$this->loader->add_action( 'admin_menu', $admin_main_menu, 'menu', 1000 );
 
 		$admin_setting_menu = new View_Analytics_Admin_Setting_Menu( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'init', $admin_setting_menu, 'setting_menu', 100 );

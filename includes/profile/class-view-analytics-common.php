@@ -72,14 +72,6 @@ class View_Analytics_Profile_Common extends View_Analytics_Common {
     public function view_count_key() {
         return '_view_analytics_profile_table_count_enable';
     }
-	
-
-	/**
-	 * Check if the current user is allow to view the Profile View List
-	 */
-	public function can_current_user_view_list( $group_id = false ) {
-		return $this->can_current_user_view_list_current_user();
-	}
 
 	/**
 	 * Show the message about when the user has view the Profile

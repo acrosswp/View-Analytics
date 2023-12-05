@@ -74,13 +74,6 @@ class View_Analytics_Forum_Common extends View_Analytics_Common {
     }
 
 	/**
-	 * Check if the current user is allow to view the Media View List
-	 */
-	public function can_current_user_view_list( $group_id = false ) {
-		return $this->can_current_user_view_list_current_user();
-	}
-
-	/**
 	 * Show the message about when the user has view the Media
 	 */
 	public function get_view_body_message( $user_id, $view_count ) {

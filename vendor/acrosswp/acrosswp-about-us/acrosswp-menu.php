@@ -44,7 +44,7 @@ if( ! class_exists( 'AcrossWP_Main_Menu' ) ) {
 			/**
 			 * Add the parent menu into the Admin Dashboard
 			 */
-			add_action( 'admin_menu', array( $this, 'main_menu' ) );
+			add_action( 'admin_menu', array( $this, 'main_menu' ), 1 );
 		}
 
 		/**

@@ -123,7 +123,7 @@ class View_Analytics_Media_Rest_Controller extends WP_REST_Controller {
 		 * Get the Author ID
 		 */
 		$author_id	= empty( $details['author_id'] ) ? 0 : absint( $details['author_id'] );
-		if( $this->common->view_count_show_user_list( $author_id ) ) {
+		if( $this->common->access( $author_id, false, 'show_view_user_list' ) ) {
 			return true;
 		}
 

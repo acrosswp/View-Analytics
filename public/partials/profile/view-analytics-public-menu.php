@@ -78,12 +78,12 @@ class View_Analytics_Profile_Count_View {
 		 * Check if the curret user has access to view the Profile View Tab
 		 */
 		$displayed_user_id = bp_displayed_user_id();
-		if ( ! empty( $displayed_user_id ) && $this->common->view_count_show_view_count( $displayed_user_id ) ) {
+		if ( ! empty( $displayed_user_id ) && $this->common->access( $displayed_user_id ) ) {
 			bp_core_new_nav_item(
 				array(
-					'name'                => __( 'Profile View', 'view-analytics' ),
-					'slug'                => 'profile-view',
-					'screen_function'     => array( $this, 'view_manage' )
+					'name'                		=> __( 'Profile View', 'view-analytics' ),
+					'slug'                		=> 'profile-view',
+					'screen_function'     		=> array( $this, 'view_manage' ),
 				)
 			);
 		}

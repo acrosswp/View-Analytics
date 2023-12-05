@@ -79,7 +79,7 @@ class View_Analytics_Group_Common extends View_Analytics_Common {
 	public function get_view_body_message( $user_id, $view_count ) {
 		$displayname = bp_core_get_user_displayname( $user_id );
 		$view = _n( 'time', 'times', $view_count, 'view-analytics' );
-		return sprintf( __( '%s saw your profile %s %s.', 'view-analytics' ), $displayname, $view_count, $view );
+		return sprintf( __( '%s saw this group %s %s.', 'view-analytics' ), $displayname, $view_count, $view );
 
 	}
 

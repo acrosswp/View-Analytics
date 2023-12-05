@@ -185,8 +185,26 @@ class View_Analytics_Admin_Setting_Menu {
 				),
 				array(
 					'type'  => 'toggle',
-					'description' => __( 'Show Avatar update Count in Public', 'view-analytics' ),
-					'id'    => 'show_view_count',
+					'description' => __( 'Show Profile Avatar update Count in Public', 'view-analytics' ),
+					'id'    => 'show_view_count_profile_avatar',
+					'default' => true,
+				),
+				array(
+					'type'  => 'toggle',
+					'description' => __( 'Show Profile Cover Image update Count in Public', 'view-analytics' ),
+					'id'    => 'show_view_count_profile_cover',
+					'default' => true,
+				),
+				array(
+					'type'  => 'toggle',
+					'description' => __( 'Show Group Avatar update Count in Public', 'view-analytics' ),
+					'id'    => 'show_view_count_group_avatar',
+					'default' => true,
+				),
+				array(
+					'type'  => 'toggle',
+					'description' => __( 'Show Group Cover Image update Count in Public', 'view-analytics' ),
+					'id'    => 'show_view_count_group_cover',
 					'default' => true,
 				),
 			)
@@ -206,13 +224,7 @@ class View_Analytics_Admin_Setting_Menu {
 					'label' => __( 'Enable Forum/Topic/Reply View Count', 'view-analytics' ),
 					'id'    => 'main',
 					'default' => true,
-				),
-				array(
-					'type'  => 'toggle',
-					'description' => __( 'Show Forum view Count in Public', 'view-analytics' ),
-					'id'    => 'show_view_count',
-					'default' => true,
-				),
+				)
 			)
 		);
 	}
