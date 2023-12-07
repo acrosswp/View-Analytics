@@ -275,7 +275,7 @@ class View_Analytics_Public_Media_Count {
 				/**
 				 * Fire a hook when someone view media for the first time
 				 */
-				do_action( $this->common->create_hooks_key( '_view_media' ), $id, $key_id, 0, 1, $current_user_id );
+				do_action( $this->common->create_hooks_key( '_view_media' ), $id, $key_id, $current_user_id, $media_owner_id, 0, 1 );
 
 			} else {
 				$id = $views['id'];
@@ -285,7 +285,7 @@ class View_Analytics_Public_Media_Count {
 				 */
 				$old_ref_count = empty( $views['ref_count'] ) ? 1 : absint( $views['ref_count'] );
 				$ref_count = $old_ref_count + 1;
-				do_action( $this->common->create_hooks_key( '_view_media' ), $id, $key_id, $old_ref_count, $ref_count, $current_user_id );
+				do_action( $this->common->create_hooks_key( '_view_media' ), $id, $key_id, $current_user_id, $views['author_id'], $old_ref_count, $ref_count );
 
 				/**
 				 * Users list
@@ -297,7 +297,7 @@ class View_Analytics_Public_Media_Count {
 					array_unshift( $users_list, $current_user_id );
 				}
 				$user_count = count( $users_list );
-				do_action( $this->common->create_hooks_key( '_users_view_media' ), $id, $key_id, $old_user_count, $user_count, $current_user_id );
+				do_action( $this->common->create_hooks_key( '_users_view_media' ), $id, $key_id, $current_user_id, $views['author_id'], $old_user_count, $user_count );
 
 				/**
 				 * update session count
@@ -305,7 +305,7 @@ class View_Analytics_Public_Media_Count {
 				$session_count		= $this->common->table->user_get( $current_user_id, $key_id, true );
 				$old_session_count	= absint( $views['session_count'] );
 				$session_count		= empty( $session_count ) ? $old_session_count + 1 : $old_session_count;
-				do_action( $this->common->create_hooks_key( '_sessions_view_media' ), $id, $key_id, $old_session_count, $session_count, $current_user_id );
+				do_action( $this->common->create_hooks_key( '_sessions_view_media' ), $id, $key_id, $current_user_id, $views['author_id'], $old_session_count, $session_count );
 
 				$this->common->table->user_update( 
 					$id,
