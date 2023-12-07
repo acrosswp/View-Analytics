@@ -73,7 +73,7 @@ class View_Analytics_Common {
 	/**
 	 * Create fiilter name by given key
 	 */
-	public function create_filter_key( $key = '' ) {
+	public function create_hooks_key( $key = '' ) {
 		return $this->view_count_key() . '_' . $key;
 	}
 
@@ -136,7 +136,7 @@ class View_Analytics_Common {
 			}
 		}
 
-		return apply_filters( $this->create_filter_key( $key ), $value );
+		return apply_filters( $this->create_hooks_key( $key ), $value );
     }
 
 	/**
