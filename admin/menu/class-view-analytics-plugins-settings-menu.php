@@ -82,7 +82,7 @@ class View_Analytics_Admin_Plugins_Setting_Menu {
 			'menu_slug'   => 'view-analytics-plugins-settings',
 			'items'      => array(
 				array(
-					'id'              => $this->common->delete_table_count_key(),
+					'id'              => $this->common->view_count_key(),
 					'type'            => 'group',
 					'title'           => __( 'View Avatar Count', 'view-analytics' ),
 					'items'           => array(
@@ -90,7 +90,7 @@ class View_Analytics_Admin_Plugins_Setting_Menu {
 							'type'  => 'toggle',
 							'title' => __( 'Delete Tables', 'view-analytics' ),
 							'label' => __( 'Delete All table on Plugin Deactivations', 'view-analytics' ),
-							'id'    => 'main',
+							'id'    => 'delete-tables',
 							'default' => false,
 						),
 					),

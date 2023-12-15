@@ -88,7 +88,7 @@ class View_Analytics_Activator {
 			View_Analytics_Group_Common::instance()->view_count_key() => View_Analytics_Group_Common::instance()->default_value(),
 			View_Analytics_Media_Common::instance()->view_count_key() => View_Analytics_Media_Common::instance()->default_value(),
 			View_Analytics_Profile_Common::instance()->view_count_key() => View_Analytics_Profile_Common::instance()->default_value(),
-			View_Analytics_Common::instance()->delete_table_count_key() => View_Analytics_Common::instance()->default_value(),
+			View_Analytics_Common::instance()->view_count_key() => View_Analytics_Common::instance()->default_value(),
 		);
 
 		foreach( $default_active_keys as $key => $value ) {	

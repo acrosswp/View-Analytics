@@ -232,8 +232,8 @@ class View_Analytics_Admin_Setting_Menu {
 					'title' => __( 'Forum Analytics', 'view-analytics' ),
 					'label' => __( 'Enable Forum/Topic/Reply View Count', 'view-analytics' ),
 					'id'    => 'main',
-					'default' => $this->forum_common->get_key_default_value( 'main' ),
-				)
+					'default' => $this->forum_common->get_key_default_value( 'delete' ),
+				),
 			)
 		);
 	}

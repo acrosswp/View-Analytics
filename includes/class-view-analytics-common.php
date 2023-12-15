@@ -71,13 +71,6 @@ class View_Analytics_Common {
 	}
 
 	/**
-     * Return the View Analytics Media Count Key
-     */
-    public function delete_table_count_key() {
-        return '_view_analytics_delete_table_key';
-    }
-
-	/**
 	 * Create table
 	 */
 	public function default_value() {
@@ -85,6 +78,13 @@ class View_Analytics_Common {
 			'main' => 0,
 		);
 	}
+
+	/**
+     * Return the View Analytics Media Count Key
+     */
+    public function view_count_key() {
+        return '_view_analytics_common_plugin_settings';
+    }
 
 	/**
 	 * Create table
