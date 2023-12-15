@@ -258,16 +258,34 @@ class View_Analytics_Activator {
 		 * Add the option to enable the all the setting if the plugin is activiating for the first time
 		 */
 		$default_active_keys = array(
-			'_view_analytics_media_table_count_enable',
-			'_view_analytics_profile_table_count_enable',
-			'_view_analytics_group_table_count_enable',
-			'_view_analytics_avatar_table_count_enable',
-			'_view_analytics_forum_table_count_enable',
+			'_view_analytics_media_table_count_enable' => array(
+				'main' => 1,
+				'show_view_user_list' => 1,
+				'show_view_count' => 1,
+			),
+			'_view_analytics_profile_table_count_enable' => array(
+				'main' => 1,
+				'show_view_count' => 0,
+			),
+			'_view_analytics_group_table_count_enable' => array(
+				'main' => 1,
+				'show_view_count' => 0,
+			),
+			'_view_analytics_avatar_table_count_enable' => array(
+				'main' => 1,
+				'show_view_count_group_cover' => 0,
+				'show_view_count_group_avatar' => 0,
+				'show_view_count_profile_cover' => 0,
+				'show_view_count_profile_avatar' => 0,
+			),
+			'_view_analytics_forum_table_count_enable' => array(
+				'main' => 1,
+			),
 		);
 
-		foreach( $default_active_keys as $key ) {	
+		foreach( $default_active_keys as $key => $value ) {	
 			if ( empty( get_option( $key, false ) ) ) {
-				update_option( $key, true );
+				update_option( $key, $value );
 			}
 		}
 	}
