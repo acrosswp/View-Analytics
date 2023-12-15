@@ -59,6 +59,63 @@ class View_Analytics_Avatar_Table {
     }
 
 	/**
+	 * Create table
+	 */
+	public function create_table() {
+		global $wpdb;
+
+		$charset_collate = $wpdb->get_charset_collate();
+
+		$table_name = $this->table_name();
+		$view_sql = "CREATE TABLE {$table_name} (
+			id 			bigint(20) NOT NULL AUTO_INCREMENT,
+			blog_id bigint(20) NULL,
+			session varchar(255) NOT NULL DEFAULT '',
+			key_id		varchar(255) NULL,
+			user_id 	bigint(20) NOT NULL,
+			type		varchar(255) NULL,
+			action		varchar(255) NULL,
+			is_new		tinyint(1) NOT NULL DEFAULT 1,
+			locale varchar(50) NOT NULL,
+			device varchar(50) NOT NULL DEFAULT 'desktop',
+			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+			PRIMARY KEY  (id)
+		) {$charset_collate};";
+
+		maybe_create_table( $table_name, $view_sql );
+	}
+
+	/**
+	 * Create table
+	 */
+	public function delete_table() {
+
+		global $wpdb;
+
+		$table_name = $this->table_name();
+		$avatar_view_sql = "DROP TABLE IF EXISTS $table_name";
+
+		$wpdb->query( $avatar_view_sql );
+
+
+		/**
+		 * We are not using this table any more
+		 * Will delete this when version 2.0.0 is releasted
+		 */
+		$avatar_view_table_name_old		 = $wpdb->prefix . 'awp_va_avatar_view';
+		$avatar_view_sql_old = "DROP TABLE IF EXISTS $avatar_view_table_name_old";
+		$wpdb->query( $avatar_view_sql_old );
+
+		/**
+		 * We are not using this table any more
+		 * Will delete this when version 2.0.0 is releasted
+		 */
+		$over_all_log_table_name		 = $wpdb->prefix . 'awp_va_log';
+		$over_all_log_sql = "DROP TABLE IF EXISTS $over_all_log_table_name";
+		$wpdb->query( $over_all_log_sql );
+	}
+
+	/**
 	 * Add the current user has view avatar count
 	 */
 	public function user_add( $key_id, $user_id, $type = 'xprofile', $action = 'avatar', $value = 1 ) {

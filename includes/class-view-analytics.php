@@ -242,6 +242,7 @@ final class View_Analytics {
 		 */
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/menu/class-view-analytics-main-menu.php';
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/menu/class-view-analytics-settings-menu.php';
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/menu/class-view-analytics-plugins-settings-menu.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -473,6 +474,9 @@ final class View_Analytics {
 
 		$admin_setting_menu = new View_Analytics_Admin_Setting_Menu( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'init', $admin_setting_menu, 'setting_menu', 100 );
+
+		$admin_plugins_setting_menu = new View_Analytics_Admin_Plugins_Setting_Menu( $this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_action( 'init', $admin_plugins_setting_menu, 'setting_menu', 100 );
 
 	}
 

@@ -67,6 +67,79 @@ class View_Analytics_Media_Table {
     }
 
 	/**
+	 * Create table
+	 */
+	public function create_table() {
+
+		global $wpdb;
+		$charset_collate = $wpdb->get_charset_collate();
+		
+		/**
+		 * Profile View
+		 */
+		$table_name		 = $this->table_name();
+		$view_sql = "CREATE TABLE {$table_name} (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			author_id bigint(20) NOT NULL DEFAULT 0,
+			key_id varchar(255) NOT NULL DEFAULT 0,
+			hash_id varchar(255) NOT NULL DEFAULT 0,
+			media_id bigint(20) NOT NULL DEFAULT 0,
+			attachment_id bigint(20) NOT NULL DEFAULT 0,
+			users_list longtext NULL,
+			user_count bigint(20) NOT NULL DEFAULT 1,
+			ref_count bigint(20) NOT NULL DEFAULT 1,
+			session_count bigint(20) NOT NULL DEFAULT 1,
+			type varchar(50) NOT NULL DEFAULT 'photo',
+			mime_type varchar(50) NOT NULL DEFAULT '',
+			is_new tinyint(1) NOT NULL DEFAULT 1,
+			PRIMARY KEY  (id)
+		) {$charset_collate};";
+
+		$table_name_log		 = $this->table_name_log();
+		$view_sql_log = "CREATE TABLE {$table_name_log} (
+			id bigint(20) NOT NULL AUTO_INCREMENT ,
+			match_id bigint(20) NOT NULL DEFAULT 0,
+			blog_id bigint(20) NULL,
+			session varchar(255) NOT NULL DEFAULT '',
+			viewer_id bigint(20) NOT NULL DEFAULT 0,
+			key_id varchar(255) NOT NULL DEFAULT 0,
+			url varchar(255) NOT NULL DEFAULT '',
+			site_components varchar(255) NULL DEFAULT '',
+			components varchar(255) NULL DEFAULT '',
+			object varchar(255) NULL DEFAULT '',
+			primitive varchar(255) NULL DEFAULT '',
+			variable varchar(255) NULL DEFAULT '',
+			device varchar(50) NOT NULL DEFAULT 'desktop',
+			locale varchar(50) NOT NULL,
+			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+			PRIMARY KEY  (id)
+		) {$charset_collate};";
+
+		maybe_create_table( $table_name, $view_sql );
+		maybe_create_table( $table_name_log, $view_sql_log );	
+	}
+
+	/**
+	 * Create table
+	 */
+	public function delete_table() {
+		global $wpdb;
+
+		/**
+		 * profile and Profile view log
+		 */
+		$table_name		 = $this->table_name();
+		$view_sql = "DROP TABLE IF EXISTS $table_name";
+
+		$table_name_log		 = $this->table_name_log();
+		$view_sql_log = "DROP TABLE IF EXISTS $table_name_log";
+
+		$wpdb->query( $view_sql );
+		$wpdb->query( $view_sql_log );
+
+	}
+
+	/**
 	 * Add the current user has view media count
 	 */
 	public function user_add( $viewer_id, $key_id, $hash_id = '0', $media_id = 0, $attachment_id = 0, $media_owner_id = 0, $media_type = 'photo', $components = array(), $ref_count = 1 ) {

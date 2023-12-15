@@ -71,6 +71,13 @@ class View_Analytics_Common {
 	}
 
 	/**
+     * Return the View Analytics Media Count Key
+     */
+    public function delete_table_count_key() {
+        return '_view_analytics_delete_table_key';
+    }
+
+	/**
 	 * Create fiilter name by given key
 	 */
 	public function create_hooks_key( $key = '' ) {

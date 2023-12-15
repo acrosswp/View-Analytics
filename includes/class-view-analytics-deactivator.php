@@ -35,7 +35,6 @@ class View_Analytics_Deactivator {
 
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
-
 		/**
 		 * Create the Table
 		 */
@@ -49,74 +48,20 @@ class View_Analytics_Deactivator {
 	public static function delete_table() {
 		global $wpdb;
 
-		/**
-		 * Avatar and cover image update of Profile and Group
-		 */
-		$avatar_view_table_name		 = $wpdb->prefix . 'awp_va_avatar_view_log';
-		$avatar_view_sql = "DROP TABLE IF EXISTS $avatar_view_table_name";
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/class-view-analytics-table.php' );
+		View_Analytics_Avatar_Table::instance()->delete_table();
 
-		/**
-		 * Forum View
-		 */
-		$forum_view_table_name_main		 = $wpdb->prefix . 'awp_va_forum_view';
-		$forum_view_sql_main = "DROP TABLE IF EXISTS $forum_view_table_name_main";
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/forum/class-view-analytics-table.php' );
+		View_Analytics_Forum_Table::instance()->delete_table();
 
-		$forum_view_table_name		 = $wpdb->prefix . 'awp_va_forum_view_log';
-		$forum_view_sql = "DROP TABLE IF EXISTS $forum_view_table_name";
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/group/class-view-analytics-table.php' );
+		View_Analytics_Group_Table::instance()->delete_table();
 
-		/**
-		 * Group and Group View Log
-		 */
-		$group_view_table_name_main		 = $wpdb->prefix . 'awp_va_group_view';
-		$group_view_sql_main = "DROP TABLE IF EXISTS $group_view_table_name_main";
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/media/class-view-analytics-table.php' );
+		View_Analytics_Media_Table::instance()->delete_table();
 
-		$group_view_table_name		 = $wpdb->prefix . 'awp_va_group_view_log';
-		$group_view_sql = "DROP TABLE IF EXISTS $group_view_table_name";
-		
-		/**
-		 * Media and Media View Log
-		 */
-		$media_view_table_name_main		 = $wpdb->prefix . 'awp_va_media_view';
-		$media_view_sql_main = "DROP TABLE IF EXISTS $media_view_table_name_main";
-
-		$media_view_table_name		 = $wpdb->prefix . 'awp_va_media_view_log';
-		$media_view_sql = "DROP TABLE IF EXISTS $media_view_table_name";
-
-
-		/**
-		 * profile and Profile view log
-		 */
-		$profile_view_table_name_main		 = $wpdb->prefix . 'awp_va_profile_view';
-		$profile_view_sql_main = "DROP TABLE IF EXISTS $profile_view_table_name_main";
-
-		$profile_view_table_name		 = $wpdb->prefix . 'awp_va_profile_view_log';
-		$profile_view_sql = "DROP TABLE IF EXISTS $profile_view_table_name";
-
-
-		/**
-		 * We are not using this table any more
-		 */
-		$over_all_log_table_name		 = $wpdb->prefix . 'awp_va_log';
-		$over_all_log_sql = "DROP TABLE IF EXISTS $over_all_log_table_name";
-
-		$avatar_view_table_name_main		 = $wpdb->prefix . 'awp_va_avatar_view';
-		$avatar_view_sql_main = "DROP TABLE IF EXISTS $avatar_view_table_name_main";
-
-		$wpdb->query( $avatar_view_sql );
-		$wpdb->query( $avatar_view_sql_main );
-
-		$wpdb->query( $forum_view_sql_main );
-		$wpdb->query( $forum_view_sql );
-
-		$wpdb->query( $group_view_sql_main );
-		$wpdb->query( $group_view_sql );
-
-		$wpdb->query( $media_view_sql_main );
-		$wpdb->query( $media_view_sql );
-
-		$wpdb->query( $profile_view_sql_main );
-		$wpdb->query( $profile_view_sql );
-		
-		$wpdb->query( $over_all_log_sql );
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/profile/class-view-analytics-table.php' );
+		View_Analytics_Profile_Table::instance()->delete_table();
+	
 	}
 }

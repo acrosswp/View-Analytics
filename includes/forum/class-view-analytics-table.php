@@ -67,6 +67,75 @@ class View_Analytics_Forum_Table {
     }
 
 	/**
+	 * Create table
+	 */
+	public function create_table() {
+
+		global $wpdb;
+		$charset_collate = $wpdb->get_charset_collate();
+		
+		/**
+		 * Profile View
+		 */
+		$table_name		 = $this->table_name();
+		$view_sql = "CREATE TABLE {$table_name} (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			blog_id bigint(20) NULL,
+			post_id bigint(20) NOT NULL,
+			author_id bigint(20) NOT NULL,
+			users_list longtext NULL,
+			user_count bigint(20) NOT NULL DEFAULT 1,
+			ref_count bigint(20) NOT NULL DEFAULT 1,
+			session_count bigint(20) NOT NULL DEFAULT 1,
+			is_new tinyint(1) NOT NULL DEFAULT 1,
+			locale varchar(50) NOT NULL,
+			PRIMARY KEY  (id)
+		) {$charset_collate};";
+
+		$table_name_log		 = $this->table_name_log();
+		$view_sql_log = "CREATE TABLE {$table_name_log} (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			match_id bigint(20) NOT NULL,
+			blog_id bigint(20) NULL,
+			session varchar(255) NOT NULL DEFAULT '',
+			post_id bigint(20) NOT NULL,
+			viewer_id bigint(20) NOT NULL,
+			url varchar(255) NOT NULL DEFAULT '',
+			components varchar(255) NULL DEFAULT '',
+			object varchar(255) NULL DEFAULT '',
+			primitive varchar(255) NULL DEFAULT '',
+			variable varchar(255) NULL DEFAULT '',
+			locale varchar(50) NOT NULL,
+			device varchar(50) NOT NULL DEFAULT 'desktop',
+			action_date TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+			PRIMARY KEY  (id)
+		) {$charset_collate};";
+
+		maybe_create_table( $table_name, $view_sql );
+		maybe_create_table( $table_name_log, $view_sql_log );	
+	}
+
+	/**
+	 * Create table
+	 */
+	public function delete_table() {
+		global $wpdb;
+
+		/**
+		 * profile and Profile view log
+		 */
+		$table_name		 = $this->table_name();
+		$view_sql = "DROP TABLE IF EXISTS $table_name";
+
+		$table_name_log		 = $this->table_name_log();
+		$view_sql_log = "DROP TABLE IF EXISTS $table_name_log";
+
+		$wpdb->query( $view_sql );
+		$wpdb->query( $view_sql_log );
+
+	}
+
+	/**
 	 * Add the current user has view forum count
 	 */
 	public function user_add( $post_id, $author_id, $viewer_id, $components, $is_new = 1 ) {
