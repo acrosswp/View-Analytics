@@ -78,6 +78,23 @@ class View_Analytics_Common {
     }
 
 	/**
+	 * Create table
+	 */
+	public function default_value() {
+		return array(
+			'main' => 0,
+		);
+	}
+
+	/**
+	 * Create table
+	 */
+	public function get_key_default_value( $key ) {
+		$default_value = $this->default_value();
+		return isset( $default_value[ $key ] ) ? $default_value[ $key ] : false;
+	}
+
+	/**
 	 * Create fiilter name by given key
 	 */
 	public function create_hooks_key( $key = '' ) {

@@ -77,6 +77,15 @@ class View_Analytics_Admin_Setting_Menu {
 	 * @var      string    $version    The current version of this plugin.
 	 */
 	private $avatar_common;
+
+	/**
+	 * The ID of this avatar setting view.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	private $forum_common;
 	
 	/**
 	 * Initialize the class and set its properties.
@@ -103,19 +112,19 @@ class View_Analytics_Admin_Setting_Menu {
 					'title' => __( 'Media Analytics', 'view-analytics' ),
 					'label' => __( 'Enable Media Analytics', 'view-analytics' ),
 					'id'    => 'main',
-					'default' => true,
+					'default' => $this->media_common->get_key_default_value( 'main' ),
 				),
 				array(
 					'type'  => 'toggle',
 					'description' => __( 'Show Media View Count in Public.', 'view-analytics' ),
 					'id'    => 'show_view_count',
-					'default' => true,
+					'default' => $this->media_common->get_key_default_value( 'show_view_count' ),
 				),
 				array(
 					'type'  => 'toggle',
 					'description' => __( 'Show Media View User Lists when someone click on the views button.', 'view-analytics' ),
 					'id'    => 'show_view_user_list',
-					'default' => true,
+					'default' => $this->media_common->get_key_default_value( 'show_view_user_list' ),
 				),
 			)
 		);
@@ -133,13 +142,13 @@ class View_Analytics_Admin_Setting_Menu {
 					'title' => __( 'Profile Analytics', 'view-analytics' ),
 					'label' => __( 'Enable Profile Analytics', 'view-analytics' ),
 					'id'    => 'main',
-					'default' => true,
+					'default' => $this->profile_common->get_key_default_value( 'main' ),
 				),
 				array(
 					'type'  => 'toggle',
 					'description' => __( 'Show list of user who has view the Member Profile', 'view-analytics' ),
 					'id'    => 'show_view_count',
-					'default' => true,
+					'default' => $this->profile_common->get_key_default_value( 'show_view_count' ),
 				),
 			)
 		);
@@ -157,13 +166,13 @@ class View_Analytics_Admin_Setting_Menu {
 					'title' => __( 'Group Analytics', 'view-analytics' ),
 					'label' => __( 'Enable Group Analytics', 'view-analytics' ),
 					'id'    => 'main',
-					'default' => true,
+					'default' => $this->group_common->get_key_default_value( 'main' ),
 				),
 				array(
 					'type'  => 'toggle',
 					'description' => __( 'Show list of user who has view the Groups', 'view-analytics' ),
 					'id'    => 'show_view_count',
-					'default' => true,
+					'default' => $this->group_common->get_key_default_value( 'show_view_count' ),
 				),
 			)
 		);
@@ -181,31 +190,31 @@ class View_Analytics_Admin_Setting_Menu {
 					'title' => __( 'Avatar Analytics', 'view-analytics' ),
 					'label' => __( 'Enable Avatar Analytics', 'view-analytics' ),
 					'id'    => 'main',
-					'default' => true,
+					'default' => $this->avatar_common->get_key_default_value( 'main' ),
 				),
 				array(
 					'type'  => 'toggle',
 					'description' => __( 'Show Profile Avatar update Count in Public', 'view-analytics' ),
 					'id'    => 'show_view_count_profile_avatar',
-					'default' => true,
+					'default' => $this->avatar_common->get_key_default_value( 'show_view_count_profile_avatar' ),
 				),
 				array(
 					'type'  => 'toggle',
 					'description' => __( 'Show Profile Cover Image update Count in Public', 'view-analytics' ),
 					'id'    => 'show_view_count_profile_cover',
-					'default' => true,
+					'default' => $this->avatar_common->get_key_default_value( 'show_view_count_profile_cover' ),
 				),
 				array(
 					'type'  => 'toggle',
 					'description' => __( 'Show Group Avatar update Count in Public', 'view-analytics' ),
 					'id'    => 'show_view_count_group_avatar',
-					'default' => true,
+					'default' => $this->avatar_common->get_key_default_value( 'show_view_count_group_avatar' ),
 				),
 				array(
 					'type'  => 'toggle',
 					'description' => __( 'Show Group Cover Image update Count in Public', 'view-analytics' ),
 					'id'    => 'show_view_count_group_cover',
-					'default' => true,
+					'default' => $this->avatar_common->get_key_default_value( 'show_view_count_group_cover' ),
 				),
 			)
 		);
@@ -223,7 +232,7 @@ class View_Analytics_Admin_Setting_Menu {
 					'title' => __( 'Forum Analytics', 'view-analytics' ),
 					'label' => __( 'Enable Forum/Topic/Reply View Count', 'view-analytics' ),
 					'id'    => 'main',
-					'default' => true,
+					'default' => $this->forum_common->get_key_default_value( 'main' ),
 				)
 			)
 		);

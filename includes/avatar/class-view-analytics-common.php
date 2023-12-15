@@ -74,6 +74,19 @@ class View_Analytics_Avatar_Common extends View_Analytics_Common {
     }
 
 	/**
+	 * Create table
+	 */
+	public function default_value() {
+		return array(
+			'main' => 1,
+			'show_view_count_group_cover' => 0,
+			'show_view_count_group_avatar' => 0,
+			'show_view_count_profile_cover' => 0,
+			'show_view_count_profile_avatar' => 0,
+		);
+	}
+
+	/**
 	 * Show the message about when the user has view the Avatar
 	 */
 	public function get_view_body_message( $user_id ) {

@@ -50,56 +50,45 @@ class View_Analytics_Activator {
 	public static function create_table() {
 
 		/**
+		 * Main common class
+		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/class-view-analytics-common.php' );
+
+		/**
 		 * Contain all the value to edit/delete/remove the table row
 		 */
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/class-view-analytics-common.php' );
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/class-view-analytics-table.php' );
-		View_Analytics_Avatar_Table::instance()->create_table();
+		View_Analytics_Avatar_Common::instance()->table->create_table();
 
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/forum/class-view-analytics-common.php' );
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/forum/class-view-analytics-table.php' );
-		View_Analytics_Forum_Table::instance()->create_table();
+		View_Analytics_Forum_Common::instance()->table->create_table();
 
 
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/group/class-view-analytics-common.php' );
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/group/class-view-analytics-table.php' );
-		View_Analytics_Profile_Table::instance()->create_table();
+		View_Analytics_Profile_Common::instance()->table->create_table();
 
-
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/profile/class-view-analytics-common.php' );
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/profile/class-view-analytics-table.php' );
-		View_Analytics_Group_Table::instance()->create_table();
+		View_Analytics_Group_Common::instance()->table->create_table();
 
 
+		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/media/class-view-analytics-common.php' );
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/media/class-view-analytics-table.php' );
-		View_Analytics_Media_Table::instance()->create_table();
+		View_Analytics_Media_Common::instance()->table->create_table();
 
 		/**
 		 * Add the option to enable the all the setting if the plugin is activiating for the first time
 		 */
 		$default_active_keys = array(
-			'_view_analytics_media_table_count_enable' => array(
-				'main' => 1,
-				'show_view_user_list' => 1,
-				'show_view_count' => 1,
-			),
-			'_view_analytics_profile_table_count_enable' => array(
-				'main' => 1,
-				'show_view_count' => 0,
-			),
-			'_view_analytics_group_table_count_enable' => array(
-				'main' => 1,
-				'show_view_count' => 0,
-			),
-			'_view_analytics_avatar_table_count_enable' => array(
-				'main' => 1,
-				'show_view_count_group_cover' => 0,
-				'show_view_count_group_avatar' => 0,
-				'show_view_count_profile_cover' => 0,
-				'show_view_count_profile_avatar' => 0,
-			),
-			'_view_analytics_forum_table_count_enable' => array(
-				'main' => 1,
-			),
-			'_view_analytics_delete_table_key' => array(
-				'main' => 0,
-			),
+			View_Analytics_Avatar_Common::instance()->view_count_key() => View_Analytics_Avatar_Common::instance()->default_value(),
+			View_Analytics_Forum_Common::instance()->view_count_key() => View_Analytics_Forum_Common::instance()->default_value(),
+			View_Analytics_Group_Common::instance()->view_count_key() => View_Analytics_Group_Common::instance()->default_value(),
+			View_Analytics_Media_Common::instance()->view_count_key() => View_Analytics_Media_Common::instance()->default_value(),
+			View_Analytics_Profile_Common::instance()->view_count_key() => View_Analytics_Profile_Common::instance()->default_value(),
+			View_Analytics_Common::instance()->delete_table_count_key() => View_Analytics_Common::instance()->default_value(),
 		);
 
 		foreach( $default_active_keys as $key => $value ) {	

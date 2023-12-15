@@ -74,6 +74,16 @@ class View_Analytics_Group_Common extends View_Analytics_Common {
     }
 
 	/**
+	 * Create table
+	 */
+	public function default_value() {
+		return array(
+			'main' => 1,
+			'show_view_count' => 0,
+		);
+	}
+
+	/**
 	 * Show the message about when the user has view the Media
 	 */
 	public function get_view_body_message( $user_id, $view_count ) {

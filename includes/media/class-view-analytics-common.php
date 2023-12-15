@@ -73,6 +73,18 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
     }
 
 	/**
+	 * Create table
+	 */
+	public function default_value() {
+		return array(
+			'main' => 1,
+			'show_view_count' => 1,
+			'show_view_user_list' => 1,
+		);
+	}
+
+
+	/**
      * Return the View Analytics Media Count Key
      */
     public function lightbox_ajax_action_key() {
