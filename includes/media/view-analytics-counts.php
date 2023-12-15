@@ -82,7 +82,6 @@ class View_Analytics_Public_Media_Count {
 
 		$this->common = View_Analytics_Media_Common::instance();
 
-
 		$this->buddyboss();
 
 		$this->buddypress();
@@ -297,7 +296,8 @@ class View_Analytics_Public_Media_Count {
 					array_unshift( $users_list, $current_user_id );
 				}
 				$user_count = count( $users_list );
-				do_action( $this->common->create_hooks_key( '_users_view_media' ), $id, $key_id, $current_user_id, $views['author_id'], $old_user_count, $user_count );
+
+				do_action( $this->common->create_hooks_key( 'users_view_media' ), $id, $key_id, $current_user_id, $views['author_id'], $old_user_count, $user_count );
 
 				/**
 				 * update session count
