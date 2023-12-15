@@ -113,7 +113,7 @@ class View_Analytics_Common {
      */
     public function get_view_setting_active( $key ) {
         $settings = $this->get_view_setting();
-		return empty( $settings[ $key ] ) ? false : $settings[ $key ];
+		return empty( $settings[ $key ] ) ? $this->get_key_default_value( $key ) : $settings[ $key ];
     }
 
 	/**

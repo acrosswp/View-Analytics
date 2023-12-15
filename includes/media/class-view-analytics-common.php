@@ -83,7 +83,6 @@ class View_Analytics_Media_Common extends View_Analytics_Common {
 		);
 	}
 
-
 	/**
      * Return the View Analytics Media Count Key
      */
