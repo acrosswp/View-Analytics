@@ -447,7 +447,7 @@ final class View_Analytics {
 	private function define_admin_hooks() {
 
 		if( class_exists( 'AcrossWP_Plugin_Update_Checker_Github' ) ) {
-			new AcrossWP_Plugin_Update_Checker_Github();
+			AcrossWP_Plugin_Update_Checker_Github::instance();
 		}
 
 		/**

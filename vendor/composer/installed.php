@@ -3,7 +3,7 @@
         'name' => 'acrosswp/view-analytics',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '396eb6bcb6beabd0f74c76d16bcb8fa6aff89ef9',
+        'reference' => '12f05206730447843b433c4f97180fa80e8f57f4',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -46,7 +46,7 @@
         'acrosswp/acrosswp-plugin-update-checker-github' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '43933bdd6a4e46ce41d3b9427db4586f2d4ab39f',
+            'reference' => '69567a282ebdb3d35964c3987d67dfde687331b4',
             'type' => 'library',
             'install_path' => __DIR__ . '/../acrosswp/acrosswp-plugin-update-checker-github',
             'aliases' => array(
@@ -57,7 +57,7 @@
         'acrosswp/view-analytics' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '396eb6bcb6beabd0f74c76d16bcb8fa6aff89ef9',
+            'reference' => '12f05206730447843b433c4f97180fa80e8f57f4',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -66,7 +66,7 @@
         'wpify/custom-fields' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '138666c03fb47f02a09c6fe16f73d763e536590c',
+            'reference' => '5cc49c34469b27bf6d76f35eba2791befe584f1b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../wpify/custom-fields',
             'aliases' => array(
@@ -77,7 +77,7 @@
         'yahnis-elsts/plugin-update-checker' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '5f251be064949ddce8a040a2bb9e4e1747000d95',
+            'reference' => 'a1445bb8dcfd88108d3b681076f89f89cfccd231',
             'type' => 'library',
             'install_path' => __DIR__ . '/../yahnis-elsts/plugin-update-checker',
             'aliases' => array(

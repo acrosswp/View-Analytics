@@ -14,7 +14,8 @@ use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
  * @subpackage Post_Anonymously/includes
  */
 
-if( ! class_exists( 'AcrossWP_Plugin_Update_Checker_Github' ) ) {
+if ( ! class_exists( 'AcrossWP_Plugin_Update_Checker_Github' ) ) {
+
 	/**
 	 * Fired during plugin licenses.
 	 *
@@ -40,7 +41,24 @@ if( ! class_exists( 'AcrossWP_Plugin_Update_Checker_Github' ) ) {
 		 *
 		 * @since 0.0.1
 		 */
-		protected $packages = array();
+		public $packages = array();
+
+		/**
+		 * Main Pin_Comment Instance.
+		 *
+		 * Ensures only one instance of WooCommerce is loaded or can be loaded.
+		 *
+		 * @since 1.0.0
+		 * @static
+		 * @see Pin_Comment()
+		 * @return Pin_Comment - Main instance.
+		 */
+		public static function instance() {
+			if ( is_null( self::$_instance ) ) {
+				self::$_instance = new self();
+			}
+			return self::$_instance;
+		}
 
 		/**
 		 * Initialize the collections used to maintain the actions and filters.
@@ -52,7 +70,7 @@ if( ! class_exists( 'AcrossWP_Plugin_Update_Checker_Github' ) ) {
 			/**
 			 * Action to do update for the plugins
 			 */
-			add_action( 'init', array( $this, 'plugin_updater' ) );
+			add_action( 'init', array( $this, 'plugin_updater' ), 1000 );
 		}
 
 		/**
@@ -71,7 +89,9 @@ if( ! class_exists( 'AcrossWP_Plugin_Update_Checker_Github' ) ) {
 			 * Check if the $this->get_packages() is empty or not
 			 */
 			if( ! empty( $this->get_packages() ) ) {
+
 				foreach ( $this->get_packages() as $package ) {
+
 					$github_repo = $package['repo'];
 					$file_path = $package['file_path'];
 					$plugin_name_slug = $package['plugin_name_slug'];

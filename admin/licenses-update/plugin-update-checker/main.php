@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) || exit;
  */
 function view_analytics_plugins_update_checker_github( $packages ) {
 
-    $packages[1000] = array(
+    $packages[1002] = array(
         'repo' 		        => 'https://github.com/acrosswp/view-analytics',
         'file_path' 		=> VIEW_ANALYTICS_FILES,
         'plugin_name_slug'	=> VIEW_ANALYTICS_PLUGIN_NAME_SLUG,

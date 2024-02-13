@@ -30,6 +30,8 @@ final class GutenbergBlock extends AbstractImplementation {
 	/** @var callable */
 	private $display;
 
+	private $enqueue_scripts = false;
+
 	/**
 	 * GutenbergBlock constructor.
 	 *
@@ -90,7 +92,8 @@ final class GutenbergBlock extends AbstractImplementation {
 		}
 
 		add_action( 'init', array( $this, 'register_block' ), $defaults['init_priority'] );
-		add_action( 'enqueue_block_assets', array( $this, 'enqueue_block_assets' ) );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_block_editor_assets' ) );
+		add_action( 'admin_footer', array( $this, 'enqueue_block_editor_scripts' ) );
 	}
 
 	/**
@@ -108,11 +111,17 @@ final class GutenbergBlock extends AbstractImplementation {
 		register_block_type( $this->name, $args );
 	}
 
-	public function enqueue_block_assets() {
-		if ( is_admin() ) {
-			wp_enqueue_editor();
-			wp_enqueue_code_editor( array( 'type' => 'text/html' ) );
+	public function enqueue_block_editor_assets() {
+		wp_enqueue_editor();
+		wp_enqueue_code_editor( array( 'type' => 'text/html' ) );
+		$this->wcf->get_assets()->enqueue_style( 'wpify-custom-blocks.css' );
 
+		$this->enqueue_scripts = true;
+
+	}
+
+	public function enqueue_block_editor_scripts() {
+		if ( $this->enqueue_scripts ) {
 			$script = $this->wcf->get_assets()->enqueue_script(
 				'wpify-custom-blocks.js',
 				array( 'wp-tinymce', 'code-editor' ),
@@ -133,8 +142,6 @@ final class GutenbergBlock extends AbstractImplementation {
 			$inline_script    .= 'window.wcf_build_url=' . wp_json_encode( $this->get_build_url() ) . ';';
 
 			wp_add_inline_script( $script, $inline_script, 'before' );
-
-			$this->wcf->get_assets()->enqueue_style( 'wpify-custom-blocks.css' );
 		}
 	}
 

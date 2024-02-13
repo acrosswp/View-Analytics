@@ -1,6 +1,8 @@
 /.idea/
+/build/
 /node_modules/
 /vendor/
 /.php_cs.cache
 *.map
 /.ssl
+.DS_Store

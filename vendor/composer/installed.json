@@ -148,24 +148,24 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/acrosswp/acrosswp-plugin-update-checker-github.git",
-                "reference": "43933bdd6a4e46ce41d3b9427db4586f2d4ab39f"
+                "reference": "69567a282ebdb3d35964c3987d67dfde687331b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/acrosswp/acrosswp-plugin-update-checker-github/zipball/43933bdd6a4e46ce41d3b9427db4586f2d4ab39f",
-                "reference": "43933bdd6a4e46ce41d3b9427db4586f2d4ab39f",
+                "url": "https://api.github.com/repos/acrosswp/acrosswp-plugin-update-checker-github/zipball/69567a282ebdb3d35964c3987d67dfde687331b4",
+                "reference": "69567a282ebdb3d35964c3987d67dfde687331b4",
                 "shasum": ""
             },
             "require": {
                 "yahnis-elsts/plugin-update-checker": "dev-master"
             },
-            "time": "2023-11-30T07:35:22+00:00",
+            "time": "2024-02-13T14:20:54+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",
             "autoload": {
                 "files": [
-                    "updater.php"
+                    "acrosswp-plugin-update-checker-github.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -196,23 +196,20 @@
             "version_normalized": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@gitlab.com:wpify/custom-fields.git",
-                "reference": "138666c03fb47f02a09c6fe16f73d763e536590c"
+                "url": "https://github.com/wpify/custom-fields.git",
+                "reference": "5cc49c34469b27bf6d76f35eba2791befe584f1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/wpify%2Fcustom-fields/repository/archive.zip?sha=138666c03fb47f02a09c6fe16f73d763e536590c",
-                "reference": "138666c03fb47f02a09c6fe16f73d763e536590c",
+                "url": "https://api.github.com/repos/wpify/custom-fields/zipball/5cc49c34469b27bf6d76f35eba2791befe584f1b",
+                "reference": "5cc49c34469b27bf6d76f35eba2791befe584f1b",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": ">=7.4||<=8.1"
+                "php": ">=7.4.33"
             },
-            "require-dev": {
-                "symfony/var-dumper": "^v5.4"
-            },
-            "time": "2023-11-30T14:56:39+00:00",
+            "time": "2024-02-08T10:28:29+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",
@@ -229,6 +226,10 @@
                 "GPL-2.0-or-later"
             ],
             "description": "WPify Custom Fields",
+            "support": {
+                "issues": "https://github.com/wpify/custom-fields/issues",
+                "source": "https://github.com/wpify/custom-fields/tree/3.12.7"
+            },
             "install-path": "../wpify/custom-fields"
         },
         {
@@ -238,19 +239,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/YahnisElsts/plugin-update-checker.git",
-                "reference": "5f251be064949ddce8a040a2bb9e4e1747000d95"
+                "reference": "a1445bb8dcfd88108d3b681076f89f89cfccd231"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/YahnisElsts/plugin-update-checker/zipball/5f251be064949ddce8a040a2bb9e4e1747000d95",
-                "reference": "5f251be064949ddce8a040a2bb9e4e1747000d95",
+                "url": "https://api.github.com/repos/YahnisElsts/plugin-update-checker/zipball/a1445bb8dcfd88108d3b681076f89f89cfccd231",
+                "reference": "a1445bb8dcfd88108d3b681076f89f89cfccd231",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "php": ">=5.6.20"
             },
-            "time": "2023-11-15T16:49:00+00:00",
+            "time": "2024-02-02T14:07:07+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",
