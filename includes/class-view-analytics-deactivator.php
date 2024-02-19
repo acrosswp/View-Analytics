@@ -60,14 +60,6 @@ class View_Analytics_Deactivator {
 			require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/class-view-analytics-table.php' );
 			View_Analytics_Avatar_Common::instance()->table->delete_table();
 
-			require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/forum/class-view-analytics-common.php' );
-			require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/forum/class-view-analytics-table.php' );
-			View_Analytics_Forum_Common::instance()->table->delete_table();
-
-			require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/group/class-view-analytics-common.php' );
-			require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/group/class-view-analytics-table.php' );
-			View_Analytics_Group_Common::instance()->table->delete_table();
-
 			require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/media/class-view-analytics-common.php' );
 			require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/media/class-view-analytics-table.php' );
 			View_Analytics_Media_Common::instance()->table->delete_table();
@@ -81,8 +73,6 @@ class View_Analytics_Deactivator {
 			 */
 			$default_active_keys = array(
 				View_Analytics_Avatar_Common::instance()->view_count_key(),
-				View_Analytics_Forum_Common::instance()->view_count_key(),
-				View_Analytics_Group_Common::instance()->view_count_key(),
 				View_Analytics_Media_Common::instance()->view_count_key(),
 				View_Analytics_Profile_Common::instance()->view_count_key(),
 				View_Analytics_Common::instance()->view_count_key(),

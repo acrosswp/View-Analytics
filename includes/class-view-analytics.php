@@ -257,16 +257,6 @@ final class View_Analytics {
 		$this->load_avatar_view();
 
 		/**
-		 * Load all the Profile view file
-		 */
-		$this->load_forum_view();
-
-		/**
-		 * Load all the Group view file
-		 */
-		$this->load_group_view();
-
-		/**
 		 * Load all the Media view file
 		 */
 		$this->load_media_view();
@@ -308,56 +298,6 @@ final class View_Analytics {
 		 * The class responsible for defining all actions that are releate to recoring the view count in table
 		 */
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/avatar/view-analytics-public-menu.php';
-	}
-
-	/**
-	 * Load all the File releaste to Group
-	 */
-	private function load_forum_view() {
-
-		/**
-		 * Contain all the value to edit/delete/remove the table row
-		 */
-		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/forum/class-view-analytics-table.php' );
-
-		/**
-		 * All the functions are included in this file
-		 */
-		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/forum/class-view-analytics-common.php' );
-
-
-		/**
-		 * The class responsible for defining all actions that are releate to recoring the view count in table
-		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/forum/view-analytics-counts.php';
-	}
-
-		/**
-	 * Load all the File releaste to Group
-	 */
-	private function load_group_view() {
-
-		/**
-		 * Contain all the value to edit/delete/remove the table row
-		 */
-		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/group/class-view-analytics-table.php' );
-
-		/**
-		 * All the functions are included in this file
-		 */
-		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/group/class-view-analytics-common.php' );
-
-
-		/**
-		 * The class responsible for defining all actions that are releate to recoring the view count in table
-		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/group/view-analytics-counts.php';
-
-
-		/**
-		 * The class responsible for defining all actions that are releate to recoring the view count in table
-		 */
-		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'public/partials/group/view-analytics-public-menu.php';
 	}
 
 	/**
@@ -519,25 +459,6 @@ final class View_Analytics {
 
 		$this->loader->add_action( 'groups_avatar_uploaded', $public_avatar_count, 'groups_avatar_uploaded', 1000 );
 		$this->loader->add_action( 'groups_cover_image_uploaded', $public_avatar_count, 'groups_cover_image_uploaded', 1000 );
-
-
-		/**
-		 * All class that are release to Public Group Count
-		 */
-		$public_forum_count = new View_Analytics_Public_Forum_Count( $this->get_plugin_name(), $this->get_version() );
-		$this->loader->add_action( 'bbp_head', $public_forum_count, 'home_content', 1000 );
-
-		/**
-		 * All class that are release to Public Group Count
-		 */
-		$public_group_count = new View_Analytics_Public_Group_Count( $this->get_plugin_name(), $this->get_version() );
-		$this->loader->add_action( 'bp_before_group_home_content', $public_group_count, 'home_content', 1000 );
-
-		/**
-		 * All class that are release to Public Group Count View
-		 */
-		$public_group_view = new View_Analytics_Group_Count_View( $this->get_plugin_name(), $this->get_version() );
-		$this->loader->add_action( 'bp_setup_nav', $public_group_view, 'navigation', 1000 );
 
 		/**
 		 * Load the Media REST API

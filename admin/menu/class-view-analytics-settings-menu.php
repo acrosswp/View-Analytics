@@ -61,15 +61,6 @@ class View_Analytics_Admin_Setting_Menu {
 	private $profile_common;
 
 	/**
-	 * The ID of this group setting view.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
-	 */
-	private $group_common;
-
-	/**
 	 * The ID of this avatar setting view.
 	 *
 	 * @since    1.0.0
@@ -77,15 +68,6 @@ class View_Analytics_Admin_Setting_Menu {
 	 * @var      string    $version    The current version of this plugin.
 	 */
 	private $avatar_common;
-
-	/**
-	 * The ID of this avatar setting view.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
-	 */
-	private $forum_common;
 	
 	/**
 	 * Initialize the class and set its properties.
@@ -157,30 +139,6 @@ class View_Analytics_Admin_Setting_Menu {
 	/**
 	 * Add the setting for media
 	 */
-	public function group_settings() {
-		return apply_filters(
-			'view-analytics-admin-group-setting',
-			array(
-				array(
-					'type'  => 'toggle',
-					'title' => __( 'Group Analytics', 'view-analytics' ),
-					'label' => __( 'Enable Group Analytics', 'view-analytics' ),
-					'id'    => 'main',
-					'default' => $this->group_common->get_key_default_value( 'main' ),
-				),
-				array(
-					'type'  => 'toggle',
-					'description' => __( 'Show list of user who has view the Groups', 'view-analytics' ),
-					'id'    => 'show_view_count',
-					'default' => $this->group_common->get_key_default_value( 'show_view_count' ),
-				),
-			)
-		);
-	}
-
-	/**
-	 * Add the setting for media
-	 */
 	public function avatar_settings() {
 		return apply_filters(
 			'view-analytics-admin-avatar-setting',
@@ -221,24 +179,6 @@ class View_Analytics_Admin_Setting_Menu {
 	}
 
 	/**
-	 * Add the setting for media
-	 */
-	public function forum_settings() {
-		return apply_filters(
-			'view-analytics-admin-forum-setting',
-			array(
-				array(
-					'type'  => 'toggle',
-					'title' => __( 'Forum Analytics', 'view-analytics' ),
-					'label' => __( 'Enable Forum/Topic/Reply View Count', 'view-analytics' ),
-					'id'    => 'main',
-					'default' => $this->forum_common->get_key_default_value( 'delete' ),
-				),
-			)
-		);
-	}
-
-	/**
 	 * Adds the plugin license page to the admin menu.
 	 *
 	 * @return void
@@ -247,9 +187,7 @@ class View_Analytics_Admin_Setting_Menu {
 
 		$this->media_common = View_Analytics_Media_Common::instance();
 		$this->profile_common = View_Analytics_Profile_Common::instance();
-		$this->group_common = View_Analytics_Group_Common::instance();
 		$this->avatar_common = View_Analytics_Avatar_Common::instance();
-		$this->forum_common = View_Analytics_Forum_Common::instance();
 
 		wpify_custom_fields()->create_options_page( array(
 			'type'        => 'normal',
@@ -272,22 +210,10 @@ class View_Analytics_Admin_Setting_Menu {
 					'items'           => $this->profile_settings(),
 				),
 				array(
-					'id'              => $this->group_common->view_count_key(),
-					'type'            => 'group',
-					'title'           => __( 'View Group Count', 'view-analytics' ),
-					'items'           => $this->group_settings(),
-				),
-				array(
 					'id'              => $this->avatar_common->view_count_key(),
 					'type'            => 'group',
 					'title'           => __( 'View Avatar Count', 'view-analytics' ),
 					'items'           => $this->avatar_settings(),
-				),
-				array(
-					'id'              => $this->forum_common->view_count_key(),
-					'type'            => 'group',
-					'title'           => __( 'View Forum/Topic/Reply Count', 'view-analytics' ),
-					'items'           => $this->forum_settings(),
 				)
 			),	
 		) );
