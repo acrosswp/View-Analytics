@@ -68,7 +68,7 @@ class View_Analytics_Public_Profile_Count {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
-		$this->common = View_Analytics_Profile_Common::instance();
+		$this->common = View_Analyticsfile_Common::instance();
 
 	}
 

@@ -295,4 +295,59 @@ class View_Analytics_Common {
 			'variable' => $single_variable,
 		);
 	}
+
+	/**
+	 * Function return the section id for the media key
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array upload document settings data.
+	 */
+	public function media_section() {
+		return 'view-analytics-pro-access-control-media';
+	}
+
+	/**
+	 * Function return the section id for the profile key
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array upload document settings data.
+	 */
+	public function profile_section() {
+		return 'view-analytics-pro-access-control-profile';
+	}
+
+	/**
+	 * Function return the section id for the group key
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array upload document settings data.
+	 */
+	public function group_section() {
+		return 'view-analytics-pro-access-control-group';
+	}
+
+	/**
+	 * Function return the section id for the group key
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array upload document settings data.
+	 */
+	public function avatar_group_section() {
+		return 'view-analytics-pro-access-control-avatar-group';
+	}
+
+	/**
+	 * Function return the section id for the group key
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array upload document settings data.
+	 */
+	public function avatar_profile_section() {
+		return 'view-analytics-pro-access-control-avatar-profile';
+	}
 }

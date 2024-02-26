@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || exit;
  * @subpackage View_Analytics/includes
  * @author     AcrossWP <contact@acrosswp.com>
  */
-class View_Analytics_Profile_Count_View {
+class View_Analyticsfile_Count_View {
 
     /**
 	 * The unique identifier of this plugin.
@@ -68,7 +68,7 @@ class View_Analytics_Profile_Count_View {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
-		$this->common = View_Analytics_Profile_Common::instance();
+		$this->common = View_Analyticsfile_Common::instance();
 	}
 
 

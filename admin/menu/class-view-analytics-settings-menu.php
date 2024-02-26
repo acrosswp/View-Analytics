@@ -186,7 +186,7 @@ class View_Analytics_Admin_Setting_Menu {
 	public function setting_menu(){
 
 		$this->media_common = View_Analytics_Media_Common::instance();
-		$this->profile_common = View_Analytics_Profile_Common::instance();
+		$this->profile_common = View_Analyticsfile_Common::instance();
 		$this->avatar_common = View_Analytics_Avatar_Common::instance();
 
 		wpify_custom_fields()->create_options_page( array(

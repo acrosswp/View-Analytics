@@ -23,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
  * @subpackage View_Analytics/includes
  * @author     AcrossWP <contact@acrosswp.com>
  */
-class View_Analytics_Profile_Common extends View_Analytics_Common {
+class View_Analyticsfile_Common extends View_Analytics_Common {
 
     /**
 	 * The single instance of the class.
@@ -45,7 +45,7 @@ class View_Analytics_Profile_Common extends View_Analytics_Common {
 	public function __construct() {
 
 		parent::__construct();
-        $this->table = View_Analytics_Profile_Table::instance();
+        $this->table = View_Analyticsfile_Table::instance();
 	}
 
 

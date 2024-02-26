@@ -63,7 +63,7 @@ class View_Analytics_Activator {
 
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/profile/class-view-analytics-common.php' );
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/profile/class-view-analytics-table.php' );
-		View_Analytics_Profile_Common::instance()->table->create_table();
+		View_Analyticsfile_Common::instance()->table->create_table();
 
 
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/media/class-view-analytics-common.php' );
@@ -76,7 +76,7 @@ class View_Analytics_Activator {
 		$default_active_keys = array(
 			View_Analytics_Avatar_Common::instance()->view_count_key() => View_Analytics_Avatar_Common::instance()->default_value(),
 			View_Analytics_Media_Common::instance()->view_count_key() => View_Analytics_Media_Common::instance()->default_value(),
-			View_Analytics_Profile_Common::instance()->view_count_key() => View_Analytics_Profile_Common::instance()->default_value(),
+			View_Analyticsfile_Common::instance()->view_count_key() => View_Analyticsfile_Common::instance()->default_value(),
 			View_Analytics_Common::instance()->view_count_key() => View_Analytics_Common::instance()->default_value(),
 		);
 

@@ -23,25 +23,25 @@ defined( 'ABSPATH' ) || exit;
  * @subpackage View_Analytics/includes
  * @author     AcrossWP <contact@acrosswp.com>
  */
-class View_Analytics_Profile_Table {
+class View_Analyticsfile_Table {
 
 	/**
 	 * The single instance of the class.
 	 *
-	 * @var View_Analytics_Profile_Table
+	 * @var View_Analyticsfile_Table
 	 * @since 1.0.0
 	 */
 	protected static $_instance = null;
 
 	/**
-	 * Main View_Analytics_Profile_Table Instance.
+	 * Main View_Analyticsfile_Table Instance.
 	 *
 	 * Ensures only one instance of WooCommerce is loaded or can be loaded.
 	 *
 	 * @since 1.0.0
 	 * @static
-	 * @see View_Analytics_Profile_Table()
-	 * @return View_Analytics_Profile_Table - Main instance.
+	 * @see View_Analyticsfile_Table()
+	 * @return View_Analyticsfile_Table - Main instance.
 	 */
 	public static function instance() {
 		if ( is_null( self::$_instance ) ) {

@@ -66,7 +66,7 @@ class View_Analytics_Deactivator {
 
 			require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/profile/class-view-analytics-common.php' );
 			require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/profile/class-view-analytics-table.php' );
-			View_Analytics_Profile_Common::instance()->table->delete_table();
+			View_Analyticsfile_Common::instance()->table->delete_table();
 			
 			/**
 			 * Add the option to enable the all the setting if the plugin is activiating for the first time
@@ -74,7 +74,7 @@ class View_Analytics_Deactivator {
 			$default_active_keys = array(
 				View_Analytics_Avatar_Common::instance()->view_count_key(),
 				View_Analytics_Media_Common::instance()->view_count_key(),
-				View_Analytics_Profile_Common::instance()->view_count_key(),
+				View_Analyticsfile_Common::instance()->view_count_key(),
 				View_Analytics_Common::instance()->view_count_key(),
 			);
 

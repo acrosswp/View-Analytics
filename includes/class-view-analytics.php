@@ -240,6 +240,16 @@ final class View_Analytics {
 		/**
 		 * The class responsible for defining all admin Dashboard Menu
 		 */
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/buddyboss-integration.php';
+
+		/**
+		 * The class responsible for defining all admin Dashboard Menu
+		 */
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/menu/media/class-view-analytics-menu.php';
+
+		/**
+		 * The class responsible for defining all admin Dashboard Menu
+		 */
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/menu/class-view-analytics-main-menu.php';
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/menu/class-view-analytics-settings-menu.php';
 		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'admin/menu/class-view-analytics-plugins-settings-menu.php';
@@ -418,6 +428,9 @@ final class View_Analytics {
 		$admin_plugins_setting_menu = new View_Analytics_Admin_Plugins_Setting_Menu( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'init', $admin_plugins_setting_menu, 'setting_menu', 100 );
 
+		$admin_media_menu = new View_Analytics_Admin_Media_Menu( $this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_action( 'admin_menu', $admin_media_menu, 'menu', 10000 );
+
 	}
 
 	/**
@@ -487,7 +500,7 @@ final class View_Analytics {
 		/**
 		 * All class that are release to Public Profile Count View
 		 */
-		$public_profile_view = new View_Analytics_Profile_Count_View( $this->get_plugin_name(), $this->get_version() );
+		$public_profile_view = new View_Analyticsfile_Count_View( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'bp_setup_nav', $public_profile_view, 'navigation', 1000 );
 
 		/**
@@ -514,6 +527,57 @@ final class View_Analytics {
 
 		}
 
+		$this->loader->add_action( 'plugins_loaded', $this, 'load_buddyboss_platform_pro', 1000 );
+	}
+
+	/**
+	 * Load the required dependencies for this BuddyBoss Platform Pro.
+	 *
+	 * Include the following files that make up the plugin:
+	 *
+	 * Create an instance of the loader which will be used to register the hooks
+	 * with WordPress.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	public function load_buddyboss_platform_pro() {
+
+		if ( ! class_exists( 'BB_Platform_Pro' ) ) {
+			return;
+		}
+
+		/**
+		 * The class responsible for defining all admin Dashboard Menu
+		 */
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/media/buddyboss-integration-view-count.php';
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/media/buddyboss-integration-user-list.php';
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/profile/buddyboss-integration-view-count.php';
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/buddyboss-integration-view-count-group-cover.php';
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/buddyboss-integration-view-count-group-avatar.php';
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/buddyboss-integration-view-count-profile-cover.php';
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/buddyboss-integration-view-count-profile-avatar.php';
+
+
+		/**
+		 * Render the Media user show
+		 */
+		new View_Analytics_BuddyBoss_Integration_Media_View_Count();
+		new View_Analytics_BuddyBoss_Integration_Media_User_List();
+
+		/**
+		 * Render the profile user show
+		 */
+		new View_Analytics_BuddyBoss_Integration_Profile_User_List();
+
+		/**
+		 * Render the Avatar user show
+		 */
+		new View_Analytics_BuddyBoss_Integration_Avatar_Group_Avatar_User_List();
+		new View_Analytics_BuddyBoss_Integration_Avatar_Group_Cover_User_List();
+		
+		new View_Analytics_BuddyBoss_Integration_Avatar_Profile_Avatar_User_List();
+		new View_Analytics_BuddyBoss_Integration_Avatar_Profile_Cover_User_List();
 	}
 
 	/**
