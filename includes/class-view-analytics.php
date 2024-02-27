@@ -276,6 +276,9 @@ final class View_Analytics {
 		 */
 		$this->load_profile_view();
 
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/class-view-analytics-notifications.php';
+		require_once VIEW_ANALYTICS_PLUGIN_PATH . 'includes/media/buddyboss-integration-user-notification.php';
+
 		$this->loader = View_Analytics_Loader::instance();
 
 		$this->common = View_Analytics_Common::instance();
@@ -503,6 +506,9 @@ final class View_Analytics {
 		$public_profile_view = new View_Analyticsfile_Count_View( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'bp_setup_nav', $public_profile_view, 'navigation', 1000 );
 
+		$this->loader->add_action( 'bp_init', $this, 'bp_init', 1000 );
+		new View_Analytics_Nofications( $this->get_plugin_name() );
+
 		/**
 		 * if BuddyBoss is loading
 		 */
@@ -528,6 +534,13 @@ final class View_Analytics {
 		}
 
 		$this->loader->add_action( 'plugins_loaded', $this, 'load_buddyboss_platform_pro', 1000 );
+	}
+
+	/**
+	 * Run all the function are the BP init hook is setup
+	 */
+	public function bp_init() {
+		$buddyboss_notification = new View_Analytics_BuddyBoss_Integration_Media_Notifications( $this->plugin_name );
 	}
 
 	/**
