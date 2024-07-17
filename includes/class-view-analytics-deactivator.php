@@ -54,7 +54,6 @@ class View_Analytics_Deactivator {
 
 
 		if ( View_Analytics_Common::instance()->get_view_setting_active( 'delete-tables' ) ) {
-			
 
 			require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/class-view-analytics-common.php' );
 			require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/avatar/class-view-analytics-table.php' );

@@ -198,7 +198,7 @@ class View_Analytics_Admin_Main_Menu {
 	
 		<div class="acrosswp-container">
 			<div class="acrosswp-logo">
-				<img src="https://example.com/your-image.jpg" alt="AcrossWP Logo">
+				<img src="https://acrosswp.com/wp-content/uploads/2023/10/awp-logo.png" alt="AcrossWP Logo">
 			</div>
 	
 			<div class="acrosswp-content">

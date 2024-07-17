@@ -195,27 +195,26 @@ class View_Analytics_Admin_Setting_Menu {
 			'page_title'  => __( 'Settings', 'view-analytics' ),
 			'menu_title'  => __( 'Settings', 'view-analytics' ),
 			'capability'  => 'manage_options',
-			'menu_slug'   => 'view-analytics-settings',
-			'items'      => array(
+			'menu_slug'   => 'view-analytics-settings',	
+			'items'       => array(
 				array(
-					'id'              => $this->media_common->view_count_key(),
-					'type'            => 'group',
-					'title'           => __( 'View Media Analytics', 'view-analytics' ),
-					'items'           => $this->media_settings(),
+				   'id'              => $this->media_common->view_count_key(),
+				   'type'            => 'group',
+				   'title'           => 'Group',
+				   'items'           => array(
+					  array(
+						 'type'            => 'text',
+						 'title'           => 'Text in group 1',
+						 'id'              => 'some_example_text_1',
+					  ),
+					  array(
+						 'type'            => 'text',
+						 'title'           => 'Text in group 2',
+						 'id'              => 'some_example_text_2',
+					  ),
+				   )
 				),
-				array(
-					'id'              => $this->profile_common->view_count_key(),
-					'type'            => 'group',
-					'title'           => __( 'View Profile Count', 'view-analytics' ),
-					'items'           => $this->profile_settings(),
-				),
-				array(
-					'id'              => $this->avatar_common->view_count_key(),
-					'type'            => 'group',
-					'title'           => __( 'View Avatar Count', 'view-analytics' ),
-					'items'           => $this->avatar_settings(),
-				)
-			),	
+			),
 		) );
 	}
 }

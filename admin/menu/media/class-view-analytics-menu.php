@@ -86,8 +86,11 @@ class View_Analytics_Admin_Media_Menu {
 	 * Show the content on the main menu
 	 */
 	function about_view_analytics() {
-
 		global $wpdb;
+
+		$page = isset( $_REQUEST['page'] ) ? $_REQUEST['page'] : '';
+		$paged = isset( $_REQUEST['paged'] ) ? $_REQUEST['paged'] : '';
+		$media_type = isset( $_REQUEST['media_type'] ) ? $_REQUEST['media_type'] : '';
 
 		/**
 		 * Media view table
@@ -101,16 +104,15 @@ class View_Analytics_Admin_Media_Menu {
 		if ( 'delete' === $table->current_action() ) {
 			$count = is_array( $_REQUEST['id'] ) ? count( $_REQUEST['id'] ) : 1;
 			$message = '<div class="updated below-h2" id="message"><p>' . sprintf( __( 'Items deleted: %d', 'view-analytics' ), $count ) .'</p></div>';
-		}
-		?>
+		} ?>
 		<div class="wrap">
 			<div class="icon32 icon32-posts-post" id="icon-edit"><br></div>
 			<?php echo $message; ?>
 			<?php $table->views(); ?>
 			<form id="persons-table" method="GET">
-				<input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>"/>
-				<input type="hidden" name="paged" value="<?php echo $_REQUEST['paged'] ?>"/>
-				<input type="hidden" name="media_type" value="<?php echo $_REQUEST['media_type'] ?>"/>
+				<input type="hidden" name="page" value="<?php echo $page; ?>"/>
+				<input type="hidden" name="paged" value="<?php echo $paged; ?>"/>
+				<input type="hidden" name="media_type" value="<?php echo $media_type; ?>"/>
 				<?php $table->display() ?>
 			</form>
 		</div>

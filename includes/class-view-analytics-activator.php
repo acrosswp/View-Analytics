@@ -70,6 +70,13 @@ class View_Analytics_Activator {
 		require_once( VIEW_ANALYTICS_PLUGIN_PATH . 'includes/media/class-view-analytics-table.php' );
 		View_Analytics_Media_Common::instance()->table->create_table();
 
+
+		/**
+		 * Delete tables that are no use
+		 */
+		View_Analytics_Common::instance()->table->forum_delete_table();
+		View_Analytics_Common::instance()->table->group_delete_table();
+
 		/**
 		 * Add the option to enable the all the setting if the plugin is activiating for the first time
 		 */

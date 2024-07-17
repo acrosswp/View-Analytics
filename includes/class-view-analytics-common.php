@@ -350,4 +350,44 @@ class View_Analytics_Common {
 	public function avatar_profile_section() {
 		return 'view-analytics-pro-access-control-avatar-profile';
 	}
+
+	/**
+	 * Create table
+	 */
+	public function forum_delete_table() {
+		global $wpdb;
+
+		/**
+		 * profile and Profile view log
+		 */
+		$table_name		 = $wpdb->prefix . 'awp_va_forum_view';
+		$view_sql = "DROP TABLE IF EXISTS $table_name";
+
+		$table_name_log		 = $wpdb->prefix . 'awp_va_forum_view_log';
+		$view_sql_log = "DROP TABLE IF EXISTS $table_name_log";
+
+		$wpdb->query( $view_sql );
+		$wpdb->query( $view_sql_log );
+
+	}
+
+	/**
+	 * Create table
+	 */
+	public function group_delete_table() {
+		global $wpdb;
+
+		/**
+		 * profile and Profile view log
+		 */
+		$table_name	= $wpdb->prefix . 'awp_va_group_view';
+		$view_sql	= "DROP TABLE IF EXISTS $table_name";
+
+		$table_name_log	= $wpdb->prefix . 'awp_va_group_view_log';
+		$view_sql_log	= "DROP TABLE IF EXISTS $table_name_log";
+
+		$wpdb->query( $view_sql );
+		$wpdb->query( $view_sql_log );
+
+	}
 }
