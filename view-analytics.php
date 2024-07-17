@@ -16,7 +16,7 @@
  * Plugin Name:       View Analytics
  * Plugin URI:        https://acrosswp.com/downloads/view-analytics/
  * Description:       View Analytics by AcrossWP
- * Version:           1.0.5
+ * Version:           1.0.6
  * Author:            AcrossWP
  * Author URI:        https://acrosswp.com
  * License:           GPL-2.0+
